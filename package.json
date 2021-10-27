@@ -6,7 +6,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "test": "jest src",
     "test:e2e": "start-server-and-test dev http-get://localhost:3000 cypress",
-    "cypress": "cypress run",
+    "cypress": "cypress run --browser chrome",
     "lint:check": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:fix": "npm run lint:check -- --fix",
     "format:check": "prettier --check .",
