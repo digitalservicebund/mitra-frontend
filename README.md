@@ -1,11 +1,112 @@
-# Vue 3 + Typescript + Vite
+# Mitra Frontend
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+[![Pipeline](https://github.com/digitalservice4germany/mitra-frontend/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservice4germany/mitra-frontend/actions/workflows/pipeline.yml)
+[![Secrets Check](https://github.com/digitalservice4germany/mitra-frontend/actions/workflows/secrets-check.yml/badge.svg)](https://github.com/digitalservice4germany/mitra-frontend/actions/workflows/secrets-check.yml)
 
-## Recommended IDE Setup
+## Prerequisites
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+Node 16.3.0
 
-## Type Support For `.vue` Imports in TS
+The repository contains a `.node-version` file to set up the required Node.js version automatically with [nodenv](https://github.com/nodenv/nodenv).
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+For the provided Git hooks you will need:
+
+```bash
+brew install lefthook talisman
+```
+
+## Getting started
+
+**To get started with development run:**
+
+```bash
+./run.sh init
+```
+
+This will install a couple of Git hooks.
+
+## Development
+
+The project uses [Vite](https://vitejs.dev/guide/) to provide a fast bundler-less [dev server](http://localhost:3000/mitra-frontend/).
+
+**Start server**:
+
+```bash
+npm run dev
+```
+
+## Tests
+
+The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Cypress](https://docs.cypress.io/guides/getting-started/writing-your-first-test)) tests.
+
+**To run the unit tests:**
+
+```bash
+npm test
+```
+
+**To run the E2E tests:**
+
+```bash
+npm run test:e2e
+```
+
+## Linting & Formatting
+
+Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html) respectively. ESLint and Prettier work in conjunction.
+
+**Lint:**
+
+```bash
+npm run lint:check
+```
+
+**Autofix linting issues:**
+
+```bash
+npm run lint:fix
+```
+
+(Some problems might not autofix.)
+
+**Check formatting:**
+
+```bash
+npm run format:check
+```
+
+**Autoformat sources:**
+
+```bash
+npm run format:fix
+```
+
+**Check format, lint and run tests in one pass:**
+
+```bash
+npm run check
+```
+
+(Executing in that order, failing fast.)
+
+## Git hooks
+
+The repo contains a [Lefthook](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md) configuration, providing a Git hooks setup out of the box.
+
+**To install these hooks, run:**
+
+```bash
+./run.sh init
+```
+
+The hooks are supposed to help you to:
+
+- commit properly formatted and linted source code only (and not break the build otherwise)
+- write [conventional commit messages](https://chris.beams.io/posts/git-commit/)
+- not accidentally push [secrets and sensitive information](https://thoughtworks.github.io/talisman/)
+
+## Deployment
+
+Currently the app is deployed to GitHub Pages from trunk continuously.
+
+:point_right: https://digitalservice4germany.github.io/mitra-frontend/
