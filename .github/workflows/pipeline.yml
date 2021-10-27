@@ -26,7 +26,7 @@ jobs:
       - name: Run Tests
         run: npm test
       - name: Run E2E Tests
-        run: npm test:e2e
+        run: npm run test:e2e
 
   deploy:
     runs-on: ubuntu-latest
