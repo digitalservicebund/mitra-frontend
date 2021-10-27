@@ -3,3 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
+.lefthook-local
+lefthook-local.yml
