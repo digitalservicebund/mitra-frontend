@@ -1,5 +1,9 @@
 import { mount } from "@vue/test-utils"
-import HelloWorld from "./HelloWorld.vue"
+// import HelloWorld from "./HelloWorld.vue"
+
+foo = "foo"
+
+defineProps({})
 
 describe("HelloWorld", () => {
   it("should display header text", () => {
