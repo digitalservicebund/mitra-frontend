@@ -1,0 +1,7 @@
+fileignoreconfig:
+- filename: .github/workflows/secrets-check.yml
+  checksum: ce3f85c6c7a7c776f207243d59f7ffac9784d3bb03bac5dcacc10118ee1b380d
+- filename: .github/workflows/pipeline.yml
+  checksum: 9c6c126709d958f39694bc7b66c7335a7529a128b799dad851048eeda5123de0
+scopeconfig:
+- scope: node
