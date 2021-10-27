@@ -4,6 +4,6 @@ fileignoreconfig:
 - filename: .github/workflows/pipeline.yml
   checksum: 9c6c126709d958f39694bc7b66c7335a7529a128b799dad851048eeda5123de0
 - filename: README.md
-  checksum: 16c8a44fdf1456ca40921216296a057d74ec5cbd454a52ab533fe28f809cb0a6
+  checksum: 8e34d2c9802242171c986d17e12cc8b26d79fd634598863aa2532e1b2f111052
 scopeconfig:
 - scope: node

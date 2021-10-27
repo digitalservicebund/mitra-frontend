@@ -53,7 +53,7 @@ npm run test:e2e
 
 ## Linting & Formatting
 
-Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html) respectively. ESLint and Prettier work in conjunction.
+Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html). ESLint and Prettier work in conjunction.
 
 **Lint:**
 
