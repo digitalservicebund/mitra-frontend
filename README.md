@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-Node 16.3.0
+**Node.js 16.3.0**
 
 The repository contains a `.node-version` file to set up the required Node.js version automatically with [nodenv](https://github.com/nodenv/nodenv).
 
@@ -37,7 +37,7 @@ npm run dev
 
 ## Tests
 
-The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Cypress](https://docs.cypress.io/guides/getting-started/writing-your-first-test)) tests.
+The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Cypress](https://docs.cypress.io/guides/getting-started/writing-your-first-test)).
 
 **To run the unit tests:**
 
