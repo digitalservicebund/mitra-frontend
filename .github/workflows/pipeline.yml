@@ -42,7 +42,9 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305 # == v3.8.0
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
