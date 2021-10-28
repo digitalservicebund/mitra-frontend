@@ -34,7 +34,7 @@ jobs:
         if: always()
         with:
           type: ${{ job.status }}
-          job_name: "*Build*"
+          job_name: "Build :point_right:"
           mention: "here"
           mention_if: "failure"
           commit: true
