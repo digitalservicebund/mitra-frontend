@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
   "integrationFolder": "e2e",
+  "testFiles": "**/*.spec.ts",
   "pluginsFile": false,
   "supportFile": false,
   "video": false
