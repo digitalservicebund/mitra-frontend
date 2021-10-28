@@ -51,35 +51,23 @@ npm test
 npm run test:e2e
 ```
 
-## Linting & Formatting
+## Style (Linting & Formatting)
 
 Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html). ESLint and Prettier work in conjunction.
 
-**Lint:**
+**Check style:**
 
 ```bash
-npm run lint:check
+npm run style:check
 ```
 
-**Autofix linting issues:**
+**Autofix issues:**
 
 ```bash
-npm run lint:fix
+npm run style:fix
 ```
 
 (Some problems might not autofix.)
-
-**Check formatting:**
-
-```bash
-npm run format:check
-```
-
-**Autoformat sources:**
-
-```bash
-npm run format:fix
-```
 
 **Check format, lint and run tests in one pass:**
 
