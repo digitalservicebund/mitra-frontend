@@ -1,9 +1,9 @@
-import { mount } from "@vue/test-utils"
+import { render } from "@testing-library/vue"
 import Header from "../../src/components/Header.vue"
 
 describe("Header", () => {
   it("should display header text", () => {
-    const wrapper = mount(Header)
-    expect(wrapper.find("h1").text()).toEqual("Mitra")
+    const { getByText } = render(Header)
+    getByText("Mitra")
   })
 })
