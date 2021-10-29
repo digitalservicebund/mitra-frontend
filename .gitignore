@@ -3,6 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
-cypress/
+cypress/screenshots
 .lefthook-local
 lefthook-local.yml
