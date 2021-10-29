@@ -57,6 +57,12 @@ npm test -- --watch
 npm run test:e2e
 ```
 
+**Gather coverage**:
+
+```bash
+npm run coverage
+```
+
 ## Style (Linting & Formatting)
 
 Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html). ESLint and Prettier work in conjunction.
