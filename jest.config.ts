@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
     "^.+\\.vue$": "@vue/vue3-jest",
   },
   testEnvironment: "jsdom",
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/test/e2e"],
 }
 
 export default config
