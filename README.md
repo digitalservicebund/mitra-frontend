@@ -45,6 +45,12 @@ The application has unit tests (using [Jest](https://jestjs.io/docs/getting-star
 npm test
 ```
 
+**With watcher:**
+
+```bash
+npm test -- --watch
+```
+
 **To run the E2E tests:**
 
 ```bash
