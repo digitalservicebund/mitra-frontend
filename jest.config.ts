@@ -8,6 +8,11 @@ const config: Config.InitialOptions = {
   },
   testEnvironment: "jsdom",
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/test/e2e"],
+  collectCoverageFrom: [
+    "src/**/*.{ts,vue}",
+    "!src/main.ts", // No need to cover bootstrap file
+    "!**/*.d.ts",
+  ],
 }
 
 export default config
