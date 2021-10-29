@@ -4,6 +4,6 @@ import Header from "../../src/components/Header.vue"
 describe("Header", () => {
   it("should display header text", () => {
     const { getByText } = render(Header)
-    expect(getByText("Mitra")).not.toBeNull()
+    expect(getByText("Mitra")).toBeInTheDocument()
   })
 })
