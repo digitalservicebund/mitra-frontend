@@ -33,7 +33,7 @@ The project uses [Vite](https://vitejs.dev/guide/) to provide a fast bundler-les
 npm run dev
 ```
 
-## Tests
+## Testing
 
 The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Cypress](https://docs.cypress.io/guides/getting-started/writing-your-first-test)).
 
@@ -60,6 +60,14 @@ npm run test:e2e
 ```bash
 npm run coverage
 ```
+
+**To run a11y tests:**
+
+```bash
+npm run test:a11y
+```
+
+Note that automated accessibility testing will help you root out about 30% of the errors in your code, but can't replace auditing by humans.
 
 ## Style (Linting & Formatting)
 
