@@ -47,6 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     # We only want to deploy from trunk, never for pull requests!
     if: ${{ ! startsWith(github.event_name, 'pull_request') }}
+    needs: build
     permissions:
       contents: write
     steps:
