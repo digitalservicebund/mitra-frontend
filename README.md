@@ -17,13 +17,11 @@ brew install lefthook talisman
 
 ## Getting started
 
-**To get started with development run:**
+**Optional - install [Git hooks](#git-hooks):**
 
 ```bash
 ./run.sh init
 ```
-
-This will install a couple of Git hooks.
 
 ## Development
 
