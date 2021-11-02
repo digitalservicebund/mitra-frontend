@@ -91,7 +91,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v8
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+        uses: treosh/lighthouse-ci-action@b8ccf8448921ddc6d53f5b8e218aa7c3f451b6b1 # == v8
         with:
           urls: |
             https://digitalservice4germany.github.io/mitra-frontend/
