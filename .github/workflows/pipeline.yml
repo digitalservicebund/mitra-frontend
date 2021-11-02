@@ -96,4 +96,3 @@ jobs:
           urls: |
             https://digitalservice4germany.github.io/mitra-frontend/
           uploadArtifacts: true
-          temporaryPublicStorage: false
