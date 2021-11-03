@@ -7,6 +7,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
     "plugin:vuejs-accessibility/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/vue",
     "plugin:cypress/recommended",
     "@vue/typescript/recommended",
     "@vue/prettier",
