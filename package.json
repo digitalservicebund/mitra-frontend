@@ -6,7 +6,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "test": "jest test",
     "test:e2e": "vite build && start-server-and-test serve http-get://localhost:5000/mitra-frontend/ cypress",
-    "test:a11y": "start-server-and-test serve http-get://localhost:5000/mitra-frontend/ pa11y-ci",
+    "test:a11y": "vite build && start-server-and-test serve http-get://localhost:5000/mitra-frontend/ pa11y-ci",
     "cypress": "cypress run --browser chrome",
     "coverage": "jest test --coverage",
     "lint:check": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
