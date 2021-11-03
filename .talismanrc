@@ -2,7 +2,7 @@ fileignoreconfig:
 - filename: .github/workflows/secrets-check.yml
   checksum: 9615146cd643726fc11ce02f5fec82ec04fcb5c1089842bc4e5fd86d70594763
 - filename: .github/workflows/pipeline.yml
-  checksum: 4c263b81356c4d2c5370882d4a4dbf5d4d792c5a904e456038b73fe5671544e4
+  checksum: cfc89bd8b2d9799666c5242330911471f0a6c865827b17e534f749be2325bc01
 - filename: README.md
   checksum: 90f67dd4a208e780774ccb69b15a7d77c57a83775541c033b2613c7121917809
 scopeconfig:
