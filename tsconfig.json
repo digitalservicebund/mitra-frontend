@@ -12,5 +12,5 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "@types/jest"]
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "jest.setup.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "jest.setup.ts"]
 }
