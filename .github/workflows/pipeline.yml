@@ -100,10 +100,3 @@ jobs:
           urls: |
             https://digitalservice4germany.github.io/mitra-frontend/
           uploadArtifacts: true
-      - name: Scan application using ZAP Baseline scan
-        # Third-party action, pin to commit SHA!
-        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
-        uses: zaproxy/action-baseline@df1ee70ea1ebbdaa1b48e6fc861e0dc0a71fedd8 # == v0.6.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target: https://digitalservice4germany.github.io/mitra-frontend/
