@@ -17,7 +17,8 @@
     "style:fix": "npm run format:fix && npm run lint:fix",
     "check": "npm run style:check && npm test && npm run test:e2e && npm run test:a11y",
     "preserve": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "clean": "rm -rf dist/"
   },
   "dependencies": {
     "vue": "^3.2.16"
