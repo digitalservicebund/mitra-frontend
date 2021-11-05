@@ -116,3 +116,7 @@ The hooks are supposed to help you to:
 Currently the app is deployed to GitHub Pages from trunk continuously.
 
 :point_right: https://digitalservice4germany.github.io/mitra-frontend/
+
+## License scanning
+
+We conduct an allowlist-based license scanning as part of the pipeline's audit job. Whenever there's a production dependency added with a yet unknown license, the build is going to fail and we will be notified.
