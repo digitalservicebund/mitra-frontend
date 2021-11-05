@@ -100,3 +100,5 @@ jobs:
           urls: |
             https://digitalservice4germany.github.io/mitra-frontend/
           uploadArtifacts: true
+      - name: Audit used licenses
+        run: npm run audit:licences
