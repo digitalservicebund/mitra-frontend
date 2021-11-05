@@ -100,5 +100,11 @@ jobs:
           urls: |
             https://digitalservice4germany.github.io/mitra-frontend/
           uploadArtifacts: true
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.3.0"
+          cache: "npm"
+      - run: npm install
       - name: Audit used licenses
         run: npm run audit:licences
