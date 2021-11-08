@@ -1,11 +1,15 @@
 <script setup lang="ts">
   import Header from "./components/Header.vue"
   import Playbook from "./components/Playbook.vue"
+  import repository from "./adapter/InMemoryPlaybookRepository"
+  import PlaybookRepository from "./domain/PlaybookRepository"
+
+  const makeRepository: () => PlaybookRepository = () => repository
 </script>
 
 <template>
   <Header />
-  <Playbook />
+  <Playbook :repository="makeRepository()" />
 </template>
 
 <style>

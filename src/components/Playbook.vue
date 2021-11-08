@@ -1,21 +1,16 @@
 <!-- UI Component: Adapter -->
+<script setup lang="ts">
+  import { defineProps, toRefs } from "vue"
+  import PlaybookRepository from "../domain/PlaybookRepository"
+
+  const props = defineProps<{ repository: PlaybookRepository }>()
+
+  const { repository } = toRefs(props)
+  const playbook = repository.value.find("test")
+</script>
+
 <template>
-  <div v-for="step in steps" :key="step">
+  <div v-for="step in playbook.steps" :key="step">
     {{ step }}
   </div>
 </template>
-
-<script lang="ts">
-  import Playbook from "../domain/Playbook"
-
-  // Playbook will be loaded from secondary adapter translating from persisted
-  // JSON to domain object.
-  const playbook: Playbook = { steps: [`First`, `Second`] }
-
-  // Primary adapter uses port...
-  const data: () => Playbook = () => playbook
-
-  export default {
-    data,
-  }
-</script>
