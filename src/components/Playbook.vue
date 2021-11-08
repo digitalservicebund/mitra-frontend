@@ -13,9 +13,7 @@
   const playbook: Playbook = { steps: [`First`, `Second`] }
 
   // Primary adapter uses port...
-  const data: () => Playbook = () => {
-    return playbook
-  }
+  const data: () => Playbook = () => playbook
 
   export default {
     data,
