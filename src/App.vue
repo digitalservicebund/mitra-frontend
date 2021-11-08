@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import Header from "./components/Header.vue"
+  import Playbook from "./components/Playbook.vue"
 </script>
 
 <template>
   <Header />
+  <Playbook />
 </template>
 
 <style>
@@ -11,8 +13,9 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+  }
+  h1 {
+    margin: 0;
   }
 </style>
