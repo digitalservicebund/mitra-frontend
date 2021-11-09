@@ -57,6 +57,6 @@
     "vite-plugin-handlebars": "^1.6.0",
     "vite-plugin-pages": "^0.18.2",
     "vue-router": "^4.0.12",
-    "vue-tsc": "^0.28.10"
+    "vue-tsc": "^0.29.2"
   }
 }
