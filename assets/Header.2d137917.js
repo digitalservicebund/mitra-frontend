@@ -1,1 +1,0 @@
-import{_ as e}from"./index.3a1286e8.js";import{o as s,f as o,i as t}from"./vendor.657320d5.js";const r={},a={class:"py-4 text-xl"},c=t("h1",{class:"font-black"},"Mitra",-1),n=[c];function _(d,i){return s(),o("header",a,n)}var h=e(r,[["render",_]]);export{h as H};
