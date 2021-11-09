@@ -1,0 +1,1 @@
+import{_ as e}from"./index.11de24c6.js";import{o as r,f as o,i as s}from"./vendor.657320d5.js";const t={},c=s("h1",null,"Mitra",-1),n=[c];function a(_,d){return r(),o("header",null,n)}var l=e(t,[["render",a]]);export{l as H};
