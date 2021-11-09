@@ -3,7 +3,7 @@ describe("Starting new contract", () => {
     cy.visit("/")
     cy.get("a").contains("Neuer Vertrag").click()
     cy.get("a").should("not.exist") // navigated away
-    cy.contains("First")
-    cy.contains("Second")
+    cy.contains("Abschnitt 1")
+    cy.contains("Abschnitt 2")
   })
 })

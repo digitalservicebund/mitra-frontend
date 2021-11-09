@@ -6,7 +6,11 @@
 </script>
 
 <template>
-  <div v-for="step in playbook.steps" :key="step">
-    {{ step }}
-  </div>
+  <h2>{{ playbook.name }}</h2>
+  <section v-for="section in playbook.sections" :key="section.text">
+    <h3>{{ section.text }}</h3>
+    <div v-for="step in section.steps" :key="step.text">
+      {{ step.text }}
+    </div>
+  </section>
 </template>

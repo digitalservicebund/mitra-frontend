@@ -7,5 +7,7 @@ fileignoreconfig:
   checksum: 457fdb3ddc834dec6b28ef96aead521b0c4283c78d5bc6cab77b9e47465743d9
 - filename: src/env.d.ts
   checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
+- filename: src/components/Contract.vue
+  checksum: 113fce03a3cb2749980df348528ea64a08dedeb383446dc427dae8174fa67ca2
 scopeconfig:
 - scope: node

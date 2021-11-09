@@ -1,4 +1,12 @@
-// Port
+interface Step {
+  text: string
+}
+interface Section {
+  text: string
+  steps: Step[]
+}
 export default interface Playbook {
-  steps: string[]
+  id: string
+  name: string
+  sections: Section[]
 }
