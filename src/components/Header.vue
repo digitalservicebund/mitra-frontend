@@ -1,5 +1,5 @@
 <template>
-  <header>
-    <h1>Mitra</h1>
+  <header class="py-4 text-xl">
+    <h1 class="font-black">Mitra</h1>
   </header>
 </template>
