@@ -4,7 +4,7 @@
   import Contract from "../components/Contract.vue"
   import repository from "../adapter/InMemoryPlaybookRepository"
 
-  const playbook: Playbook = repository.find("test")
+  const playbook: Playbook = repository.findById("test")
 </script>
 
 <template>
