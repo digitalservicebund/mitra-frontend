@@ -8,6 +8,6 @@ fileignoreconfig:
 - filename: src/env.d.ts
   checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
 - filename: src/components/Contract.vue
-  checksum: 113fce03a3cb2749980df348528ea64a08dedeb383446dc427dae8174fa67ca2
+  checksum: cf3584323f7c449ed982e887866ada5417259dc7f268034cfab45072c6ecb28b
 scopeconfig:
 - scope: node
