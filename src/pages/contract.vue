@@ -1,15 +1,15 @@
 <script setup lang="ts">
+  import Playbook from "../domain/Playbook"
   import Header from "../components/Header.vue"
-  import Playbook from "../components/Playbook.vue"
+  import Contract from "../components/Contract.vue"
   import repository from "../adapter/InMemoryPlaybookRepository"
-  import PlaybookRepository from "../domain/PlaybookRepository"
 
-  const makeRepository: () => PlaybookRepository = () => repository
+  const playbook: Playbook = repository.find("test")
 </script>
 
 <template>
   <Header />
-  <Playbook :repository="makeRepository()" />
+  <Contract :playbook="playbook" />
 </template>
 
 <style>
