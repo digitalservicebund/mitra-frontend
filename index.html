@@ -2,6 +2,10 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
     <link rel="icon" href="/favicon.ico" />
     {{#if import.meta.env.PROD}}
     <meta
@@ -11,7 +15,7 @@
       script-src 'self';
       style-src 'self';
       img-src 'self' data:;
-      font-src;
+      font-src 'self' https://fonts.gstatic.com;
       connect-src 'self';
       media-src 'self';
       object-src 'none';
