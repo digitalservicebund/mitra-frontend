@@ -7,3 +7,4 @@ coverage
 cypress/screenshots
 .lefthook-local
 lefthook-local.yml
+.lighthouseci

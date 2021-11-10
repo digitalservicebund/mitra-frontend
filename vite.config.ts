@@ -15,7 +15,7 @@ export default defineConfig({
   base: "/mitra-frontend/",
   server: {
     watch: {
-      ignored: ["**/coverage/**"],
+      ignored: ["**/coverage/**", "**/.lighthouseci/**"],
     },
   },
 })
