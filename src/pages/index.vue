@@ -8,8 +8,12 @@
     <h2 class="font-black mt-8 mb-2">Verträge</h2>
     <div class="flex flex-row">
       <p class="h-48 w-48 border p-4 mr-2 opacity-60">Vertrag bearbeiten</p>
-      <p class="h-48 w-48 border p-4 mr-2">
-        <router-link to="/mitra-frontend/contract">Neuer Vertrag</router-link>
+      <p class="flex h-48 w-48 mr-2">
+        <router-link
+          to="/mitra-frontend/contract"
+          class-name="flex-1 p-4 border"
+          >Neuer Vertrag</router-link
+        >
       </p>
       <p class="h-48 w-48 border p-4 opacity-60">
         Neuer Vertrag aus lokaler Datei
