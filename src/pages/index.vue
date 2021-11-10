@@ -9,9 +9,7 @@
     <div class="flex flex-row">
       <p class="h-48 w-48 border p-4 mr-2 opacity-60">Vertrag bearbeiten</p>
       <p class="flex h-48 w-48 mr-2">
-        <router-link
-          to="/mitra-frontend/contract"
-          class-name="flex-1 p-4 border"
+        <router-link to="/mitra-frontend/contract" class="flex-1 p-4 border"
           >Neuer Vertrag</router-link
         >
       </p>
