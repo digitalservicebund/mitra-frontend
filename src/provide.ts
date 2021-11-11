@@ -1,5 +1,5 @@
 import PlaybookRepository from "./domain/PlaybookRepository"
-import repository from "./adapter/InMemoryPlaybookRepository"
+import repository from "./infra/InMemoryPlaybookRepository"
 
 export const makePlaybookRepository: () => PlaybookRepository = () => {
   return repository
