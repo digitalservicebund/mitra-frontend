@@ -21,7 +21,7 @@
               aria-hidden="true"
               >cloud</span
             >
-            Neuer Vertrag
+            Neuer EVB-IT Cloud Vertrag
           </router-link>
         </p>
         <p class="card opacity-60">
