@@ -34,6 +34,7 @@
             <span class="p-card-icon material-icons-outlined" aria-hidden="true"
               >add</span
             >
+            Neuer Vertrag aus lokaler Datei
           </template>
         </Card>
       </div>
