@@ -26,7 +26,8 @@
   "dependencies": {
     "primeicons": "^5.0.0",
     "primevue": "^3.8.2",
-    "vue": "^3.2.16"
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.15.0",
@@ -62,7 +63,6 @@
     "vite": "^2.6.4",
     "vite-plugin-handlebars": "^1.6.0",
     "vite-plugin-pages": "^0.18.2",
-    "vue-router": "^4.0.12",
     "vue-tsc": "^0.29.2"
   }
 }
