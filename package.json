@@ -24,6 +24,8 @@
     "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause'"
   },
   "dependencies": {
+    "primeicons": "^5.0.0",
+    "primevue": "^3.8.2",
     "vue": "^3.2.16"
   },
   "devDependencies": {

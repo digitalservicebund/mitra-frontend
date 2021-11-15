@@ -2,6 +2,7 @@ import { createApp } from "vue"
 import { createRouter, createWebHistory } from "vue-router"
 import routes from "virtual:generated-pages"
 import App from "./App.vue"
+import PrimeVue from "primevue/config"
 import "./index.css"
 
 const router = createRouter({
@@ -9,4 +10,4 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(router).mount("#app")
+createApp(App).use(router).use(PrimeVue).mount("#app")
