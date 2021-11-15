@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import Card from "primevue/card"
   import Header from "../components/Header.vue"
 </script>
 
@@ -8,45 +9,54 @@
     <section>
       <h2 class="font-black mt-8 mb-2">Verträge</h2>
       <div class="flex flex-row">
-        <p class="card opacity-60">
-          <span class="card-icon material-icons-outlined" aria-hidden="true"
-            >description</span
-          >
-          Vertrag bearbeiten
-        </p>
-        <p class="card">
-          <router-link to="/mitra-frontend/contract" class="block"
-            ><span
-              class="card-icon material-icons-outlined hover:bg-gray-50"
-              aria-hidden="true"
-              >cloud</span
+        <Card class="opacity-60">
+          <template #content>
+            <span class="p-card-icon material-icons-outlined" aria-hidden="true"
+              >description</span
             >
-            Neuer EVB-IT Cloud Vertrag
-          </router-link>
-        </p>
-        <p class="card opacity-60">
-          <span class="card-icon material-icons-outlined" aria-hidden="true"
-            >add</span
-          >
-          Neuer Vertrag aus lokaler Datei
-        </p>
+            Vertrag bearbeiten
+          </template>
+        </Card>
+        <Card>
+          <template #content>
+            <router-link to="/mitra-frontend/contract" class="block">
+              <span
+                class="p-card-icon material-icons-outlined hover:bg-gray-50"
+                aria-hidden="true"
+                >cloud</span
+              >
+              Neuer EVB-IT Cloud Vertrag
+            </router-link>
+          </template>
+        </Card>
+        <Card class="opacity-60">
+          <template #content>
+            <span class="p-card-icon material-icons-outlined" aria-hidden="true"
+              >add</span
+            >
+          </template>
+        </Card>
       </div>
     </section>
     <section>
       <h2 class="font-black mt-8 mb-2">Playbooks</h2>
       <div class="flex flex-row">
-        <p class="card opacity-60">
-          <span class="card-icon material-icons-outlined" aria-hidden="true"
-            >smart_display</span
-          >
-          Playbook bearbeiten
-        </p>
-        <p class="card opacity-60">
-          <span class="card-icon material-icons-outlined" aria-hidden="true"
-            >add</span
-          >
-          Neues Playbook
-        </p>
+        <Card class="opacity-60">
+          <template #content>
+            <span class="p-card-icon material-icons-outlined" aria-hidden="true"
+              >smart_display</span
+            >
+            Playbook bearbeiten
+          </template>
+        </Card>
+        <Card class="opacity-60">
+          <template #content>
+            <span class="p-card-icon material-icons-outlined" aria-hidden="true"
+              >add</span
+            >
+            Neues Playbook
+          </template>
+        </Card>
       </div>
     </section>
   </main>
@@ -54,10 +64,10 @@
 
 <style>
   @layer components {
-    .card {
+    .p-card {
       @apply flex flex-col w-48 mr-2;
     }
-    .card-icon {
+    .p-card-icon {
       @apply flex flex-col items-center justify-center h-48 border mb-2 text-6xl;
     }
   }
