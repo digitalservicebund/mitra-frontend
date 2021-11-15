@@ -63,6 +63,14 @@
 </template>
 
 <style>
+  .p-card,
+  .p-card .p-card-body,
+  .p-card .p-card-content {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
   @layer components {
     .p-card {
       @apply flex flex-col w-48 mr-2;
