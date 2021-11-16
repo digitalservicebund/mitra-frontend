@@ -5,8 +5,31 @@ const testPlaybook: Playbook = {
   id: "test-playbook",
   name: "Testvertrag",
   sections: [
-    { text: "Abschnitt 1", steps: [{ text: "Schritt 1.1" }] },
-    { text: "Abschnitt 2", steps: [{ text: "Schritt 2.1" }] },
+    {
+      text: "Rubrum",
+      steps: [
+        { text: "Schritt 1.1" },
+        { text: "Schritt 1.2" },
+        { text: "Schritt 1.3" },
+      ],
+    },
+    {
+      text: "Gegenstand und Bestandteile des Vertrags",
+      steps: [
+        { text: "Schritt 2.1" },
+        { text: "Schritt 2.2" },
+        { text: "Schritt 2.3" },
+      ],
+    },
+    {
+      text: "Gegenstand der Leistungen",
+      steps: [
+        { text: "Schritt 3.1" },
+        { text: "Schritt 3.2" },
+        { text: "Schritt 3.3" },
+        { text: "Schritt 3.4" },
+      ],
+    },
   ],
 }
 
