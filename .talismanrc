@@ -10,7 +10,7 @@ fileignoreconfig:
 - filename: src/components/Contract.vue
   checksum: cf3584323f7c449ed982e887866ada5417259dc7f268034cfab45072c6ecb28b
 - filename: src/theme.css
-  checksum: 35f7cdbd70017e88170f9b805a42616f9779b0e293a137c0b0fcd7e75ece5612
+  checksum: b40833b4da61b7e17f0a000282640ff9877ba8908fc83a0b902c1c993dab4f54
 - filename: '*.woff'
   checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
 - filename: index.html
