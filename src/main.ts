@@ -4,9 +4,9 @@ import routes from "virtual:generated-pages"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
 
-import "primevue/resources/themes/tailwind-light/theme.css"
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
+import "./theme.css"
 import "./index.css"
 
 const router = createRouter({
