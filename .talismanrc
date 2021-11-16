@@ -13,5 +13,7 @@ fileignoreconfig:
   checksum: 35f7cdbd70017e88170f9b805a42616f9779b0e293a137c0b0fcd7e75ece5612
 - filename: '*.woff'
   checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
+- filename: index.html
+  checksum: 6ca978ea39901ffc49bebc3db4f832231a2cec829d2e253dfeeedf6a9b46e5e7
 scopeconfig:
 - scope: node
