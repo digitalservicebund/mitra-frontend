@@ -52,7 +52,7 @@ Subject
 
 Some context/description
 
-Addresses MIT-$1
+Addresses MIT-${1#MIT-}
 EOF
 }
 
@@ -61,7 +61,8 @@ _help() {
   echo ""
   echo "Available commands:"
   echo "init                  Set up repository for development"
-  echo "cm <issue-number>     Configure commit message template with given issue number"
+  echo "cm <issue-number>     Configure commit message template with given issue number;"
+  echo "                      issue number can be with or without prefix: 1234, MIT-1234."
 }
 
 cmd="${1:-}"
