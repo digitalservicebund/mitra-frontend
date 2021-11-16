@@ -3,7 +3,7 @@ describe("Starting new contract", () => {
     cy.visit("/")
     cy.get("main a").contains("Neuer EVB-IT Cloud Vertrag").click()
     cy.get("main a").should("not.exist") // navigated away
-    cy.contains("Abschnitt 1")
-    cy.contains("Abschnitt 2")
+    cy.contains("Rubrum")
+    cy.contains("Gegenstand der Leistungen")
   })
 })
