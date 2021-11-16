@@ -9,7 +9,7 @@
     <section>
       <h2 class="font-black mt-8 mb-2">Verträge</h2>
       <div class="flex flex-row">
-        <Card class="opacity-60">
+        <Card class="p-disabled">
           <template #content>
             <span class="p-card-icon material-icons-outlined" aria-hidden="true"
               >description</span
@@ -29,7 +29,7 @@
             </router-link>
           </template>
         </Card>
-        <Card class="opacity-60">
+        <Card class="p-disabled">
           <template #content>
             <span class="p-card-icon material-icons-outlined" aria-hidden="true"
               >add</span
@@ -42,7 +42,7 @@
     <section>
       <h2 class="font-black mt-8 mb-2">Playbooks</h2>
       <div class="flex flex-row">
-        <Card class="opacity-60">
+        <Card class="p-disabled">
           <template #content>
             <span class="p-card-icon material-icons-outlined" aria-hidden="true"
               >smart_display</span
@@ -50,7 +50,7 @@
             Playbook bearbeiten
           </template>
         </Card>
-        <Card class="opacity-60">
+        <Card class="p-disabled">
           <template #content>
             <span class="p-card-icon material-icons-outlined" aria-hidden="true"
               >add</span
