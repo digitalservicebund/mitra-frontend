@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: src/env.d.ts
   checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
 - filename: src/components/Contract.vue
-  checksum: cf3584323f7c449ed982e887866ada5417259dc7f268034cfab45072c6ecb28b
+  checksum: 058d384bd5809b9fd721e64601be7cc73b413909d6d5c70a3f19fded73adf081
 - filename: src/theme.css
   checksum: b40833b4da61b7e17f0a000282640ff9877ba8908fc83a0b902c1c993dab4f54
 - filename: '*.woff'
