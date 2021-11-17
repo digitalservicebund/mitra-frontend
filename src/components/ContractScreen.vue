@@ -27,13 +27,14 @@
 <template>
   <AppHeader />
   <Dialog
+    id="dialog-contract-title"
     v-model:visible="displayTitleDialog"
     :closable="false"
     :modal="true"
     header="Wie wollen Sie den Vertrag benennen?"
   >
     <InputText
-      id="contract-title"
+      id="input-contract-title"
       v-model="contractTitle"
       title="Titel des Vertrags"
       type="text"
@@ -46,11 +47,11 @@
   <Contract :title="contractTitle" :playbook="playbook" />
 </template>
 
-<style scoped>
-  .p-dialog {
+<style>
+  #dialog-contract-title {
     width: 40vw;
   }
-  .p-inputtext {
+  #input-contract-title {
     width: 100%;
   }
 </style>
