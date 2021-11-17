@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import Playbook from "../domain/Playbook"
   import PlaybookRepository from "../domain/PlaybookRepository"
-  import Header from "../components/Header.vue"
+  import AppHeader from "../components/AppHeader.vue"
   import Contract from "../components/Contract.vue"
   import { makePlaybookRepository } from "../provide"
 
@@ -11,6 +11,6 @@
 </script>
 
 <template>
-  <Header />
+  <AppHeader />
   <Contract :playbook="playbook" />
 </template>

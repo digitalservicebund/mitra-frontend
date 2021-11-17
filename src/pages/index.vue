@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import Card from "primevue/card"
-  import Header from "../components/Header.vue"
+  import AppHeader from "../components/AppHeader.vue"
 </script>
 
 <template>
-  <Header />
+  <AppHeader />
   <main id="index" class="grid grid-rows-2 justify-center">
     <section>
       <h2 class="font-black mt-8 mb-2">Verträge</h2>

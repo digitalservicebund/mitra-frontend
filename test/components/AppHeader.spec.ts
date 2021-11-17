@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
-import Header from "../../src/components/Header.vue"
+import AppHeader from "../../src/components/AppHeader.vue"
 
-describe("Header", () => {
+describe("AppHeader", () => {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -21,7 +21,7 @@ describe("Header", () => {
   })
 
   it("should display header text", async () => {
-    render(Header, {
+    render(AppHeader, {
       global: {
         plugins: [router],
       },
