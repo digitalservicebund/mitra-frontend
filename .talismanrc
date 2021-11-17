@@ -1,19 +1,19 @@
 fileignoreconfig:
-- filename: .github/workflows/secrets-check.yml
-  checksum: 9615146cd643726fc11ce02f5fec82ec04fcb5c1089842bc4e5fd86d70594763
-- filename: .github/workflows/pipeline.yml
-  checksum: cdfb0792df6c80a142d4af3d5fc1c81bf28fda48d5931e6952f6c0e22e880ff8
-- filename: README.md
-  checksum: 457fdb3ddc834dec6b28ef96aead521b0c4283c78d5bc6cab77b9e47465743d9
-- filename: src/env.d.ts
-  checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
-- filename: src/components/Contract.vue
-  checksum: 058d384bd5809b9fd721e64601be7cc73b413909d6d5c70a3f19fded73adf081
-- filename: src/theme.css
-  checksum: b40833b4da61b7e17f0a000282640ff9877ba8908fc83a0b902c1c993dab4f54
-- filename: '*.woff'
-  checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
-- filename: index.html
-  checksum: 9ec99df40c06aeaa41f735fc4260a006f30f9b1c83f6e43a427260a1322cc190
+  - filename: .github/workflows/secrets-check.yml
+    checksum: 9615146cd643726fc11ce02f5fec82ec04fcb5c1089842bc4e5fd86d70594763
+  - filename: .github/workflows/pipeline.yml
+    checksum: cdfb0792df6c80a142d4af3d5fc1c81bf28fda48d5931e6952f6c0e22e880ff8
+  - filename: README.md
+    checksum: 457fdb3ddc834dec6b28ef96aead521b0c4283c78d5bc6cab77b9e47465743d9
+  - filename: src/env.d.ts
+    checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
+  - filename: src/theme.css
+    checksum: b40833b4da61b7e17f0a000282640ff9877ba8908fc83a0b902c1c993dab4f54
+  - filename: "*.woff"
+    checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
+  - filename: index.html
+    checksum: 9ec99df40c06aeaa41f735fc4260a006f30f9b1c83f6e43a427260a1322cc190
+  - filename: src/components/Contract.vue
+    checksum: 788c1d010368e801523ce89e3bc1021c7a6f1ad0448e53287b7cef378d2f1afd
 scopeconfig:
-- scope: node
+  - scope: node

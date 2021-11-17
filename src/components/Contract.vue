@@ -11,9 +11,11 @@
   </header>
 
   <h2>{{ playbook.name }}</h2>
-  <section v-for="section in playbook.sections" :key="section.text">
-    <h3>{{ section.text }}</h3>
-    <div v-for="step in section.steps" :key="step.text">
+  <section v-for="module in playbook.modules" :key="module.text">
+    <h3>
+      <strong>{{ module.text }}</strong>
+    </h3>
+    <div v-for="step in module.steps" :key="step.text">
       {{ step.text }}
     </div>
   </section>

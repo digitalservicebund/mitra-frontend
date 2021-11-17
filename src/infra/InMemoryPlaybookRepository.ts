@@ -4,7 +4,7 @@ import PlaybookRepository from "../domain/PlaybookRepository"
 const testPlaybook: Playbook = {
   id: "test-playbook",
   name: "Testvertrag",
-  sections: [
+  modules: [
     {
       text: "Rubrum",
       steps: [
