@@ -3,15 +3,24 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:vue/vue3-recommended",
-    "plugin:vuejs-accessibility/recommended",
-    "@vue/typescript/recommended",
-    "@vue/prettier",
-    "@vue/prettier/@typescript-eslint",
-  ],
+  extends: ["eslint:recommended"],
   parserOptions: {
     ecmaVersion: 2021,
   },
+  overrides: [
+    // Cannot lint JavaScript config files with TypeScript rules...
+    {
+      files: ["**/*.{ts,vue}"],
+      env: {
+        node: true,
+      },
+      extends: [
+        "plugin:vue/vue3-recommended",
+        "plugin:vuejs-accessibility/recommended",
+        "@vue/typescript/recommended",
+        "@vue/prettier",
+        "@vue/prettier/@typescript-eslint",
+      ],
+    },
+  ],
 }
