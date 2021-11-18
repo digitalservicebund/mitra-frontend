@@ -12,7 +12,7 @@ fileignoreconfig:
   - filename: "*.woff"
     checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
   - filename: index.html
-    checksum: d4ccab449993446874d308e3ae9f0b197ec00f6ee2440bb6e1e82f94a010d251
+    checksum: 63a27c2047a3c82a7795008469903d03d0886c8d880c2c078bb71c8fceec82e8
   - filename: src/components/Contract.vue
     checksum: 788c1d010368e801523ce89e3bc1021c7a6f1ad0448e53287b7cef378d2f1afd
 allowed_patterns:
