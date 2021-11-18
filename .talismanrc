@@ -15,5 +15,7 @@ fileignoreconfig:
     checksum: 9ec99df40c06aeaa41f735fc4260a006f30f9b1c83f6e43a427260a1322cc190
   - filename: src/components/Contract.vue
     checksum: 788c1d010368e801523ce89e3bc1021c7a6f1ad0448e53287b7cef378d2f1afd
+allowed_patterns:
+  - key
 scopeconfig:
   - scope: node
