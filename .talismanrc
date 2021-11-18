@@ -8,11 +8,11 @@ fileignoreconfig:
   - filename: src/env.d.ts
     checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
   - filename: src/theme.css
-    checksum: 43b527c6ceaa3a55505484b6558ac1cf06ab4d8119bc9d764ec66a07ca041dfd
+    checksum: 37b2d90ac8083b718cc005eb6eb7d568d13a3efb891e73b42dfd9107c11ee5a5
   - filename: "*.woff"
     checksum: 7c5f8b6a1ef38fe1de8ba7e83f3b9f5ee36d9b37befaf61fbdcd5634e1198405
   - filename: index.html
-    checksum: 5f5b306fb4b3c1f4a7e3d637b1e7e2424792de542f8502c180bd3888f47d6e27
+    checksum: d4ccab449993446874d308e3ae9f0b197ec00f6ee2440bb6e1e82f94a010d251
   - filename: src/components/Contract.vue
     checksum: 788c1d010368e801523ce89e3bc1021c7a6f1ad0448e53287b7cef378d2f1afd
 allowed_patterns:
