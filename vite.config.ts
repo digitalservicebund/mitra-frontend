@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     handlebars(),
     pages({
-      pagesDir: [{ dir: "src/pages", baseRoute: "mitra-frontend" }],
+      pagesDir: [{ dir: "src/routes", baseRoute: "mitra-frontend" }],
     }),
   ],
   base: "/mitra-frontend/",
