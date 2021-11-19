@@ -9,7 +9,7 @@
   import InputText from "primevue/inputtext"
   import { onMounted, ref } from "vue"
 
-  const contractTitle = ref("")
+  const contractTitle = ref("Unbenannter Vertrag")
   const displayTitleDialog = ref(false)
   const openTitleDialog = () => {
     displayTitleDialog.value = true
@@ -38,6 +38,7 @@
       v-model="contractTitle"
       title="Titel des Vertrags"
       type="text"
+      @focus="$event.target.select()"
     />
     <template #footer>
       <Button label="OK" icon="pi pi-check" @click="closeTitleDialog"></Button>
