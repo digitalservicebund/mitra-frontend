@@ -2,7 +2,7 @@
   import Playbook from "../domain/Playbook"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import AppHeader from "./AppHeader.vue"
-  import Contract from "./Contract.vue"
+  import EditContract from "./EditContract.vue"
   import { makePlaybookRepository } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
@@ -56,7 +56,7 @@
       <span> {{ contractTitle }} </span>
     </Button>
   </section>
-  <Contract :title="contractTitle" :playbook="playbook" />
+  <EditContract :title="contractTitle" :playbook="playbook" />
 </template>
 
 <style>
