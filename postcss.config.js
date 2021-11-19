@@ -8,10 +8,7 @@ module.exports = {
       content: [
         "./index.html",
         "./src/**/*.vue",
-        "./node_modules/primevue/button/Button.vue",
-        "./node_modules/primevue/card/Card.vue",
-        "./node_modules/primevue/dialog/Dialog.vue",
-        "./node_modules/primevue/inputtext/InputText.vue",
+        ...require("./collect-purgecss-content"),
       ],
       css: ["./src/theme.css"],
       defaultExtractor(content) {
