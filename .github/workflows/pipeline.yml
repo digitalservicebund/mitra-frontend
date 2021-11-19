@@ -19,6 +19,8 @@ jobs:
           node-version: "16.3.0"
           cache: "npm"
       - run: npm install
+      - name: Check build
+        run: npm run build
       - name: Check format
         run: npm run format:check
       - name: Lint
