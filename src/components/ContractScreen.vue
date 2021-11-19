@@ -17,6 +17,11 @@
   const closeTitleDialog = () => {
     displayTitleDialog.value = false
   }
+
+  const highlightText = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    target?.select()
+  }
   onMounted(() => openTitleDialog())
 
   // Primary adapter using the port (PlaybookRepository interface)
@@ -38,7 +43,7 @@
       v-model="contractTitle"
       title="Titel des Vertrags"
       type="text"
-      @focus="$event.target.select()"
+      @focus="highlightText"
       @keyup.enter="closeTitleDialog"
     />
     <template #footer>
