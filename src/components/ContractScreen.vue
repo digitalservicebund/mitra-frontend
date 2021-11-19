@@ -29,8 +29,8 @@
   <Dialog
     id="dialog-contract-title"
     v-model:visible="displayTitleDialog"
-    :closable="false"
     :modal="true"
+    :dismissable-mask="true"
     header="Wie wollen Sie den Vertrag benennen?"
   >
     <InputText
