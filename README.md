@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-**Node.js 16.3.0**
+**Node.js 16.13.0**
 
 The repository contains a `.node-version` file to set up the required Node.js version automatically with [nodenv](https://github.com/nodenv/nodenv).
 
