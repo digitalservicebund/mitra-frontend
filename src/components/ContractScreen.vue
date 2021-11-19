@@ -10,19 +10,23 @@
   import { onMounted, ref } from "vue"
 
   const contractTitle = ref("Unbenannter Vertrag")
+  const titleInput = ref()
   const displayTitleDialog = ref(false)
-  const openTitleDialog = () => {
+
+  const editTitle = () => {
+    titleInput.value = contractTitle.value
     displayTitleDialog.value = true
   }
-  const closeTitleDialog = () => {
+  const saveTitle = () => {
     displayTitleDialog.value = false
+    contractTitle.value = titleInput.value
   }
 
   const highlightText = (event: Event) => {
     const target = event.target as HTMLInputElement
     target?.select()
   }
-  onMounted(() => openTitleDialog())
+  onMounted(() => editTitle())
 
   // Primary adapter using the port (PlaybookRepository interface)
   const repository: PlaybookRepository = makePlaybookRepository()
@@ -40,19 +44,19 @@
   >
     <InputText
       id="input-contract-title"
-      v-model="contractTitle"
+      v-model="titleInput"
       title="Titel des Vertrags"
       type="text"
       @focus="highlightText"
-      @keyup.enter="closeTitleDialog"
+      @keyup.enter="saveTitle"
     />
     <template #footer>
-      <Button label="OK" icon="pi pi-check" @click="closeTitleDialog"></Button>
+      <Button label="OK" icon="pi pi-check" @click="saveTitle"></Button>
     </template>
   </Dialog>
 
   <section>
-    <Button class="p-button-link" @click="openTitleDialog">
+    <Button class="p-button-link" @click="editTitle">
       <span> {{ contractTitle }} </span>
     </Button>
   </section>

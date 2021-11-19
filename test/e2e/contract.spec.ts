@@ -11,11 +11,18 @@ describe("Starting new contract", () => {
     cy.get("main a").contains("Neuer EVB-IT Cloud Vertrag").click()
     cy.contains("Vertrag benennen").should("exist")
   })
-  it("should display provided title on page", () => {
+  it("should save edited title on button click", () => {
     cy.visit("/")
     cy.get("main a").contains("Neuer EVB-IT Cloud Vertrag").click()
     cy.get("#input-contract-title").type("foo")
     cy.get("button").contains("OK").click()
+    cy.contains("foo")
+  })
+  it("should save edited title on pressing enter", () => {
+    cy.visit("/")
+    cy.get("main a").contains("Neuer EVB-IT Cloud Vertrag").click()
+    cy.get("#input-contract-title").type("foo")
+    cy.get("#input-contract-title").type("{enter}")
     cy.contains("foo")
   })
 })
