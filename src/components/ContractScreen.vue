@@ -39,6 +39,7 @@
       title="Titel des Vertrags"
       type="text"
       @focus="$event.target.select()"
+      @keyup.enter="closeTitleDialog"
     />
     <template #footer>
       <Button label="OK" icon="pi pi-check" @click="closeTitleDialog"></Button>
