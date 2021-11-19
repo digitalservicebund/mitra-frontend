@@ -45,6 +45,11 @@
     </template>
   </Dialog>
 
+  <section>
+    <Button class="p-button-link" @click="openTitleDialog">
+      <span> {{ contractTitle }} </span>
+    </Button>
+  </section>
   <Contract :title="contractTitle" :playbook="playbook" />
 </template>
 
