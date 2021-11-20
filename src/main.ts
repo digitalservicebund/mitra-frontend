@@ -14,4 +14,13 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(router).use(PrimeVue).mount("#app")
+const app = createApp(App).use(router).use(PrimeVue)
+
+// Register global directive "v-focus" for focusing elements
+app.directive("focus", {
+  mounted(el) {
+    el.focus()
+  },
+})
+
+app.mount("#app")

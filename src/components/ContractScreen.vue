@@ -45,6 +45,7 @@
     <InputText
       id="input-contract-title"
       v-model="titleInput"
+      v-focus
       title="Titel des Vertrags"
       type="text"
       @focus="highlightText"
@@ -67,6 +68,7 @@
   #dialog-contract-title {
     width: 40vw;
   }
+
   #input-contract-title {
     width: 100%;
   }
