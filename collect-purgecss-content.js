@@ -21,13 +21,12 @@ const importStatementRegexp = /import .+ from "primevue\/(.+)"/g
 const lookup = glob
   .sync(`${componentsDir}/**/*.vue`)
   .map((path) => fs.readFileSync(path, "utf8"))
-  .map((content) => [...content.matchAll(importStatementRegexp)])
-  .reduce((memo, current) => memo.concat(current), [])
-  .map((match) => match[1])
+  .flatMap((content) => [...content.matchAll(importStatementRegexp)])
+  .flatMap((match) => match.slice(1, 2)) // pick the capturing group from the match
 
 const pathPartRegexp = new RegExp(`/(${lookup.join("|")})/`)
 const nodeModulePaths = glob
   .sync(`${primeVueComponentsDir}/**/*.vue`)
-  .filter((path) => pathPartRegexp.test(path)) // path must include one of our lookup...
+  .filter((path) => pathPartRegexp.test(path)) // path must be included in our lookup
 
 module.exports = nodeModulePaths
