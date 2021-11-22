@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-The application must run in a browser without relying on a central backend server for it's core functionalities. The application will have a lot of business logic in the browser client.
+The application must run in a browser without relying on a central backend server for its core functionalities. The application will have a lot of business logic in the browser client.
 
 ## Decision
 
