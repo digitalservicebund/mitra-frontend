@@ -26,7 +26,7 @@
     const target = event.target as HTMLInputElement
     target?.select()
   }
-  onMounted(() => editTitle())
+  onMounted(editTitle)
 
   // Primary adapter using the port (PlaybookRepository interface)
   const repository: PlaybookRepository = makePlaybookRepository()
