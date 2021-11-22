@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { ref, defineProps } from "vue"
-  import Playbook from "../domain/Playbook"
+  import { Module } from "../domain/Playbook"
   import PanelMenu from "primevue/panelmenu"
 
-  const props = defineProps<{ playbook: Playbook }>()
+  const props = defineProps<{ modules: Module[] }>()
 
   type MenuItem = {
     label: string
@@ -13,7 +13,7 @@
     items?: MenuItem[]
   }
 
-  const generateMenuItems = (playbook: Playbook): MenuItem[] => {
+  const generateMenuItems = (modules: Module[]): MenuItem[] => {
     return [
       {
         label: "Startseite",
@@ -21,7 +21,7 @@
       },
       {
         label: "Module",
-        items: playbook.modules.map((module, index) => {
+        items: modules.map((module, index) => {
           return { label: `${index + 1}. ${module.text}`, url: "#" }
         }),
       },
@@ -45,7 +45,7 @@
     ]
   }
 
-  const menuItems = ref(generateMenuItems(props.playbook))
+  const menuItems = ref(generateMenuItems(props.modules))
 </script>
 
 <template>

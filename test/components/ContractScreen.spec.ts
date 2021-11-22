@@ -6,7 +6,12 @@ import PlaybookRepository from "../../src/domain/PlaybookRepository"
 
 const playbookTestRepository: PlaybookRepository = {
   load() {
-    return { modules: [] }
+    return {
+      modules: [],
+      getModules() {
+        return this.modules
+      },
+    }
   },
   save() {
     return

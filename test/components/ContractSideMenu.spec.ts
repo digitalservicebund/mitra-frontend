@@ -1,37 +1,35 @@
 import { render, screen, fireEvent } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
-import Playbook from "../../src/domain/Playbook"
+import { Module } from "../../src/domain/Playbook"
 
-const testPlaybook: Playbook = {
-  modules: [
-    {
-      text: "Rubrum",
-      steps: [
-        { text: "Schritt 1.1" },
-        { text: "Schritt 1.2" },
-        { text: "Schritt 1.3" },
-      ],
-    },
-    {
-      text: "Gegenstand und Bestandteile des Vertrags",
-      steps: [
-        { text: "Schritt 2.1" },
-        { text: "Schritt 2.2" },
-        { text: "Schritt 2.3" },
-      ],
-    },
-    {
-      text: "Gegenstand der Leistungen",
-      steps: [
-        { text: "Schritt 3.1" },
-        { text: "Schritt 3.2" },
-        { text: "Schritt 3.3" },
-        { text: "Schritt 3.4" },
-      ],
-    },
-  ],
-}
+const testModules: Module[] = [
+  {
+    text: "Rubrum",
+    steps: [
+      { text: "Schritt 1.1" },
+      { text: "Schritt 1.2" },
+      { text: "Schritt 1.3" },
+    ],
+  },
+  {
+    text: "Gegenstand und Bestandteile des Vertrags",
+    steps: [
+      { text: "Schritt 2.1" },
+      { text: "Schritt 2.2" },
+      { text: "Schritt 2.3" },
+    ],
+  },
+  {
+    text: "Gegenstand der Leistungen",
+    steps: [
+      { text: "Schritt 3.1" },
+      { text: "Schritt 3.2" },
+      { text: "Schritt 3.3" },
+      { text: "Schritt 3.4" },
+    ],
+  },
+]
 
 describe("ContractSideMenu", () => {
   const router = createRouter({
@@ -54,7 +52,7 @@ describe("ContractSideMenu", () => {
   it("should render all fixed menu items", async () => {
     render(ContractSideMenu, {
       props: {
-        playbook: testPlaybook,
+        modules: testModules,
       },
       global: {
         plugins: [router],
@@ -67,10 +65,10 @@ describe("ContractSideMenu", () => {
     expect(screen.getByText("Notizen")).toBeVisible()
   })
 
-  it("should render all modules of playbook", async () => {
+  it("should render all modules", async () => {
     render(ContractSideMenu, {
       props: {
-        playbook: testPlaybook,
+        modules: testModules,
       },
       global: {
         plugins: [router],
