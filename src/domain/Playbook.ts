@@ -1,10 +1,11 @@
 interface Step {
   text: string
 }
-interface Module {
+export interface Module {
   text: string
   steps: Step[]
 }
 export default interface Playbook {
   modules: Module[]
+  getModules(): Module[]
 }
