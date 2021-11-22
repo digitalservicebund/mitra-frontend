@@ -61,7 +61,7 @@
       <span> {{ contractTitle }} </span>
     </Button>
   </section>
-  <EditContract :title="contractTitle" :playbook="playbook" />
+  <EditContract :playbook="playbook" />
 </template>
 
 <style>

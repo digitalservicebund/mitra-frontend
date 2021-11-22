@@ -2,7 +2,7 @@
   import { defineProps } from "vue"
   import Playbook from "../domain/Playbook"
 
-  defineProps<{ title: string; playbook: Playbook }>()
+  defineProps<{ playbook: Playbook }>()
 </script>
 
 <template>
