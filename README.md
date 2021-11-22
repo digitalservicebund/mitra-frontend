@@ -120,3 +120,12 @@ Currently the app is deployed to GitHub Pages from trunk continuously.
 ## License scanning
 
 We conduct an allowlist-based license scanning as part of the pipeline's audit job. Whenever there's a production dependency added with a yet unknown license, the build is going to fail and we will be notified.
+
+## Architecture Decision Records
+
+[Architecture decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+are kept in the `docs/adr` directory. For adding new records install the [adr-tools](https://github.com/npryce/adr-tools) package:
+
+```bash
+brew install adr-tools
+```
