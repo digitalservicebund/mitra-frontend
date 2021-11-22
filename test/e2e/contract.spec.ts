@@ -25,4 +25,12 @@ describe("Starting new contract", () => {
     cy.get("#input-contract-title").type("{enter}")
     cy.contains("foo")
   })
+  it("should list the modules in navigation", () => {
+    cy.visit("/contract")
+    cy.get("#input-contract-title").type("foo")
+    cy.get("button").contains("OK").click()
+    cy.get("nav").contains("Module").click()
+    cy.get("nav").contains("Rubrum")
+    cy.get("nav").contains("Gegenstand der Leistungen")
+  })
 })

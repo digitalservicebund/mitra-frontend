@@ -4,6 +4,7 @@
   import ContractRepository from "../domain/ContractRepository"
   import AppHeader from "./AppHeader.vue"
   import EditContract from "./EditContract.vue"
+  import ContractSideMenu from "./ContractSideMenu.vue"
   import { makePlaybookRepository, makeContractRepository } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
@@ -45,39 +46,47 @@
 </script>
 
 <template>
-  <AppHeader />
+  <div class="flex">
+    <div class="flex-col">
+      <ContractSideMenu :playbook="contract.playbook" />
+    </div>
 
-  <Dialog
-    id="dialog-contract-title"
-    v-model:visible="displayTitleDialog"
-    :modal="true"
-    :dismissable-mask="true"
-    header="Wie wollen Sie den Vertrag benennen?"
-  >
-    <InputText
-      id="input-contract-title"
-      v-model="titleInput"
-      v-focus
-      title="Titel des Vertrags"
-      type="text"
-      @focus="highlightText"
-      @keyup.enter="updateTitle"
-    />
-    <template #footer>
-      <Button label="OK" icon="pi pi-check" @click="updateTitle"></Button>
-    </template>
-  </Dialog>
+    <div class="flex-col p-8">
+      <AppHeader />
 
-  <section>
-    <Button class="p-button-link" @click="editTitle">
-      <span>{{ contractTitle }}</span>
-    </Button>
-    <Button class="p-button-link" @click="saveContract">
-      <span>Speichern</span>
-    </Button>
-  </section>
+      <Dialog
+        id="dialog-contract-title"
+        v-model:visible="displayTitleDialog"
+        :modal="true"
+        :dismissable-mask="true"
+        header="Wie wollen Sie den Vertrag benennen?"
+      >
+        <InputText
+          id="input-contract-title"
+          v-model="titleInput"
+          v-focus
+          title="Titel des Vertrags"
+          type="text"
+          @focus="highlightText"
+          @keyup.enter="updateTitle"
+        />
+        <template #footer>
+          <Button label="OK" icon="pi pi-check" @click="updateTitle"></Button>
+        </template>
+      </Dialog>
 
-  <EditContract :contract="contract" />
+      <section>
+        <Button class="p-button-link" @click="editTitle">
+          <span>{{ contractTitle }}</span>
+        </Button>
+        <Button class="p-button-link" @click="saveContract">
+          <span>Speichern</span>
+        </Button>
+      </section>
+
+      <EditContract :contract="contract" />
+    </div>
+  </div>
 </template>
 
 <style>
