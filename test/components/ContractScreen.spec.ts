@@ -64,10 +64,8 @@ describe("ContractScreen", () => {
     })
     const vm: unknown = wrapper.vm
     const instance = vm as {
-      contract: Contract
       titleInput: string
       updateTitle: () => void
-      saveContract: () => void
     }
 
     // Simulate text input
