@@ -6,7 +6,6 @@
 </script>
 
 <template>
-  <h2>{{ playbook.name }}</h2>
   <section v-for="module in playbook.modules" :key="module.text">
     <h3>
       <strong>{{ module.text }}</strong>
