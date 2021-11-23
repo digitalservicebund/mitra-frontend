@@ -2,7 +2,6 @@ import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 
 const testPlaybook: Playbook = {
-  id: "test-playbook",
   modules: [
     {
       text: "Rubrum",
@@ -33,9 +32,11 @@ const testPlaybook: Playbook = {
 }
 
 const repository: PlaybookRepository = {
-  findById: (id) => {
-    console.log(`Looking up Playbook with id ${id}`)
+  load() {
     return testPlaybook
+  },
+  save() {
+    // noop
   },
 }
 

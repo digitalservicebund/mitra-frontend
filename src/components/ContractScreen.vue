@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import Contract from "../domain/Contract"
-  import Playbook from "../domain/Playbook"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import AppHeader from "./AppHeader.vue"
   import EditContract from "./EditContract.vue"
@@ -12,8 +11,7 @@
 
   // Primary adapter using the port (PlaybookRepository interface)
   const repository: PlaybookRepository = makePlaybookRepository()
-  const playbook: Playbook = repository.findById("test-playbook")
-  const contract: Contract = Contract.fromPlaybook(playbook)
+  const contract: Contract = Contract.fromPlaybook(repository.load())
 
   const placeholder = "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)

@@ -6,6 +6,5 @@ interface Module {
   steps: Step[]
 }
 export default interface Playbook {
-  id: string
   modules: Module[]
 }

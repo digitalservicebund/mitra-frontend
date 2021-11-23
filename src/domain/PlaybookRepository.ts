@@ -1,5 +1,6 @@
 import Playbook from "./Playbook"
 
 export default interface PlaybookRepository {
-  findById: (id: string) => Playbook
+  load: () => Playbook
+  save: (playbook: Playbook) => void
 }
