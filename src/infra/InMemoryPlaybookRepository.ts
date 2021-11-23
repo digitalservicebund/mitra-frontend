@@ -3,7 +3,6 @@ import PlaybookRepository from "../domain/PlaybookRepository"
 
 const testPlaybook: Playbook = {
   id: "test-playbook",
-  name: "Unbenannter Vertrag",
   modules: [
     {
       text: "Rubrum",

@@ -15,8 +15,9 @@
   const playbook: Playbook = repository.findById("test-playbook")
   const contract: Contract = Contract.fromPlaybook(playbook)
 
-  const contractTitle = ref(contract.name)
-  const titleInput = ref(contract.name)
+  const placeholder = "Unbenannter Vertrag"
+  const contractTitle = ref(placeholder)
+  const titleInput = ref(placeholder)
   const displayTitleDialog = ref(false)
 
   const editTitle = () => {

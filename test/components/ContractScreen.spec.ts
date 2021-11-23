@@ -1,18 +1,18 @@
 import { shallowMount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
-import Playbook from "../../src/domain/Playbook"
+import Contract from "../../src/domain/Contract"
 
 describe("ContractScreen", () => {
   it("updates contract name when entered", () => {
     const wrapper = shallowMount(ContractScreen)
     const vm: unknown = wrapper.vm
     const instance = vm as {
-      contract: Playbook
+      contract: Contract
       titleInput: string
       saveTitle: () => void
     }
 
-    expect(instance.contract.name).toBe("Unbenannter Vertrag")
+    expect(instance.contract.name).toBe("")
 
     // Simulate text input
     instance.titleInput = "Neuer Vertrag"

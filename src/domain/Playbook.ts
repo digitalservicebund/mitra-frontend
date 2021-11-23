@@ -7,6 +7,5 @@ interface Module {
 }
 export default interface Playbook {
   id: string
-  name: string
   modules: Module[]
 }
