@@ -1,4 +1,3 @@
-import { ref } from "@vue/runtime-dom"
 import { mount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 
