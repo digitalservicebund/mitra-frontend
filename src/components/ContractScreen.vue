@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import Contract from "../domain/Contract"
   import Playbook from "../domain/Playbook"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import AppHeader from "./AppHeader.vue"
@@ -12,9 +13,10 @@
   // Primary adapter using the port (PlaybookRepository interface)
   const repository: PlaybookRepository = makePlaybookRepository()
   const playbook: Playbook = repository.findById("test-playbook")
+  const contract: Contract = Contract.fromPlaybook(playbook)
 
-  const contractTitle = ref(playbook.name)
-  const titleInput = ref(playbook.name)
+  const contractTitle = ref(contract.name)
+  const titleInput = ref(contract.name)
   const displayTitleDialog = ref(false)
 
   const editTitle = () => {
@@ -25,7 +27,7 @@
   const saveTitle = () => {
     displayTitleDialog.value = false
     contractTitle.value = titleInput.value
-    playbook.name = titleInput.value
+    contract.name = titleInput.value
   }
 
   const highlightText = (event: Event) => {
@@ -65,7 +67,7 @@
       <span>{{ contractTitle }}</span>
     </Button>
   </section>
-  <EditContract :playbook="playbook" />
+  <EditContract :contract="contract" />
 </template>
 
 <style>

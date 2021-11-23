@@ -7,17 +7,17 @@ describe("ContractScreen", () => {
     const wrapper = shallowMount(ContractScreen)
     const vm: unknown = wrapper.vm
     const instance = vm as {
-      playbook: Playbook
+      contract: Playbook
       titleInput: string
       saveTitle: () => void
     }
 
-    expect(instance.playbook.name).toBe("Unbenannter Vertrag")
+    expect(instance.contract.name).toBe("Unbenannter Vertrag")
 
     // Simulate text input
     instance.titleInput = "Neuer Vertrag"
     instance.saveTitle()
 
-    expect(instance.playbook.name).toBe("Neuer Vertrag")
+    expect(instance.contract.name).toBe("Neuer Vertrag")
   })
 })

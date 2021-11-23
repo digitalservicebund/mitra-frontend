@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import { defineProps } from "vue"
-  import Playbook from "../domain/Playbook"
+  import Contract from "../domain/Contract"
 
-  defineProps<{ playbook: Playbook }>()
+  defineProps<{ contract: Contract }>()
 </script>
 
 <template>
-  <section v-for="module in playbook.modules" :key="module.text">
+  <section v-for="module in contract.playbook.modules" :key="module.text">
     <h3>
       <strong>{{ module.text }}</strong>
     </h3>
