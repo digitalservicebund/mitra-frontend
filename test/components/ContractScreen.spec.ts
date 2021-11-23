@@ -1,17 +1,9 @@
-import { mount } from "@vue/test-utils"
+import { shallowMount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 
 describe("ContractScreen", () => {
   it("updates contract name when entered", () => {
-    const wrapper = mount(ContractScreen, {
-      global: {
-        stubs: {
-          AppHeader: true,
-          RouterLink: true,
-          Dialog: true,
-        },
-      },
-    })
+    const wrapper = shallowMount(ContractScreen)
     expect(wrapper.vm.playbook.name).toBe("Unbenannter Vertrag")
 
     // Simulate text input
