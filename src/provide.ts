@@ -1,6 +1,12 @@
 import PlaybookRepository from "./domain/PlaybookRepository"
-import repository from "./infra/InMemoryPlaybookRepository"
+import playbookRepository from "./infra/InMemoryPlaybookRepository"
+import ContractRepository from "./domain/ContractRepository"
+import contractRepository from "./infra/FileSystemContractRepository"
 
 export const makePlaybookRepository: () => PlaybookRepository = () => {
-  return repository
+  return playbookRepository
+}
+
+export const makeContractRepository: () => ContractRepository = () => {
+  return contractRepository
 }
