@@ -7,7 +7,7 @@
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
-  import { onMounted, Ref, ref } from "vue"
+  import { onMounted, ref } from "vue"
 
   // Primary adapter using the port (PlaybookRepository interface)
   const repository: PlaybookRepository = makePlaybookRepository()
