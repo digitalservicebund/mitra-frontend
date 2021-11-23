@@ -7,34 +7,38 @@
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
-  import { onMounted, ref } from "vue"
+  import { onMounted, Ref, ref } from "vue"
 
-  const contractTitle = ref("Unbenannter Vertrag")
-  const titleInput = ref()
+  // Primary adapter using the port (PlaybookRepository interface)
+  const repository: PlaybookRepository = makePlaybookRepository()
+  const playbook: Playbook = repository.findById("test-playbook")
+
+  const contractTitle = ref(playbook.name)
+  const titleInput = ref(playbook.name)
   const displayTitleDialog = ref(false)
 
   const editTitle = () => {
     titleInput.value = contractTitle.value
     displayTitleDialog.value = true
   }
+
   const saveTitle = () => {
     displayTitleDialog.value = false
     contractTitle.value = titleInput.value
+    playbook.name = titleInput.value
   }
 
   const highlightText = (event: Event) => {
     const target = event.target as HTMLInputElement
     target?.select()
   }
-  onMounted(editTitle)
 
-  // Primary adapter using the port (PlaybookRepository interface)
-  const repository: PlaybookRepository = makePlaybookRepository()
-  const playbook: Playbook = repository.findById("test-playbook")
+  onMounted(editTitle)
 </script>
 
 <template>
   <AppHeader />
+
   <Dialog
     id="dialog-contract-title"
     v-model:visible="displayTitleDialog"
@@ -58,7 +62,7 @@
 
   <section>
     <Button class="p-button-link" @click="editTitle">
-      <span> {{ contractTitle }} </span>
+      <span>{{ contractTitle }}</span>
     </Button>
   </section>
   <EditContract :playbook="playbook" />
