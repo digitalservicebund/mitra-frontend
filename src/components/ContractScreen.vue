@@ -48,7 +48,7 @@
 <template>
   <div class="flex">
     <div class="flex-col">
-      <ContractSideMenu :modules="contract.playbook.getModules()" />
+      <ContractSideMenu :modules="contract.getModules" />
     </div>
 
     <div class="flex-col p-8">

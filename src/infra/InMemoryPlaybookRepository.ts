@@ -29,9 +29,6 @@ const testPlaybook: Playbook = {
       ],
     },
   ],
-  getModules() {
-    return this.modules
-  },
 }
 
 const repository: PlaybookRepository = {

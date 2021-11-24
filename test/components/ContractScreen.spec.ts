@@ -8,9 +8,6 @@ const playbookTestRepository: PlaybookRepository = {
   load() {
     return {
       modules: [],
-      getModules() {
-        return this.modules
-      },
     }
   },
   save() {

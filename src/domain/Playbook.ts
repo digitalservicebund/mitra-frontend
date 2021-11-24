@@ -7,5 +7,4 @@ export interface Module {
 }
 export default interface Playbook {
   modules: Module[]
-  getModules(): Module[]
 }

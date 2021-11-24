@@ -12,4 +12,8 @@ export default class Contract {
   static fromPlaybook(playbook: Playbook): Contract {
     return new Contract(playbook)
   }
+
+  get getModules() {
+    return this.playbook.modules
+  }
 }
