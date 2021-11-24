@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, defineProps } from "vue"
+  import { ref, defineProps, onMounted } from "vue"
   import type { RouteRecordName } from "vue-router"
   import { Module } from "../domain/Playbook"
   import PanelMenu from "primevue/panelmenu"
@@ -49,6 +49,14 @@
   }
 
   const menuItems = ref(generateMenuItems(props.modules))
+
+  // temporary accessibility fix for same IDs in PrimeVue's PanelMenu component
+  onMounted(() => {
+    const createdItems = document.querySelectorAll(".p-toggleable-content")
+    createdItems.forEach(
+      (item, index) => item.id && (item.id += `_${index + 1}`)
+    )
+  })
 </script>
 
 <template>
