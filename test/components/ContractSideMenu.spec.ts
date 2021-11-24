@@ -1,35 +1,25 @@
-import { render, screen, fireEvent } from "@testing-library/vue"
+import { fireEvent, render, screen } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
-import { Module } from "../../src/domain/Playbook"
+import Module from "../../src/domain/Module"
 
-const testModules: Module[] = [
-  {
-    text: "Rubrum",
-    steps: [
-      { text: "Schritt 1.1" },
-      { text: "Schritt 1.2" },
-      { text: "Schritt 1.3" },
-    ],
-  },
-  {
-    text: "Gegenstand und Bestandteile des Vertrags",
-    steps: [
-      { text: "Schritt 2.1" },
-      { text: "Schritt 2.2" },
-      { text: "Schritt 2.3" },
-    ],
-  },
-  {
-    text: "Gegenstand der Leistungen",
-    steps: [
-      { text: "Schritt 3.1" },
-      { text: "Schritt 3.2" },
-      { text: "Schritt 3.3" },
-      { text: "Schritt 3.4" },
-    ],
-  },
-]
+const module1: Module = new Module(1, "Rubrum")
+module1.addSteps(
+  { id: 1, text: "Schritt 1.1" },
+  { id: 2, text: "Schritt 1.2" },
+  { id: 3, text: "Schritt 1.3" }
+)
+const module2: Module = new Module(
+  2,
+  "Gegenstand und Bestandteile des Vertrags"
+)
+module2.addSteps(
+  { id: 1, text: "Schritt 2.1" },
+  { id: 2, text: "Schritt 2.2" },
+  { id: 3, text: "Schritt 2.3" }
+)
+
+const testModules: Module[] = [module1, module2]
 
 describe("ContractSideMenu", () => {
   const router = createRouter({
@@ -87,6 +77,5 @@ describe("ContractSideMenu", () => {
     expect(
       screen.getByText("2. Gegenstand und Bestandteile des Vertrags")
     ).toBeVisible()
-    expect(screen.getByText("3. Gegenstand der Leistungen")).toBeVisible()
   })
 })

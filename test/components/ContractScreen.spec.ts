@@ -3,12 +3,11 @@ import ContractScreen from "../../src/components/ContractScreen.vue"
 import Contract from "../../src/domain/Contract"
 import ContractRepository from "../../src/domain/ContractRepository"
 import PlaybookRepository from "../../src/domain/PlaybookRepository"
+import Playbook from "../../src/domain/Playbook"
 
 const playbookTestRepository: PlaybookRepository = {
   load() {
-    return {
-      modules: [],
-    }
+    return new Playbook()
   },
   save() {
     return

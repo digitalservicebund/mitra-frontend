@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ref, defineProps, onMounted } from "vue"
   import type { RouteRecordName } from "vue-router"
-  import { Module } from "../domain/Playbook"
   import PanelMenu from "primevue/panelmenu"
+  import Module from "../domain/Module"
 
   const props = defineProps<{ modules: Module[] }>()
 
