@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { ref, defineProps } from "vue"
+  import type { RouteRecordName } from "vue-router"
   import { Module } from "../domain/Playbook"
   import PanelMenu from "primevue/panelmenu"
 
@@ -7,9 +8,8 @@
 
   type MenuItem = {
     label: string
+    to?: { name: RouteRecordName }
     icon?: string
-    url?: string
-    command?: () => void
     items?: MenuItem[]
   }
 
@@ -17,30 +17,33 @@
     return [
       {
         label: "Startseite",
-        url: "/",
+        to: { name: "mitra-frontend" },
       },
       {
         label: "Module",
         items: modules.map((module, index) => {
-          return { label: `${index + 1}. ${module.text}`, url: "#" }
+          return {
+            label: `${index + 1}. ${module.text}`,
+            to: { name: "mitra-frontend" },
+          }
         }),
       },
       {
         label: "Fragenübersicht",
-        url: "#",
+        to: { name: "mitra-frontend" },
       },
       {
         label: "TO-DOs",
-        url: "#",
+        to: { name: "mitra-frontend" },
       },
       {
         label: "Notizen",
-        url: "#",
+        to: { name: "mitra-frontend" },
       },
       {
         label: "Speichern",
+        to: { name: "mitra-frontend" },
         icon: "pi pi-fw pi-download",
-        url: "#",
       },
     ]
   }

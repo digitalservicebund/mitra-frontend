@@ -36,7 +36,15 @@ describe("ContractSideMenu", () => {
     history: createWebHistory(),
     routes: [
       {
+        path: "/mitra-frontend/",
+        name: "mitra-frontend",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
         path: "/mitra-frontend/contract",
+        name: "mitra-frontend-contract",
         component: {
           template: "<div></div>",
         },
