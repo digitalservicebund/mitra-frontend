@@ -1,1 +1,0 @@
-import{_ as t}from"./index.9fafd906.js";import{r as o,o as r,n as s,p as a,h as n,s as c,z as _}from"./vendor.3a5fdff0.js";const d={},f={class:"py-4 text-xl"},i={class:"font-black"},l=_("Mitra");function p(m,h){const e=o("router-link");return r(),s("header",f,[a("h1",i,[n(e,{to:"/mitra-frontend/"},{default:c(()=>[l]),_:1})])])}var u=t(d,[["render",p]]);export{u as A};
