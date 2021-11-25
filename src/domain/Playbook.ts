@@ -8,12 +8,6 @@ export default class Playbook {
   }
 
   addModule(module: Module) {
-    const length = this.modules.length
-    const lastModule = length === 0 ? null : this.modules[length - 1]
-    if (lastModule) {
-      module.prev = lastModule.id
-      lastModule.next = module.id
-    }
     this.modules.push(module)
   }
 

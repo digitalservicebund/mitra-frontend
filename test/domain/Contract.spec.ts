@@ -12,7 +12,7 @@ describe("Contract", () => {
 
   it("should return the modules of playbook", () => {
     const playbook = new Playbook()
-    playbook.addModule(new Module(1, "foo"))
+    playbook.addModule(new Module("foo"))
 
     const contract = Contract.fromPlaybook(playbook)
 

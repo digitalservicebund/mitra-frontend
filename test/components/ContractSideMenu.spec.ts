@@ -3,20 +3,17 @@ import { createRouter, createWebHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Module from "../../src/domain/Module"
 
-const module1: Module = new Module(1, "Rubrum")
+const module1: Module = new Module("Rubrum")
 module1.addSteps(
-  { id: 1, text: "Schritt 1.1" },
-  { id: 2, text: "Schritt 1.2" },
-  { id: 3, text: "Schritt 1.3" }
+  { text: "Schritt 1.1" },
+  { text: "Schritt 1.2" },
+  { text: "Schritt 1.3" }
 )
-const module2: Module = new Module(
-  2,
-  "Gegenstand und Bestandteile des Vertrags"
-)
+const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags")
 module2.addSteps(
-  { id: 1, text: "Schritt 2.1" },
-  { id: 2, text: "Schritt 2.2" },
-  { id: 3, text: "Schritt 2.3" }
+  { text: "Schritt 2.1" },
+  { text: "Schritt 2.2" },
+  { text: "Schritt 2.3" }
 )
 
 const testModules: Module[] = [module1, module2]

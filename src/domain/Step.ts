@@ -3,7 +3,6 @@ export enum StepType {
 }
 
 export interface Step {
-  id: number
   text: string
   type?: StepType
   prev?: number
