@@ -20,7 +20,7 @@ const contractTestRepository: ContractRepository = {
   load() {
     return savedContract
   },
-  save(contract: Contract) {
+  async save(contract: Contract) {
     savedContract = contract
     return
   },

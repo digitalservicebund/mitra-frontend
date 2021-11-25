@@ -6,7 +6,7 @@ fileignoreconfig:
   - filename: README.md
     checksum: fa49bfedda9e8f6bd3f5862fd06d2efae9f2c23ee6e6ef8bb70c64f35ceebaf8
   - filename: src/env.d.ts
-    checksum: c6889d19e358dfd8d08f3a11bd4a9d88ad88b83d847dceb1175b8821bc4ec4ac
+    checksum: f6a4ec3a58a79486f4eab37ca3ee43253941f95319320b6f191775cc9a2b10fe
   - filename: src/theme.css
     checksum: 37b2d90ac8083b718cc005eb6eb7d568d13a3efb891e73b42dfd9107c11ee5a5
   - filename: "*.woff"

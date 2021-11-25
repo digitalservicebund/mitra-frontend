@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "@types/jest"]
+    "types": ["vite/client", "@types/jest", "@types/wicg-native-file-system"]
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "jest.setup.ts"],
   "exclude": ["test/e2e/**/*.ts"]

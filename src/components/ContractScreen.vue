@@ -38,8 +38,8 @@
     target?.select()
   }
 
-  const saveContract = () => {
-    contractRepository.save(contract)
+  const saveContract = async () => {
+    await contractRepository.save(contract)
   }
 
   onMounted(editTitle)

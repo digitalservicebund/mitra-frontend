@@ -7,3 +7,14 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+interface SaveFilePickerOptions {
+  suggestedName?: string
+  startIn?:
+    | "desktop"
+    | "documents"
+    | "downloads"
+    | "music"
+    | "pictures"
+    | "videos"
+}
