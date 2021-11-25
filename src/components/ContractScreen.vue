@@ -81,17 +81,29 @@
         </Button>
       </section>
 
-      <ContractEdit :contract="contract" />
+      <transition name="fade" mode="out-in">
+        <ContractEdit :contract="contract" />
+      </transition>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
   #dialog-contract-title {
     width: 40vw;
   }
 
   #input-contract-title {
     width: 100%;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
