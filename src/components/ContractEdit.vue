@@ -35,7 +35,7 @@
 <template>
   <section :key="currentStepId">
     <h3>
-      <strong>{{ currentModule?.text }}</strong>
+      {{ currentModule?.text }}
     </h3>
     <div class="contract-step">
       <div class="question-block">
@@ -67,6 +67,9 @@
 </template>
 
 <style scoped>
+  h3 {
+    font-weight: bold;
+  }
   .contract-step {
     width: 30vw;
   }
