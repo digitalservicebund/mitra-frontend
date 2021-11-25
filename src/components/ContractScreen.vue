@@ -2,7 +2,7 @@
   import Contract from "../domain/Contract"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import ContractRepository from "../domain/ContractRepository"
-  import EditContract from "./EditContract.vue"
+  import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
   import { makePlaybookRepository, makeContractRepository } from "../provide"
   import Button from "primevue/button"
@@ -81,7 +81,7 @@
         </Button>
       </section>
 
-      <EditContract :contract="contract" />
+      <ContractEdit :contract="contract" />
     </div>
   </div>
 </template>
