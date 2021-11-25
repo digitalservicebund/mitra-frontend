@@ -5,6 +5,4 @@ export enum StepType {
 export interface Step {
   text: string
   type?: StepType
-  prev?: number
-  next?: number
 }
