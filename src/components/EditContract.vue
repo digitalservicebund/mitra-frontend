@@ -1,16 +1,98 @@
 <script setup lang="ts">
+  import { onBeforeMount, onBeforeUpdate, ref } from "vue"
   import Contract from "../domain/Contract"
+  import Button from "primevue/button"
+  import InputText from "primevue/inputtext"
+  import { StepType } from "../domain/Step"
 
-  defineProps<{ contract: Contract }>()
+  const props = defineProps<{ contract: Contract }>()
+
+  let currentStepId = ref(props.contract.currentStepId)
+  let currentModule = ref()
+  let currentStep = ref()
+
+  const prev = () => {
+    props.contract.prevStep()
+    currentStepId.value = props.contract.currentStepId
+  }
+
+  const next = () => {
+    props.contract.nextStep()
+    currentStepId.value = props.contract.currentStepId
+  }
+
+  function updateRefs() {
+    return () => {
+      currentModule.value = props.contract.getCurrentModule()
+      currentStep.value = props.contract.getCurrentStep()
+    }
+  }
+
+  onBeforeMount(updateRefs())
+  onBeforeUpdate(updateRefs())
 </script>
 
 <template>
-  <section v-for="module in contract.playbook.modules" :key="module.text">
+  <section :key="currentStepId">
     <h3>
-      <strong>{{ module.text }}</strong>
+      <strong>{{ currentModule?.text }}</strong>
     </h3>
-    <div v-for="step in module.steps" :key="step.text">
-      {{ step.text }}
+    <div class="contract-step">
+      <div class="question-block">
+        {{ currentStep?.text }}
+      </div>
+      <div v-if="StepType.Text === currentStep?.type" class="answer-block">
+        <InputText
+          class="answer-input-text"
+          :title="currentStep?.text"
+          type="text"
+        />
+      </div>
+      <div class="step-navigation">
+        <Button
+          v-if="props.contract.hasPrev()"
+          label="Zurück"
+          class="p-button-outlined prev-button"
+          @click="prev"
+        />
+        <Button
+          v-if="props.contract.hasNext()"
+          label="Weiter"
+          class="p-button-outlined next-button"
+          @click="next"
+        />
+      </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+  .contract-step {
+    width: 30vw;
+  }
+
+  .contract-step div {
+    margin-bottom: 1em;
+  }
+
+  .step-navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .step-navigation Button {
+    min-width: 8vw;
+  }
+
+  .step-navigation .prev-button {
+    grid-column: 1;
+  }
+
+  .step-navigation .next-button {
+    grid-column: 3;
+  }
+
+  .answer-input-text {
+    width: 100%;
+  }
+</style>
