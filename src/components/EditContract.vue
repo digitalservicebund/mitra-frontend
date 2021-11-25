@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { defineProps } from "vue"
   import Contract from "../domain/Contract"
 
   defineProps<{ contract: Contract }>()

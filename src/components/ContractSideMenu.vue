@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, defineProps, onMounted } from "vue"
+  import { ref, onMounted } from "vue"
   import type { RouteRecordName } from "vue-router"
   import PanelMenu from "primevue/panelmenu"
   import Module from "../domain/Module"
