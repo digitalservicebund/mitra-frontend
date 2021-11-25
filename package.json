@@ -58,7 +58,7 @@
     "license-checker": "^25.0.1",
     "pa11y-ci": "^2.4.2",
     "postcss": "^8.4.0",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.0",
     "prettier-plugin-sh": "^0.8.0",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^2.2.19",
