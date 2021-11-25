@@ -2,7 +2,6 @@
   import Contract from "../domain/Contract"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import ContractRepository from "../domain/ContractRepository"
-  import AppHeader from "./AppHeader.vue"
   import EditContract from "./EditContract.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
   import { makePlaybookRepository, makeContractRepository } from "../provide"
@@ -52,8 +51,6 @@
     </div>
 
     <div class="flex-col p-8">
-      <AppHeader />
-
       <Dialog
         id="dialog-contract-title"
         v-model:visible="displayTitleDialog"
