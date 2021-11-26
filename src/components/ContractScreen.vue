@@ -47,7 +47,7 @@
 <template>
   <div class="flex">
     <div class="flex-col">
-      <ContractSideMenu :modules="contract.getModules" />
+      <ContractSideMenu :modules="contract.getModules" @save="saveContract" />
     </div>
 
     <div class="flex-col p-8">
@@ -75,9 +75,6 @@
       <section>
         <Button class="p-button-link" @click="editTitle">
           <span>{{ contractTitle }}</span>
-        </Button>
-        <Button class="p-button-link" @click="saveContract">
-          <span>Speichern</span>
         </Button>
       </section>
 

@@ -5,6 +5,9 @@
   import Module from "../domain/Module"
 
   const props = defineProps<{ modules: Module[] }>()
+  const emit = defineEmits<{
+    (e: "save"): void
+  }>()
 
   type MenuItem = {
     label: string
@@ -44,7 +47,7 @@
       {
         label: "Speichern",
         icon: "pi pi-fw pi-download",
-        command: () => console.log("Saving file... (not really)"),
+        command: () => emit("save"),
       },
     ]
   }

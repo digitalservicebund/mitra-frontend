@@ -64,4 +64,17 @@ describe("ContractSideMenu", () => {
       screen.getByText("2. Gegenstand und Bestandteile des Vertrags")
     ).toBeVisible()
   })
+
+  it("should issue command to save contract", async () => {
+    const { emitted } = render(ContractSideMenu, {
+      props: {
+        modules: testModules,
+      },
+      global: {
+        plugins: [router],
+      },
+    })
+    await fireEvent.click(screen.getByText("Speichern"))
+    expect(emitted().save).toBeTruthy()
+  })
 })

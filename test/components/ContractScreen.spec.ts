@@ -1,5 +1,6 @@
 import { mount, shallowMount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
+import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
 import ContractRepository from "../../src/domain/ContractRepository"
 import PlaybookRepository from "../../src/domain/PlaybookRepository"
@@ -53,11 +54,11 @@ describe("ContractScreen", () => {
     expect(instance.contract.title).toBe("Neuer Vertrag")
   })
 
-  it("allows to save contract as work in progress", async () => {
+  it("saves contract as work in progress when requested", async () => {
     const wrapper = mount(ContractScreen, {
       global: {
         stubs: {
-          AppHeader: true,
+          Button: true,
           Dialog: true,
           RouterLink: true,
         },
@@ -73,10 +74,7 @@ describe("ContractScreen", () => {
     instance.titleInput = "Neuer Vertrag"
     instance.updateTitle()
 
-    await wrapper
-      .findAll("button")
-      .filter((button) => button.text() === "Speichern")
-      .forEach((button) => button.trigger("click"))
+    wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
     expect(contractTestRepository.load().title).toBe("Neuer Vertrag")
   })
