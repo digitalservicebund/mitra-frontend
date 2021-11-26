@@ -1,7 +1,7 @@
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import Module from "../domain/Module"
-import { Step, StepType } from "../domain/Step"
+import Step, { StepType } from "../domain/Step"
 
 const step11: Step = { type: StepType.Text, text: "Schritt 1.1" }
 const step12: Step = { type: StepType.Text, text: "Schritt 1.2" }
