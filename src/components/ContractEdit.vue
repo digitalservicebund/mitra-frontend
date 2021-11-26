@@ -7,10 +7,10 @@
 
   const props = defineProps<{ contract: Contract }>()
 
-  let currentStepId = ref(props.contract.currentStepId)
-  let currentModule = ref()
-  let currentStep = ref()
-  let answer = ref()
+  const currentStepId = ref(props.contract.currentStepId)
+  const currentModule = ref()
+  const currentStep = ref()
+  const answer = ref()
 
   const prev = () => {
     props.contract.updateCurrentStepAnswer(answer.value)
