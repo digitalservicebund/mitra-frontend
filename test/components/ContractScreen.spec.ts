@@ -35,7 +35,7 @@ jest.mock("../../src/provide", () => {
 })
 
 describe("ContractScreen", () => {
-  it("updates contract name when entered", () => {
+  it("updates contract title when entered", () => {
     const wrapper = shallowMount(ContractScreen)
     const vm: unknown = wrapper.vm
     const instance = vm as {
@@ -44,13 +44,13 @@ describe("ContractScreen", () => {
       updateTitle: () => void
     }
 
-    expect(instance.contract.name).toBe("")
+    expect(instance.contract.title).toBe("")
 
     // Simulate text input
     instance.titleInput = "Neuer Vertrag"
     instance.updateTitle()
 
-    expect(instance.contract.name).toBe("Neuer Vertrag")
+    expect(instance.contract.title).toBe("Neuer Vertrag")
   })
 
   it("allows to save contract as work in progress", async () => {
@@ -78,6 +78,6 @@ describe("ContractScreen", () => {
       .filter((button) => button.text() === "Speichern")
       .forEach((button) => button.trigger("click"))
 
-    expect(contractTestRepository.load().name).toBe("Neuer Vertrag")
+    expect(contractTestRepository.load().title).toBe("Neuer Vertrag")
   })
 })

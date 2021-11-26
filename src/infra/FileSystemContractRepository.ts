@@ -3,7 +3,7 @@ import ContractRepository from "../domain/ContractRepository"
 import Playbook from "../domain/Playbook"
 
 function makeFileBaseName(contract: Contract) {
-  return contract.name.toLowerCase().replace(/\s/g, "-")
+  return contract.title.toLowerCase().replace(/\s/g, "-")
 }
 
 async function writeFile(fileHandle: FileSystemFileHandle, data: string) {

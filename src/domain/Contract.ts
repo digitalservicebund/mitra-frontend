@@ -3,13 +3,13 @@ import Module from "./Module"
 import { Step } from "./Step"
 
 export default class Contract {
-  name: string
+  title: string
   playbook: Playbook
   currentModuleId: number
   currentStepId: number
 
   constructor(playbook: Playbook, currentModuleId = 0, currentStepId = 0) {
-    this.name = ""
+    this.title = ""
     this.playbook = playbook
     this.currentModuleId = currentModuleId
     this.currentStepId = currentStepId
