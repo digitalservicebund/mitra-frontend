@@ -10,15 +10,20 @@
   let currentStepId = ref(props.contract.currentStepId)
   let currentModule = ref()
   let currentStep = ref()
+  let answer = ref()
 
   const prev = () => {
+    props.contract.updateCurrentStepAnswer(answer.value)
     props.contract.prevStep()
     currentStepId.value = props.contract.currentStepId
+    answer.value = props.contract.getCurrentStepAnswer()
   }
 
   const next = () => {
+    props.contract.updateCurrentStepAnswer(answer.value)
     props.contract.nextStep()
     currentStepId.value = props.contract.currentStepId
+    answer.value = props.contract.getCurrentStepAnswer()
   }
 
   function updateRefs() {
@@ -43,6 +48,7 @@
       </div>
       <div v-if="StepType.Text === currentStep?.type" class="answer-block">
         <InputText
+          v-model="answer"
           class="answer-input-text"
           :title="currentStep?.text"
           type="text"
@@ -70,6 +76,7 @@
   h3 {
     font-weight: bold;
   }
+
   .contract-step {
     width: 30vw;
   }

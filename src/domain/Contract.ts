@@ -7,16 +7,30 @@ export default class Contract {
   playbook: Playbook
   currentModuleId: number
   currentStepId: number
+  answers: Map<string, string>
 
   constructor(playbook: Playbook, currentModuleId = 0, currentStepId = 0) {
     this.title = ""
     this.playbook = playbook
     this.currentModuleId = currentModuleId
     this.currentStepId = currentStepId
+    this.answers = new Map()
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
     return new Contract(playbook)
+  }
+
+  getCurrentStepAnswer(): string | undefined {
+    return this.answers.get(this.getCurrentStep()?.uuid)
+  }
+
+  updateCurrentStepAnswer(answer?: string) {
+    if (answer) {
+      this.answers.set(this.getCurrentStep()?.uuid, answer)
+    } else {
+      this.answers.set(this.getCurrentStep()?.uuid, "")
+    }
   }
 
   get getModules() {
@@ -30,6 +44,7 @@ export default class Contract {
   getCurrentStep(): Step {
     return this.getCurrentModule()?.steps[this.currentStepId]
   }
+
   hasPrev(): boolean {
     return this.currentStepId > 0 || this.currentModuleId > 0
   }
@@ -55,6 +70,7 @@ export default class Contract {
       this.currentStepId = this.getCurrentModule().steps.length - 1
     }
   }
+
   private hasNextModule(): boolean {
     return this.currentModuleId < this.getModules.length - 1
   }
