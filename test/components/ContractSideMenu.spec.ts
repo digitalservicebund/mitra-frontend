@@ -33,7 +33,7 @@ describe("ContractSideMenu", () => {
     ],
   })
 
-  it("should render all fixed menu items", async () => {
+  it("should render all fixed menu items", () => {
     render(ContractSideMenu, {
       props: {
         modules: testModules,
