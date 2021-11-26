@@ -53,10 +53,19 @@
 
   // temporary accessibility fix for same IDs in PrimeVue's PanelMenu component
   onMounted(() => {
-    const createdItems = document.querySelectorAll(".p-toggleable-content")
-    createdItems.forEach(
-      (item, index) => item.id && (item.id += `_${index + 1}`)
-    )
+    const panels = document.querySelectorAll(".p-panelmenu-panel")
+    panels.forEach((panel, index) => {
+      const content = panel.querySelector(".p-toggleable-content")
+      content?.id && (content.id += `_${index + 1}`)
+
+      const header = panel.querySelector(".p-panelmenu-header-link")
+      if (header?.id) {
+        header.id += `_${index + 1}`
+        content?.setAttribute("aria-labelledby", header.id)
+      } else {
+        content?.removeAttribute("aria-labelledby")
+      }
+    })
   })
 </script>
 
