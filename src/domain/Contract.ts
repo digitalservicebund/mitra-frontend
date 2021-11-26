@@ -1,6 +1,6 @@
 import Playbook from "./Playbook"
 import Module from "./Module"
-import Step from "./Step"
+import { Step } from "./Step"
 
 export default class Contract {
   title: string

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/vue"
 import { createRouter, createMemoryHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Module from "../../src/domain/Module"
-import Step from "../../src/domain/Step"
+import { Step } from "../../src/domain/Step"
 
 const module1: Module = new Module("Rubrum")
 module1.addSteps(

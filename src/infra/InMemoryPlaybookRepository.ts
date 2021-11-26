@@ -1,13 +1,13 @@
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import Module from "../domain/Module"
-import Step, { StepType } from "../domain/Step"
+import { Step, TextStep } from "../domain/Step"
 
-const step11: Step = new Step("Schritt 1.1", StepType.Text)
-const step12: Step = new Step("Schritt 1.2", StepType.Text)
+const step11: Step = new TextStep("Schritt 1.1")
+const step12: Step = new TextStep("Schritt 1.2")
 const step13: Step = new Step("Schritt 1.3")
 
-const step21: Step = new Step("Schritt 2.1", StepType.Text)
+const step21: Step = new TextStep("Schritt 2.1")
 const step22: Step = new Step("Schritt 2.2")
 const step23: Step = new Step("Schritt 2.3")
 

@@ -5,14 +5,20 @@ export enum StepType {
   Text = "TEXT",
 }
 
-export default class Step {
+export class Step<T extends StepType = StepType.None> {
   uuid: string
   text: string
   type?: StepType
 
-  constructor(text: string, type: StepType = StepType.None) {
+  constructor(text: string, type?: T) {
     this.text = text
     this.type = type
     this.uuid = uuid()
+  }
+}
+
+export class TextStep extends Step<StepType.Text> {
+  constructor(text: string) {
+    super(text, StepType.Text)
   }
 }

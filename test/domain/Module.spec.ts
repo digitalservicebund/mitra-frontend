@@ -1,5 +1,5 @@
 import Module from "../../src/domain/Module"
-import Step from "../../src/domain/Step"
+import { Step } from "../../src/domain/Step"
 
 describe("Module", () => {
   it("should be instantiated with zero steps", () => {
