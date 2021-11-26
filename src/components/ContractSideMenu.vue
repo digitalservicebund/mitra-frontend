@@ -10,6 +10,7 @@
     label: string
     to?: { name: RouteRecordName }
     icon?: string
+    command?: () => void
     items?: MenuItem[]
   }
 
@@ -42,8 +43,8 @@
       },
       {
         label: "Speichern",
-        to: { name: "mitra-frontend" },
         icon: "pi pi-fw pi-download",
+        command: () => console.log("Saving file... (not really)"),
       },
     ]
   }
