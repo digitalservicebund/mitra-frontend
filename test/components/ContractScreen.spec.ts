@@ -30,6 +30,7 @@ describe("ContractScreen", () => {
           Button: true,
           Dialog: true,
           RouterLink: true,
+          ContractEdit: true,
         },
       },
     })
