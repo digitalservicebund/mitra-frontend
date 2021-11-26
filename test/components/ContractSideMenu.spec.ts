@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createMemoryHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Module from "../../src/domain/Module"
 
@@ -20,28 +20,16 @@ const testModules: Module[] = [module1, module2]
 
 describe("ContractSideMenu", () => {
   const router = createRouter({
-    history: createWebHistory(),
+    history: createMemoryHistory(),
     routes: [
       {
-        path: "/mitra-frontend/",
+        path: "/",
         name: "mitra-frontend",
         component: {
           template: "<div></div>",
         },
       },
-      {
-        path: "/mitra-frontend/contract",
-        name: "mitra-frontend-contract",
-        component: {
-          template: "<div></div>",
-        },
-      },
     ],
-  })
-
-  beforeAll(async () => {
-    router.push("/mitra-frontend/contract")
-    await router.isReady()
   })
 
   it("should render all fixed menu items", async () => {
