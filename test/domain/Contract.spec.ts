@@ -1,7 +1,7 @@
 import Contract from "../../src/domain/Contract"
 import Playbook from "../../src/domain/Playbook"
 import Module from "../../src/domain/Module"
-import { Step } from "../../src/domain/Step"
+import { TextStep } from "../../src/domain/Step"
 
 describe("Contract", () => {
   it("should be created from given playbook", () => {
@@ -28,9 +28,13 @@ describe("Contract prev/next", () => {
   beforeEach(() => {
     playbook = new Playbook()
     const module1 = new Module("foo")
-    module1.addSteps(new Step("foo"), new Step("bar"), new Step("baz"))
+    module1.addSteps(
+      new TextStep("foo"),
+      new TextStep("bar"),
+      new TextStep("baz")
+    )
     const module2 = new Module("bar")
-    module2.addSteps(new Step("foo"))
+    module2.addSteps(new TextStep("foo"))
     playbook.addModules(module1, module2)
   })
 

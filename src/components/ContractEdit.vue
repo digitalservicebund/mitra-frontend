@@ -3,7 +3,6 @@
   import Contract from "../domain/Contract"
   import Button from "primevue/button"
   import InputText from "primevue/inputtext"
-  import { StepType } from "../domain/Step"
 
   const props = defineProps<{ contract: Contract }>()
 
@@ -46,7 +45,7 @@
       <div class="question-block">
         {{ currentStep?.text }}
       </div>
-      <div v-if="StepType.Text === currentStep?.type" class="answer-block">
+      <div class="answer-block">
         <InputText
           v-model="answer"
           class="answer-input-text"

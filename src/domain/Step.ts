@@ -1,24 +1,36 @@
 import { v4 as uuid } from "uuid"
 
-export enum StepType {
-  None = "NONE",
-  Text = "TEXT",
+interface Informational {
+  getAnswer(): undefined
+}
+interface TextAnswer {
+  getAnswer(): string
 }
 
-export class Step<T extends StepType = StepType.None> {
+export type StepType = Informational | TextAnswer
+
+export abstract class Step<T extends StepType> {
   uuid: string
   text: string
-  type?: StepType
+  answer: T
 
-  constructor(text: string, type?: T) {
-    this.text = text
-    this.type = type
+  constructor(text: string, answer: T) {
     this.uuid = uuid()
+    this.text = text
+    this.answer = answer
+  }
+
+  getText(): string {
+    return this.text
+  }
+
+  getAnswer(): T {
+    return this.answer
   }
 }
 
-export class TextStep extends Step<StepType.Text> {
+export class TextStep extends Step<TextAnswer> {
   constructor(text: string) {
-    super(text, StepType.Text)
+    super(text, {} as TextAnswer)
   }
 }

@@ -1,6 +1,7 @@
 import Playbook from "./Playbook"
 import Module from "./Module"
 import { Step } from "./Step"
+import type { StepType } from "./Step"
 
 export default class Contract {
   title: string
@@ -41,7 +42,7 @@ export default class Contract {
     return this.getModules[this.currentModuleId]
   }
 
-  getCurrentStep(): Step {
+  getCurrentStep(): Step<StepType> {
     return this.getCurrentModule()?.steps[this.currentStepId]
   }
 

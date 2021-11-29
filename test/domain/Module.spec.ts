@@ -1,5 +1,5 @@
 import Module from "../../src/domain/Module"
-import { Step } from "../../src/domain/Step"
+import { TextStep } from "../../src/domain/Step"
 
 describe("Module", () => {
   it("should be instantiated with zero steps", () => {
@@ -10,7 +10,7 @@ describe("Module", () => {
 
   it("should add the first step", () => {
     const module = new Module("foo")
-    module.addSteps(new Step("bar"))
+    module.addSteps(new TextStep("bar"))
 
     expect(module.steps.length).toEqual(1)
     expect(module.steps[0].text).toEqual("bar")
@@ -18,7 +18,11 @@ describe("Module", () => {
 
   it("should add multiple steps", () => {
     const module = new Module("foo")
-    module.addSteps(new Step("bar"), new Step("baz"), new Step("fizz"))
+    module.addSteps(
+      new TextStep("bar"),
+      new TextStep("baz"),
+      new TextStep("fizz")
+    )
 
     expect(module.steps.length).toEqual(3)
     expect(module.steps[0].text).toEqual("bar")
