@@ -10,6 +10,20 @@ describe("Starting new contract", () => {
     cy.visit("/contract")
     cy.contains("Vertrag benennen").should("exist")
   })
+
+  it("should close title dialog on clicking x", () => {
+    cy.visit("/contract")
+    cy.get(".p-dialog-header-close-icon").click()
+    cy.contains("Vertrag benennen").should("not.exist")
+  })
+
+  it("should close title dialog on clicking mask", () => {
+    cy.visit("/contract")
+    // click outside the dialog
+    cy.get("body").click(0, 0)
+    cy.contains("Vertrag benennen").should("not.exist")
+  })
+
   it("should save edited title on button click", () => {
     cy.visit("/contract")
     cy.get("#input-contract-title").type("foo")

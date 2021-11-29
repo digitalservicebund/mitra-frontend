@@ -53,7 +53,7 @@
     <div class="flex-col p-8">
       <Dialog
         id="dialog-contract-title"
-        :visible="displayTitleDialog"
+        v-model:visible="displayTitleDialog"
         :modal="true"
         :dismissable-mask="true"
         header="Wie wollen Sie den Vertrag benennen?"
