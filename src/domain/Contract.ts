@@ -7,21 +7,31 @@ import type { StepType } from "./Step"
 export default class Contract extends Entity {
   title: string
   playbook: Playbook
-  currentModuleId: number
-  currentStepId: number
   answers: Map<string, string>
+
+  // any modification of these values must guarantee that the referenced module and step exist.
+  private _currentModuleId: number
+  private _currentStepId: number
 
   constructor(playbook: Playbook, currentModuleId = 0, currentStepId = 0) {
     super()
     this.title = ""
     this.playbook = playbook
-    this.currentModuleId = currentModuleId
-    this.currentStepId = currentStepId
+    this._currentModuleId = currentModuleId
+    this._currentStepId = currentStepId
     this.answers = new Map()
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
     return new Contract(playbook)
+  }
+
+  get currentStepId() {
+    return this._currentStepId
+  }
+
+  get currentModuleId() {
+    return this._currentModuleId
   }
 
   getCurrentStepAnswer(): string | undefined {
@@ -41,15 +51,15 @@ export default class Contract extends Entity {
   }
 
   getCurrentModule(): Module {
-    return this.getModules[this.currentModuleId]
+    return this.getModules[this._currentModuleId]
   }
 
   getCurrentStep(): Step<StepType> {
-    return this.getCurrentModule()?.steps[this.currentStepId]
+    return this.getCurrentModule()?.steps[this._currentStepId]
   }
 
   hasPrev(): boolean {
-    return this.currentStepId > 0 || this.currentModuleId > 0
+    return this.hasPrevStep() || this.hasPrevModule()
   }
 
   hasNext(): boolean {
@@ -58,27 +68,35 @@ export default class Contract extends Entity {
 
   nextStep(): void {
     if (this.hasNextStep()) {
-      this.currentStepId++
+      this._currentStepId++
     } else if (this.hasNextModule()) {
-      this.currentModuleId++
-      this.currentStepId = 0
+      this._currentModuleId++
+      this._currentStepId = 0
     }
   }
 
   prevStep(): void {
-    if (this.currentStepId > 0) {
-      this.currentStepId--
-    } else if (this.currentModuleId > 0) {
-      this.currentModuleId--
-      this.currentStepId = this.getCurrentModule().steps.length - 1
+    if (this.hasPrevStep()) {
+      this._currentStepId--
+    } else if (this.hasPrevModule()) {
+      this._currentModuleId--
+      this._currentStepId = this.getCurrentModule().steps.length - 1
     }
   }
 
+  private hasPrevModule() {
+    return this._currentModuleId > 0
+  }
+
+  private hasPrevStep() {
+    return this._currentStepId > 0
+  }
+
   private hasNextModule(): boolean {
-    return this.currentModuleId < this.getModules.length - 1
+    return this._currentModuleId < this.getModules.length - 1
   }
 
   private hasNextStep(): boolean {
-    return this.currentStepId < this.getCurrentModule()?.steps.length - 1
+    return this._currentStepId < this.getCurrentModule()?.steps.length - 1
   }
 }
