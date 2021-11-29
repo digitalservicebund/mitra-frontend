@@ -7,11 +7,7 @@ export default class Playbook {
     this.modules = []
   }
 
-  addModule(module: Module) {
-    this.modules.push(module)
-  }
-
   addModules(...modules: Module[]) {
-    modules.forEach((module) => this.addModule(module))
+    this.modules.push(...modules)
   }
 }

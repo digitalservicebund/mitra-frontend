@@ -11,7 +11,7 @@ describe("Playbook", () => {
   it("should add the first module with no references", () => {
     const playbook = new Playbook()
     const module = new Module("foo")
-    playbook.addModule(module)
+    playbook.addModules(module)
 
     expect(playbook.modules.length).toEqual(1)
     expect(playbook.modules[0]).toEqual({ text: "foo", steps: [] })
