@@ -25,15 +25,13 @@
     answer.value = props.contract.getCurrentStepAnswer()
   }
 
-  function updateRefs() {
-    return () => {
-      currentModule.value = props.contract.getCurrentModule()
-      currentStep.value = props.contract.getCurrentStep()
-    }
+  const updateRefs = () => {
+    currentModule.value = props.contract.getCurrentModule()
+    currentStep.value = props.contract.getCurrentStep()
   }
 
-  onBeforeMount(updateRefs())
-  onBeforeUpdate(updateRefs())
+  onBeforeMount(updateRefs)
+  onBeforeUpdate(updateRefs)
 </script>
 
 <template>
