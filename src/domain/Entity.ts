@@ -7,12 +7,12 @@ const isEntity = (v: unknown): v is Entity => {
 export default abstract class Entity {
   public readonly id: string
 
-  constructor() {
+  protected constructor() {
     this.id = uuid()
   }
 
   public equals(object?: Entity): boolean {
-    if (object == null || object == undefined) {
+    if (object === null || object === undefined) {
       return false
     }
 
