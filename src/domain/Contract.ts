@@ -1,9 +1,10 @@
+import Entity from "./Entity"
 import Playbook from "./Playbook"
 import Module from "./Module"
 import { Step } from "./Step"
 import type { StepType } from "./Step"
 
-export default class Contract {
+export default class Contract extends Entity {
   title: string
   playbook: Playbook
   currentModuleId: number
@@ -11,6 +12,7 @@ export default class Contract {
   answers: Map<string, string>
 
   constructor(playbook: Playbook, currentModuleId = 0, currentStepId = 0) {
+    super()
     this.title = ""
     this.playbook = playbook
     this.currentModuleId = currentModuleId
@@ -23,14 +25,14 @@ export default class Contract {
   }
 
   getCurrentStepAnswer(): string | undefined {
-    return this.answers.get(this.getCurrentStep()?.uuid)
+    return this.answers.get(this.getCurrentStep()?.id)
   }
 
   updateCurrentStepAnswer(answer?: string) {
     if (answer) {
-      this.answers.set(this.getCurrentStep()?.uuid, answer)
+      this.answers.set(this.getCurrentStep()?.id, answer)
     } else {
-      this.answers.set(this.getCurrentStep()?.uuid, "")
+      this.answers.set(this.getCurrentStep()?.id, "")
     }
   }
 
