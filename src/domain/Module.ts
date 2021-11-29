@@ -9,11 +9,7 @@ export default class Module {
     this.steps = []
   }
 
-  addStep(step: Step) {
-    this.steps.push(step)
-  }
-
   addSteps(...steps: Step[]) {
-    steps.forEach((step) => this.addStep(step))
+    this.steps.push(...steps)
   }
 }

@@ -10,7 +10,7 @@ describe("Module", () => {
 
   it("should add the first step", () => {
     const module = new Module("foo")
-    module.addStep(new Step("bar"))
+    module.addSteps(new Step("bar"))
 
     expect(module.steps.length).toEqual(1)
     expect(module.steps[0].text).toEqual("bar")
