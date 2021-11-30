@@ -10,13 +10,8 @@ interface TextAnswer {
 export type StepType = Informational | TextAnswer
 
 export abstract class Step<T extends StepType> extends Entity {
-  text: string
-  answer: T
-
-  constructor(text: string, answer: T) {
+  constructor(public text: string, public answer: T) {
     super()
-    this.text = text
-    this.answer = answer
   }
 
   getText(): string {
