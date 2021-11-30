@@ -2,19 +2,19 @@ import { fireEvent, render, screen } from "@testing-library/vue"
 import { createRouter, createMemoryHistory } from "vue-router"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Module from "../../src/domain/Module"
-import { TextStep } from "../../src/domain/Step"
+import { TextAnswerStep } from "../../src/domain/Step"
 
 const module1: Module = new Module("Rubrum")
 module1.addSteps(
-  new TextStep("Schritt 1.1"),
-  new TextStep("Schritt 1.2"),
-  new TextStep("Schritt 1.3")
+  new TextAnswerStep("Schritt 1.1"),
+  new TextAnswerStep("Schritt 1.2"),
+  new TextAnswerStep("Schritt 1.3")
 )
 const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags")
 module2.addSteps(
-  new TextStep("Schritt 2.1"),
-  new TextStep("Schritt 2.2"),
-  new TextStep("Schritt 2.3")
+  new TextAnswerStep("Schritt 2.1"),
+  new TextAnswerStep("Schritt 2.2"),
+  new TextAnswerStep("Schritt 2.3")
 )
 
 const testModules: Module[] = [module1, module2]

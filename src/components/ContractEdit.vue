@@ -1,28 +1,41 @@
 <script setup lang="ts">
-  import { onBeforeMount, onBeforeUpdate, ref } from "vue"
+  import { onBeforeMount, onBeforeUpdate, ref, computed } from "vue"
   import Contract from "../domain/Contract"
+  import { InformationalStep, TextAnswerStep } from "../domain/Step"
+  import InformationalStepComponent from "./InformationalStep.vue"
+  import TextAnswerStepComponent from "./TextAnswerStep.vue"
   import Button from "primevue/button"
-  import InputText from "primevue/inputtext"
 
   const props = defineProps<{ contract: Contract }>()
 
   const currentStepId = ref(props.contract.currentStepId)
   const currentModule = ref()
   const currentStep = ref()
-  const answer = ref()
+  const answer = ref("")
+
+  const currentStepComponent = computed(() => {
+    const type = currentStep.value.constructor.type
+    if (type === TextAnswerStep.type) {
+      return TextAnswerStepComponent
+    }
+    if (type === InformationalStep.type) {
+      return InformationalStepComponent
+    }
+    return null // unknown type, don't render anything
+  })
 
   const prev = () => {
     props.contract.updateCurrentStepAnswer(answer.value)
     props.contract.prevStep()
     currentStepId.value = props.contract.currentStepId
-    answer.value = props.contract.getCurrentStepAnswer()
+    answer.value = props.contract.getCurrentStepAnswer() || ""
   }
 
   const next = () => {
     props.contract.updateCurrentStepAnswer(answer.value)
     props.contract.nextStep()
     currentStepId.value = props.contract.currentStepId
-    answer.value = props.contract.getCurrentStepAnswer()
+    answer.value = props.contract.getCurrentStepAnswer() || ""
   }
 
   const updateRefs = () => {
@@ -40,17 +53,12 @@
       {{ currentModule?.text }}
     </h3>
     <div class="contract-step">
-      <div class="question-block">
-        {{ currentStep?.text }}
-      </div>
-      <div class="answer-block">
-        <InputText
-          v-model="answer"
-          class="answer-input-text"
-          :title="currentStep?.text"
-          type="text"
-        />
-      </div>
+      <component
+        :is="currentStepComponent"
+        :answer="answer"
+        :text="currentStep.text"
+        @answer-changed="answer = $event"
+      />
       <div class="step-navigation">
         <Button
           v-if="props.contract.hasPrev()"
@@ -78,10 +86,6 @@
     width: 30vw;
   }
 
-  .contract-step div {
-    margin-bottom: 1em;
-  }
-
   .step-navigation {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -97,9 +101,5 @@
 
   .step-navigation .next-button {
     grid-column: 3;
-  }
-
-  .answer-input-text {
-    width: 100%;
   }
 </style>

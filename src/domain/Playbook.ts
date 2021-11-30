@@ -4,9 +4,9 @@ import Module from "./Module"
 export default class Playbook extends Entity {
   public readonly modules: Module[]
 
-  constructor() {
+  constructor(modules: Module[] = []) {
     super()
-    this.modules = []
+    this.modules = modules
   }
 
   addModules(...modules: Module[]) {

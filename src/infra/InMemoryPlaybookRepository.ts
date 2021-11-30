@@ -1,20 +1,20 @@
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import Module from "../domain/Module"
-import { TextStep } from "../domain/Step"
+import { TextAnswerStep } from "../domain/Step"
 
-const step11 = new TextStep("Schritt 1.1")
-const step12 = new TextStep("Schritt 1.2")
-const step13 = new TextStep("Schritt 1.3")
+const step11 = new TextAnswerStep("Schritt 1.1")
+const step12 = new TextAnswerStep("Schritt 1.2")
+const step13 = new TextAnswerStep("Schritt 1.3")
 
-const step21 = new TextStep("Schritt 2.1")
-const step22 = new TextStep("Schritt 2.2")
-const step23 = new TextStep("Schritt 2.3")
+const step21 = new TextAnswerStep("Schritt 2.1")
+const step22 = new TextAnswerStep("Schritt 2.2")
+const step23 = new TextAnswerStep("Schritt 2.3")
 
-const step31 = new TextStep("Schritt 3.1")
-const step32 = new TextStep("Schritt 3.2")
-const step33 = new TextStep("Schritt 3.3")
-const step34 = new TextStep("Schritt 3.4")
+const step31 = new TextAnswerStep("Schritt 3.1")
+const step32 = new TextAnswerStep("Schritt 3.2")
+const step33 = new TextAnswerStep("Schritt 3.3")
+const step34 = new TextAnswerStep("Schritt 3.4")
 
 const module1 = new Module("Rubrum")
 const module2 = new Module("Gegenstand und Bestandteile des Vertrags")

@@ -6,10 +6,10 @@ export default class Module extends Entity {
   readonly text: string
   readonly steps: Step<StepType>[]
 
-  constructor(text: string) {
+  constructor(text: string, steps: Step<StepType>[] = []) {
     super()
     this.text = text
-    this.steps = []
+    this.steps = steps
   }
 
   addSteps(...steps: Step<StepType>[]) {

@@ -28,7 +28,21 @@ export abstract class Step<T extends StepType> extends Entity {
   }
 }
 
-export class TextStep extends Step<TextAnswer> {
+export class InformationalStep extends Step<Informational> {
+  // We need to capture the type manually, as at runtime it's not available,
+  // and because Vue uses proxies, thus we can't compare constructors...
+  static type = "Informational"
+
+  constructor(text: string) {
+    super(text, {} as Informational)
+  }
+}
+
+export class TextAnswerStep extends Step<TextAnswer> {
+  // We need to capture the type manually, as at runtime it's not available,
+  // and because Vue uses proxies, thus we can't compare constructors...
+  static type = "TextAnswer"
+
   constructor(text: string) {
     super(text, {} as TextAnswer)
   }
