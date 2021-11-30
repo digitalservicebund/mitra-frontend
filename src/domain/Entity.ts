@@ -11,7 +11,7 @@ export default abstract class Entity {
     this.id = uuid()
   }
 
-  public equals(object?: Entity): boolean {
+  public equals(object?: this): boolean {
     if (object === null || object === undefined) {
       return false
     }
