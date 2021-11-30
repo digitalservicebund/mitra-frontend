@@ -29,10 +29,14 @@
             </router-link>
           </template>
         </Card>
-        <Card class="p-disabled">
+        <Card>
           <template #content>
-            <span class="material-icons-outlined" aria-hidden="true">add</span>
-            Neuer Vertrag aus lokaler Datei
+            <router-link to="/mitra-frontend/open-playbook" class="block">
+              <span class="material-icons-outlined" aria-hidden="true"
+                >add</span
+              >
+              Neuer Vertrag aus lokaler Datei
+            </router-link>
           </template>
         </Card>
       </div>

@@ -1,6 +1,7 @@
 {
   "urls": [
     "http://localhost:5000/mitra-frontend/",
-    "http://localhost:5000/mitra-frontend/contract"
+    "http://localhost:5000/mitra-frontend/contract",
+    "http://localhost:5000/mitra-frontend/open-playbook"
   ]
 }
