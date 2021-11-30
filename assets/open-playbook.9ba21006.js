@@ -1,1 +1,0 @@
-import{_ as n}from"./index.e7589fbd.js";import{o as e,e as o,f as t,c as s}from"./vendor.1df8a095.js";const a={};function _(r,c){return e(),o("section")}var f=n(a,[["render",_]]);const m=t({setup(r){return(c,p)=>(e(),s(f))}});export{m as default};
