@@ -62,26 +62,26 @@
 
 <template>
   <section :key="currentStep?.id">
-    <h3>
+    <h3 class="font-bold">
       {{ currentModule?.text }}
     </h3>
-    <div class="contract-step">
+    <div class="w-[30vw]">
       <component
         :is="currentStepComponent"
         :step="currentStep"
         @answer-changed="currentStep?.setAnswer($event)"
       />
-      <div class="step-navigation">
+      <div class="grid grid-cols-3 col-span-full">
         <Button
           v-if="hasPreviousStep"
           label="Zurück"
-          class="p-button-outlined prev-button"
+          class="p-button-outlined col-start-1"
           @click="previous"
         />
         <Button
           v-if="hasNextStep"
           label="Weiter"
-          class="p-button-outlined next-button"
+          class="p-button-outlined col-start-3"
           @click="next"
         />
       </div>
@@ -90,28 +90,7 @@
 </template>
 
 <style scoped>
-  h3 {
-    font-weight: bold;
-  }
-
-  .contract-step {
-    width: 30vw;
-  }
-
-  .step-navigation {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .step-navigation Button {
+  .p-button {
     min-width: 8vw;
-  }
-
-  .step-navigation .prev-button {
-    grid-column: 1;
-  }
-
-  .step-navigation .next-button {
-    grid-column: 3;
   }
 </style>

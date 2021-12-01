@@ -26,6 +26,7 @@ module.exports = {
         /^(?!(|.*?:)cursor-move).+-move$/,
         /^router-link(|-exact)-active$/,
         /data-v-.*/,
+        /.*-\[.*\]/, // Arbitrary value support with Tailwind JIT, such as w-[762px]...
       ],
     }),
     tailwindcss(),

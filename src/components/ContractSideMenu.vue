@@ -78,7 +78,7 @@
   </nav>
 </template>
 
-<style>
+<style scoped>
   .p-panelmenu {
     width: 15em;
   }
