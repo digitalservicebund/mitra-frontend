@@ -16,7 +16,7 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
 const repository: ContractRepository = {
   load() {
     // noop
-    return new Contract(new Playbook())
+    return new Contract("", new Playbook())
   },
   async save(contract: Contract) {
     if (!!window.showSaveFilePicker) {

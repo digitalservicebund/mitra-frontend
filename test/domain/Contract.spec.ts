@@ -4,139 +4,36 @@ import Module from "../../src/domain/Module"
 import { TextAnswerStep } from "../../src/domain/Step"
 
 describe("Contract", () => {
-  it("should be created from given playbook", () => {
-    const playbook: Playbook = new Playbook()
-
+  it("should hold the modules of a playbook", () => {
+    const playbook = new Playbook([new Module("foo")])
     const contract = Contract.fromPlaybook(playbook)
-    expect(contract.playbook).toBe(playbook)
+    expect(contract.getAllModules()).toEqual(playbook.modules)
   })
 
-  it("should return the modules of playbook", () => {
-    const playbook = new Playbook()
-    playbook.addModules(new Module("foo"))
-
+  it("should provide the first unanswered of all steps", () => {
+    const answeredStep = new TextAnswerStep("foo")
+    answeredStep.setAnswer("bar")
+    const unansweredStep = new TextAnswerStep("foo")
+    const playbook = new Playbook([
+      new Module("one", [answeredStep]),
+      new Module("two", [unansweredStep]),
+    ])
     const contract = Contract.fromPlaybook(playbook)
-
-    expect(contract.getModules).toBe(playbook.modules)
-    expect(contract.getModules[0].text).toBe("foo")
+    expect(contract.getFirstUnansweredStep()).toBe(unansweredStep)
   })
-})
 
-describe("Contract prev/next", () => {
-  let playbook: Playbook
-
-  beforeEach(() => {
-    playbook = new Playbook()
-    const module1 = new Module("foo")
-    module1.addSteps(
-      new TextAnswerStep("foo"),
-      new TextAnswerStep("bar"),
-      new TextAnswerStep("baz")
+  it("should provide the module a step belongs to", () => {
+    const stepForLookup = new TextAnswerStep("foo")
+    const playbook = new Playbook([
+      new Module("one"),
+      new Module("two", [new TextAnswerStep("foo")]),
+      new Module("three", [stepForLookup]),
+    ])
+    const contract = Contract.fromPlaybook(playbook)
+    expect(contract.getModuleFor(stepForLookup)).toEqual(playbook.modules[2])
+    // We might have to deal with proxies which are used by Vue extensively..
+    expect(contract.getModuleFor(new Proxy(stepForLookup, {}))).toBe(
+      playbook.modules[2]
     )
-    const module2 = new Module("bar")
-    module2.addSteps(new TextAnswerStep("foo"))
-    playbook.addModules(module1, module2)
-  })
-
-  it("should have next if not last step in module", () => {
-    const contract = new Contract(playbook, 0, 0)
-
-    expect(contract.hasNext()).toBe(true)
-  })
-
-  it("should have next if last step in intermediate module", () => {
-    const contract = new Contract(playbook, 0, 2)
-
-    expect(contract.hasNext()).toBe(true)
-  })
-
-  it("should not have next if last step in last module", () => {
-    const contract = new Contract(playbook, 1, 0)
-
-    expect(contract.hasNext()).toBe(false)
-  })
-
-  it("should not have next on empty modules", () => {
-    const contract = new Contract(new Playbook(), 0, 0)
-
-    expect(contract.hasNext()).toBe(false)
-  })
-
-  it("should have prev if not first step in first module", () => {
-    const contract = new Contract(playbook, 0, 1)
-
-    expect(contract.hasPrev()).toBe(true)
-  })
-
-  it("should have prev if first step in subsequent module", () => {
-    const contract = new Contract(playbook, 1, 0)
-
-    expect(contract.hasPrev()).toBe(true)
-  })
-
-  it("should not have prev if first step in first module", () => {
-    const contract = new Contract(playbook, 0, 0)
-
-    expect(contract.hasPrev()).toBe(false)
-  })
-
-  it("should not have prev on empty modules", () => {
-    const contract = new Contract(new Playbook(), 0, 0)
-
-    expect(contract.hasPrev()).toBe(false)
-  })
-
-  it("should retain current refs if there are no previous steps", () => {
-    const contract = new Contract(playbook, 0, 0)
-
-    contract.prevStep()
-
-    expect(contract.currentModuleId).toBe(0)
-    expect(contract.currentStepId).toBe(0)
-  })
-
-  it("should decrement currentStepId", () => {
-    const contract = new Contract(playbook, 0, 2)
-
-    contract.prevStep()
-
-    expect(contract.currentModuleId).toBe(0)
-    expect(contract.currentStepId).toBe(1)
-  })
-
-  it("should decrement currentModuleId if current step is the first in module", () => {
-    const contract = new Contract(playbook, 1, 0)
-
-    contract.prevStep()
-
-    expect(contract.currentModuleId).toBe(0)
-    expect(contract.currentStepId).toBe(2)
-  })
-
-  it("should retain current refs if there are no next steps", () => {
-    const contract = new Contract(playbook, 1, 0)
-
-    contract.nextStep()
-
-    expect(contract.currentModuleId).toBe(1)
-    expect(contract.currentStepId).toBe(0)
-  })
-
-  it("should increment currentStepId", () => {
-    const contract = new Contract(playbook, 0, 0)
-
-    contract.nextStep()
-
-    expect(contract.currentModuleId).toBe(0)
-    expect(contract.currentStepId).toBe(1)
-  })
-
-  it("should increment currentModuleId if current step is the last in module", () => {
-    const contract = new Contract(playbook, 0, 2)
-
-    contract.nextStep()
-
-    expect(contract.currentModuleId).toBe(1)
-    expect(contract.currentStepId).toBe(0)
   })
 })

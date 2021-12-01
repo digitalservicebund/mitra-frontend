@@ -1,20 +1,26 @@
 <script setup lang="ts">
-  import { onBeforeMount, onBeforeUpdate, ref, computed } from "vue"
+  import { ref, computed } from "vue"
   import Contract from "../domain/Contract"
-  import { InformationalStep, TextAnswerStep } from "../domain/Step"
+  import {
+    InformationalStep,
+    Step,
+    StepType,
+    TextAnswerStep,
+  } from "../domain/Step"
   import InformationalStepComponent from "./InformationalStep.vue"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
   import Button from "primevue/button"
 
   const props = defineProps<{ contract: Contract }>()
 
-  const currentStepId = ref(props.contract.currentStepId)
-  const currentModule = ref()
-  const currentStep = ref()
-  const answer = ref("")
+  const currentStep = ref(props.contract.getFirstUnansweredStep())
 
   const currentStepComponent = computed(() => {
-    const type = currentStep.value.constructor.TYPE
+    if (currentStep.value === undefined) {
+      return null
+    }
+    const step = currentStep.value as Step<StepType>
+    const type = step.getType()
     if (type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
     }
@@ -24,50 +30,56 @@
     return null // unknown type, don't render anything
   })
 
-  const prev = () => {
-    props.contract.updateCurrentStepAnswer(answer.value)
-    props.contract.prevStep()
-    currentStepId.value = props.contract.currentStepId
-    answer.value = props.contract.getCurrentStepAnswer() || ""
+  const steps: Step<StepType>[] = props.contract.getAllSteps()
+
+  const lookupCurrentStep = (step: Step<StepType>) =>
+    step.id === currentStep.value?.id
+
+  const previous = () => {
+    const currentIndex = steps.findIndex(lookupCurrentStep)
+    if (currentIndex > 0) {
+      currentStep.value = steps[currentIndex - 1]
+    }
   }
 
   const next = () => {
-    props.contract.updateCurrentStepAnswer(answer.value)
-    props.contract.nextStep()
-    currentStepId.value = props.contract.currentStepId
-    answer.value = props.contract.getCurrentStepAnswer() || ""
+    const currentIndex = steps.findIndex(lookupCurrentStep)
+    if (currentIndex < steps.length - 1) {
+      currentStep.value = steps[currentIndex + 1]
+    }
   }
 
-  const updateRefs = () => {
-    currentModule.value = props.contract.getCurrentModule()
-    currentStep.value = props.contract.getCurrentStep()
-  }
+  const hasPreviousStep = computed(() => steps.findIndex(lookupCurrentStep) > 0)
 
-  onBeforeMount(updateRefs)
-  onBeforeUpdate(updateRefs)
+  const hasNextStep = computed(
+    () => steps.findIndex(lookupCurrentStep) < steps.length - 1
+  )
+
+  const currentModule = computed(() => {
+    return props.contract.getModuleFor(currentStep.value as Step<StepType>)
+  })
 </script>
 
 <template>
-  <section :key="currentStepId">
+  <section :key="currentStep?.id">
     <h3>
       {{ currentModule?.text }}
     </h3>
     <div class="contract-step">
       <component
         :is="currentStepComponent"
-        :answer="answer"
-        :text="currentStep.text"
-        @answer-changed="answer = $event"
+        :step="currentStep"
+        @answer-changed="currentStep?.setAnswer($event)"
       />
       <div class="step-navigation">
         <Button
-          v-if="props.contract.hasPrev()"
+          v-if="hasPreviousStep"
           label="Zurück"
           class="p-button-outlined prev-button"
-          @click="prev"
+          @click="previous"
         />
         <Button
-          v-if="props.contract.hasNext()"
+          v-if="hasNextStep"
           label="Weiter"
           class="p-button-outlined next-button"
           @click="next"

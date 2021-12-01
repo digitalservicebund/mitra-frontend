@@ -1,25 +1,42 @@
 import Entity from "./Entity"
 
-interface Informational {
-  getAnswer(): undefined
+class Informational {
+  getAnswer(): string {
+    return ""
+  }
+  setAnswer(): void {
+    // noop
+  }
 }
-interface TextAnswer {
-  getAnswer(): string
+class TextAnswer {
+  constructor(private answer?: string) {}
+  getAnswer(): string | undefined {
+    return this.answer
+  }
+  setAnswer(answer: string): void {
+    this.answer = answer
+  }
 }
 
 export type StepType = Informational | TextAnswer
 
 export abstract class Step<T extends StepType> extends Entity {
-  constructor(public text: string, public answer: T) {
+  constructor(public readonly text: string, private answer: T) {
     super()
   }
 
-  getText(): string {
-    return this.text
+  abstract getType(): string
+
+  getAnswer(): string {
+    return this.answer.getAnswer() || ""
   }
 
-  getAnswer(): T {
-    return this.answer
+  setAnswer(answer: string): void {
+    this.answer.setAnswer(answer)
+  }
+
+  isUnanswered(): boolean {
+    return !this.answer.getAnswer()
   }
 }
 
@@ -29,7 +46,11 @@ export class InformationalStep extends Step<Informational> {
   static readonly TYPE = "InformationalStep"
 
   constructor(text: string) {
-    super(text, {} as Informational)
+    super(text, new Informational())
+  }
+
+  getType(): string {
+    return InformationalStep.TYPE
   }
 }
 
@@ -39,6 +60,10 @@ export class TextAnswerStep extends Step<TextAnswer> {
   static readonly TYPE = "TextAnswerStep"
 
   constructor(text: string) {
-    super(text, {} as TextAnswer)
+    super(text, new TextAnswer())
+  }
+
+  getType(): string {
+    return TextAnswerStep.TYPE
   }
 }
