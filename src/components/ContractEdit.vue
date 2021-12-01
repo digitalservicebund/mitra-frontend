@@ -14,11 +14,11 @@
   const answer = ref("")
 
   const currentStepComponent = computed(() => {
-    const type = currentStep.value.constructor.type
-    if (type === TextAnswerStep.type) {
+    const type = currentStep.value.constructor.TYPE
+    if (type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
     }
-    if (type === InformationalStep.type) {
+    if (type === InformationalStep.TYPE) {
       return InformationalStepComponent
     }
     return null // unknown type, don't render anything
