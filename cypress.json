@@ -3,6 +3,6 @@
   "integrationFolder": "test/e2e",
   "testFiles": "**/*.spec.ts",
   "pluginsFile": false,
-  "supportFile": false,
+  "supportFile": "cypress/support",
   "video": false
 }
