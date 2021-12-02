@@ -1,1 +1,0 @@
-import{_ as n}from"./index.d3be040f.js";import{o as e,e as o,f as t,c as s}from"./vendor.d25256ee.js";const _={};function a(r,c){return e(),o("section")}var f=n(_,[["render",a]]);const m=t({setup(r){return(c,p)=>(e(),s(f))}});export{m as default};
