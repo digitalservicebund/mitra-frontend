@@ -33,7 +33,7 @@
   const steps: Step<StepType>[] = props.contract.getAllSteps()
 
   const lookupCurrentStep = (step: Step<StepType>) =>
-    step.id === currentStep.value?.id
+    step.equals(currentStep.value as Step<StepType>)
 
   const previous = () => {
     const currentIndex = steps.findIndex(lookupCurrentStep)
