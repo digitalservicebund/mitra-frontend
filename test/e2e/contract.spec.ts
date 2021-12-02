@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+/// <reference types="cypress-file-upload" />
 describe("Starting new contract", () => {
   it("should be reachable from start page", () => {
     cy.visit("/")
@@ -58,5 +60,10 @@ describe("Starting new contract", () => {
     cy.findByTitle("Schritt 1.1").should("have.value", "foo")
     cy.get("button").contains("Weiter").click()
     cy.findByTitle("Schritt 1.2").should("have.value", "bar")
+  })
+
+  it("should open playbook from filesystem", () => {
+    cy.visit("/open-playbook")
+    cy.get('input[type="file"]').attachFile("empty.json")
   })
 })
