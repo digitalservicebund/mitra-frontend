@@ -29,7 +29,7 @@ export default class Contract extends Entity {
 
   getModuleFor(step: Step<StepType>): Module | undefined {
     return this.playbook.modules.find((module) =>
-      module.steps.find((x) => x.id === step.id)
+      module.steps.find((x) => x.equals(step))
     )
   }
 }
