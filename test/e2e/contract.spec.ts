@@ -6,6 +6,7 @@ describe("Starting new contract", () => {
     cy.contains("Rubrum")
     cy.contains("Gegenstand der Leistungen")
   })
+
   it("should show title dialog", () => {
     cy.visit("/contract")
     cy.contains("Vertrag benennen").should("exist")
@@ -30,12 +31,14 @@ describe("Starting new contract", () => {
     cy.get("button").contains("OK").click()
     cy.contains("foo")
   })
+
   it("should save edited title on pressing enter", () => {
     cy.visit("/contract")
     cy.get("#input-contract-title").type("foo")
     cy.get("#input-contract-title").type("{enter}")
     cy.contains("foo")
   })
+
   it("should list the modules in navigation", () => {
     cy.visit("/contract")
     cy.get("#input-contract-title").type("foo")
@@ -44,6 +47,7 @@ describe("Starting new contract", () => {
     cy.get("nav").contains("Rubrum")
     cy.get("nav").contains("Gegenstand der Leistungen")
   })
+
   it("should preserve text input", () => {
     cy.visit("/contract")
     cy.get("#input-contract-title").type("{enter}")
