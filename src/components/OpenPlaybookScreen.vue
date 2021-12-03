@@ -2,18 +2,34 @@
   import FileUpload from "primevue/fileupload"
   import AppHeader from "./AppHeader.vue"
   import { ref } from "vue"
+  import { useRouter } from "vue-router"
+  import PlaybookRepository from "../domain/PlaybookRepository"
+  import Playbook from "../domain/Playbook"
+  import { makePlaybookRepository } from "../provide"
 
-  const data = ref("")
   const chooseLabel = ref("Computer durchsuchen")
+  const playbookRepository: PlaybookRepository = makePlaybookRepository()
+  const router = useRouter()
 
   const upload = async (event: { files: File[] }) => {
+    const playbookAsJson = await parsePlaybook(event)
+    const playbook: Playbook = Playbook.fromJson(playbookAsJson)
+    console.log(playbook)
+    playbookRepository.save(playbook)
+    await router.push("/mitra-frontend/contract")
+  }
+
+  const parsePlaybook = async (event: { files: File[] }) => {
     let file = event?.files[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = () => {
-        data.value = reader.result as string
-      }
-      reader.readAsText(file || new Blob())
+      reader.readAsText(file)
+      const result = await new Promise((resolve) => {
+        reader.onload = () => {
+          resolve(reader.result)
+        }
+      })
+      return JSON.parse(result as string).playbook
     }
   }
 </script>

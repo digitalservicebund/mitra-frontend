@@ -9,4 +9,9 @@ export default class Playbook extends Entity {
   addModules(...modules: Module[]) {
     this.modules.push(...modules)
   }
+
+  static fromJson(jsonPlaybook: Playbook) {
+    const modules: Module[] = jsonPlaybook.modules.map(Module.fromJson)
+    return new Playbook(modules)
+  }
 }

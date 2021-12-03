@@ -19,4 +19,9 @@ export default class Module extends Entity {
       this.steps.map((step) => step.clone())
     )
   }
+
+  static fromJson(jsonModule: Module) {
+    const steps: Step<Answer>[] = jsonModule.steps.map(Step.fromJson)
+    return new Module(jsonModule.text, steps)
+  }
 }

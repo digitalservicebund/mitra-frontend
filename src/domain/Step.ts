@@ -40,6 +40,10 @@ export abstract class Step<T extends Answer> extends Entity {
   isUnanswered(): boolean {
     return !this.answer.getAnswer()
   }
+
+  static fromJson(jsonStep: Step<Answer>) {
+    return new TextAnswerStep(jsonStep.text)
+  }
 }
 
 export class TextAnswerStep extends Step<TextAnswer> {

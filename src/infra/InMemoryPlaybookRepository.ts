@@ -27,12 +27,14 @@ module3.addSteps(step31, step32, step33, step34)
 const testPlaybook = new Playbook()
 testPlaybook.addModules(module1, module2, module3)
 
+let currentPlaybook = testPlaybook
+
 const repository: PlaybookRepository = {
   load() {
-    return testPlaybook
+    return currentPlaybook
   },
-  save() {
-    // noop
+  save(playbook: Playbook) {
+    currentPlaybook = playbook
   },
 }
 
