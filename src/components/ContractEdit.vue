@@ -7,7 +7,7 @@
 
   const props = defineProps<{ contract: Contract }>()
 
-  const currentStep = ref(props.contract.getAllSteps()[0])
+  const currentStep = ref(props.contract.getSteps()[0])
 
   const currentStepComponent = computed(() => {
     if (currentStep.value === undefined) {
@@ -31,7 +31,7 @@
     return props.contract.getModuleFor(currentStep.value as Step<StepType>)
   })
 
-  const steps: Step<StepType>[] = props.contract.getAllSteps()
+  const steps: Step<StepType>[] = props.contract.getSteps()
 
   const lookupCurrentStep = (step: Step<StepType>) =>
     step.equals(currentStep.value as Step<StepType>)

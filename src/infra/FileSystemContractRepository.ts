@@ -1,6 +1,5 @@
 import Contract from "../domain/Contract"
 import ContractRepository from "../domain/ContractRepository"
-import Playbook from "../domain/Playbook"
 
 function makeFileBaseName(contract: Contract) {
   return contract.title.toLowerCase().replace(/\s/g, "-")
@@ -16,7 +15,7 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
 const repository: ContractRepository = {
   load() {
     // noop
-    return new Contract("", new Playbook())
+    return new Contract("", [])
   },
   async save(contract: Contract) {
     if (!!window.showSaveFilePicker) {

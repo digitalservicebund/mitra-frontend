@@ -13,4 +13,11 @@ export default class Module extends Entity {
   addSteps(...steps: Step<StepType>[]) {
     this.steps.push(...steps)
   }
+
+  clone(): Module {
+    return new Module(
+      this.text,
+      this.steps.map((step) => step.clone())
+    )
+  }
 }

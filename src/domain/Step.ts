@@ -13,11 +13,12 @@ class TextAnswer {
 export type StepType = TextAnswer
 
 export abstract class Step<T extends StepType> extends Entity {
-  constructor(public readonly text: string, private answer: T) {
+  constructor(public readonly text: string, protected answer: T) {
     super()
   }
 
   abstract getType(): string
+  abstract clone(): Step<T>
 
   getAnswer(): string {
     return this.answer.getAnswer() || ""
@@ -37,11 +38,15 @@ export class TextAnswerStep extends Step<TextAnswer> {
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "TextAnswerStep"
 
-  constructor(text: string) {
-    super(text, new TextAnswer())
+  constructor(text: string, answer: TextAnswer = new TextAnswer()) {
+    super(text, answer)
   }
 
   getType(): string {
     return TextAnswerStep.TYPE
+  }
+
+  clone(): Step<TextAnswer> {
+    return new TextAnswerStep(this.text, this.answer)
   }
 }

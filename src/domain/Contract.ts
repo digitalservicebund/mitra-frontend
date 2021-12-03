@@ -5,24 +5,25 @@ import { Step } from "./Step"
 import type { StepType } from "./Step"
 
 export default class Contract extends Entity {
-  constructor(public title: string, private playbook: Playbook) {
+  constructor(public title: string, private modules: Module[]) {
     super()
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
-    return new Contract("", playbook)
+    const modules: Module[] = playbook.modules.map((module) => module.clone())
+    return new Contract("", modules)
   }
 
-  getAllSteps(): Step<StepType>[] {
-    return this.playbook.modules.flatMap((module) => module.steps)
+  getSteps(): Step<StepType>[] {
+    return this.modules.flatMap((module) => module.steps)
   }
 
-  getAllModules(): Module[] {
-    return this.playbook.modules
+  getModules(): Module[] {
+    return this.modules
   }
 
   getModuleFor(step: Step<StepType>): Module | undefined {
-    return this.playbook.modules.find((module) =>
+    return this.modules.find((module) =>
       module.steps.find((x) => x.equals(step))
     )
   }

@@ -47,10 +47,7 @@
 <template>
   <div class="flex">
     <div class="flex-col">
-      <ContractSideMenu
-        :modules="contract.getAllModules()"
-        @save="saveContract"
-      />
+      <ContractSideMenu :modules="contract.getModules()" @save="saveContract" />
     </div>
 
     <div class="flex-col p-8">
