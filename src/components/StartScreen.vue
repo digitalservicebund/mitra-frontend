@@ -1,6 +1,15 @@
 <script setup lang="ts">
   import Card from "primevue/card"
   import AppHeader from "./AppHeader.vue"
+  import PlaybookRepository from "../domain/PlaybookRepository"
+  import { makePlaybookRepository } from "../provide"
+  import cloudContractPlaybook from "../infra/CloudContractPlaybook"
+
+  const playbookRepository: PlaybookRepository = makePlaybookRepository()
+
+  const loadCloudContract = () => {
+    playbookRepository.save(cloudContractPlaybook)
+  }
 </script>
 
 <template>
@@ -19,7 +28,11 @@
         </Card>
         <Card>
           <template #content>
-            <router-link to="/mitra-frontend/contract" class="block">
+            <router-link
+              to="/mitra-frontend/contract"
+              class="block"
+              @click="loadCloudContract"
+            >
               <span
                 class="material-icons-outlined hover:bg-gray-50"
                 aria-hidden="true"
@@ -32,7 +45,9 @@
         <Card>
           <template #content>
             <router-link to="/mitra-frontend/open-playbook" class="block">
-              <span class="material-icons-outlined" aria-hidden="true"
+              <span
+                class="material-icons-outlined hover:bg-gray-50"
+                aria-hidden="true"
                 >add</span
               >
               Neuer Vertrag aus lokaler Datei
