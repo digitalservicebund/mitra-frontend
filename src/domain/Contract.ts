@@ -13,12 +13,6 @@ export default class Contract extends Entity {
     return new Contract("", playbook)
   }
 
-  getFirstUnansweredStep(): Step<StepType> | undefined {
-    return this.playbook.modules
-      .flatMap((module) => module.steps)
-      .find((step) => step.isUnanswered())
-  }
-
   getAllSteps(): Step<StepType>[] {
     return this.playbook.modules.flatMap((module) => module.steps)
   }

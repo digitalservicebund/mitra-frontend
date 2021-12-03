@@ -10,18 +10,6 @@ describe("Contract", () => {
     expect(contract.getAllModules()).toEqual(playbook.modules)
   })
 
-  it("should provide the first unanswered of all steps", () => {
-    const answeredStep = new TextAnswerStep("foo")
-    answeredStep.setAnswer("bar")
-    const unansweredStep = new TextAnswerStep("foo")
-    const playbook = new Playbook([
-      new Module("one", [answeredStep]),
-      new Module("two", [unansweredStep]),
-    ])
-    const contract = Contract.fromPlaybook(playbook)
-    expect(contract.getFirstUnansweredStep()).toBe(unansweredStep)
-  })
-
   it("should provide the module a step belongs to", () => {
     const stepForLookup = new TextAnswerStep("foo")
     const playbook = new Playbook([

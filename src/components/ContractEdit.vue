@@ -13,7 +13,7 @@
 
   const props = defineProps<{ contract: Contract }>()
 
-  const currentStep = ref(props.contract.getFirstUnansweredStep())
+  const currentStep = ref(props.contract.getAllSteps()[0])
 
   const currentStepComponent = computed(() => {
     if (currentStep.value === undefined) {
