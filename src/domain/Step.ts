@@ -37,10 +37,6 @@ export abstract class Step<T extends Answer> extends Entity {
     this.answer.setAnswer(answer)
   }
 
-  isUnanswered(): boolean {
-    return !this.answer.getAnswer()
-  }
-
   static fromJson(jsonStep: Step<Answer>) {
     return new TextAnswerStep(jsonStep.text)
   }
