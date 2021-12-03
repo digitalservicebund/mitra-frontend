@@ -1,18 +1,27 @@
 import Entity from "./Entity"
 
-class TextAnswer {
-  constructor(private answer?: string) {}
-  getAnswer(): string | undefined {
+export abstract class Answer {
+  abstract getAnswer(): unknown
+  abstract setAnswer(answer: unknown): void
+  abstract toString(): string
+}
+
+export class TextAnswer extends Answer {
+  constructor(private answer: string = "") {
+    super()
+  }
+  getAnswer(): string {
     return this.answer
   }
   setAnswer(answer: string): void {
     this.answer = answer
   }
+  toString(): string {
+    return this.answer
+  }
 }
 
-export type StepType = TextAnswer
-
-export abstract class Step<T extends StepType> extends Entity {
+export abstract class Step<T extends Answer> extends Entity {
   constructor(public readonly text: string, protected answer: T) {
     super()
   }
@@ -20,11 +29,11 @@ export abstract class Step<T extends StepType> extends Entity {
   abstract getType(): string
   abstract clone(): Step<T>
 
-  getAnswer(): string {
-    return this.answer.getAnswer() || ""
+  getAnswer(): T {
+    return this.answer
   }
 
-  setAnswer(answer: string): void {
+  setAnswer(answer: T): void {
     this.answer.setAnswer(answer)
   }
 

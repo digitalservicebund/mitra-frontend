@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, computed } from "vue"
   import Contract from "../domain/Contract"
-  import { Step, StepType, TextAnswerStep } from "../domain/Step"
+  import { Answer, Step, TextAnswerStep } from "../domain/Step"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
   import Button from "primevue/button"
 
@@ -13,7 +13,7 @@
     if (currentStep.value === undefined) {
       return null
     }
-    const step = currentStep.value as Step<StepType>
+    const step = currentStep.value as Step<Answer>
     const type = step.getType()
     if (type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
@@ -23,23 +23,23 @@
 
   const hasPreviousStep = computed(
     () =>
-      props.contract.getPreviousStepFor(currentStep.value as Step<StepType>) !==
+      props.contract.getPreviousStepFor(currentStep.value as Step<Answer>) !==
       undefined
   )
 
   const hasNextStep = computed(
     () =>
-      props.contract.getNextStepFor(currentStep.value as Step<StepType>) !==
+      props.contract.getNextStepFor(currentStep.value as Step<Answer>) !==
       undefined
   )
 
   const currentModule = computed(() => {
-    return props.contract.getModuleFor(currentStep.value as Step<StepType>)
+    return props.contract.getModuleFor(currentStep.value as Step<Answer>)
   })
 
   const previous = () => {
     const step = props.contract.getPreviousStepFor(
-      currentStep.value as Step<StepType>
+      currentStep.value as Step<Answer>
     )
     if (step) {
       currentStep.value = step
@@ -48,7 +48,7 @@
 
   const next = () => {
     const step = props.contract.getNextStepFor(
-      currentStep.value as Step<StepType>
+      currentStep.value as Step<Answer>
     )
     if (step) {
       currentStep.value = step

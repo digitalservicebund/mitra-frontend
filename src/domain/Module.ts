@@ -1,16 +1,15 @@
 import Entity from "./Entity"
-import { Step } from "./Step"
-import type { StepType } from "./Step"
+import { Answer, Step } from "./Step"
 
 export default class Module extends Entity {
   constructor(
     public readonly text: string,
-    public readonly steps: Step<StepType>[] = []
+    public readonly steps: Step<Answer>[] = []
   ) {
     super()
   }
 
-  addSteps(...steps: Step<StepType>[]) {
+  addSteps(...steps: Step<Answer>[]) {
     this.steps.push(...steps)
   }
 

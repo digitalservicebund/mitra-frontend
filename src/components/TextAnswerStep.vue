@@ -1,14 +1,14 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import InputText from "primevue/inputtext"
-  import { Step, StepType } from "../domain/Step"
+  import { Step, TextAnswer } from "../domain/Step"
 
-  const props = defineProps<{ step: Step<StepType> }>()
+  const props = defineProps<{ step: Step<TextAnswer> }>()
   const emit = defineEmits<{
     (e: "answerChanged", answer: string): void
   }>()
 
-  const editableAnswer = ref(props.step.getAnswer())
+  const editableAnswer = ref(props.step.getAnswer().toString())
 </script>
 
 <template>
