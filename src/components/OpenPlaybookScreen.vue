@@ -1,11 +1,11 @@
 <script setup lang="ts">
   import FileUpload from "primevue/fileupload"
-  import AppHeader from "./AppHeader.vue"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import PlaybookRepository from "../domain/PlaybookRepository"
   import Playbook from "../domain/Playbook"
   import { makePlaybookRepository } from "../provide"
+  import NavigateToHome from "./NavigateToHome.vue"
 
   const chooseLabel = ref("Computer durchsuchen")
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
@@ -35,7 +35,7 @@
 </script>
 
 <template>
-  <AppHeader />
+  <NavigateToHome />
   <section id="open-playbook">
     <h2 class="font-bold mb-4">Neuen Vertrag erstellen</h2>
     <label for="upload-playbook"
