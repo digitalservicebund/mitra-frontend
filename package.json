@@ -24,6 +24,7 @@
     "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause'"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "primeicons": "^5.0.0",
     "primevue": "^3.8.2",
     "vue": "^3.2.16",
@@ -34,6 +35,7 @@
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/vue": "^6.5.0",
+    "@types/file-saver": "^2.0.4",
     "@types/jest": "^27.0.2",
     "@types/uuid": "^8.3.3",
     "@types/wicg-native-file-system": "^2020.6.0",
