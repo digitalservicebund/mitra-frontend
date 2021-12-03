@@ -18,6 +18,14 @@ export default class Contract extends Entity {
     return this.modules.flatMap((module) => module.steps)
   }
 
+  getNextStepFor(step: Step<StepType>): Step<StepType> | undefined {
+    return this.getSteps()[this.#findStepIndex(step) + 1]
+  }
+
+  getPreviousStepFor(step: Step<StepType>): Step<StepType> | undefined {
+    return this.getSteps()[this.#findStepIndex(step) - 1]
+  }
+
   getModules(): Module[] {
     return this.modules
   }
@@ -26,5 +34,9 @@ export default class Contract extends Entity {
     return this.modules.find((module) =>
       module.steps.find((x) => x.equals(step))
     )
+  }
+
+  #findStepIndex(step: Step<StepType>): number {
+    return this.getSteps().findIndex((x) => x.equals(step))
   }
 }

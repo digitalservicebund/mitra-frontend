@@ -21,32 +21,37 @@
     return null // unknown type, don't render anything
   })
 
-  const hasPreviousStep = computed(() => steps.findIndex(lookupCurrentStep) > 0)
+  const hasPreviousStep = computed(
+    () =>
+      props.contract.getPreviousStepFor(currentStep.value as Step<StepType>) !==
+      undefined
+  )
 
   const hasNextStep = computed(
-    () => steps.findIndex(lookupCurrentStep) < steps.length - 1
+    () =>
+      props.contract.getNextStepFor(currentStep.value as Step<StepType>) !==
+      undefined
   )
 
   const currentModule = computed(() => {
     return props.contract.getModuleFor(currentStep.value as Step<StepType>)
   })
 
-  const steps: Step<StepType>[] = props.contract.getSteps()
-
-  const lookupCurrentStep = (step: Step<StepType>) =>
-    step.equals(currentStep.value as Step<StepType>)
-
   const previous = () => {
-    const currentIndex = steps.findIndex(lookupCurrentStep)
-    if (currentIndex > 0) {
-      currentStep.value = steps[currentIndex - 1]
+    const step = props.contract.getPreviousStepFor(
+      currentStep.value as Step<StepType>
+    )
+    if (step) {
+      currentStep.value = step
     }
   }
 
   const next = () => {
-    const currentIndex = steps.findIndex(lookupCurrentStep)
-    if (currentIndex < steps.length - 1) {
-      currentStep.value = steps[currentIndex + 1]
+    const step = props.contract.getNextStepFor(
+      currentStep.value as Step<StepType>
+    )
+    if (step) {
+      currentStep.value = step
     }
   }
 </script>

@@ -13,30 +13,50 @@ describe("Contract", () => {
     // Copy objects as to avoid modifying the original playbook
     expect(contract.getModules()).not.toEqual(playbook.modules)
     expect(contract.getSteps()).not.toEqual(
-      playbook.modules.flatMap((m) => m.steps)
+      playbook.modules.flatMap((module) => module.steps)
     )
 
     expect(contract.getModules()).toHaveLength(playbook.modules.length)
     expect(contract.getSteps()).toHaveLength(
-      playbook.modules.flatMap((m) => m.steps).length
+      playbook.modules.flatMap((module) => module.steps).length
     )
   })
 
   it("should provide the module a step belongs to", () => {
-    const playbook = new Playbook([
-      new Module("one"),
-      new Module("two", [new TextAnswerStep("foo")]),
-      new Module("three", [new TextAnswerStep("bar")]),
+    const contract = new Contract("foo", [
+      new Module("one", [new TextAnswerStep("foo")]),
+      new Module("two", [new TextAnswerStep("bar")]),
     ])
-    const contract = Contract.fromPlaybook(playbook)
 
     const stepForLookup = contract.getSteps()[1]
     expect(contract.getModuleFor(stepForLookup)).toEqual(
-      contract.getModules()[2]
+      contract.getModules()[1]
     )
     // We might have to deal with proxies which are used by Vue extensively..
     expect(contract.getModuleFor(new Proxy(stepForLookup, {}))).toBe(
-      contract.getModules()[2]
+      contract.getModules()[1]
     )
+  })
+
+  it("should provide traversal forward given a step", () => {
+    const contract = new Contract("foo", [
+      new Module("one", [new TextAnswerStep("foo")]),
+      new Module("two", [new TextAnswerStep("bar")]),
+    ])
+
+    const [stepOne, stepTwo] = contract.getSteps()
+    expect(contract.getNextStepFor(stepOne)).toBe(stepTwo)
+    expect(contract.getNextStepFor(stepTwo)).toBeUndefined()
+  })
+
+  it("should provide traversal backward given a step", () => {
+    const contract = new Contract("foo", [
+      new Module("one", [new TextAnswerStep("foo")]),
+      new Module("two", [new TextAnswerStep("bar")]),
+    ])
+
+    const [stepOne, stepTwo] = contract.getSteps()
+    expect(contract.getPreviousStepFor(stepOne)).toBeUndefined()
+    expect(contract.getPreviousStepFor(stepTwo)).toBe(stepOne)
   })
 })
