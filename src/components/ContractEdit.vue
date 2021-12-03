@@ -1,13 +1,7 @@
 <script setup lang="ts">
   import { ref, computed } from "vue"
   import Contract from "../domain/Contract"
-  import {
-    InformationalStep,
-    Step,
-    StepType,
-    TextAnswerStep,
-  } from "../domain/Step"
-  import InformationalStepComponent from "./InformationalStep.vue"
+  import { Step, StepType, TextAnswerStep } from "../domain/Step"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
   import Button from "primevue/button"
 
@@ -23,9 +17,6 @@
     const type = step.getType()
     if (type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
-    }
-    if (type === InformationalStep.TYPE) {
-      return InformationalStepComponent
     }
     return null // unknown type, don't render anything
   })

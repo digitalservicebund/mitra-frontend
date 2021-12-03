@@ -1,13 +1,5 @@
 import Entity from "./Entity"
 
-class Informational {
-  getAnswer(): string {
-    return ""
-  }
-  setAnswer(): void {
-    // noop
-  }
-}
 class TextAnswer {
   constructor(private answer?: string) {}
   getAnswer(): string | undefined {
@@ -18,7 +10,7 @@ class TextAnswer {
   }
 }
 
-export type StepType = Informational | TextAnswer
+export type StepType = TextAnswer
 
 export abstract class Step<T extends StepType> extends Entity {
   constructor(public readonly text: string, private answer: T) {
@@ -37,20 +29,6 @@ export abstract class Step<T extends StepType> extends Entity {
 
   isUnanswered(): boolean {
     return !this.answer.getAnswer()
-  }
-}
-
-export class InformationalStep extends Step<Informational> {
-  // We need to capture the type manually, as at runtime it's not available,
-  // and because Vue uses proxies, thus we can't compare constructors...
-  static readonly TYPE = "InformationalStep"
-
-  constructor(text: string) {
-    super(text, new Informational())
-  }
-
-  getType(): string {
-    return InformationalStep.TYPE
   }
 }
 
