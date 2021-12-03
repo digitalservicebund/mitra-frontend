@@ -14,23 +14,20 @@
   const upload = async (event: { files: File[] }) => {
     const playbookAsJson = await parsePlaybook(event)
     const playbook: Playbook = Playbook.fromJson(playbookAsJson)
-    console.log(playbook)
     playbookRepository.save(playbook)
     await router.push("/mitra-frontend/contract")
   }
 
   const parsePlaybook = async (event: { files: File[] }) => {
-    let file = event?.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.readAsText(file)
-      const result = await new Promise((resolve) => {
-        reader.onload = () => {
-          resolve(reader.result)
-        }
-      })
-      return JSON.parse(result as string).playbook
-    }
+    const file = event?.files[0]
+    const reader = new FileReader()
+    reader.readAsText(file)
+    const result = await new Promise((resolve) => {
+      reader.onload = () => {
+        resolve(reader.result)
+      }
+    })
+    return JSON.parse(result as string).playbook
   }
 </script>
 
