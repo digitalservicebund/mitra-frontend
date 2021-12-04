@@ -10,12 +10,8 @@
   const currentStep = ref(props.contract.getSteps()[0])
 
   const currentStepComponent = computed(() => {
-    if (currentStep.value === undefined) {
-      return null
-    }
     const step = currentStep.value as Step<Answer>
-    const type = step.getType()
-    if (type === TextAnswerStep.TYPE) {
+    if (step?.getType() === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
     }
     return null // unknown type, don't render anything
