@@ -9,6 +9,12 @@
 
 The repository contains a `.node-version` file to set up the required Node.js version automatically with [nodenv](https://github.com/nodenv/nodenv).
 
+For E2E testing with [Playwright](https://playwright.dev/docs/intro) you will need to install the supported browsers:
+
+```bash
+npx playwright install
+```
+
 For the provided Git hooks you will need:
 
 ```bash
