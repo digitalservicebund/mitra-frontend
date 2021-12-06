@@ -28,7 +28,9 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Install E2E test dependencies
-        run: npx playwright install
+        run: |
+          npx --yes playwright install-deps
+          npx --yes playwright install
       - name: Run E2E tests
         env:
           WAIT_ON_TIMEOUT: 20000 # 20 seconds... by default start-server-and-test will wait 5 minutes, way too long for feedback!
