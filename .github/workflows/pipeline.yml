@@ -27,7 +27,7 @@ jobs:
         run: npm run lint:check
       - name: Run tests
         run: npm test
-      - name: Install operating system dependencies
+      - name: Install E2E test dependencies
         run: npx playwright install
       - name: Run E2E tests
         env:
