@@ -36,10 +36,6 @@ export abstract class Step<T extends Answer> extends Entity {
   setAnswer(answer: T): void {
     this.answer.setAnswer(answer)
   }
-
-  static fromJson(jsonStep: Step<Answer>) {
-    return new TextAnswerStep(jsonStep.text)
-  }
 }
 
 export class TextAnswerStep extends Step<TextAnswer> {

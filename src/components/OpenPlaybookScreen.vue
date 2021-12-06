@@ -3,31 +3,22 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import PlaybookRepository from "../domain/PlaybookRepository"
-  import Playbook from "../domain/Playbook"
-  import { makePlaybookRepository } from "../provide"
+  import {
+    makeFileSystemPlaybookLoader,
+    makePlaybookRepository,
+  } from "../provide"
   import NavigateToHome from "./NavigateToHome.vue"
 
   const chooseLabel = ref("Computer durchsuchen")
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
+  const playbookLoader = makeFileSystemPlaybookLoader()
   const router = useRouter()
 
   const upload = async (event: { files: File[] }) => {
-    const playbookAsJson = await parsePlaybook(event)
-    const playbook: Playbook = Playbook.fromJson(playbookAsJson)
+    const file = event?.files[0]
+    const playbook = await playbookLoader.load(file)
     playbookRepository.save(playbook)
     await router.push("/mitra-frontend/contract")
-  }
-
-  const parsePlaybook = async (event: { files: File[] }) => {
-    const file = event?.files[0]
-    const reader = new FileReader()
-    reader.readAsText(file)
-    const result = await new Promise((resolve) => {
-      reader.onload = () => {
-        resolve(reader.result)
-      }
-    })
-    return JSON.parse(result as string).playbook
   }
 </script>
 
