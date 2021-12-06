@@ -5,6 +5,7 @@ dist-ssr
 *.local
 coverage
 cypress/screenshots
+test-results
 .lefthook-local
 lefthook-local.yml
 .lighthouseci
