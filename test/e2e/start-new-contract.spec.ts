@@ -15,6 +15,7 @@ test("Start with title input dialog", async ({ page }) => {
 
 test("Close title input dialog on clicking x", async ({ page }) => {
   await page.goto("/mitra-frontend/contract")
+  await page.locator("text=Vertrag benennen").waitFor()
   await page.click(".p-dialog-header-close-icon")
   await page.locator("#input-contract-title").waitFor({ state: "detached" })
   await expect(page.locator("text=Vertrag benennen")).toBeHidden()
@@ -22,6 +23,7 @@ test("Close title input dialog on clicking x", async ({ page }) => {
 
 test("Close title input dialog on clicking mask", async ({ page }) => {
   await page.goto("/mitra-frontend/contract")
+  await page.locator("text=Vertrag benennen").waitFor()
   // Click outside the dialog..
   await page.mouse.click(0, 0)
   await page.locator("#input-contract-title").waitFor({ state: "detached" })
