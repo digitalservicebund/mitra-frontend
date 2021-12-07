@@ -1,27 +1,6 @@
 /// <reference types="cypress" />
 /// <reference types="cypress-file-upload" />
 describe("Starting new contract", () => {
-  it("should list the modules in navigation", () => {
-    cy.visit("/contract")
-    cy.get("#input-contract-title").type("foo")
-    cy.get("button").contains("OK").click()
-    cy.get("nav").contains("Module").click()
-    cy.get("nav").contains("Rubrum")
-    cy.get("nav").contains("Gegenstand der Leistungen")
-  })
-
-  it("should preserve text input", () => {
-    cy.visit("/contract")
-    cy.get("#input-contract-title").type("{enter}")
-    cy.findByTitle("Schritt 1.1").type("foo")
-    cy.get("button").contains("Weiter").click()
-    cy.findByTitle("Schritt 1.2").type("bar")
-    cy.get("button").contains("Zurück").click()
-    cy.findByTitle("Schritt 1.1").should("have.value", "foo")
-    cy.get("button").contains("Weiter").click()
-    cy.findByTitle("Schritt 1.2").should("have.value", "bar")
-  })
-
   it("should open playbook from filesystem", () => {
     cy.visit("/open-playbook")
     cy.get("input[type='file']").attachFile("contract.json")
