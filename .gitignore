@@ -10,3 +10,4 @@ test-results
 lefthook-local.yml
 .lighthouseci
 .idea
+test/e2e/saved-contract.json

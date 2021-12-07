@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
   retries: 1,
   use: {
     viewport: { width: 1280, height: 720 },
+    acceptDownloads: true,
     baseURL: "http://localhost:5000",
     screenshot: "only-on-failure",
   },

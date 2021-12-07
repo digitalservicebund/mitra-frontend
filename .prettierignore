@@ -4,3 +4,4 @@ dist
 dist-ssr
 coverage
 .lighthouseci
+test/e2e/saved-contract.json
