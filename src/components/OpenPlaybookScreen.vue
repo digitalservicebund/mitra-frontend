@@ -22,7 +22,7 @@
 
 <template>
   <NavigateToHome />
-  <section id="open-playbook">
+  <main id="open-playbook">
     <h2 class="font-bold mb-4">Neuen Vertrag erstellen</h2>
     <label for="upload-playbook"
       >Wählen Sie ein Playbook von Ihrer Festplatte aus.
@@ -48,5 +48,5 @@
         </FileUpload>
       </div>
     </label>
-  </section>
+  </main>
 </template>

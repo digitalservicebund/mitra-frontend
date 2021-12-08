@@ -50,11 +50,11 @@
 
 <template>
   <div class="flex">
-    <div class="flex-col">
+    <nav class="flex-col">
       <ContractSideMenu :modules="contract.getModules()" @save="saveContract" />
-    </div>
+    </nav>
 
-    <div class="flex-col p-8">
+    <main class="flex-col p-8">
       <Dialog
         id="dialog-contract-title"
         v-model:visible="displayTitleDialog"
@@ -85,7 +85,7 @@
       <transition name="fade" mode="out-in">
         <ContractEdit :contract="contract" />
       </transition>
-    </div>
+    </main>
   </div>
 </template>
 

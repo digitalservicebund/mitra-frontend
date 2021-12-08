@@ -73,9 +73,7 @@
 </script>
 
 <template>
-  <nav>
-    <PanelMenu :model="menuItems" class="w-70" />
-  </nav>
+  <PanelMenu :model="menuItems" class="w-70" />
 </template>
 
 <style scoped>
