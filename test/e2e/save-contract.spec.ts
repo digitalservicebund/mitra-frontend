@@ -6,8 +6,8 @@ test.skip(
   "Chrome chrashes upon invoking `window.showSaveFilePicker`... => https://github.com/microsoft/playwright/issues/7339"
 )
 
-test("Save currently worked on contract to disk", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract/cloud-contract")
+test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
+  await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
   await page.locator("text=Vertrag benennen").waitFor()
   await page.fill("#input-contract-title", "TEST")
   await page.click("text=OK")

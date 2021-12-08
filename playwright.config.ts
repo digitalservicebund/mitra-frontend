@@ -25,6 +25,11 @@ const config: PlaywrightTestConfig = {
       use: { ...devices["Desktop Safari"] },
     },
   ],
+  webServer: {
+    command: "npm run serve",
+    port: 5000,
+    timeout: parseInt(process.env.WAIT_ON_TIMEOUT) || 20 * 1000,
+  },
 }
 
 export default config
