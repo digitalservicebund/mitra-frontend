@@ -25,7 +25,7 @@
   "dependencies": {
     "file-saver": "^2.0.5",
     "primeicons": "^5.0.0",
-    "primevue": "^3.8.2",
+    "primevue": "^3.10.0",
     "uuid": "^8.3.2",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12"
