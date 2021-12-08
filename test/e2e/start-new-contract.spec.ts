@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test"
+import { expect, test } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
 
 test("Reachable from start page", async ({ page, baseURL }) => {
