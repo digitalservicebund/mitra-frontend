@@ -13,7 +13,6 @@
   const upload = async (event: { files: File[] }) => {
     const file = event?.files[0]
     const contract = await contractLoader.load(file)
-    console.log(contract)
     contractStore.save(contract.id, contract)
     await router.push("/mitra-frontend/contract/" + contract.id)
   }
