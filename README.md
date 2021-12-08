@@ -41,7 +41,7 @@ npm run dev
 
 ## Testing
 
-The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Cypress](https://docs.cypress.io/guides/getting-started/writing-your-first-test)).
+The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Playwright](https://playwright.dev/docs/intro)).
 
 **To run the unit tests:**
 

@@ -1,9 +1,0 @@
-{
-  "baseUrl": "http://localhost:5000/mitra-frontend/",
-  "integrationFolder": "test/e2e",
-  "testFiles": "**/*.spec.ts",
-  "ignoreTestFiles": "*-*.spec.ts",
-  "pluginsFile": false,
-  "supportFile": "cypress/support",
-  "video": false
-}
