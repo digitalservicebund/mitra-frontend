@@ -1,23 +1,23 @@
 import Entity from "./Entity"
 
 export abstract class Answer {
-  abstract getAnswer(): unknown
-  abstract setAnswer(answer: unknown): void
+  abstract getValue(): unknown
+  abstract setValue(answer: unknown): void
   abstract toString(): string
 }
 
 export class TextAnswer extends Answer {
-  constructor(private answer: string = "") {
+  constructor(private value: string = "") {
     super()
   }
-  getAnswer(): string {
-    return this.answer
+  getValue(): string {
+    return this.value
   }
-  setAnswer(answer: string): void {
-    this.answer = answer
+  setValue(answer: string): void {
+    this.value = answer
   }
   toString(): string {
-    return this.answer
+    return this.value
   }
 }
 
@@ -34,7 +34,7 @@ export abstract class Step<T extends Answer> extends Entity {
   }
 
   setAnswer(answer: T): void {
-    this.answer.setAnswer(answer)
+    this.answer.setValue(answer)
   }
 }
 
