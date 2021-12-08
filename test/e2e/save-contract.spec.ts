@@ -7,7 +7,7 @@ test("Save currently worked on contract to disk", async ({
 }) => {
   // Chrome chrashes upon invoking `window.showSaveFilePicker`...!
   if (browserName !== "chromium") {
-    await page.goto("/mitra-frontend/contract")
+    await page.goto("/mitra-frontend/contract/cloud-contract")
     await page.locator("text=Vertrag benennen").waitFor()
     await page.fill("#input-contract-title", "TEST")
     await page.click("text=OK")

@@ -4,18 +4,18 @@ import { getDocument, queries } from "@playwright-testing-library/test"
 test("Reachable from start page", async ({ page }) => {
   await page.goto("/mitra-frontend/")
   await page.click("text=Neuer EVB-IT Cloud Vertrag")
-  await expect(page).toHaveURL(/\/contract$/)
+  await expect(page).toHaveURL(/\/contract\/cloud-contract$/)
 })
 
 test("Start with title input dialog", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await expect(
     page.locator("text=Wie wollen Sie den Vertrag benennen?")
   ).toBeVisible()
 })
 
 test("Close title input dialog when clicking x", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.locator("text=Vertrag benennen").waitFor()
   await page.click(".p-dialog-header-close-icon")
   await page.locator("#input-contract-title").waitFor({ state: "detached" })
@@ -23,7 +23,7 @@ test("Close title input dialog when clicking x", async ({ page }) => {
 })
 
 test("Close title input dialog when clicking mask", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.locator("text=Vertrag benennen").waitFor()
   // Click outside the dialog..
   await page.mouse.click(0, 0)
@@ -32,7 +32,7 @@ test("Close title input dialog when clicking mask", async ({ page }) => {
 })
 
 test("Save edited title when clicking button", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.fill("#input-contract-title", "foo")
   await page.click("text=OK")
   await page.locator("#input-contract-title").waitFor({ state: "detached" })
@@ -40,7 +40,7 @@ test("Save edited title when clicking button", async ({ page }) => {
 })
 
 test("Save edited title when pressing enter", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.fill("#input-contract-title", "foo")
   await page.press("#input-contract-title", "Enter")
   await page.locator("#input-contract-title").waitFor({ state: "detached" })
@@ -48,7 +48,7 @@ test("Save edited title when pressing enter", async ({ page }) => {
 })
 
 test("List contract modules in navigation", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.locator("text=Vertrag benennen").waitFor()
   await page.mouse.click(0, 0) // Dismiss dialog..
 
@@ -60,7 +60,7 @@ test("List contract modules in navigation", async ({ page }) => {
 })
 
 test("Navigate through steps of a contract for editing", async ({ page }) => {
-  await page.goto("/mitra-frontend/contract")
+  await page.goto("/mitra-frontend/contract/cloud-contract")
   await page.locator("text=Vertrag benennen").waitFor()
   await page.mouse.click(0, 0) // Dismiss dialog..
 

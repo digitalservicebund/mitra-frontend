@@ -1,15 +1,6 @@
 <script setup lang="ts">
   import Card from "primevue/card"
   import AppHeader from "./AppHeader.vue"
-  import PlaybookRepository from "../domain/PlaybookRepository"
-  import { makePlaybookRepository } from "../provide"
-  import cloudContractPlaybook from "../infra/CloudContractPlaybook"
-
-  const playbookRepository: PlaybookRepository = makePlaybookRepository()
-
-  const loadCloudContract = () => {
-    playbookRepository.save(cloudContractPlaybook)
-  }
 </script>
 
 <template>
@@ -29,9 +20,8 @@
         <Card>
           <template #content>
             <router-link
-              to="/mitra-frontend/contract"
+              to="/mitra-frontend/contract/cloud-contract"
               class="block"
-              @click="loadCloudContract"
             >
               <span
                 class="material-icons-outlined hover:bg-gray-50"

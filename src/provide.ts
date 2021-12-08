@@ -4,6 +4,7 @@ import ContractRepository from "./domain/ContractRepository"
 import contractRepository from "./infra/FileSystemContractRepository"
 import PlaybookLoader from "./usecases/LoadPlaybook"
 import filePlaybookLoader from "./infra/FileSystemPlaybookLoader"
+import store, { ContractStore } from "./infra/ContractStore"
 
 export const makePlaybookRepository: () => PlaybookRepository = () => {
   return playbookRepository
@@ -15,4 +16,8 @@ export const makeContractRepository: () => ContractRepository = () => {
 
 export const makeFileSystemPlaybookLoader: () => PlaybookLoader<File> = () => {
   return filePlaybookLoader
+}
+
+export const makeContractStore: () => ContractStore = () => {
+  return store
 }

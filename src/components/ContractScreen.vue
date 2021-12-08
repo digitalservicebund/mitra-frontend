@@ -1,22 +1,22 @@
 <script setup lang="ts">
   import Contract from "../domain/Contract"
-  import PlaybookRepository from "../domain/PlaybookRepository"
   import ContractRepository from "../domain/ContractRepository"
   import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
-  import { makePlaybookRepository, makeContractRepository } from "../provide"
+  import { makeContractRepository, makeContractStore } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
   import { onMounted, ref } from "vue"
 
-  // Primary adapter using the port (PlaybookRepository interface)
-  const playbookRepository: PlaybookRepository = makePlaybookRepository()
+  const props = defineProps<{ id: string }>()
+
   // Secondary adapter using the port (ContactRepository interface)
   const contractRepository: ContractRepository = makeContractRepository()
-  const contract: Contract = Contract.fromPlaybook(playbookRepository.load())
+  const contractStore = makeContractStore()
+  const contract: Contract = contractStore.load(props.id)
 
-  const placeholder = "Unbenannter Vertrag"
+  const placeholder = contract.title ? contract.title : "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
   const titleInput = ref(placeholder)
   const displayTitleDialog = ref(false)
@@ -41,7 +41,11 @@
     await contractRepository.save(contract)
   }
 
-  onMounted(editTitle)
+  onMounted(() => {
+    if (!contract.title) {
+      editTitle()
+    }
+  })
 </script>
 
 <template>
