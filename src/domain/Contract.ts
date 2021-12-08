@@ -4,7 +4,7 @@ import Module from "./Module"
 import { Answer, Step } from "./Step"
 
 export default class Contract extends Entity {
-  constructor(public title: string, private modules: Module[]) {
+  constructor(public title: string, public modules: Module[]) {
     super()
   }
 

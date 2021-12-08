@@ -9,12 +9,16 @@
     <section>
       <h2 class="font-black mt-8 mb-2">Verträge</h2>
       <div class="flex flex-row">
-        <Card class="p-disabled">
+        <Card>
           <template #content>
-            <span class="material-icons-outlined" aria-hidden="true"
-              >description</span
-            >
-            Vertrag bearbeiten
+            <router-link to="/mitra-frontend/open-contract" class="block">
+              <span
+                class="material-icons-outlined hover:bg-gray-50"
+                aria-hidden="true"
+                >description</span
+              >
+              Vertrag bearbeiten
+            </router-link>
           </template>
         </Card>
         <Card>

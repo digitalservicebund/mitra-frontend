@@ -7,7 +7,7 @@ export abstract class Answer {
 }
 
 export class TextAnswer extends Answer {
-  constructor(private value: string = "") {
+  constructor(public value: string = "") {
     super()
   }
   getValue(): string {
@@ -22,12 +22,19 @@ export class TextAnswer extends Answer {
 }
 
 export abstract class Step<T extends Answer> extends Entity {
-  constructor(public readonly text: string, protected answer: T) {
+  constructor(
+    public readonly text: string,
+    public readonly type: string,
+    public answer: T
+  ) {
     super()
   }
 
-  abstract getType(): string
   abstract clone(): Step<T>
+
+  getType(): string {
+    return this.type
+  }
 
   getAnswer(): T {
     return this.answer
@@ -44,11 +51,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
   static readonly TYPE = "TextAnswerStep"
 
   constructor(text: string, answer: TextAnswer = new TextAnswer()) {
-    super(text, answer)
-  }
-
-  getType(): string {
-    return TextAnswerStep.TYPE
+    super(text, TextAnswerStep.TYPE, answer)
   }
 
   clone(): Step<TextAnswer> {
