@@ -26,7 +26,7 @@
       >Wählen Sie einen Vertrag von Ihrer Festplatte aus.
       <div class="mt-4">
         <FileUpload
-          title="contract-hochladen"
+          title="Vertrag auswählen"
           :choose-label="chooseLabel"
           :show-upload-button="false"
           :show-cancel-button="false"

@@ -28,7 +28,7 @@
       >Wählen Sie ein Playbook von Ihrer Festplatte aus.
       <div class="mt-4">
         <FileUpload
-          title="playbook-hochladen"
+          title="Playbook auswählen"
           :choose-label="chooseLabel"
           :show-upload-button="false"
           :show-cancel-button="false"
