@@ -6,7 +6,7 @@ import { makeContractRepository } from "../../src/provide"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
-    const wrapper = shallowMount(ContractScreen)
+    const wrapper = shallowMount(ContractScreen, { props: { id: "foo" } })
     const vm: unknown = wrapper.vm
     const instance = vm as {
       contract: Contract
@@ -25,6 +25,9 @@ describe("ContractScreen", () => {
 
   it("saves contract as work in progress when requested", async () => {
     const wrapper = mount(ContractScreen, {
+      props: {
+        id: "foo",
+      },
       global: {
         stubs: {
           Button: true,
