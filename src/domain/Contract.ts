@@ -4,7 +4,11 @@ import Module from "./Module"
 import { Answer, Step } from "./Step"
 
 export default class Contract extends Entity {
-  constructor(public title: string, public modules: Module[], id?: string) {
+  constructor(
+    public title: string,
+    public readonly modules: Module[],
+    id?: string
+  ) {
     super(id)
   }
 
@@ -23,10 +27,6 @@ export default class Contract extends Entity {
 
   getPreviousStepFor(step: Step<Answer>): Step<Answer> | undefined {
     return this.getSteps()[this.#findStepIndex(step) - 1]
-  }
-
-  getModules(): Module[] {
-    return this.modules
   }
 
   getModuleFor(step: Step<Answer>): Module | undefined {

@@ -54,7 +54,7 @@
 <template>
   <div class="flex">
     <nav class="flex-col">
-      <ContractSideMenu :modules="contract.getModules()" @save="saveContract" />
+      <ContractSideMenu :modules="contract.modules" @save="saveContract" />
     </nav>
 
     <main class="flex-col p-8">
