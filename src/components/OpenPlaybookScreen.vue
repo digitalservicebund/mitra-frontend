@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import FileUpload from "primevue/fileupload"
+  import type { FileUploadUploaderEvent } from "primevue/fileupload"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { makeContractStore, makeFileSystemPlaybookLoader } from "../provide"
@@ -11,9 +12,11 @@
   const contractStore = makeContractStore()
   const router = useRouter()
 
-  const upload = async (event: { files: File[] }) => {
-    const file = event?.files[0]
-    const playbook = await playbookLoader.load(file)
+  const upload = async (event: FileUploadUploaderEvent) => {
+    const file: File | File[] = event?.files
+    const playbook = await playbookLoader.load(
+      file instanceof Array ? file[0] : file
+    )
     const contract: Contract = Contract.fromPlaybook(playbook)
     contractStore.save(contract.id, contract)
     await router.push("/mitra-frontend/contract/" + contract.id)
