@@ -9,22 +9,17 @@ import fileContractLoader from "./infra/FileSystemContractLoader"
 import ContractSaver from "./usecases/SaveContract"
 import fileContractSaver from "./infra/FileSystemContractSaver"
 
-export const makePlaybookRepository: () => PlaybookRepository = () => {
-  return playbookRepository
-}
+export const makePlaybookRepository: () => PlaybookRepository = () =>
+  playbookRepository
 
-export const makeContractRepository: () => ContractRepository = () => {
-  return contractRepository
-}
+export const makeContractRepository: () => ContractRepository = () =>
+  contractRepository
 
-export const makeFileSystemPlaybookLoader: () => PlaybookLoader<File> = () => {
-  return filePlaybookLoader
-}
+export const makeFileSystemPlaybookLoader: () => PlaybookLoader<File> = () =>
+  filePlaybookLoader
 
-export const makeFileSystemContractLoader: () => ContractLoader<File> = () => {
-  return fileContractLoader
-}
+export const makeFileSystemContractLoader: () => ContractLoader<File> = () =>
+  fileContractLoader
 
-export const makeFileSystemContractSaver: () => ContractSaver = () => {
-  return fileContractSaver
-}
+export const makeFileSystemContractSaver: () => ContractSaver = () =>
+  fileContractSaver
