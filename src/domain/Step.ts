@@ -24,22 +24,14 @@ export class TextAnswer extends Answer {
 export abstract class Step<T extends Answer> extends Entity {
   constructor(
     public readonly text: string,
-    public readonly type: string,
-    public answer: T,
+    public readonly answer: T,
     id?: string
   ) {
     super(id)
   }
 
+  abstract get type(): string
   abstract clone(): Step<T>
-
-  getType(): string {
-    return this.type
-  }
-
-  getAnswer(): T {
-    return this.answer
-  }
 
   setAnswer(answer: T): void {
     this.answer.setValue(answer)
@@ -56,7 +48,11 @@ export class TextAnswerStep extends Step<TextAnswer> {
     answer: TextAnswer = new TextAnswer(),
     id?: string
   ) {
-    super(text, TextAnswerStep.TYPE, answer, id)
+    super(text, answer, id)
+  }
+
+  get type(): string {
+    return TextAnswerStep.TYPE
   }
 
   clone(): Step<TextAnswer> {

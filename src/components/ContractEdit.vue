@@ -11,7 +11,7 @@
 
   const currentStepComponent = computed(() => {
     const step = currentStep.value as Step<Answer>
-    if (step?.getType() === TextAnswerStep.TYPE) {
+    if (step?.type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
     }
     return null // unknown type, don't render anything

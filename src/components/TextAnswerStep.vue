@@ -8,7 +8,7 @@
     (e: "answerChanged", answer: string): void
   }>()
 
-  const editableAnswer = ref(props.step.getAnswer().toString())
+  const editableAnswer = ref(props.step.answer.toString())
 </script>
 
 <template>
