@@ -4,9 +4,10 @@ import { Answer, Step } from "./Step"
 export default class Module extends Entity {
   constructor(
     public readonly text: string,
-    public readonly steps: Step<Answer>[] = []
+    public readonly steps: Step<Answer>[] = [],
+    id?: string
   ) {
-    super()
+    super(id)
   }
 
   addSteps(...steps: Step<Answer>[]) {

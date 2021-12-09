@@ -1,8 +1,8 @@
 import Contract from "../../src/domain/Contract"
 import Playbook from "../../src/domain/Playbook"
-import repository from "../../src/infra/FileSystemContractRepository"
+import contractSaver from "../../src/infra/FileSystemContractSaver"
 
-describe("FileSystemContractRepository", () => {
+describe("FileSystemContractSaver", () => {
   // NOTE: With jsdom, which jest is using as test environment
   // we need to mock some of the file handling related objects!
   const fileHandle = {} as FileSystemFileHandle
@@ -21,7 +21,7 @@ describe("FileSystemContractRepository", () => {
 
   it("should save a given contract to a file", async () => {
     const contract: Contract = Contract.fromPlaybook(new Playbook())
-    await repository.save(contract)
+    await contractSaver.save(contract)
     expect(window.showSaveFilePicker).toBeCalledTimes(1)
     expect(fileStream.write).toBeCalledTimes(1)
     expect(fileStream.close).toBeCalledTimes(1)

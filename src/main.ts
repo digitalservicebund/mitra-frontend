@@ -8,9 +8,6 @@ import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 import "./theme.css"
 import "./index.css"
-import PlaybookRepository from "./domain/PlaybookRepository"
-import { makeContractStore, makePlaybookRepository } from "./provide"
-import Contract from "./domain/Contract"
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,10 +22,5 @@ app.directive("focus", {
     el.focus()
   },
 })
-
-const playbookRepository: PlaybookRepository = makePlaybookRepository()
-const contract: Contract = Contract.fromPlaybook(playbookRepository.load())
-const contracts = makeContractStore()
-contracts.save("cloud-contract", contract)
 
 app.mount("#app")

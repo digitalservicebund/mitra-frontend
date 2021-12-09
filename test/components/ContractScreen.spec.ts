@@ -6,7 +6,9 @@ import { makeContractRepository } from "../../src/provide"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
-    const wrapper = shallowMount(ContractScreen, { props: { id: "foo" } })
+    const wrapper = shallowMount(ContractScreen, {
+      props: { id: "contract-id" },
+    })
     const vm: unknown = wrapper.vm
     const instance = vm as {
       contract: Contract
@@ -26,7 +28,7 @@ describe("ContractScreen", () => {
   it("saves contract as work in progress when requested", async () => {
     const wrapper = mount(ContractScreen, {
       props: {
-        id: "foo",
+        id: "contract-id",
       },
       global: {
         stubs: {
@@ -49,7 +51,7 @@ describe("ContractScreen", () => {
 
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
-    const contract = makeContractRepository().load()
+    const contract = makeContractRepository().load("contract-id")
     expect(contract.title).toBe("Neuer Vertrag")
   })
 })

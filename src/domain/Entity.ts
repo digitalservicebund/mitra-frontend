@@ -5,10 +5,8 @@ const isEntity = (v: unknown): v is Entity => {
 }
 
 export default abstract class Entity {
-  public readonly id: string
-
-  protected constructor() {
-    this.id = uuid()
+  protected constructor(public readonly id: string = uuid()) {
+    this.id = id
   }
 
   public equals(object?: this): boolean {

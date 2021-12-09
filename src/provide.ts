@@ -1,12 +1,13 @@
 import PlaybookRepository from "./domain/PlaybookRepository"
 import playbookRepository from "./infra/InMemoryPlaybookRepository"
 import ContractRepository from "./domain/ContractRepository"
-import contractRepository from "./infra/FileSystemContractRepository"
+import contractRepository from "./infra/InMemoryContractRepository"
 import PlaybookLoader from "./usecases/LoadPlaybook"
 import filePlaybookLoader from "./infra/FileSystemPlaybookLoader"
-import store, { ContractStore } from "./infra/ContractStore"
-import fileContractLoader from "./infra/FileSystemContractLoader"
 import ContractLoader from "./usecases/LoadContract"
+import fileContractLoader from "./infra/FileSystemContractLoader"
+import ContractSaver from "./usecases/SaveContract"
+import fileContractSaver from "./infra/FileSystemContractSaver"
 
 export const makePlaybookRepository: () => PlaybookRepository = () => {
   return playbookRepository
@@ -24,6 +25,6 @@ export const makeFileSystemContractLoader: () => ContractLoader<File> = () => {
   return fileContractLoader
 }
 
-export const makeContractStore: () => ContractStore = () => {
-  return store
+export const makeFileSystemContractSaver: () => ContractSaver = () => {
+  return fileContractSaver
 }

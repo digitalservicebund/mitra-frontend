@@ -1,15 +1,19 @@
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
-import cloudContractPlaybook from "./CloudContractPlaybook"
+import { playbook } from "../data/evb-it-cloud-playbook.json"
+import { createPlaybook } from "./JsonAdapter"
 
-let currentPlaybook: Playbook
+const data = new Map<string, Playbook>()
+
+const cloudContractPlaybook = createPlaybook(playbook as Playbook)
+data.set(cloudContractPlaybook.id, cloudContractPlaybook)
 
 const repository: PlaybookRepository = {
-  load() {
-    return currentPlaybook || cloudContractPlaybook
+  load(id: string) {
+    return data.get(id) || new Playbook()
   },
   save(playbook: Playbook) {
-    currentPlaybook = playbook
+    data.set(playbook.id, playbook)
   },
 }
 

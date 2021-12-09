@@ -1,5 +1,5 @@
 import Contract from "../domain/Contract"
-import ContractRepository from "../domain/ContractRepository"
+import ContractSaver from "../usecases/SaveContract"
 
 function makeFileBaseName(contract: Contract) {
   return contract.title.toLowerCase().replace(/\s/g, "-")
@@ -12,11 +12,7 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
   await writable.close()
 }
 
-const repository: ContractRepository = {
-  load() {
-    // noop
-    return new Contract("", [])
-  },
+const saver: ContractSaver = {
   async save(contract: Contract) {
     if (!!window.showSaveFilePicker) {
       const fileHandle: FileSystemFileHandle = await window.showSaveFilePicker({
@@ -42,4 +38,4 @@ const repository: ContractRepository = {
   },
 }
 
-export default repository
+export default saver

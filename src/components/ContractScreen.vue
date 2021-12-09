@@ -3,7 +3,7 @@
   import ContractRepository from "../domain/ContractRepository"
   import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
-  import { makeContractRepository, makeContractStore } from "../provide"
+  import { makeContractRepository, makePlaybookRepository } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
@@ -11,12 +11,15 @@
 
   const props = defineProps<{ id: string }>()
 
-  // Secondary adapter using the port (ContactRepository interface)
   const contractRepository: ContractRepository = makeContractRepository()
-  const contractStore = makeContractStore()
-  const contract: Contract = contractStore.load(props.id)
+  const contract: Contract =
+    props.id === "cloud-contract"
+      ? Contract.fromPlaybook(
+          makePlaybookRepository().load("db2a1d38-01fb-4ea2-bc6f-b5213413c809")
+        )
+      : contractRepository.load(props.id)
 
-  const placeholder = contract.title ? contract.title : "Unbenannter Vertrag"
+  const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
   const titleInput = ref(placeholder)
   const displayTitleDialog = ref(false)

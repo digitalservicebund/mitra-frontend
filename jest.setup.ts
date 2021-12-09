@@ -2,11 +2,10 @@ import "@testing-library/jest-dom"
 import { config } from "@vue/test-utils"
 import Contract from "./src/domain/Contract"
 import ContractRepository from "./src/domain/ContractRepository"
-import Module from "./src/domain/Module"
 import Playbook from "./src/domain/Playbook"
 import PlaybookRepository from "./src/domain/PlaybookRepository"
+import Module from "./src/domain/Module"
 import { TextAnswerStep } from "./src/domain/Step"
-import { ContractStore } from "./src/infra/ContractStore"
 
 config.global.directives = {
   focus() {
@@ -15,34 +14,27 @@ config.global.directives = {
 }
 
 // Set up tests environment to use test repositories
+let savedPlaybook: Playbook = new Playbook([
+  new Module("test-module", [new TextAnswerStep("test-step")]),
+])
 const playbookTestRepository: PlaybookRepository = {
   load() {
-    return new Playbook([
-      new Module("test-module", [new TextAnswerStep("test-step")]),
-    ])
+    return savedPlaybook
   },
-  save() {
+  save(playbook) {
+    savedPlaybook = playbook
     return
   },
 }
 
-let savedContract: Contract
+let savedContract: Contract = Contract.fromPlaybook(savedPlaybook)
 const contractTestRepository: ContractRepository = {
   load() {
     return savedContract
   },
-  async save(contract: Contract) {
+  save(contract) {
     savedContract = contract
     return
-  },
-}
-
-const contractStore: ContractStore = {
-  load(): Contract {
-    return new Contract("", [])
-  },
-  save(): void {
-    // noop
   },
 }
 
@@ -50,6 +42,5 @@ jest.mock("./src/provide", () => {
   return {
     makePlaybookRepository: jest.fn(() => playbookTestRepository),
     makeContractRepository: jest.fn(() => contractTestRepository),
-    makeContractStore: jest.fn(() => contractStore),
   }
 })

@@ -4,8 +4,8 @@ import Module from "./Module"
 import { Answer, Step } from "./Step"
 
 export default class Contract extends Entity {
-  constructor(public title: string, public modules: Module[]) {
-    super()
+  constructor(public title: string, public modules: Module[], id?: string) {
+    super(id)
   }
 
   static fromPlaybook(playbook: Playbook): Contract {

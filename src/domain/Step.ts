@@ -25,9 +25,10 @@ export abstract class Step<T extends Answer> extends Entity {
   constructor(
     public readonly text: string,
     public readonly type: string,
-    public answer: T
+    public answer: T,
+    id?: string
   ) {
-    super()
+    super(id)
   }
 
   abstract clone(): Step<T>
@@ -50,8 +51,12 @@ export class TextAnswerStep extends Step<TextAnswer> {
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "TextAnswerStep"
 
-  constructor(text: string, answer: TextAnswer = new TextAnswer()) {
-    super(text, TextAnswerStep.TYPE, answer)
+  constructor(
+    text: string,
+    answer: TextAnswer = new TextAnswer(),
+    id?: string
+  ) {
+    super(text, TextAnswerStep.TYPE, answer, id)
   }
 
   clone(): Step<TextAnswer> {

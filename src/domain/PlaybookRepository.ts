@@ -1,6 +1,6 @@
 import Playbook from "./Playbook"
 
 export default interface PlaybookRepository {
-  load: () => Playbook
+  load: (id: string) => Playbook
   save: (playbook: Playbook) => void
 }
