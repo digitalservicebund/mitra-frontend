@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted } from "vue"
-  import type { RouteRecordName } from "vue-router"
   import PanelMenu from "primevue/panelmenu"
+  import type { MenuItem } from "primevue/menuitem"
   import Module from "../domain/Module"
 
   const props = defineProps<{ modules: Module[] }>()
@@ -9,40 +9,32 @@
     (e: "save"): void
   }>()
 
-  type MenuItem = {
-    label: string
-    to?: { name: RouteRecordName }
-    icon?: string
-    command?: () => void
-    items?: MenuItem[]
-  }
-
   const generateMenuItems = (modules: Module[]): MenuItem[] => {
     return [
       {
         label: "Startseite",
-        to: { name: "mitra-frontend" },
+        to: "/mitra-frontend/",
       },
       {
         label: "Module",
         items: modules.map((module, index) => {
           return {
             label: `${index + 1}. ${module.text}`,
-            to: { name: "mitra-frontend" },
+            to: "/mitra-frontend/",
           }
         }),
       },
       {
         label: "Fragenübersicht",
-        to: { name: "mitra-frontend" },
+        to: "/mitra-frontend/",
       },
       {
         label: "TO-DOs",
-        to: { name: "mitra-frontend" },
+        to: "/mitra-frontend/",
       },
       {
         label: "Notizen",
-        to: { name: "mitra-frontend" },
+        to: "/mitra-frontend/",
       },
       {
         label: "Speichern",
