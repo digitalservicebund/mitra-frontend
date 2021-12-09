@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, onMounted } from "vue"
+  import { ref } from "vue"
   import PanelMenu from "primevue/panelmenu"
   import type { MenuItem } from "primevue/menuitem"
   import Module from "../domain/Module"
@@ -45,23 +45,6 @@
   }
 
   const menuItems = ref(generateMenuItems(props.modules))
-
-  // temporary accessibility fix for same IDs in PrimeVue's PanelMenu component
-  onMounted(() => {
-    const panels = document.querySelectorAll(".p-panelmenu-panel")
-    panels.forEach((panel, index) => {
-      const content = panel.querySelector(".p-toggleable-content")
-      content?.id && (content.id += `_${index + 1}`)
-
-      const header = panel.querySelector(".p-panelmenu-header-link")
-      if (header?.id) {
-        header.id += `_${index + 1}`
-        content?.setAttribute("aria-labelledby", header.id)
-      } else {
-        content?.removeAttribute("aria-labelledby")
-      }
-    })
-  })
 </script>
 
 <template>
