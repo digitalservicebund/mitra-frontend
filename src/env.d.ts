@@ -9,7 +9,6 @@ declare module "*.vue" {
 }
 
 interface SaveFilePickerOptions {
-  suggestedName?: string
   startIn?:
     | "desktop"
     | "documents"
