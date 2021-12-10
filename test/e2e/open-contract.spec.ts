@@ -16,7 +16,7 @@ test.describe("Open contract from filesystem", async () => {
   })
 })
 
-test("Reload cloud contract after having created contract from loaded playbook", async ({
+test("Reload cloud contract after having opened saved contract", async ({
   page,
   baseURL,
 }) => {
