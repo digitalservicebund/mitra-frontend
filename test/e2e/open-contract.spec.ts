@@ -14,6 +14,21 @@ test.describe("Open contract from filesystem", async () => {
       .then((input) => input.inputValue())
       .then((value) => expect(value).toBe("hello world"))
   })
+
+  test("via drag and drop", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/mitra-frontend/open-contract`)
+    await page
+      .dragAndDrop("html", ".p-fileupload-content")
+      .then(() =>
+        page.setInputFiles(
+          "input[type=file]",
+          "./test/e2e/fixtures/contract.json"
+        )
+      )
+    const document = await getDocument(page)
+    const { getByText } = queries
+    await getByText(document, "foo module")
+  })
 })
 
 test("Reload cloud contract after having opened saved contract", async ({
