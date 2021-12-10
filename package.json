@@ -59,7 +59,7 @@
     "json-schema": ">=0.4.0",
     "license-checker": "^25.0.1",
     "pa11y-ci": "^3.0.0",
-    "postcss": "^8.4.0",
+    "postcss": "^8.4.4",
     "prettier": "^2.5.0",
     "prettier-plugin-sh": "^0.8.0",
     "start-server-and-test": "^1.14.0",

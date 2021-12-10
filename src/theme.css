@@ -1764,7 +1764,8 @@
   border-color: #f0a9a7;
 }
 
-.p-button {
+.p-button,
+.p-button[type="button"] /* Necesssary, otherwise Tailwind 3 reset with `background-color: transparent` interferes... */ {
   color: #ffffff;
   background: #4f46e5;
   border: 1px solid #4f46e5;

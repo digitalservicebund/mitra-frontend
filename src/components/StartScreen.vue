@@ -83,6 +83,6 @@
     @apply flex flex-col w-48 mr-2;
   }
   #index .p-card .material-icons-outlined {
-    @apply flex flex-col items-center justify-center h-48 border mb-2 text-6xl;
+    @apply flex flex-col items-center justify-center h-48 border border-slate-300 mb-2 text-6xl;
   }
 </style>
