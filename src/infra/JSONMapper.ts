@@ -1,17 +1,7 @@
-import Playbook from "../domain/Playbook"
-import Module from "../domain/Module"
-import { Answer, Step, TextAnswer, TextAnswerStep } from "../domain/Step"
 import Contract from "../domain/Contract"
-
-export function createPlaybook(jsonPlaybook: Playbook) {
-  const modules: Module[] = jsonPlaybook.modules.map(createModule)
-  return new Playbook(modules, jsonPlaybook.id)
-}
-
-export function createContract(jsonContract: Contract) {
-  const modules: Module[] = jsonContract.modules.map(createModule)
-  return new Contract(jsonContract.title, modules, jsonContract.id)
-}
+import Module from "../domain/Module"
+import Playbook from "../domain/Playbook"
+import { Answer, Step, TextAnswer, TextAnswerStep } from "../domain/Step"
 
 function createModule(jsonModule: Module) {
   const steps: Step<Answer>[] = jsonModule.steps.map(createStep)
@@ -27,4 +17,14 @@ function createStep(jsonStep: Step<Answer>) {
     )
   }
   return new TextAnswerStep("")
+}
+
+export function createPlaybook(jsonPlaybook: Playbook) {
+  const modules: Module[] = jsonPlaybook.modules.map(createModule)
+  return new Playbook(modules, jsonPlaybook.id)
+}
+
+export function createContract(jsonContract: Contract) {
+  const modules: Module[] = jsonContract.modules.map(createModule)
+  return new Contract(jsonContract.title, modules, jsonContract.id)
 }

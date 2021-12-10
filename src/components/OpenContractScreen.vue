@@ -3,14 +3,11 @@
   import type { FileUploadUploaderEvent } from "primevue/fileupload"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
-  import {
-    makeContractRepository,
-    makeFileSystemContractLoader,
-  } from "../provide"
+  import { makeContractRepository, makeLoadContract } from "../provide"
   import NavigateToHome from "./NavigateToHome.vue"
 
   const chooseLabel = ref("Computer durchsuchen")
-  const contractLoader = makeFileSystemContractLoader()
+  const contractLoader = makeLoadContract()
   const contractRepository = makeContractRepository()
   const router = useRouter()
 

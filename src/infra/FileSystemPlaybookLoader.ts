@@ -1,13 +1,12 @@
-import PlaybookLoader from "../usecases/LoadPlaybook"
+import LoadPlaybook from "../domain/LoadPlaybook"
 import { loadFile } from "./LoadFile"
-import { createPlaybook } from "./JsonAdapter"
+import { createPlaybook } from "./JSONMapper"
 
-const filePlaybookLoader: PlaybookLoader<File> = {
+const loader: LoadPlaybook<File> = {
   load: async (file: File) => {
     const result = await loadFile(file)
-    const jsonPlaybook = JSON.parse(result as string).playbook
-    return createPlaybook(jsonPlaybook)
+    return createPlaybook(JSON.parse(result as string).playbook)
   },
 }
 
-export default filePlaybookLoader
+export default loader

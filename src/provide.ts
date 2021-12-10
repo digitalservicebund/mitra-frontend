@@ -1,25 +1,15 @@
-import PlaybookRepository from "./domain/PlaybookRepository"
-import playbookRepository from "./infra/InMemoryPlaybookRepository"
-import ContractRepository from "./domain/ContractRepository"
 import contractRepository from "./infra/InMemoryContractRepository"
-import PlaybookLoader from "./usecases/LoadPlaybook"
-import filePlaybookLoader from "./infra/FileSystemPlaybookLoader"
-import ContractLoader from "./usecases/LoadContract"
-import fileContractLoader from "./infra/FileSystemContractLoader"
-import ContractSaver from "./usecases/SaveContract"
-import fileContractSaver from "./infra/FileSystemContractSaver"
+import playbookRepository from "./infra/InMemoryPlaybookRepository"
+import loadContractFromFileSystem from "./infra/FileSystemContractLoader"
+import saveContractToFileSystem from "./infra/FileSystemContractSaver"
+import loadPlaybookFromFileSystem from "./infra/FileSystemPlaybookLoader"
 
-export const makePlaybookRepository: () => PlaybookRepository = () =>
-  playbookRepository
+export const makeContractRepository = () => contractRepository
 
-export const makeContractRepository: () => ContractRepository = () =>
-  contractRepository
+export const makePlaybookRepository = () => playbookRepository
 
-export const makeFileSystemPlaybookLoader: () => PlaybookLoader<File> = () =>
-  filePlaybookLoader
+export const makeLoadContract = () => loadContractFromFileSystem
 
-export const makeFileSystemContractLoader: () => ContractLoader<File> = () =>
-  fileContractLoader
+export const makeSaveContract = () => saveContractToFileSystem
 
-export const makeFileSystemContractSaver: () => ContractSaver = () =>
-  fileContractSaver
+export const makeLoadPlaybook = () => loadPlaybookFromFileSystem
