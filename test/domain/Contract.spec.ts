@@ -8,9 +8,10 @@ describe("Contract", () => {
     const playbook = new Playbook([
       new Module("foo", [new TextAnswerStep("foo")]),
     ])
-    const contract = Contract.fromPlaybook(playbook)
+    const contract = Contract.fromPlaybook(playbook) as Contract
 
     // Copy objects as to avoid modifying the original playbook
+    expect(contract).not.toBeUndefined()
     expect(contract.modules).not.toEqual(playbook.modules)
     expect(contract.getSteps()).not.toEqual(
       playbook.modules.flatMap((module) => module.steps)

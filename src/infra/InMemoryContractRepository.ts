@@ -5,7 +5,7 @@ const data = new Map<string, Contract>()
 
 const repository: ContractRepository = {
   findById(id: string) {
-    return data.get(id) || new Contract("", [])
+    return data.get(id)
   },
 
   save(contract: Contract) {

@@ -12,7 +12,7 @@
   const props = defineProps<{ id: string }>()
 
   const contractRepository: ContractRepository = makeContractRepository()
-  const contract: Contract =
+  const contract: Contract | undefined =
     props.id === "cloud-contract"
       ? Contract.fromPlaybook(
           makePlaybookRepository().findById(
@@ -20,6 +20,10 @@
           )
         )
       : contractRepository.findById(props.id)
+
+  if (contract === undefined) {
+    throw new Error("Contract not found")
+  }
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -42,8 +46,8 @@
     target?.select()
   }
 
-  const saveContract = async () => {
-    await contractRepository.save(contract)
+  const saveContract = () => {
+    contractRepository.save(contract)
   }
 
   onMounted(() => {

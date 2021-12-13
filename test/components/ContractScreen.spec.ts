@@ -52,7 +52,9 @@ describe("ContractScreen", () => {
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
     // eslint-disable-next-line testing-library/await-async-query
-    const contract = makeContractRepository().findById("contract-id")
+    const contract = makeContractRepository().findById(
+      "contract-id"
+    ) as Contract
     expect(contract.title).toBe("Neuer Vertrag")
   })
 })

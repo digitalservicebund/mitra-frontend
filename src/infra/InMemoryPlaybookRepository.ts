@@ -10,7 +10,7 @@ data.set(cloudContractPlaybook.id, cloudContractPlaybook)
 
 const repository: PlaybookRepository = {
   findById(id: string) {
-    return data.get(id) || new Playbook()
+    return data.get(id)
   },
   save(playbook: Playbook) {
     data.set(playbook.id, playbook)

@@ -4,8 +4,8 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { makeContractRepository, makeLoadPlaybook } from "../provide"
-  import NavigateToHome from "./NavigateToHome.vue"
   import Contract from "../domain/Contract"
+  import NavigateToHome from "./NavigateToHome.vue"
 
   const chooseLabel = ref("Computer durchsuchen")
   const playbookLoader = makeLoadPlaybook()
@@ -17,9 +17,11 @@
     const playbook = await playbookLoader.load(
       file instanceof Array ? file[0] : file
     )
-    const contract: Contract = Contract.fromPlaybook(playbook)
-    contractRepository.save(contract)
-    await router.push("/mitra-frontend/contract/" + contract.id)
+    const contract: Contract | undefined = Contract.fromPlaybook(playbook)
+    if (contract !== undefined) {
+      contractRepository.save(contract)
+      await router.push("/mitra-frontend/contract/" + contract.id)
+    }
   }
 </script>
 

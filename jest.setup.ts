@@ -27,7 +27,7 @@ const playbookTestRepository: PlaybookRepository = {
   },
 }
 
-let savedContract: Contract = Contract.fromPlaybook(savedPlaybook)
+let savedContract: Contract = Contract.fromPlaybook(savedPlaybook) as Contract
 const contractTestRepository: ContractRepository = {
   findById() {
     return savedContract

@@ -1,5 +1,4 @@
 import Contract from "../../src/domain/Contract"
-import Playbook from "../../src/domain/Playbook"
 import contractSaver from "../../src/infra/FileSystemContractSaver"
 
 describe("FileSystemContractSaver", () => {
@@ -20,7 +19,7 @@ describe("FileSystemContractSaver", () => {
   })
 
   it("should save a given contract to a file", async () => {
-    const contract: Contract = Contract.fromPlaybook(new Playbook())
+    const contract: Contract = new Contract("foo", [])
     await contractSaver.save(contract)
     expect(window.showSaveFilePicker).toBeCalledTimes(1)
     expect(fileStream.write).toBeCalledTimes(1)
