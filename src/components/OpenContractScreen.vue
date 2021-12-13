@@ -3,13 +3,16 @@
   import type { FileUploadUploaderEvent } from "primevue/fileupload"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
-  import { makeContractRepository, makeLoadContract } from "../provide"
+  import Contract from "../domain/Contract"
+  import Persistence from "../domain/Persistence"
+  import {
+    makeContractPersistenceService,
+    makeContractRepository,
+  } from "../provide"
   import NavigateToHome from "./NavigateToHome.vue"
 
-  const chooseLabel = ref("Computer durchsuchen")
-  const contractLoader = makeLoadContract()
+  const contractLoader: Persistence<Contract> = makeContractPersistenceService()
   const contractRepository = makeContractRepository()
-  const router = useRouter()
 
   const upload = async (event: FileUploadUploaderEvent) => {
     const file: File | File[] = event?.files
@@ -19,6 +22,9 @@
     contractRepository.save(contract)
     await router.push("/mitra-frontend/contract/" + contract.id)
   }
+
+  const chooseLabel = ref("Computer durchsuchen")
+  const router = useRouter()
 </script>
 
 <template>

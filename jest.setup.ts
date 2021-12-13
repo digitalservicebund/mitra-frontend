@@ -6,7 +6,8 @@ import Playbook from "./src/domain/Playbook"
 import PlaybookRepository from "./src/domain/PlaybookRepository"
 import Module from "./src/domain/Module"
 import { TextAnswerStep } from "./src/domain/Step"
-import SaveContract from "./src/domain/SaveContract"
+import PlaybookPersistenceService from "./src/domain/PlaybookPersistenceService"
+import ContractPersistenceService from "./src/domain/ContractPersistenceService"
 
 config.global.directives = {
   focus() {
@@ -39,14 +40,24 @@ const contractTestRepository: ContractRepository = {
   },
 }
 
-const saveContract: SaveContract = {
-  save: jest.fn(),
-}
+const playbookTestPersistenceService: PlaybookPersistenceService =
+  new PlaybookPersistenceService({ load: jest.fn() })
+jest.spyOn(playbookTestPersistenceService, "load")
+
+const contractTestPersistenceService: ContractPersistenceService =
+  new ContractPersistenceService({ load: jest.fn() }, { save: jest.fn() })
+jest.spyOn(contractTestPersistenceService, "load")
+jest.spyOn(contractTestPersistenceService, "save")
 
 jest.mock("./src/provide", () => {
   return {
     makePlaybookRepository: jest.fn(() => playbookTestRepository),
     makeContractRepository: jest.fn(() => contractTestRepository),
-    makeSaveContract: jest.fn(() => saveContract),
+    makePlaybookPersistenceService: jest.fn(
+      () => playbookTestPersistenceService
+    ),
+    makeContractPersistenceService: jest.fn(
+      () => contractTestPersistenceService
+    ),
   }
 })

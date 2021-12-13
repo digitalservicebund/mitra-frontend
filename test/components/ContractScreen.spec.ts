@@ -2,8 +2,8 @@ import { mount, shallowMount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
-import SaveContract from "../../src/domain/SaveContract"
-import { makeSaveContract } from "../../src/provide"
+import ContractPersistenceService from "../../src/domain/ContractPersistenceService"
+import { makeContractPersistenceService } from "../../src/provide"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
@@ -47,7 +47,11 @@ describe("ContractScreen", () => {
 
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
-    const saveContract: SaveContract = makeSaveContract()
-    expect(saveContract.save).toHaveBeenNthCalledWith(1, instance.contract)
+    const persistenceService: ContractPersistenceService =
+      makeContractPersistenceService()
+    expect(persistenceService.save).toHaveBeenNthCalledWith(
+      1,
+      instance.contract
+    )
   })
 })

@@ -4,9 +4,9 @@
   import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
   import {
+    makeContractPersistenceService,
     makeContractRepository,
     makePlaybookRepository,
-    makeSaveContract,
   } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
@@ -15,7 +15,7 @@
 
   const props = defineProps<{ id: string }>()
 
-  const filePersistence = makeSaveContract()
+  const filePersistence = makeContractPersistenceService()
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract | undefined =
     props.id === "cloud-contract"
