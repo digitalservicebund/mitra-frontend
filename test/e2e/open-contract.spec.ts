@@ -30,19 +30,3 @@ test.describe("Open contract from filesystem", async () => {
     await getByText(document, "foo module")
   })
 })
-
-test("Reload cloud contract after having opened saved contract", async ({
-  page,
-  baseURL,
-}) => {
-  await page.goto(`${baseURL}/mitra-frontend/open-contract`)
-  await page.setInputFiles(
-    "input[type=file]",
-    "./test/e2e/fixtures/contract.json"
-  )
-  await page.click("text=Startseite")
-  await page.click("text=Neuer EVB-IT Cloud Vertrag")
-  const document = await getDocument(page)
-  const { getByText } = queries
-  await getByText(document, "Rubrum")
-})
