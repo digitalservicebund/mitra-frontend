@@ -15,9 +15,11 @@
   const contract: Contract =
     props.id === "cloud-contract"
       ? Contract.fromPlaybook(
-          makePlaybookRepository().load("db2a1d38-01fb-4ea2-bc6f-b5213413c809")
+          makePlaybookRepository().findById(
+            "db2a1d38-01fb-4ea2-bc6f-b5213413c809"
+          )
         )
-      : contractRepository.load(props.id)
+      : contractRepository.findById(props.id)
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)

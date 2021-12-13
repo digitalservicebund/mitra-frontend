@@ -18,7 +18,7 @@ let savedPlaybook: Playbook = new Playbook([
   new Module("test-module", [new TextAnswerStep("test-step")]),
 ])
 const playbookTestRepository: PlaybookRepository = {
-  load() {
+  findById() {
     return savedPlaybook
   },
   save(playbook) {
@@ -29,7 +29,7 @@ const playbookTestRepository: PlaybookRepository = {
 
 let savedContract: Contract = Contract.fromPlaybook(savedPlaybook)
 const contractTestRepository: ContractRepository = {
-  load() {
+  findById() {
     return savedContract
   },
   save(contract) {

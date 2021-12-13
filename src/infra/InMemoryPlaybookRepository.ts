@@ -9,7 +9,7 @@ const cloudContractPlaybook = createPlaybook(playbook as Playbook)
 data.set(cloudContractPlaybook.id, cloudContractPlaybook)
 
 const repository: PlaybookRepository = {
-  load(id: string) {
+  findById(id: string) {
     return data.get(id) || new Playbook()
   },
   save(playbook: Playbook) {

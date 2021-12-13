@@ -51,7 +51,8 @@ describe("ContractScreen", () => {
 
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
-    const contract = makeContractRepository().load("contract-id")
+    // eslint-disable-next-line testing-library/await-async-query
+    const contract = makeContractRepository().findById("contract-id")
     expect(contract.title).toBe("Neuer Vertrag")
   })
 })

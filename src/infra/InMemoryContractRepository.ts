@@ -4,7 +4,7 @@ import ContractRepository from "../domain/ContractRepository"
 const data = new Map<string, Contract>()
 
 const repository: ContractRepository = {
-  load(id: string) {
+  findById(id: string) {
     return data.get(id) || new Contract("", [])
   },
 
