@@ -84,3 +84,19 @@ test("Navigate through steps of a contract for editing", async ({
     .then((input) => input.inputValue())
     .then((value) => expect(value).toBe("bar"))
 })
+
+test("Reset formerly entered values", async ({ page, baseURL }) => {
+  await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
+  await page.locator("text=Vertrag benennen").waitFor()
+  await page.mouse.click(0, 0) // Dismiss dialog..
+
+  const { findByTitle } = queries
+  const document = await getDocument(page)
+  await findByTitle(document, "Schritt 1.1").then((input) => input.type("foo"))
+  await page.click("text=Startseite")
+  await page.click("text=Neuer EVB-IT Cloud Vertrag")
+  const inputValue = await findByTitle(document, "Schritt 1.1").then((input) =>
+    input.inputValue()
+  )
+  expect(inputValue).toBe("")
+})

@@ -1,6 +1,6 @@
 import Entity from "./Entity"
 
-export abstract class Answer {
+export abstract class Answer extends Entity {
   abstract getValue(): unknown
   abstract setValue(answer: unknown): void
   abstract toString(): string
@@ -56,6 +56,6 @@ export class TextAnswerStep extends Step<TextAnswer> {
   }
 
   clone(): Step<TextAnswer> {
-    return new TextAnswerStep(this.text, this.answer)
+    return new TextAnswerStep(this.text, new TextAnswer(this.answer.value))
   }
 }
