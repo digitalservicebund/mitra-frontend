@@ -16,15 +16,14 @@ test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
     download.createReadStream().then((stream) => {
       const writable = fs.createWriteStream("./test/e2e/saved-contract.json")
       stream.pipe(writable)
-
-      const downloaded = fs.readFileSync(
-        "./test/e2e/saved-contract.json",
-        "utf-8"
-      )
-
-      expect(() => JSON.parse(downloaded)).not.toThrow()
-      expect(JSON.parse(downloaded)).toMatchObject({ title: "TEST" })
     })
   })
-  await page.click("text=Speichern")
+
+  await Promise.all([
+    page.waitForEvent("download"), // expect download to start
+    page.click("text=Speichern"),
+  ])
+  const downloaded = fs.readFileSync("./test/e2e/saved-contract.json", "utf-8")
+  expect(() => JSON.parse(downloaded)).not.toThrow()
+  expect(JSON.parse(downloaded)).toMatchObject({ title: "TEST" })
 })

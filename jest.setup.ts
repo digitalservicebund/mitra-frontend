@@ -6,6 +6,7 @@ import Playbook from "./src/domain/Playbook"
 import PlaybookRepository from "./src/domain/PlaybookRepository"
 import Module from "./src/domain/Module"
 import { TextAnswerStep } from "./src/domain/Step"
+import SaveContract from "./src/domain/SaveContract"
 
 config.global.directives = {
   focus() {
@@ -38,9 +39,14 @@ const contractTestRepository: ContractRepository = {
   },
 }
 
+const saveContract: SaveContract = {
+  save: jest.fn(),
+}
+
 jest.mock("./src/provide", () => {
   return {
     makePlaybookRepository: jest.fn(() => playbookTestRepository),
     makeContractRepository: jest.fn(() => contractTestRepository),
+    makeSaveContract: jest.fn(() => saveContract),
   }
 })

@@ -2,7 +2,8 @@ import { mount, shallowMount } from "@vue/test-utils"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
-import { makeContractRepository } from "../../src/provide"
+import SaveContract from "../../src/domain/SaveContract"
+import { makeSaveContract } from "../../src/provide"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
@@ -41,20 +42,12 @@ describe("ContractScreen", () => {
     })
     const vm: unknown = wrapper.vm
     const instance = vm as {
-      titleInput: string
-      updateTitle: () => void
+      contract: Contract
     }
-
-    // Simulate text input
-    instance.titleInput = "Neuer Vertrag"
-    instance.updateTitle()
 
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
-    // eslint-disable-next-line testing-library/await-async-query
-    const contract = makeContractRepository().findById(
-      "contract-id"
-    ) as Contract
-    expect(contract.title).toBe("Neuer Vertrag")
+    const saveContract: SaveContract = makeSaveContract()
+    expect(saveContract.save).toHaveBeenNthCalledWith(1, instance.contract)
   })
 })

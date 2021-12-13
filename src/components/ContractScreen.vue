@@ -3,7 +3,11 @@
   import ContractRepository from "../domain/ContractRepository"
   import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
-  import { makeContractRepository, makePlaybookRepository } from "../provide"
+  import {
+    makeContractRepository,
+    makePlaybookRepository,
+    makeSaveContract,
+  } from "../provide"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
@@ -11,6 +15,7 @@
 
   const props = defineProps<{ id: string }>()
 
+  const filePersistence = makeSaveContract()
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract | undefined =
     props.id === "cloud-contract"
@@ -47,7 +52,7 @@
   }
 
   const saveContract = () => {
-    contractRepository.save(contract)
+    filePersistence.save(contract)
   }
 
   onMounted(() => {
