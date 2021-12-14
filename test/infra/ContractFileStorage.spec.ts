@@ -1,7 +1,7 @@
 import Contract from "../../src/domain/Contract"
-import contractSaver from "../../src/infra/FileSystemContractSaver"
+import contractSaver from "../../src/infra/ContractFileStorage"
 
-describe("FileSystemContractSaver", () => {
+describe("ContractFileStorage", () => {
   // NOTE: With jsdom, which jest is using as test environment
   // we need to mock some of the file handling related objects!
   const fileHandle = {} as FileSystemFileHandle

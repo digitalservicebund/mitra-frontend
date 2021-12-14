@@ -4,21 +4,20 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Contract from "../domain/Contract"
-  import Persistence from "../domain/Persistence"
+  import Storage from "../domain/Storage"
+  import ContractRepository from "../domain/ContractRepository"
   import {
-    makeContractPersistenceService,
     makeContractRepository,
+    makeContractStorageService,
   } from "../provide"
   import NavigateToHome from "./NavigateToHome.vue"
 
-  const contractLoader: Persistence<Contract> = makeContractPersistenceService()
-  const contractRepository = makeContractRepository()
+  const storage: Storage<Contract, File> = makeContractStorageService()
+  const contractRepository: ContractRepository = makeContractRepository()
 
   const upload = async (event: FileUploadUploaderEvent) => {
     const file: File | File[] = event?.files
-    const contract = await contractLoader.load(
-      file instanceof Array ? file[0] : file
-    )
+    const contract = await storage.load(file instanceof Array ? file[0] : file)
     contractRepository.save(contract)
     await router.push("/mitra-frontend/contract/" + contract.id)
   }

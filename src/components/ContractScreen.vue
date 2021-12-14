@@ -1,21 +1,22 @@
 <script setup lang="ts">
-  import Contract from "../domain/Contract"
-  import ContractRepository from "../domain/ContractRepository"
+  import { onMounted, ref } from "vue"
+  import Button from "primevue/button"
   import ContractEdit from "./ContractEdit.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
-  import {
-    makeContractPersistenceService,
-    makeContractRepository,
-    makePlaybookRepository,
-  } from "../provide"
-  import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
-  import { onMounted, ref } from "vue"
+  import ContractRepository from "../domain/ContractRepository"
+  import Contract from "../domain/Contract"
+  import Storage from "../domain/Storage"
+  import {
+    makeContractRepository,
+    makeContractStorageService,
+    makePlaybookRepository,
+  } from "../provide"
 
   const props = defineProps<{ id: string }>()
 
-  const filePersistence = makeContractPersistenceService()
+  const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract =
     props.id === "cloud-contract"
@@ -48,7 +49,7 @@
   }
 
   const saveContract = () => {
-    filePersistence.save(contract)
+    storage.save(contract)
   }
 
   onMounted(() => {

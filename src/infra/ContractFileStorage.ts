@@ -1,5 +1,7 @@
 import Contract from "../domain/Contract"
-import SaveContract from "../domain/SaveContract"
+import Storage from "../domain/Storage"
+import { loadFile } from "./LoadFile"
+import { createContract } from "./JSONMapper"
 
 function makeFileBaseName(contract: Contract) {
   return contract.title.toLowerCase().replace(/\s/g, "-")
@@ -12,7 +14,12 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
   await writable.close()
 }
 
-const saver: SaveContract = {
+const storage: Storage<Contract, File> = {
+  async load(file: File) {
+    const result = await loadFile(file)
+    return createContract(JSON.parse(result as string))
+  },
+
   async save(contract: Contract) {
     if (!!window.showSaveFilePicker) {
       const fileHandle: FileSystemFileHandle = await window.showSaveFilePicker({
@@ -38,4 +45,4 @@ const saver: SaveContract = {
   },
 }
 
-export default saver
+export default storage
