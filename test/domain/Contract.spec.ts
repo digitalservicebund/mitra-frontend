@@ -8,7 +8,7 @@ describe("Contract", () => {
     const playbook = new Playbook([
       new Module("foo", [new TextAnswerStep("foo")]),
     ])
-    const contract = Contract.fromPlaybook(playbook) as Contract
+    const contract = Contract.fromPlaybook(playbook)
 
     // Copy objects as to avoid modifying the original playbook
     expect(contract).not.toBeUndefined()

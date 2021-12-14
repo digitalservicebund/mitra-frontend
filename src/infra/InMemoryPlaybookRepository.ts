@@ -10,7 +10,11 @@ data.set(cloudContractPlaybook.id, cloudContractPlaybook)
 
 const repository: PlaybookRepository = {
   findById(id: string) {
-    return data.get(id)
+    const playbook = data.get(id)
+    if (typeof playbook === "undefined") {
+      throw new Error("Contract not found")
+    }
+    return playbook
   },
   save(playbook: Playbook) {
     data.set(playbook.id, playbook)

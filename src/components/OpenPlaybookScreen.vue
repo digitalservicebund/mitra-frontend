@@ -20,11 +20,9 @@
     const playbook = await playbookLoader.load(
       file instanceof Array ? file[0] : file
     )
-    const contract: Contract | undefined = Contract.fromPlaybook(playbook)
-    if (contract !== undefined) {
-      contractRepository.save(contract)
-      await router.push("/mitra-frontend/contract/" + contract.id)
-    }
+    const contract: Contract = Contract.fromPlaybook(playbook)
+    contractRepository.save(contract)
+    await router.push("/mitra-frontend/contract/" + contract.id)
   }
 
   const chooseLabel = ref("Computer durchsuchen")

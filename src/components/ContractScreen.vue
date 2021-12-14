@@ -17,7 +17,7 @@
 
   const filePersistence = makeContractPersistenceService()
   const contractRepository: ContractRepository = makeContractRepository()
-  const contract: Contract | undefined =
+  const contract: Contract =
     props.id === "cloud-contract"
       ? Contract.fromPlaybook(
           makePlaybookRepository().findById(
@@ -25,10 +25,6 @@
           )
         )
       : contractRepository.findById(props.id)
-
-  if (contract === undefined) {
-    throw new Error("Contract not found")
-  }
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)

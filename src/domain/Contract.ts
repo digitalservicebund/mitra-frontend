@@ -12,10 +12,7 @@ export default class Contract extends Entity {
     super(id)
   }
 
-  static fromPlaybook(playbook?: Playbook): Contract | undefined {
-    if (!playbook) {
-      return
-    }
+  static fromPlaybook(playbook: Playbook): Contract {
     const modules: Module[] = playbook.modules.map((module) => module.clone())
     return new Contract("", modules)
   }
