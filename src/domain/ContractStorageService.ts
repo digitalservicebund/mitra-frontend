@@ -1,7 +1,10 @@
 import Contract from "./Contract"
-import Storage from "./Storage"
+import LoadEntityFromStorage from "./LoadEntityFromStorage"
+import type Storage from "./Storage"
 
-export default class ContractStorageService implements Storage<Contract, File> {
+export default class ContractStorageService
+  implements LoadEntityFromStorage<Contract, File>
+{
   constructor(private readonly storage: Storage<Contract, File>) {}
 
   public async load(content: File) {

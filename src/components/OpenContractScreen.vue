@@ -4,15 +4,16 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Contract from "../domain/Contract"
-  import Storage from "../domain/Storage"
   import ContractRepository from "../domain/ContractRepository"
+  import LoadEntityFromStorage from "../domain/LoadEntityFromStorage"
   import {
     makeContractRepository,
     makeContractStorageService,
   } from "../provide"
   import NavigateToHome from "./NavigateToHome.vue"
 
-  const storage: Storage<Contract, File> = makeContractStorageService()
+  const storage: LoadEntityFromStorage<Contract, File> =
+    makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
 
   const upload = async (event: FileUploadUploaderEvent) => {

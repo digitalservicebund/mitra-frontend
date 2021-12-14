@@ -1,4 +1,8 @@
-export default interface Storage<T, U> {
-  load: (loadable: U) => Promise<T>
-  save: (persistable: T) => Promise<void>
-}
+import Entity from "./Entity"
+import LoadEntityFromStorage from "./LoadEntityFromStorage"
+import SaveEntityToStorage from "./SaveEntityToStorage"
+
+type Storage<T extends Entity, U> = SaveEntityToStorage<T> &
+  LoadEntityFromStorage<T, U>
+
+export default Storage

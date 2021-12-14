@@ -1,7 +1,10 @@
 import Playbook from "./Playbook"
-import Storage from "./Storage"
+import LoadEntityFromStorage from "./LoadEntityFromStorage"
+import type Storage from "./Storage"
 
-export default class PlaybookStorageService implements Storage<Playbook, File> {
+export default class PlaybookStorageService
+  implements LoadEntityFromStorage<Playbook, File>
+{
   constructor(private readonly storage: Storage<Playbook, File>) {}
 
   public async load(content: File) {
