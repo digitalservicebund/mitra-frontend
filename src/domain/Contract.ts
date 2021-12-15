@@ -17,8 +17,8 @@ export default class Contract extends Entity {
     return new Contract("", modules)
   }
 
-  getSteps(): Step<Answer>[] {
-    return this.modules.flatMap((module) => module.steps)
+  getSteps(): readonly Step<Answer>[] {
+    return Object.freeze(this.modules.flatMap((module) => module.steps))
   }
 
   getNextStepFor(step: Step<Answer>): Step<Answer> | undefined {
