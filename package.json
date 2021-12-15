@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
+    "@pinia/testing": "^0.0.8",
     "@playwright-testing-library/test": "^4.0.1",
     "@playwright/test": "^1.17.1",
     "@testing-library/jest-dom": "^5.16.1",

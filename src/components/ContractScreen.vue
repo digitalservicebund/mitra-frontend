@@ -2,12 +2,14 @@
   import { onMounted, ref } from "vue"
   import Button from "primevue/button"
   import ContractEdit from "./ContractEdit.vue"
+  import ContractPreview from "./ContractPreview.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
   import ContractRepository from "../domain/ContractRepository"
   import Contract from "../domain/Contract"
   import Storage from "../domain/Storage"
+  import { useStore } from "../infra/Session"
   import {
     makeContractRepository,
     makeContractStorageService,
@@ -15,6 +17,8 @@
   } from "../provide"
 
   const props = defineProps<{ id: string }>()
+
+  const session = useStore()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
@@ -26,6 +30,7 @@
           )
         )
       : contractRepository.findById(props.id)
+  session.lastWorkedOnContract = contract
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -97,6 +102,8 @@
         <ContractEdit :contract="contract" />
       </transition>
     </main>
+
+    <ContractPreview />
   </div>
 </template>
 

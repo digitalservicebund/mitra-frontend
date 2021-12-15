@@ -1,4 +1,5 @@
 import { mount, shallowMount } from "@vue/test-utils"
+import { createTestingPinia } from "@pinia/testing"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
@@ -8,7 +9,12 @@ import { makeContractStorageService } from "../../src/provide"
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
     const wrapper = shallowMount(ContractScreen, {
-      props: { id: "contract-id" },
+      props: {
+        id: "contract-id",
+      },
+      global: {
+        plugins: [createTestingPinia()],
+      },
     })
     const vm: unknown = wrapper.vm
     const instance = vm as {
@@ -32,6 +38,7 @@ describe("ContractScreen", () => {
         id: "contract-id",
       },
       global: {
+        plugins: [createTestingPinia()],
         stubs: {
           Button: true,
           Dialog: true,

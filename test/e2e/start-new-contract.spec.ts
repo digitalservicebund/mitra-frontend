@@ -50,41 +50,6 @@ test("Save edited title when pressing enter", async ({ page, baseURL }) => {
   await expect(page.locator("text=foo")).toBeVisible()
 })
 
-test("List contract modules in navigation", async ({ page, baseURL }) => {
-  await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
-  await page.locator("text=Vertrag benennen").waitFor()
-  await page.mouse.click(0, 0) // Dismiss dialog..
-
-  await page.click("nav >> text=Module")
-  await expect(page.locator("nav >> text=Rubrum")).toBeVisible()
-  await expect(
-    page.locator("nav >> text=Gegenstand der Leistungen")
-  ).toBeVisible()
-})
-
-test("Navigate through steps of a contract for editing", async ({
-  page,
-  baseURL,
-}) => {
-  await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
-  await page.locator("text=Vertrag benennen").waitFor()
-  await page.mouse.click(0, 0) // Dismiss dialog..
-
-  const { findByTitle } = queries
-  const document = await getDocument(page)
-  await findByTitle(document, "Schritt 1.1").then((input) => input.type("foo"))
-  await page.click("text=Weiter")
-  await findByTitle(document, "Schritt 1.2").then((input) => input.type("bar"))
-  await page.click("text=Zurück")
-  await findByTitle(document, "Schritt 1.1")
-    .then((input) => input.inputValue())
-    .then((value) => expect(value).toBe("foo"))
-  await page.click("text=Weiter")
-  await findByTitle(document, "Schritt 1.2")
-    .then((input) => input.inputValue())
-    .then((value) => expect(value).toBe("bar"))
-})
-
 test("Reset formerly entered values", async ({ page, baseURL }) => {
   await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
   await page.locator("text=Vertrag benennen").waitFor()
