@@ -1,5 +1,6 @@
 import { createApp } from "vue"
 import { createRouter, createWebHistory } from "vue-router"
+import { createPinia } from "pinia"
 import routes from "virtual:generated-pages"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
@@ -9,12 +10,15 @@ import "primeicons/primeicons.css"
 import "./theme.css"
 import "./index.css"
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
-
-const app = createApp(App).use(router).use(PrimeVue)
+const app = createApp(App)
+  .use(
+    createRouter({
+      history: createWebHistory(),
+      routes,
+    })
+  )
+  .use(createPinia())
+  .use(PrimeVue)
 
 // Register global directive "v-focus" for focusing elements
 app.directive("focus", {
