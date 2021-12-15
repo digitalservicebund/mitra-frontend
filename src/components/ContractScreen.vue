@@ -44,8 +44,10 @@
 
   const updateTitle = () => {
     displayTitleDialog.value = false
-    contractTitle.value = titleInput.value
-    contract.title = titleInput.value
+    if (titleInput.value !== placeholder) {
+      contractTitle.value = titleInput.value
+      contract.title = titleInput.value
+    }
   }
 
   const highlightText = (event: Event) => {
