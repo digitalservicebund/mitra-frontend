@@ -20,7 +20,7 @@
     "serve": "vite preview",
     "clean": "rm -rf dist/",
     "audit:lighthouse": "npx --yes @lhci/cli collect --url='https://digitalservice4germany.github.io/mitra-frontend/'",
-    "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause'"
+    "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause;Apache-2.0'"
   },
   "dependencies": {
     "file-saver": "^2.0.5",
