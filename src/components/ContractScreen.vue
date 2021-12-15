@@ -67,12 +67,12 @@
 </script>
 
 <template>
-  <div class="flex">
-    <nav class="flex-col">
+  <div class="flex flex-row">
+    <nav class="flex-none">
       <ContractSideMenu :modules="contract.modules" @save="saveContract" />
     </nav>
 
-    <main class="flex-col p-8">
+    <main class="flex-1 p-8">
       <Dialog
         id="dialog-contract-title"
         v-model:visible="displayTitleDialog"
@@ -105,7 +105,7 @@
       </transition>
     </main>
 
-    <ContractPreview />
+    <ContractPreview class="flex-1" />
   </div>
 </template>
 
