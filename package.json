@@ -23,6 +23,11 @@
     "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause'"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.22.2",
+    "@editorjs/list": "^1.6.2",
+    "@editorjs/table": "^2.0.1",
+    "@editorjs/underline": "^1.0.0",
+    "@tinymce/tinymce-vue": "^4.0.5",
     "file-saver": "^2.0.5",
     "primeicons": "^5.0.0",
     "primevue": "^3.10.0",
