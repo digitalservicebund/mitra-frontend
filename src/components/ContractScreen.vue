@@ -94,11 +94,11 @@
         </template>
       </Dialog>
 
-      <section>
+      <header>
         <Button class="p-button-link" @click="editTitle">
           <span>{{ contractTitle }}</span>
         </Button>
-      </section>
+      </header>
 
       <transition name="fade" mode="out-in">
         <ContractEdit :contract="contract" />
