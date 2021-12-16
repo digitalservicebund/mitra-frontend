@@ -17,16 +17,16 @@ export default class Contract extends Entity {
     return new Contract("", modules)
   }
 
-  getSteps(): readonly Step<Answer>[] {
+  getAllSteps(): readonly Step<Answer>[] {
     return Object.freeze(this.modules.flatMap((module) => module.steps))
   }
 
   getNextStepFor(step: Step<Answer>): Step<Answer> | undefined {
-    return this.getSteps()[this.#findStepIndex(step) + 1]
+    return this.getAllSteps()[this.#findStepIndex(step) + 1]
   }
 
   getPreviousStepFor(step: Step<Answer>): Step<Answer> | undefined {
-    return this.getSteps()[this.#findStepIndex(step) - 1]
+    return this.getAllSteps()[this.#findStepIndex(step) - 1]
   }
 
   getModuleFor(step: Step<Answer>): Module | undefined {
@@ -36,6 +36,6 @@ export default class Contract extends Entity {
   }
 
   #findStepIndex(step: Step<Answer>): number {
-    return this.getSteps().findIndex((x) => x.equals(step))
+    return this.getAllSteps().findIndex((x) => x.equals(step))
   }
 }

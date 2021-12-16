@@ -7,7 +7,7 @@
 
   const props = defineProps<{ contract: Contract }>()
 
-  const currentStep = ref(props.contract.getSteps()[0])
+  const currentStep = ref(props.contract.getAllSteps()[0])
 
   const currentStepComponent = computed(() => {
     const step = currentStep.value as Step<Answer>
