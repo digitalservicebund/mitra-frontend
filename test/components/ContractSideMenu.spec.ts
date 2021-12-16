@@ -48,9 +48,7 @@ describe("ContractSideMenu", () => {
     })
     expect(screen.getByText("Startseite")).toBeVisible()
     expect(screen.getByText("Module")).toBeVisible()
-    expect(screen.getByText("Fragenübersicht")).toBeVisible()
-    expect(screen.getByText("TO-DOs")).toBeVisible()
-    expect(screen.getByText("Notizen")).toBeVisible()
+    expect(screen.getByText("Speichern")).toBeVisible()
   })
 
   it("should render all modules", async () => {

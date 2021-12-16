@@ -25,18 +25,6 @@
         }),
       },
       {
-        label: "Fragenübersicht",
-        to: "/mitra-frontend/",
-      },
-      {
-        label: "TO-DOs",
-        to: "/mitra-frontend/",
-      },
-      {
-        label: "Notizen",
-        to: "/mitra-frontend/",
-      },
-      {
         label: "Speichern",
         icon: "pi pi-fw pi-download",
         command: () => emit("save"),
