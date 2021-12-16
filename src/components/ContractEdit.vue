@@ -57,26 +57,24 @@
     <h3 class="font-bold">
       {{ currentModule?.text }}
     </h3>
-    <div class="w-[30vw]">
-      <component
-        :is="currentStepComponent"
-        :step="currentStep"
-        @answer-changed="currentStep?.setAnswer($event)"
+    <component
+      :is="currentStepComponent"
+      :step="currentStep"
+      @answer-changed="currentStep?.setAnswer($event)"
+    />
+    <div class="grid grid-cols-3 col-span-full">
+      <Button
+        v-if="hasPreviousStep"
+        label="Zurück"
+        class="p-button-outlined col-start-1"
+        @click="previous"
       />
-      <div class="grid grid-cols-3 col-span-full">
-        <Button
-          v-if="hasPreviousStep"
-          label="Zurück"
-          class="p-button-outlined col-start-1"
-          @click="previous"
-        />
-        <Button
-          v-if="hasNextStep"
-          label="Weiter"
-          class="p-button-outlined col-start-3"
-          @click="next"
-        />
-      </div>
+      <Button
+        v-if="hasNextStep"
+        label="Weiter"
+        class="p-button-outlined col-start-3"
+        @click="next"
+      />
     </div>
   </section>
 </template>
