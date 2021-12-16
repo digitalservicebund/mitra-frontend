@@ -7,12 +7,8 @@
 
 <template>
   <section>
-    <h3 class="mb-2 font-bold">Vorschau Vertragstext</h3>
-    <article
-      v-for="step in contract?.getSteps()"
-      :key="step.id"
-      class="p-2 bg-slate-100"
-    >
+    <h3 class="p-2 font-bold bg-white">Vorschau Vertragstext</h3>
+    <article v-for="step in contract?.getSteps()" :key="step.id" class="p-2">
       {{ step.answer.toString() }}
     </article>
   </section>

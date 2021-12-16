@@ -67,7 +67,7 @@
 </script>
 
 <template>
-  <div class="flex flex-row">
+  <div class="flex h-full">
     <nav class="flex-none">
       <ContractSideMenu :modules="contract.modules" @save="saveContract" />
     </nav>
@@ -105,7 +105,7 @@
       </transition>
     </main>
 
-    <ContractPreview class="flex-1" />
+    <ContractPreview class="flex-1 bg-slate-100" />
   </div>
 </template>
 
