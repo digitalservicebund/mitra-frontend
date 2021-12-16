@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
 
+const { findByTitle, findByText } = queries
+
 async function startEditing({ page, baseURL }) {
   await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
   await page.locator("text=Vertrag benennen").waitFor()
@@ -23,7 +25,6 @@ test("Navigate through steps of a contract for editing", async ({
 }) => {
   await startEditing({ page, baseURL })
 
-  const { findByTitle } = queries
   const document = await getDocument(page)
   await findByTitle(document, "Schritt 1.1").then((input) => input.type("foo"))
   await page.click("text=Weiter")
@@ -41,11 +42,12 @@ test("Navigate through steps of a contract for editing", async ({
 test("Preview edits", async ({ page, baseURL }) => {
   await startEditing({ page, baseURL })
 
-  const { findByTitle, findByText } = queries
   const document = await getDocument(page)
   await findByTitle(document, "Schritt 1.1").then((input) =>
     input.type("Answer to show up in preview")
   )
-  await page.click("text=Weiter")
-  await findByText(document, "Answer to show up in preview")
+  const preview = await page.locator("section:right-of(main)").elementHandle()
+  await findByText(preview, "Vorschau Vertragstext")
+  await findByText(preview, "Rubrum")
+  await findByText(preview, "Answer to show up in preview")
 })

@@ -1,5 +1,7 @@
 import { test } from "@playwright/test"
-import { getDocument, queries } from "@playwright-testing-library/test"
+import { queries } from "@playwright-testing-library/test"
+
+const { getByText } = queries
 
 test.describe("Open playbook from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
@@ -9,9 +11,8 @@ test.describe("Open playbook from filesystem", async () => {
       "./test/e2e/fixtures/playbook.json"
     )
     await page.click(".p-dialog-header-close-icon")
-    const document = await getDocument(page)
-    const { getByText } = queries
-    await getByText(document, "foo module")
+    const main = await page.locator("main").elementHandle()
+    await getByText(main, "foo module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
@@ -25,8 +26,7 @@ test.describe("Open playbook from filesystem", async () => {
         )
       )
     await page.click(".p-dialog-header-close-icon")
-    const document = await getDocument(page)
-    const { getByText } = queries
-    await getByText(document, "foo module")
+    const main = await page.locator("main").elementHandle()
+    await getByText(main, "foo module")
   })
 })
