@@ -3,7 +3,7 @@ import { createTestingPinia } from "@pinia/testing"
 import Contract from "../../src/domain/Contract"
 import Module from "../../src/domain/Module"
 import { Answer, Step, TextAnswerStep } from "../../src/domain/Step"
-import { Session, useStore } from "../../src/infra/session"
+import { Session, useStore } from "../../src/infra/Session"
 import ContractEdit from "../../src/components/ContractEdit.vue"
 
 describe("ContractEdit", () => {

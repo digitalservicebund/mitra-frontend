@@ -6,7 +6,7 @@ import PrimeVue from "primevue/config"
 import Module from "../../src/domain/Module"
 import { Answer, Step, TextAnswerStep } from "../../src/domain/Step"
 import Contract from "../../src/domain/Contract"
-import { Session, useStore } from "../../src/infra/session"
+import { Session, useStore } from "../../src/infra/Session"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 
 const module1: Module = new Module("Rubrum")
