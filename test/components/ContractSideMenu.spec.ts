@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
+import PrimeVue from "primevue/config"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Module from "../../src/domain/Module"
 import { TextAnswerStep } from "../../src/domain/Step"
@@ -43,28 +44,16 @@ describe("ContractSideMenu", () => {
         modules: testModules,
       },
       global: {
-        plugins: [router],
+        plugins: [router, PrimeVue],
       },
     })
     expect(screen.getByText("Startseite")).toBeVisible()
     expect(screen.getByText("Module")).toBeVisible()
-    expect(screen.getByText("Speichern")).toBeVisible()
-  })
-
-  it("should render all modules", async () => {
-    render(ContractSideMenu, {
-      props: {
-        modules: testModules,
-      },
-      global: {
-        plugins: [router],
-      },
-    })
-    await fireEvent.click(screen.getByText("Module"))
     expect(screen.getByText("1. Rubrum")).toBeVisible()
     expect(
       screen.getByText("2. Gegenstand und Bestandteile des Vertrags")
     ).toBeVisible()
+    expect(screen.getByText("Speichern")).toBeVisible()
   })
 
   it("should issue command to navigate to module", async () => {
@@ -73,7 +62,7 @@ describe("ContractSideMenu", () => {
         modules: testModules,
       },
       global: {
-        plugins: [router],
+        plugins: [router, PrimeVue],
       },
     })
     await fireEvent.click(screen.getByText("Module"))
@@ -89,7 +78,7 @@ describe("ContractSideMenu", () => {
         modules: testModules,
       },
       global: {
-        plugins: [router],
+        plugins: [router, PrimeVue],
       },
     })
     await fireEvent.click(screen.getByText("Speichern"))

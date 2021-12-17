@@ -1,5 +1,6 @@
 import { mount, shallowMount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
+import PrimeVue from "primevue/config"
 import ContractScreen from "../../src/components/ContractScreen.vue"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
@@ -13,7 +14,7 @@ describe("ContractScreen", () => {
         id: "contract-id",
       },
       global: {
-        plugins: [createTestingPinia()],
+        plugins: [createTestingPinia(), PrimeVue],
       },
     })
     const vm: unknown = wrapper.vm
@@ -38,7 +39,7 @@ describe("ContractScreen", () => {
         id: "contract-id",
       },
       global: {
-        plugins: [createTestingPinia()],
+        plugins: [createTestingPinia(), PrimeVue],
         stubs: {
           Button: true,
           Dialog: true,

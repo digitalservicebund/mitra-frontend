@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from "vue"
-  import PanelMenu from "primevue/panelmenu"
+  import Menu from "primevue/menu"
   import type { MenuItem } from "primevue/menuitem"
   import Module from "../domain/Module"
   import { Answer, Step } from "../domain/Step"
@@ -15,6 +15,7 @@
     return [
       {
         label: "Startseite",
+        icon: "pi pi-angle-left",
         to: "/mitra-frontend/",
       },
       {
@@ -38,11 +39,11 @@
 </script>
 
 <template>
-  <PanelMenu :model="menuItems" class="w-70" />
+  <Menu :model="menuItems" class="w-70" />
 </template>
 
-<style scoped>
-  .p-panelmenu {
-    width: 15em;
+<style>
+  .p-menu .p-menuitem-link .p-menuitem-icon:not(.pi):empty {
+    display: none;
   }
 </style>
