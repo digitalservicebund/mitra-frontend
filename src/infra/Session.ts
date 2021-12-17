@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import Contract from "../domain/Contract"
 import { Answer, Step } from "../domain/Step"
 
-class Session {
+export class Session {
   constructor(
     public readonly currentSteps = new Map<Contract, Step<Answer>>()
   ) {}

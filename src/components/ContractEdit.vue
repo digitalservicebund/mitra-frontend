@@ -45,6 +45,7 @@
     )
     if (step) {
       currentStep.value = step
+      store.$state.setCurrentStep(props.contract, step)
     }
   }
 
@@ -54,6 +55,7 @@
     )
     if (step) {
       currentStep.value = step
+      store.$state.setCurrentStep(props.contract, step)
     }
   }
 </script>

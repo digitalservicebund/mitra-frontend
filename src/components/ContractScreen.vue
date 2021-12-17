@@ -76,7 +76,7 @@
   <div class="flex h-full">
     <nav class="flex-none">
       <ContractSideMenu
-        :modules="contract.modules"
+        :contract="contract"
         @save="saveContract"
         @navigate="handleNavigate"
       />

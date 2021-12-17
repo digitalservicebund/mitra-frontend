@@ -2,14 +2,26 @@
   import { ref } from "vue"
   import Menu from "primevue/menu"
   import type { MenuItem } from "primevue/menuitem"
+  import Contract from "../domain/Contract"
   import Module from "../domain/Module"
   import { Answer, Step } from "../domain/Step"
+  import { useStore } from "../infra/Session"
 
-  const props = defineProps<{ modules: Module[] }>()
+  const props = defineProps<{ contract: Contract }>()
   const emit = defineEmits<{
     (e: "save"): void
     (e: "navigate", step: Step<Answer>): void
   }>()
+
+  const store = useStore()
+
+  const withHighlight = (item: MenuItem, module: Module) => {
+    return module.steps.find((step) =>
+      step.equals(store.$state.getCurrentStep(props.contract))
+    )
+      ? { ...item, class: "font-bold" }
+      : item
+  }
 
   const generateMenuItems = (modules: Module[]): MenuItem[] => {
     return [
@@ -21,10 +33,13 @@
       {
         label: "Module",
         items: modules.map((module, index) => {
-          return {
-            label: `${index + 1}. ${module.text}`,
-            command: () => emit("navigate", module.steps[0]),
-          }
+          return withHighlight(
+            {
+              label: `${index + 1}. ${module.text}`,
+              command: () => emit("navigate", module.steps[0]),
+            },
+            module
+          )
         }),
       },
       {
@@ -35,7 +50,11 @@
     ]
   }
 
-  const menuItems = ref(generateMenuItems(props.modules))
+  store.$subscribe(() => {
+    menuItems.value = generateMenuItems(props.contract.modules)
+  })
+
+  const menuItems = ref(generateMenuItems(props.contract.modules))
 </script>
 
 <template>
