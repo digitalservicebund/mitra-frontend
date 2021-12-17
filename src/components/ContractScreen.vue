@@ -8,6 +8,7 @@
   import InputText from "primevue/inputtext"
   import ContractRepository from "../domain/ContractRepository"
   import Contract from "../domain/Contract"
+  import { Answer, Step } from "../domain/Step"
   import Storage from "../domain/Storage"
   import { useStore } from "../infra/Session"
   import {
@@ -18,7 +19,7 @@
 
   const props = defineProps<{ id: string }>()
 
-  const session = useStore()
+  const store = useStore()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
@@ -30,7 +31,7 @@
           )
         )
       : contractRepository.findById(props.id)
-  session.lastWorkedOnContract = contract
+  store.$state.addContracts(contract)
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -59,6 +60,11 @@
     storage.save(contract)
   }
 
+  const handleNavigate = (step: Step<Answer>) => {
+    console.log(step)
+    store.$state.setCurrentStep(contract, step)
+  }
+
   onMounted(() => {
     if (!contract.title) {
       editTitle()
@@ -69,7 +75,11 @@
 <template>
   <div class="flex h-full">
     <nav class="flex-none">
-      <ContractSideMenu :modules="contract.modules" @save="saveContract" />
+      <ContractSideMenu
+        :modules="contract.modules"
+        @save="saveContract"
+        @navigate="handleNavigate"
+      />
     </nav>
 
     <main class="flex-1 p-8">
@@ -105,7 +115,7 @@
       </transition>
     </main>
 
-    <ContractPreview class="flex-1 bg-slate-100" />
+    <ContractPreview :contract="contract" class="flex-1 bg-slate-100" />
   </div>
 </template>
 

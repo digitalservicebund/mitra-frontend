@@ -1,13 +1,19 @@
 <script setup lang="ts">
-  import { ref, computed } from "vue"
+  import { computed, ref } from "vue"
+  import Button from "primevue/button"
   import Contract from "../domain/Contract"
   import { Answer, Step, TextAnswerStep } from "../domain/Step"
+  import { useStore } from "../infra/Session"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
-  import Button from "primevue/button"
 
   const props = defineProps<{ contract: Contract }>()
 
-  const currentStep = ref(props.contract.getAllSteps()[0])
+  const store = useStore()
+
+  const currentStep = ref(store.$state.getCurrentStep(props.contract))
+  store.$subscribe((mutation, state) => {
+    currentStep.value = state.getCurrentStep(props.contract)
+  })
 
   const currentStepComponent = computed(() => {
     const step = currentStep.value as Step<Answer>

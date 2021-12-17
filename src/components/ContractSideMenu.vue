@@ -3,10 +3,12 @@
   import PanelMenu from "primevue/panelmenu"
   import type { MenuItem } from "primevue/menuitem"
   import Module from "../domain/Module"
+  import { Answer, Step } from "../domain/Step"
 
   const props = defineProps<{ modules: Module[] }>()
   const emit = defineEmits<{
     (e: "save"): void
+    (e: "navigate", step: Step<Answer>): void
   }>()
 
   const generateMenuItems = (modules: Module[]): MenuItem[] => {
@@ -20,7 +22,7 @@
         items: modules.map((module, index) => {
           return {
             label: `${index + 1}. ${module.text}`,
-            to: "/mitra-frontend/",
+            command: () => emit("navigate", module.steps[0]),
           }
         }),
       },
