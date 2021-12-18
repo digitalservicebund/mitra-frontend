@@ -4,10 +4,10 @@ import { createTestingPinia } from "@pinia/testing"
 import { createRouter, createWebHistory } from "vue-router"
 import PrimeVue from "primevue/config"
 import Module from "../../src/domain/Module"
-import { Answer, Step, TextAnswerStep } from "../../src/domain/Step"
+import { TextAnswerStep } from "../../src/domain/Step"
 import Contract from "../../src/domain/Contract"
-import { Session, useStore } from "../../src/infra/Session"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
+import { useSession } from "../../src/session"
 
 const module1: Module = new Module("Rubrum")
 module1.addSteps(
@@ -92,12 +92,9 @@ describe("ContractSideMenu", () => {
   it("should highlight module of currently worked on step", () => {
     const contract = new Contract("", testModules)
     const pinia = createTestingPinia()
-    useStore().$state = new Session(
-      new Map<Contract, Step<Answer>>().set(
-        contract,
-        contract.modules[1].steps[0]
-      )
-    )
+    const session = useSession()
+    session.updateCurrentStep(contract, contract.modules[1].steps[0])
+
     const wrapper = mount(ContractSideMenu, {
       props: {
         contract: contract,

@@ -5,7 +5,7 @@
   import Contract from "../domain/Contract"
   import Module from "../domain/Module"
   import { Answer, Step } from "../domain/Step"
-  import { useStore } from "../infra/Session"
+  import { useSession } from "../session"
 
   const props = defineProps<{ contract: Contract }>()
   const emit = defineEmits<{
@@ -13,11 +13,11 @@
     (e: "navigate", step: Step<Answer>): void
   }>()
 
-  const store = useStore()
+  const session = useSession()
 
   const withHighlight = (item: MenuItem, module: Module) => {
     return module.steps.find((step) =>
-      step.equals(store.$state.getCurrentStep(props.contract))
+      step.equals(session.cache.get(props.contract))
     )
       ? { ...item, class: "font-bold" }
       : item
@@ -50,7 +50,7 @@
     ]
   }
 
-  store.$subscribe(() => {
+  session.$subscribe(() => {
     menuItems.value = generateMenuItems(props.contract.modules)
   })
 

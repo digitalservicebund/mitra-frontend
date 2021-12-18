@@ -6,6 +6,9 @@ import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import Contract from "../../src/domain/Contract"
 import ContractStorageService from "../../src/domain/ContractStorageService"
 import { makeContractStorageService } from "../../src/provide"
+import { useSession } from "../../src/session"
+import Module from "../../src/domain/Module"
+import { TextAnswerStep } from "../../src/domain/Step"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {
@@ -34,12 +37,20 @@ describe("ContractScreen", () => {
   })
 
   it("saves contract as work in progress when requested", async () => {
+    const contract = new Contract("", [
+      new Module("foo", [new TextAnswerStep("foo")]),
+      new Module("bar", [new TextAnswerStep("bar")]),
+    ])
+    const pinia = createTestingPinia()
+    const session = useSession()
+    session.updateCurrentStep(contract, contract.modules[0].steps[0])
+
     const wrapper = mount(ContractScreen, {
       props: {
         id: "contract-id",
       },
       global: {
-        plugins: [createTestingPinia(), PrimeVue],
+        plugins: [pinia, PrimeVue],
         stubs: {
           Button: true,
           Dialog: true,
@@ -52,7 +63,6 @@ describe("ContractScreen", () => {
     const instance = vm as {
       contract: Contract
     }
-
     wrapper.findComponent(ContractSideMenu).vm.$emit("save")
 
     const storage: ContractStorageService = makeContractStorageService()

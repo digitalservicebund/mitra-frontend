@@ -10,7 +10,7 @@
   import Contract from "../domain/Contract"
   import { Answer, Step } from "../domain/Step"
   import Storage from "../domain/Storage"
-  import { useStore } from "../infra/Session"
+  import { useSession } from "../session"
   import {
     makeContractRepository,
     makeContractStorageService,
@@ -19,7 +19,7 @@
 
   const props = defineProps<{ id: string }>()
 
-  const store = useStore()
+  const session = useSession()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
@@ -31,7 +31,7 @@
           )
         )
       : contractRepository.findById(props.id)
-  store.$state.addContracts(contract)
+  session.updateCurrentStep(contract, contract.getAllSteps()[0])
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -61,8 +61,7 @@
   }
 
   const handleNavigate = (step: Step<Answer>) => {
-    console.log(step)
-    store.$state.setCurrentStep(contract, step)
+    session.updateCurrentStep(contract, step)
   }
 
   onMounted(() => {

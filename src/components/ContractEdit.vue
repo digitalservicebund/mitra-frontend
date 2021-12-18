@@ -3,16 +3,16 @@
   import Button from "primevue/button"
   import Contract from "../domain/Contract"
   import { Answer, Step, TextAnswerStep } from "../domain/Step"
-  import { useStore } from "../infra/Session"
+  import { useSession } from "../session"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
 
   const props = defineProps<{ contract: Contract }>()
 
-  const store = useStore()
+  const session = useSession()
 
-  const currentStep = ref(store.$state.getCurrentStep(props.contract))
-  store.$subscribe((mutation, state) => {
-    currentStep.value = state.getCurrentStep(props.contract)
+  const currentStep = ref(session.cache.get(props.contract))
+  session.$subscribe((mutation, session) => {
+    currentStep.value = session.cache.get(props.contract)
   })
 
   const currentStepComponent = computed(() => {
@@ -45,7 +45,7 @@
     )
     if (step) {
       currentStep.value = step
-      store.$state.setCurrentStep(props.contract, step)
+      session.updateCurrentStep(props.contract, step)
     }
   }
 
@@ -55,7 +55,7 @@
     )
     if (step) {
       currentStep.value = step
-      store.$state.setCurrentStep(props.contract, step)
+      session.updateCurrentStep(props.contract, step)
     }
   }
 </script>
