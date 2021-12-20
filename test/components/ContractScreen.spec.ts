@@ -47,7 +47,7 @@ describe("ContractScreen", () => {
 
     const wrapper = mount(ContractScreen, {
       props: {
-        id: "contract-id",
+        id: contract.id,
       },
       global: {
         plugins: [pinia, PrimeVue],

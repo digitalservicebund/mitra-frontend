@@ -6,23 +6,20 @@
   import ContractSideMenu from "./ContractSideMenu.vue"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
-  import ContractRepository from "../domain/ContractRepository"
   import Contract from "../domain/Contract"
   import { Answer, Step } from "../domain/Step"
   import Storage from "../domain/Storage"
-  import { useSession } from "../session"
   import {
-    makeContractRepository,
     makeContractStorageService,
     makePlaybookRepository,
   } from "../provide"
+  import { useSession } from "../session"
 
   const props = defineProps<{ id: string }>()
 
   const session = useSession()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
-  const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract =
     props.id === "cloud-contract"
       ? Contract.fromPlaybook(
@@ -30,8 +27,8 @@
             "db2a1d38-01fb-4ea2-bc6f-b5213413c809"
           )
         )
-      : contractRepository.findById(props.id)
-  session.updateCurrentStep(contract, contract.getAllSteps()[0])
+      : session.lastEditedContract
+  session.updateContract(contract)
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -48,6 +45,7 @@
     if (titleInput.value !== placeholder) {
       contractTitle.value = titleInput.value
       contract.title = titleInput.value
+      session.updateContract(contract)
     }
   }
 

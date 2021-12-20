@@ -1,7 +1,5 @@
 import "@testing-library/jest-dom"
 import { config } from "@vue/test-utils"
-import Contract from "./src/domain/Contract"
-import ContractRepository from "./src/domain/ContractRepository"
 import Playbook from "./src/domain/Playbook"
 import PlaybookRepository from "./src/domain/PlaybookRepository"
 import Module from "./src/domain/Module"
@@ -29,17 +27,6 @@ const playbookTestRepository: PlaybookRepository = {
   },
 }
 
-let savedContract: Contract = Contract.fromPlaybook(savedPlaybook)
-const contractTestRepository: ContractRepository = {
-  findById() {
-    return savedContract
-  },
-  save(contract) {
-    savedContract = contract
-    return
-  },
-}
-
 const playbookTestStorageService: PlaybookStorageService =
   new PlaybookStorageService({ load: jest.fn(), save: jest.fn() })
 jest.spyOn(playbookTestStorageService, "load")
@@ -52,7 +39,6 @@ jest.spyOn(contractTestStorageService, "save")
 jest.mock("./src/provide", () => {
   return {
     makePlaybookRepository: jest.fn(() => playbookTestRepository),
-    makeContractRepository: jest.fn(() => contractTestRepository),
     makePlaybookStorageService: jest.fn(() => playbookTestStorageService),
     makeContractStorageService: jest.fn(() => contractTestStorageService),
   }

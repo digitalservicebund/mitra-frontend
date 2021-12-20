@@ -4,22 +4,20 @@
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Contract from "../domain/Contract"
-  import ContractRepository from "../domain/ContractRepository"
   import LoadEntityFromStorage from "../domain/LoadEntityFromStorage"
-  import {
-    makeContractRepository,
-    makeContractStorageService,
-  } from "../provide"
+  import { makeContractStorageService } from "../provide"
+  import { useSession } from "../session"
   import NavigateToHome from "./NavigateToHome.vue"
+
+  const session = useSession()
 
   const storage: LoadEntityFromStorage<Contract, File> =
     makeContractStorageService()
-  const contractRepository: ContractRepository = makeContractRepository()
 
   const upload = async (event: FileUploadUploaderEvent) => {
     const file: File | File[] = event?.files
     const contract = await storage.load(file instanceof Array ? file[0] : file)
-    contractRepository.save(contract)
+    session.updateContract(contract)
     await router.push("/mitra-frontend/contract/" + contract.id)
   }
 
