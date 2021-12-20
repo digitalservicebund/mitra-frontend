@@ -1,7 +1,7 @@
-import { expect, test } from "@playwright/test"
-import { getDocument, queries } from "@playwright-testing-library/test"
+import { test } from "@playwright/test"
+import { queries } from "@playwright-testing-library/test"
 
-const { getByText, findByTitle } = queries
+const { getByText } = queries
 
 test.describe("Open contract from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
@@ -10,10 +10,8 @@ test.describe("Open contract from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/contract.json"
     )
-    const document = await getDocument(page)
-    await findByTitle(document, "bar")
-      .then((input) => input.inputValue())
-      .then((value) => expect(value).toBe("hello world"))
+    const main = await page.locator("main").elementHandle()
+    await getByText(main, "foo module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {

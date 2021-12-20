@@ -1,4 +1,4 @@
-import contractRepository from "./infra/InMemoryContractRepository"
+import contractRepository from "./infra/LocalStorageContractRepository"
 import playbookRepository from "./infra/InMemoryPlaybookRepository"
 import contractFileStorage from "./infra/ContractFileStorage"
 import ContractStorageService from "./domain/ContractStorageService"
