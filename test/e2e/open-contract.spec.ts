@@ -1,7 +1,7 @@
 import { test } from "@playwright/test"
 import { queries } from "@playwright-testing-library/test"
 
-const { getByText } = queries
+const { findByText } = queries
 
 test.describe("Open contract from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
@@ -11,7 +11,7 @@ test.describe("Open contract from filesystem", async () => {
       "./test/e2e/fixtures/contract.json"
     )
     const main = await page.locator("main").elementHandle()
-    await getByText(main, "foo module")
+    await findByText(main, "foo module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
@@ -25,6 +25,6 @@ test.describe("Open contract from filesystem", async () => {
         )
       )
     const main = await page.locator("main").elementHandle()
-    await getByText(main, "foo module")
+    await findByText(main, "foo module")
   })
 })
