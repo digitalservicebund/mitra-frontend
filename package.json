@@ -43,7 +43,7 @@
     "@types/uuid": "^8.3.3",
     "@types/wicg-file-system-access": "^2020.9.4",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.7.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.0.0",
