@@ -45,7 +45,7 @@
     )
     if (step) {
       currentStep.value = step
-      session.updateCurrentStep(props.contract, step)
+      session.rememberCurrentStep(props.contract, step)
     }
   }
 
@@ -55,7 +55,7 @@
     )
     if (step) {
       currentStep.value = step
-      session.updateCurrentStep(props.contract, step)
+      session.rememberCurrentStep(props.contract, step)
     }
   }
 </script>

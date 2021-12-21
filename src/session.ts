@@ -7,7 +7,7 @@ export const useSession = defineStore("session", {
     cache: new Map<Contract, Step<Answer>>(),
   }),
   actions: {
-    updateCurrentStep(contract: Contract, step: Step<Answer>) {
+    rememberCurrentStep(contract: Contract, step: Step<Answer>) {
       this.cache.set(contract, step)
     },
   },

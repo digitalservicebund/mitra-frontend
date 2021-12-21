@@ -31,7 +31,7 @@
           )
         )
       : contractRepository.findById(props.id)
-  session.updateCurrentStep(contract, contract.getAllSteps()[0])
+  session.rememberCurrentStep(contract, contract.getAllSteps()[0])
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)
@@ -61,7 +61,7 @@
   }
 
   const handleNavigate = (step: Step<Answer>) => {
-    session.updateCurrentStep(contract, step)
+    session.rememberCurrentStep(contract, step)
   }
 
   onMounted(() => {

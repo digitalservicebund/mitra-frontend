@@ -14,7 +14,7 @@ describe("ContractEdit", () => {
     ])
     const pinia = createTestingPinia()
     const session = useSession()
-    session.updateCurrentStep(contract, contract.modules[0].steps[0])
+    session.rememberCurrentStep(contract, contract.modules[0].steps[0])
 
     const wrapper = mount(ContractEdit, {
       props: {

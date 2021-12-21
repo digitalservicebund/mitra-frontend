@@ -93,7 +93,7 @@ describe("ContractSideMenu", () => {
     const contract = new Contract("", testModules)
     const pinia = createTestingPinia()
     const session = useSession()
-    session.updateCurrentStep(contract, contract.modules[1].steps[0])
+    session.rememberCurrentStep(contract, contract.modules[1].steps[0])
 
     const wrapper = mount(ContractSideMenu, {
       props: {
