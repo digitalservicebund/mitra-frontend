@@ -14,7 +14,6 @@
   import {
     makeContractRepository,
     makeContractStorageService,
-    makePlaybookRepository,
   } from "../provide"
 
   const props = defineProps<{ id: string }>()
@@ -23,14 +22,7 @@
 
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
-  const contract: Contract =
-    props.id === "cloud-contract"
-      ? Contract.fromPlaybook(
-          makePlaybookRepository().findById(
-            "db2a1d38-01fb-4ea2-bc6f-b5213413c809"
-          )
-        )
-      : contractRepository.findById(props.id)
+  const contract: Contract = contractRepository.findById(props.id)
   session.rememberCurrentStep(contract, contract.getAllSteps()[0])
 
   const placeholder = contract.title || "Unbenannter Vertrag"

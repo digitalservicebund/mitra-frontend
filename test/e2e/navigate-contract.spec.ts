@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
 
 async function startEditing({ page, baseURL }) {
-  await page.goto(`${baseURL}/mitra-frontend/contract/cloud-contract`)
+  await page.goto(`${baseURL}/mitra-frontend/new-contract`)
   await page.locator("text=Vertrag benennen").waitFor()
   await page.mouse.click(0, 0) // Dismiss dialog..
 }

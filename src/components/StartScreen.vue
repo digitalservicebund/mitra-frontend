@@ -21,10 +21,7 @@
         </Card>
         <Card>
           <template #content>
-            <router-link
-              to="/mitra-frontend/contract/cloud-contract"
-              class="block"
-            >
+            <router-link to="/mitra-frontend/new-contract" class="block">
               <span
                 class="material-icons-outlined hover:bg-gray-50"
                 aria-hidden="true"

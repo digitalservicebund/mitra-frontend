@@ -28,6 +28,21 @@ export abstract class Step<T extends Answer> extends Entity {
     id?: string
   ) {
     super(id)
+    // Ensure our getters are enumerable so that JSON.stringify,
+    // Object.keys etc. picks them up!
+    for (const property of ["type"]) {
+      const descriptor = Object.getOwnPropertyDescriptor(
+        Object.getPrototypeOf(this),
+        property
+      )
+      Object.defineProperty(
+        this,
+        property,
+        Object.assign(descriptor, {
+          enumerable: true,
+        })
+      )
+    }
   }
 
   abstract get type(): string

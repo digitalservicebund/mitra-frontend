@@ -22,7 +22,7 @@
     const playbook = await storage.load(file instanceof Array ? file[0] : file)
     const contract: Contract = Contract.fromPlaybook(playbook)
     contractRepository.save(contract)
-    await router.push("/mitra-frontend/contract/" + contract.id)
+    await router.push(`/mitra-frontend/contract/${contract.id}`)
   }
 
   const chooseLabel = ref("Computer durchsuchen")
