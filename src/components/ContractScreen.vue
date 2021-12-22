@@ -48,7 +48,7 @@
     target?.select()
   }
 
-  const saveContract = () => {
+  const handleSave = () => {
     storage.save(contract)
   }
 
@@ -68,7 +68,7 @@
     <nav class="flex-none">
       <ContractSideMenu
         :contract="contract"
-        @save="saveContract"
+        @save="handleSave"
         @navigate="handleNavigate"
       />
     </nav>
