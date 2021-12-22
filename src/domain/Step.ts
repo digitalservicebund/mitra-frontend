@@ -1,6 +1,6 @@
 import Entity from "./Entity"
 
-type Answerable = string
+type Answerable = string | number
 
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
@@ -17,6 +17,16 @@ export abstract class Answer<T = Answerable> extends Entity {
 
 export class TextAnswer extends Answer<string> {
   constructor(public value = "") {
+    super(value)
+  }
+
+  toString(): string {
+    return `${this.value}`
+  }
+}
+
+export class SingleChoiceAnswer extends Answer<number> {
+  constructor(public value = -1) {
     super(value)
   }
 
@@ -76,5 +86,30 @@ export class TextAnswerStep extends Step<TextAnswer> {
 
   clone(): TextAnswerStep {
     return new TextAnswerStep(this.text, new TextAnswer(this.answer.value))
+  }
+}
+
+export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
+  // We need to capture the type manually, as at runtime it's not available,
+  // and because Vue uses proxies, thus we can't compare constructors...
+  static readonly TYPE = "SingleChoiceAnswerStep"
+
+  constructor(
+    text: string,
+    answer: SingleChoiceAnswer = new SingleChoiceAnswer(),
+    id?: string
+  ) {
+    super(text, answer, id)
+  }
+
+  get type(): string {
+    return SingleChoiceAnswerStep.TYPE
+  }
+
+  clone(): SingleChoiceAnswerStep {
+    return new SingleChoiceAnswerStep(
+      this.text,
+      new SingleChoiceAnswer(this.answer.value)
+    )
   }
 }
