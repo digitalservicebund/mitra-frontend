@@ -20,6 +20,7 @@ function createStep(jsonStep: Step<Answer>) {
     return new TextAnswerStep(
       jsonStep.text,
       new TextAnswer((jsonStep.answer as TextAnswer).value),
+      (jsonStep as TextAnswerStep).produce,
       jsonStep.id
     )
   }

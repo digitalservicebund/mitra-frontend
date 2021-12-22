@@ -21,7 +21,7 @@ test("Edit text answer", async ({ page }) => {
   const preview = await page.locator("section:right-of(main)").elementHandle()
   await findByText(preview, "Vorschau Vertragstext")
   await findByText(preview, "Rubrum")
-  await findByText(preview, "Answer to show up in preview")
+  await findByText(preview, "Textbaustein: Answer to show up in preview")
 })
 
 test("Edit single choice answer", async ({ page }) => {

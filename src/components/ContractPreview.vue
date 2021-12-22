@@ -13,7 +13,7 @@
     <article v-for="module in modules" :key="module.id" class="p-2">
       <h4 class="font-bold">{{ module.text }}</h4>
       <div v-for="step in module.steps" :key="step.id" class="mt-2">
-        {{ step.answer.toString() }}
+        {{ step.print() }}
       </div>
     </article>
   </section>

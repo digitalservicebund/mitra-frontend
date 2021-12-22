@@ -16,7 +16,7 @@ export abstract class Answer<T = Answerable> extends Entity {
 }
 
 export class TextAnswer extends Answer<string> {
-  constructor(public value = "") {
+  constructor(value = "") {
     super(value)
   }
 
@@ -59,6 +59,10 @@ export abstract class Step<T extends Answer> extends Entity {
     }
   }
 
+  print(): string {
+    return this.answer.toString()
+  }
+
   abstract get type(): string
   abstract clone(): Step<T>
 }
@@ -71,6 +75,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
   constructor(
     text: string,
     answer: TextAnswer = new TextAnswer(),
+    public readonly produce: string = "${answer}",
     id?: string
   ) {
     super(text, answer, id)
@@ -80,8 +85,19 @@ export class TextAnswerStep extends Step<TextAnswer> {
     return TextAnswerStep.TYPE
   }
 
+  print() {
+    if (!this.answer.value) {
+      return ""
+    }
+    return this.produce.replaceAll("${answer}", this.answer.value.toString())
+  }
+
   clone(): TextAnswerStep {
-    return new TextAnswerStep(this.text, new TextAnswer(this.answer.value))
+    return new TextAnswerStep(
+      this.text,
+      new TextAnswer(this.answer.value),
+      this.produce
+    )
   }
 }
 
