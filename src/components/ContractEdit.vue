@@ -58,6 +58,10 @@
       session.rememberCurrentStep(props.contract, step)
     }
   }
+
+  const handleAnswer = (answer: Answer) => {
+    ;(currentStep.value as Step<Answer>).setAnswer(answer)
+  }
 </script>
 
 <template>
@@ -68,7 +72,7 @@
     <component
       :is="currentStepComponent"
       :step="currentStep"
-      @answer-changed="currentStep?.setAnswer($event)"
+      @answer-changed="handleAnswer"
     />
     <div class="grid grid-cols-3 col-span-full">
       <Button
