@@ -67,10 +67,6 @@
       session.rememberCurrentStep(props.contract, step)
     }
   }
-
-  const handleAnswer = (answer: Answer) => {
-    ;(currentStep.value as Step<Answer>).setAnswer(answer)
-  }
 </script>
 
 <template>
@@ -78,11 +74,7 @@
     <h3 class="font-bold">
       {{ currentModule?.text }}
     </h3>
-    <component
-      :is="currentStepComponent"
-      :step="currentStep"
-      @answer-changed="handleAnswer"
-    />
+    <component :is="currentStepComponent" :step="currentStep" />
     <div class="grid grid-cols-3 col-span-full">
       <Button
         v-if="hasPreviousStep"

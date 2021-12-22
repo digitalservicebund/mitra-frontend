@@ -1,26 +1,12 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import RadioButton from "primevue/radiobutton"
-  import {
-    Answer,
-    SingleChoiceAnswer,
-    SingleChoiceAnswerStep,
-  } from "../domain/Step"
+  import { SingleChoiceAnswerStep } from "../domain/Step"
 
   const props = defineProps<{ step: SingleChoiceAnswerStep }>()
-  const emit = defineEmits<{
-    (e: "answerChanged", answer: Answer): void
-  }>()
-
-  const handleChange = () => {
-    const answer = new SingleChoiceAnswer(
-      props.step.answer.choices,
-      choice.value
-    )
-    emit("answerChanged", answer)
-  }
-
   const choice = ref(props.step.answer.value)
+
+  const handleChange = () => props.step.answer.setValue(choice.value)
 </script>
 
 <template>

@@ -61,10 +61,6 @@ export abstract class Step<T extends Answer> extends Entity {
 
   abstract get type(): string
   abstract clone(): Step<T>
-
-  setAnswer(answer: T): void {
-    this.answer.setValue(answer.value)
-  }
 }
 
 export class TextAnswerStep extends Step<TextAnswer> {
