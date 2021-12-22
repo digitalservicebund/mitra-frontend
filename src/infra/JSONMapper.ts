@@ -16,7 +16,7 @@ function createStep(jsonStep: Step<Answer>) {
       jsonStep.id
     )
   }
-  return new TextAnswerStep("")
+  throw new Error("Step type unknown")
 }
 
 export function createPlaybook(jsonPlaybook: Playbook) {
