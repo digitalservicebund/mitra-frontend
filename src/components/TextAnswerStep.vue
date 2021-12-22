@@ -1,12 +1,17 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import InputText from "primevue/inputtext"
-  import { Step, TextAnswer } from "../domain/Step"
+  import { Answer, Step, TextAnswer } from "../domain/Step"
 
   const props = defineProps<{ step: Step<TextAnswer> }>()
   const emit = defineEmits<{
-    (e: "answerChanged", answer: string): void
+    (e: "answerChanged", answer: Answer): void
   }>()
+
+  const handleInput = () => {
+    const answer = new TextAnswer(editableAnswer.value)
+    emit("answerChanged", answer)
+  }
 
   const editableAnswer = ref(props.step.answer.toString())
 </script>
@@ -21,7 +26,7 @@
       :title="step.text"
       class="w-full"
       type="text"
-      @input="emit('answerChanged', editableAnswer)"
+      @input="handleInput"
     />
   </div>
 </template>

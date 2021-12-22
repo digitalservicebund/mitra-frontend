@@ -1,23 +1,27 @@
 import Entity from "./Entity"
 
-export abstract class Answer extends Entity {
-  abstract getValue(): unknown
-  abstract setValue(answer: unknown): void
+type Answerable = string
+
+export abstract class Answer<T = Answerable> extends Entity {
+  constructor(public value: T) {
+    super()
+    this.value = value
+  }
+
+  setValue(answer: T): void {
+    this.value = answer
+  }
+
   abstract toString(): string
 }
 
-export class TextAnswer extends Answer {
-  constructor(public value: string = "") {
-    super()
+export class TextAnswer extends Answer<string> {
+  constructor(public value = "") {
+    super(value)
   }
-  getValue(): string {
-    return this.value
-  }
-  setValue(answer: string): void {
-    this.value = answer
-  }
+
   toString(): string {
-    return this.value
+    return `${this.value}`
   }
 }
 
@@ -49,7 +53,7 @@ export abstract class Step<T extends Answer> extends Entity {
   abstract clone(): Step<T>
 
   setAnswer(answer: T): void {
-    this.answer.setValue(answer)
+    this.answer.setValue(answer.value)
   }
 }
 
@@ -70,7 +74,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
     return TextAnswerStep.TYPE
   }
 
-  clone(): Step<TextAnswer> {
+  clone(): TextAnswerStep {
     return new TextAnswerStep(this.text, new TextAnswer(this.answer.value))
   }
 }
