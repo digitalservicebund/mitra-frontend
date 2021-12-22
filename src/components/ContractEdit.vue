@@ -2,9 +2,15 @@
   import { computed, ref } from "vue"
   import Button from "primevue/button"
   import Contract from "../domain/Contract"
-  import { Answer, Step, TextAnswerStep } from "../domain/Step"
+  import {
+    Answer,
+    SingleChoiceAnswerStep,
+    Step,
+    TextAnswerStep,
+  } from "../domain/Step"
   import { useSession } from "../session"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
+  import SingleChoiceAnswerStepComponent from "./SingleChoiceAnswerStep.vue"
 
   const props = defineProps<{ contract: Contract }>()
 
@@ -19,6 +25,9 @@
     const step = currentStep.value as Step<Answer>
     if (step.type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
+    }
+    if (step.type === SingleChoiceAnswerStep.TYPE) {
+      return SingleChoiceAnswerStepComponent
     }
     return null // unknown type, don't render anything
   })

@@ -1,7 +1,14 @@
 import Contract from "../domain/Contract"
 import Module from "../domain/Module"
 import Playbook from "../domain/Playbook"
-import { Answer, Step, TextAnswer, TextAnswerStep } from "../domain/Step"
+import {
+  Answer,
+  SingleChoiceAnswer,
+  SingleChoiceAnswerStep,
+  Step,
+  TextAnswer,
+  TextAnswerStep,
+} from "../domain/Step"
 
 function createModule(jsonModule: Module) {
   const steps: Step<Answer>[] = jsonModule.steps.map(createStep)
@@ -9,10 +16,20 @@ function createModule(jsonModule: Module) {
 }
 
 function createStep(jsonStep: Step<Answer>) {
-  if (TextAnswerStep.TYPE === jsonStep.type) {
+  if (jsonStep.type === TextAnswerStep.TYPE) {
     return new TextAnswerStep(
       jsonStep.text,
       new TextAnswer((jsonStep.answer as TextAnswer).value),
+      jsonStep.id
+    )
+  }
+  if (jsonStep.type === SingleChoiceAnswerStep.TYPE) {
+    return new SingleChoiceAnswerStep(
+      jsonStep.text,
+      new SingleChoiceAnswer(
+        (jsonStep.answer as SingleChoiceAnswer).choices,
+        (jsonStep.answer as SingleChoiceAnswer).value
+      ),
       jsonStep.id
     )
   }

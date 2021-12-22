@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import InputText from "primevue/inputtext"
-  import { Answer, Step, TextAnswer } from "../domain/Step"
+  import { Answer, TextAnswer, TextAnswerStep } from "../domain/Step"
 
-  const props = defineProps<{ step: Step<TextAnswer> }>()
+  const props = defineProps<{ step: TextAnswerStep }>()
   const emit = defineEmits<{
     (e: "answerChanged", answer: Answer): void
   }>()

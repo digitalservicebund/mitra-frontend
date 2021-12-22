@@ -26,12 +26,12 @@ export class TextAnswer extends Answer<string> {
 }
 
 export class SingleChoiceAnswer extends Answer<number> {
-  constructor(public value = -1) {
+  constructor(public choices: string[], value = -1) {
     super(value)
   }
 
   toString(): string {
-    return `${this.value}`
+    return `${this.choices[this.value] || ""}`
   }
 }
 
@@ -96,7 +96,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
 
   constructor(
     text: string,
-    answer: SingleChoiceAnswer = new SingleChoiceAnswer(),
+    answer: SingleChoiceAnswer = new SingleChoiceAnswer([]),
     id?: string
   ) {
     super(text, answer, id)
@@ -106,10 +106,14 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return SingleChoiceAnswerStep.TYPE
   }
 
+  getChoices() {
+    return this.answer.choices
+  }
+
   clone(): SingleChoiceAnswerStep {
     return new SingleChoiceAnswerStep(
       this.text,
-      new SingleChoiceAnswer(this.answer.value)
+      new SingleChoiceAnswer(this.answer.choices, this.answer.value)
     )
   }
 }
