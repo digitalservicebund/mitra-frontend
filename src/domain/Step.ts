@@ -135,7 +135,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return [this, ...this.answer.choices[this.answer.value].path]
   }
 
-  getChoices(): readonly Choice[] {
+  get choices(): readonly Choice[] {
     return this.answer.choices
   }
 

@@ -16,7 +16,7 @@
   </div>
   <ul class="mb-4">
     <li
-      v-for="({ text }, index) in step.getChoices()"
+      v-for="({ text }, index) in step.choices"
       :key="index"
       class="p-field-radiobutton flex flex-row items-center pt-1 pb-1"
     >
