@@ -41,7 +41,7 @@ export default class Contract extends Entity {
 
   getModuleFor(step: Step<Answer>): Module | undefined {
     return this.modules.find((module) =>
-      module.steps.find((x) => x.equals(step))
+      module.path.find((x) => x.equals(step))
     )
   }
 }

@@ -36,7 +36,7 @@
           return withHighlight(
             {
               label: `${index + 1}. ${module.text}`,
-              command: () => emit("navigate", module.steps[0]),
+              command: () => emit("navigate", module.path[0]),
             },
             module
           )
