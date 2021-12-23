@@ -10,6 +10,10 @@ export default class Module extends Entity {
     super(id)
   }
 
+  get path(): Step<Answer>[] {
+    return this.steps.flatMap((step) => step.path)
+  }
+
   clone(): Module {
     return new Module(
       this.text,

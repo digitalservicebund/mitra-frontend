@@ -40,7 +40,10 @@ test("Edit single choice answer", async ({ page }) => {
   await findByText(preview, "Vorschau Vertragstext")
   await findByText(preview, "Auswahl B")
   await page.click("text=Weiter")
-  await findByTitle(document, "Schritt 1.3 B")
+  await findByTitle(document, "Schritt 1.3 B").then((input) =>
+    input.type("Answer to show up in preview")
+  )
+  await findByText(preview, "Answer to show up in preview")
   await page.click("text=Weiter")
   await findByTitle(document, "Schritt 2.1")
 })

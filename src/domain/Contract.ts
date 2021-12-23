@@ -24,9 +24,7 @@ export default class Contract extends Entity {
   }
 
   get path(): Step<Answer>[] {
-    return this.modules
-      .flatMap((module) => module.steps)
-      .flatMap((step) => step.path)
+    return this.modules.flatMap((module) => module.path)
   }
 
   nextStepInPathAt(step: Step<Answer>): Step<Answer> | undefined {
