@@ -16,7 +16,7 @@
   const session = useSession()
 
   const withHighlight = (item: MenuItem, module: Module) => {
-    return module.steps.find((step) =>
+    return module.path.find((step) =>
       step.equals(session.cache.get(props.contract))
     )
       ? { ...item, class: "font-bold" }
