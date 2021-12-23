@@ -13,12 +13,12 @@ describe("Contract", () => {
     // Copy objects as to avoid modifying the original playbook
     expect(contract).not.toBeUndefined()
     expect(contract.modules).not.toEqual(playbook.modules)
-    expect(contract.getForeseeableSteps()).not.toEqual(
+    expect(contract.path).not.toEqual(
       playbook.modules.flatMap((module) => module.steps)
     )
 
     expect(contract.modules).toHaveLength(playbook.modules.length)
-    expect(contract.getForeseeableSteps()).toHaveLength(
+    expect(contract.path).toHaveLength(
       playbook.modules.flatMap((module) => module.steps).length
     )
   })
@@ -29,7 +29,7 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const stepForLookup = contract.getForeseeableSteps()[1]
+    const stepForLookup = contract.path[1]
     expect(contract.getModuleFor(stepForLookup)).toEqual(contract.modules[1])
     // We might have to deal with proxies which are used by Vue extensively..
     expect(contract.getModuleFor(new Proxy(stepForLookup, {}))).toBe(
@@ -43,7 +43,7 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const [stepOne, stepTwo] = contract.getForeseeableSteps()
+    const [stepOne, stepTwo] = contract.path
     expect(contract.nextStepInPathAt(stepOne)).toBe(stepTwo)
     expect(contract.nextStepInPathAt(stepTwo)).toBeUndefined()
   })
@@ -54,7 +54,7 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const [stepOne, stepTwo] = contract.getForeseeableSteps()
+    const [stepOne, stepTwo] = contract.path
     expect(contract.previousStepInPathAt(stepOne)).toBeUndefined()
     expect(contract.previousStepInPathAt(stepTwo)).toBe(stepOne)
   })

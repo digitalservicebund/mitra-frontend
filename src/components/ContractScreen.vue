@@ -23,7 +23,7 @@
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract = contractRepository.findById(props.id)
-  session.rememberCurrentStep(contract, contract.getForeseeableSteps()[0])
+  session.rememberCurrentStep(contract, contract.path[0])
 
   const placeholder = contract.title || "Unbenannter Vertrag"
   const contractTitle = ref(placeholder)

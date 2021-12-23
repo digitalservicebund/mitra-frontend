@@ -35,10 +35,6 @@ export default class Contract extends Entity {
     return this.path[findStepIndex(this.path, step) - 1]
   }
 
-  getForeseeableSteps(): readonly Step<Answer>[] {
-    return Object.freeze(this.modules.flatMap((module) => module.steps))
-  }
-
   getModuleFor(step: Step<Answer>): Module | undefined {
     return this.modules.find((module) =>
       module.path.find((x) => x.equals(step))
