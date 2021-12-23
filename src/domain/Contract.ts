@@ -23,18 +23,22 @@ export default class Contract extends Entity {
     return new Contract("", modules)
   }
 
-  getAllSteps(): readonly Step<Answer>[] {
+  get path(): Step<Answer>[] {
+    return this.modules
+      .flatMap((module) => module.steps)
+      .flatMap((step) => step.path)
+  }
+
+  nextStepInPathAt(step: Step<Answer>): Step<Answer> | undefined {
+    return this.path[findStepIndex(this.path, step) + 1]
+  }
+
+  previousStepInPathAt(step: Step<Answer>): Step<Answer> | undefined {
+    return this.path[findStepIndex(this.path, step) - 1]
+  }
+
+  getForeseeableSteps(): readonly Step<Answer>[] {
     return Object.freeze(this.modules.flatMap((module) => module.steps))
-  }
-
-  getNextStepFor(step: Step<Answer>): Step<Answer> | undefined {
-    const steps = this.getAllSteps()
-    return steps[findStepIndex(steps, step) + 1]
-  }
-
-  getPreviousStepFor(step: Step<Answer>): Step<Answer> | undefined {
-    const steps = this.getAllSteps()
-    return steps[findStepIndex(steps, step) - 1]
   }
 
   getModuleFor(step: Step<Answer>): Module | undefined {

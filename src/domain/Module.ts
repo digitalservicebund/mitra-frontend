@@ -10,10 +10,6 @@ export default class Module extends Entity {
     super(id)
   }
 
-  addSteps(...steps: Step<Answer>[]) {
-    this.steps.push(...steps)
-  }
-
   clone(): Module {
     return new Module(
       this.text,

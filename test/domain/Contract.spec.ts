@@ -13,12 +13,12 @@ describe("Contract", () => {
     // Copy objects as to avoid modifying the original playbook
     expect(contract).not.toBeUndefined()
     expect(contract.modules).not.toEqual(playbook.modules)
-    expect(contract.getAllSteps()).not.toEqual(
+    expect(contract.getForeseeableSteps()).not.toEqual(
       playbook.modules.flatMap((module) => module.steps)
     )
 
     expect(contract.modules).toHaveLength(playbook.modules.length)
-    expect(contract.getAllSteps()).toHaveLength(
+    expect(contract.getForeseeableSteps()).toHaveLength(
       playbook.modules.flatMap((module) => module.steps).length
     )
   })
@@ -29,7 +29,7 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const stepForLookup = contract.getAllSteps()[1]
+    const stepForLookup = contract.getForeseeableSteps()[1]
     expect(contract.getModuleFor(stepForLookup)).toEqual(contract.modules[1])
     // We might have to deal with proxies which are used by Vue extensively..
     expect(contract.getModuleFor(new Proxy(stepForLookup, {}))).toBe(
@@ -43,9 +43,9 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const [stepOne, stepTwo] = contract.getAllSteps()
-    expect(contract.getNextStepFor(stepOne)).toBe(stepTwo)
-    expect(contract.getNextStepFor(stepTwo)).toBeUndefined()
+    const [stepOne, stepTwo] = contract.getForeseeableSteps()
+    expect(contract.nextStepInPathAt(stepOne)).toBe(stepTwo)
+    expect(contract.nextStepInPathAt(stepTwo)).toBeUndefined()
   })
 
   it("should provide traversal backward given a step", () => {
@@ -54,8 +54,8 @@ describe("Contract", () => {
       new Module("two", [new TextAnswerStep("bar")]),
     ])
 
-    const [stepOne, stepTwo] = contract.getAllSteps()
-    expect(contract.getPreviousStepFor(stepOne)).toBeUndefined()
-    expect(contract.getPreviousStepFor(stepTwo)).toBe(stepOne)
+    const [stepOne, stepTwo] = contract.getForeseeableSteps()
+    expect(contract.previousStepInPathAt(stepOne)).toBeUndefined()
+    expect(contract.previousStepInPathAt(stepTwo)).toBe(stepOne)
   })
 })

@@ -4,6 +4,7 @@
   import { TextAnswerStep } from "../domain/Step"
 
   const props = defineProps<{ step: TextAnswerStep }>()
+
   const answer = ref(props.step.answer.toString())
 
   const handleInput = () => props.step.answer.setValue(answer.value)

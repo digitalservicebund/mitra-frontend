@@ -9,19 +9,16 @@ import Contract from "../../src/domain/Contract"
 import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import { useSession } from "../../src/session"
 
-const module1: Module = new Module("Rubrum")
-module1.addSteps(
+const module1: Module = new Module("Rubrum", [
   new TextAnswerStep("Schritt 1.1"),
   new TextAnswerStep("Schritt 1.2"),
-  new TextAnswerStep("Schritt 1.3")
-)
-const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags")
-module2.addSteps(
+  new TextAnswerStep("Schritt 1.3"),
+])
+const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags", [
   new TextAnswerStep("Schritt 2.1"),
   new TextAnswerStep("Schritt 2.2"),
-  new TextAnswerStep("Schritt 2.3")
-)
-
+  new TextAnswerStep("Schritt 2.3"),
+])
 const testModules: Module[] = [module1, module2]
 
 describe("ContractSideMenu", () => {

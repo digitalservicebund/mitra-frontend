@@ -10,12 +10,12 @@ import {
   TextAnswerStep,
 } from "../domain/Step"
 
-function createModule(jsonModule: Module) {
+function createModule(jsonModule: Module): Module {
   const steps: Step<Answer>[] = jsonModule.steps.map(createStep)
   return new Module(jsonModule.text, steps, jsonModule.id)
 }
 
-function createStep(jsonStep: Step<Answer>) {
+function createStep(jsonStep: Step<Answer>): Step<Answer> {
   if (jsonStep.type === TextAnswerStep.TYPE) {
     return new TextAnswerStep(
       jsonStep.text,
@@ -28,7 +28,10 @@ function createStep(jsonStep: Step<Answer>) {
     return new SingleChoiceAnswerStep(
       jsonStep.text,
       new SingleChoiceAnswer(
-        (jsonStep.answer as SingleChoiceAnswer).choices,
+        (jsonStep.answer as SingleChoiceAnswer).choices.map((jsonChoice) => ({
+          text: jsonChoice.text,
+          next: jsonChoice.next.map(createStep),
+        })),
         (jsonStep.answer as SingleChoiceAnswer).value
       ),
       jsonStep.id
@@ -37,12 +40,12 @@ function createStep(jsonStep: Step<Answer>) {
   throw new Error("Step type unknown")
 }
 
-export function createPlaybook(jsonPlaybook: Playbook) {
+export function createPlaybook(jsonPlaybook: Playbook): Playbook {
   const modules: Module[] = jsonPlaybook.modules.map(createModule)
   return new Playbook(modules, jsonPlaybook.id)
 }
 
-export function createContract(jsonContract: Contract) {
+export function createContract(jsonContract: Contract): Contract {
   const modules: Module[] = jsonContract.modules.map(createModule)
   return new Contract(jsonContract.title, modules, jsonContract.id)
 }

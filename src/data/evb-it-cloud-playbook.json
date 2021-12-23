@@ -24,7 +24,30 @@
             "text": "Schritt 1.3",
             "type": "SingleChoiceAnswerStep",
             "answer": {
-              "choices": ["Auswahl 1", "Auswahl 2"]
+              "choices": [
+                {
+                  "text": "Auswahl A",
+                  "next": [
+                    {
+                      "id": "57c97b0d-4eae-439e-b747-c297b76128e5",
+                      "text": "Schritt 1.3 A",
+                      "type": "TextAnswerStep",
+                      "answer": {}
+                    }
+                  ]
+                },
+                {
+                  "text": "Auswahl B",
+                  "next": [
+                    {
+                      "id": "0b79fbb8-18f4-4824-af2a-3f4a95dc8cc6",
+                      "text": "Schritt 1.3 B",
+                      "type": "TextAnswerStep",
+                      "answer": {}
+                    }
+                  ]
+                }
+              ]
             }
           }
         ]

@@ -34,13 +34,13 @@
 
   const hasPreviousStep = computed(
     () =>
-      props.contract.getPreviousStepFor(currentStep.value as Step<Answer>) !==
+      props.contract.previousStepInPathAt(currentStep.value as Step<Answer>) !==
       undefined
   )
 
   const hasNextStep = computed(
     () =>
-      props.contract.getNextStepFor(currentStep.value as Step<Answer>) !==
+      props.contract.nextStepInPathAt(currentStep.value as Step<Answer>) !==
       undefined
   )
 
@@ -49,7 +49,7 @@
   })
 
   const previous = () => {
-    const step = props.contract.getPreviousStepFor(
+    const step = props.contract.previousStepInPathAt(
       currentStep.value as Step<Answer>
     )
     if (step) {
@@ -59,7 +59,7 @@
   }
 
   const next = () => {
-    const step = props.contract.getNextStepFor(
+    const step = props.contract.nextStepInPathAt(
       currentStep.value as Step<Answer>
     )
     if (step) {

@@ -1,6 +1,7 @@
 import Entity from "./Entity"
 
 type Answerable = string | number
+type Choice = { text: string; next: Step<Answer>[] }
 
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
@@ -26,12 +27,12 @@ export class TextAnswer extends Answer<string> {
 }
 
 export class SingleChoiceAnswer extends Answer<number> {
-  constructor(public readonly choices: string[], value = -1) {
+  constructor(public readonly choices: Choice[], value = -1) {
     super(value)
   }
 
   toString(): string {
-    return `${this.choices[this.value] || ""}`
+    return `${this.choices[this.value]?.text || ""}`
   }
 }
 
@@ -42,6 +43,7 @@ export abstract class Step<T extends Answer> extends Entity {
     id?: string
   ) {
     super(id)
+
     // Ensure our getters are enumerable so that JSON.stringify,
     // Object.keys etc. picks them up!
     for (const property of ["type"]) {
@@ -59,12 +61,20 @@ export abstract class Step<T extends Answer> extends Entity {
     }
   }
 
+  abstract get type(): string
+  abstract clone(): Step<T>
+
+  get steps(): Step<Answer>[] {
+    return []
+  }
+
+  get path(): Step<Answer>[] {
+    return [this]
+  }
+
   print(): string {
     return this.answer.toString()
   }
-
-  abstract get type(): string
-  abstract clone(): Step<T>
 }
 
 export class TextAnswerStep extends Step<TextAnswer> {
@@ -118,7 +128,21 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return SingleChoiceAnswerStep.TYPE
   }
 
-  getChoices() {
+  get steps(): Step<Answer>[] {
+    if (this.answer.value === -1) {
+      return []
+    }
+    return this.answer.choices[this.answer.value].next
+  }
+
+  get path(): Step<Answer<Answerable>>[] {
+    if (this.answer.value === -1) {
+      return [this]
+    }
+    return [this, ...this.answer.choices[this.answer.value].next]
+  }
+
+  getChoices(): readonly Choice[] {
     return this.answer.choices
   }
 
