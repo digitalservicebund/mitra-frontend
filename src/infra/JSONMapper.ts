@@ -30,7 +30,7 @@ function createStep(jsonStep: Step<Answer>): Step<Answer> {
       new SingleChoiceAnswer(
         (jsonStep.answer as SingleChoiceAnswer).choices.map((jsonChoice) => ({
           text: jsonChoice.text,
-          next: jsonChoice.next.map(createStep),
+          path: jsonChoice.path.map(createStep),
         })),
         (jsonStep.answer as SingleChoiceAnswer).value
       ),

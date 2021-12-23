@@ -1,7 +1,7 @@
 import Entity from "./Entity"
 
 type Answerable = string | number
-type Choice = { text: string; next: Step<Answer>[] }
+type Choice = { text: string; path: Step<Answer>[] }
 
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
@@ -132,7 +132,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     if (this.answer.value === -1) {
       return [this]
     }
-    return [this, ...this.answer.choices[this.answer.value].next]
+    return [this, ...this.answer.choices[this.answer.value].path]
   }
 
   getChoices(): readonly Choice[] {
