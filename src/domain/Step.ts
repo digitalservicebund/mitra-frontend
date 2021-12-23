@@ -128,13 +128,6 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return SingleChoiceAnswerStep.TYPE
   }
 
-  get steps(): Step<Answer>[] {
-    if (this.answer.value === -1) {
-      return []
-    }
-    return this.answer.choices[this.answer.value].next
-  }
-
   get path(): Step<Answer<Answerable>>[] {
     if (this.answer.value === -1) {
       return [this]
