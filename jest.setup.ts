@@ -2,12 +2,12 @@ import "@testing-library/jest-dom"
 import { config } from "@vue/test-utils"
 import Contract from "./src/domain/Contract"
 import ContractRepository from "./src/domain/ContractRepository"
+import ContractStorageService from "./src/domain/ContractStorageService"
+import Module from "./src/domain/Module"
 import Playbook from "./src/domain/Playbook"
 import PlaybookRepository from "./src/domain/PlaybookRepository"
-import Module from "./src/domain/Module"
-import { TextAnswerStep } from "./src/domain/Step"
 import PlaybookStorageService from "./src/domain/PlaybookStorageService"
-import ContractStorageService from "./src/domain/ContractStorageService"
+import { TextAnswerStep } from "./src/domain/Step"
 
 config.global.directives = {
   focus() {

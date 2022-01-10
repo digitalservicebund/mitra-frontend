@@ -1,6 +1,6 @@
+import { playbook } from "../data/evb-it-cloud-playbook.json"
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
-import { playbook } from "../data/evb-it-cloud-playbook.json"
 import { createPlaybook } from "./JSONMapper"
 
 const data = new Map<string, Playbook>()

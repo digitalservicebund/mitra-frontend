@@ -1,7 +1,7 @@
 import Playbook from "../domain/Playbook"
 import Storage from "../domain/Storage"
-import { loadFile } from "./LoadFile"
 import { createPlaybook } from "./JSONMapper"
+import { loadFile } from "./LoadFile"
 
 const storage: Storage<Playbook, File> = {
   async load(file: File) {

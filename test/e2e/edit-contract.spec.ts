@@ -1,5 +1,5 @@
-import { expect, Page, test as base } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
+import { expect, Page, test as base } from "@playwright/test"
 
 const { findByLabelText, findByText, findByTitle } = queries
 

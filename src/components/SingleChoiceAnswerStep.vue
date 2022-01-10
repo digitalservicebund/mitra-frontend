@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { ref } from "vue"
   import RadioButton from "primevue/radiobutton"
+  import { ref } from "vue"
   import { SingleChoiceAnswerStep } from "../domain/Step"
 
   const props = defineProps<{ step: SingleChoiceAnswerStep }>()

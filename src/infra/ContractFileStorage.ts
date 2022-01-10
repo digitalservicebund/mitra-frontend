@@ -1,7 +1,7 @@
 import Contract from "../domain/Contract"
 import Storage from "../domain/Storage"
-import { loadFile } from "./LoadFile"
 import { createContract } from "./JSONMapper"
+import { loadFile } from "./LoadFile"
 
 function makeFileBaseName(contract: Contract) {
   return contract.title.toLowerCase().replace(/\s/g, "-")

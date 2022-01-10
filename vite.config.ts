@@ -1,5 +1,5 @@
-import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+import { defineConfig } from "vite"
 import handlebars from "vite-plugin-handlebars"
 import pages from "vite-plugin-pages"
 

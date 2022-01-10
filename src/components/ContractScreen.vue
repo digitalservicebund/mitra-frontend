@@ -1,20 +1,20 @@
 <script setup lang="ts">
-  import { onMounted, ref } from "vue"
   import Button from "primevue/button"
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
-  import ContractEdit from "./ContractEdit.vue"
-  import ContractPreview from "./ContractPreview.vue"
-  import ContractSideMenu from "./ContractSideMenu.vue"
+  import { onMounted, ref } from "vue"
   import Contract from "../domain/Contract"
   import ContractRepository from "../domain/ContractRepository"
   import { Answer, Step } from "../domain/Step"
   import Storage from "../domain/Storage"
-  import { useSession } from "../session"
   import {
     makeContractRepository,
     makeContractStorageService,
   } from "../provide"
+  import { useSession } from "../session"
+  import ContractEdit from "./ContractEdit.vue"
+  import ContractPreview from "./ContractPreview.vue"
+  import ContractSideMenu from "./ContractSideMenu.vue"
 
   const props = defineProps<{ id: string }>()
 

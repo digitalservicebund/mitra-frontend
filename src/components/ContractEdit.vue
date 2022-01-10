@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { computed, ref } from "vue"
   import Button from "primevue/button"
+  import { computed, ref } from "vue"
   import Contract from "../domain/Contract"
   import {
     Answer,
@@ -9,8 +9,8 @@
     TextAnswerStep,
   } from "../domain/Step"
   import { useSession } from "../session"
-  import TextAnswerStepComponent from "./TextAnswerStep.vue"
   import SingleChoiceAnswerStepComponent from "./SingleChoiceAnswerStep.vue"
+  import TextAnswerStepComponent from "./TextAnswerStep.vue"
 
   const props = defineProps<{ contract: Contract }>()
 

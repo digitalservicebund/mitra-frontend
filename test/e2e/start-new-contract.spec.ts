@@ -1,5 +1,5 @@
-import { expect, test } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
+import { expect, test } from "@playwright/test"
 
 test("Reachable from start page", async ({ page, baseURL }) => {
   await page.goto(`${baseURL}/mitra-frontend/`)

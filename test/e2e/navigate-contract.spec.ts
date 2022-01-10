@@ -1,5 +1,5 @@
-import { expect, test } from "@playwright/test"
 import { getDocument, queries } from "@playwright-testing-library/test"
+import { expect, test } from "@playwright/test"
 
 async function startEditing({ page, baseURL }) {
   await page.goto(`${baseURL}/mitra-frontend/new-contract`)

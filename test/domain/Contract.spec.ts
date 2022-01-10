@@ -1,6 +1,6 @@
 import Contract from "../../src/domain/Contract"
-import Playbook from "../../src/domain/Playbook"
 import Module from "../../src/domain/Module"
+import Playbook from "../../src/domain/Playbook"
 import { TextAnswerStep } from "../../src/domain/Step"
 
 describe("Contract", () => {

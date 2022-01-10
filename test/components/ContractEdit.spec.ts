@@ -1,9 +1,9 @@
-import { mount } from "@vue/test-utils"
 import { createTestingPinia } from "@pinia/testing"
+import { mount } from "@vue/test-utils"
+import ContractEdit from "../../src/components/ContractEdit.vue"
 import Contract from "../../src/domain/Contract"
 import Module from "../../src/domain/Module"
 import { TextAnswerStep } from "../../src/domain/Step"
-import ContractEdit from "../../src/components/ContractEdit.vue"
 import { useSession } from "../../src/session"
 
 describe("ContractEdit", () => {

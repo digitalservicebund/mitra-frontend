@@ -1,12 +1,12 @@
-import { mount } from "@vue/test-utils"
-import { fireEvent, render, screen } from "@testing-library/vue"
 import { createTestingPinia } from "@pinia/testing"
-import { createRouter, createWebHistory } from "vue-router"
+import { fireEvent, render, screen } from "@testing-library/vue"
+import { mount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
+import { createRouter, createWebHistory } from "vue-router"
+import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
+import Contract from "../../src/domain/Contract"
 import Module from "../../src/domain/Module"
 import { TextAnswerStep } from "../../src/domain/Step"
-import Contract from "../../src/domain/Contract"
-import ContractSideMenu from "../../src/components/ContractSideMenu.vue"
 import { useSession } from "../../src/session"
 
 const module1: Module = new Module("Rubrum", [

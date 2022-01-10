@@ -1,9 +1,10 @@
+import { createPinia } from "pinia"
+import PrimeVue from "primevue/config"
+// eslint-disable-next-line import/no-unresolved
+import routes from "virtual:generated-pages"
 import { createApp } from "vue"
 import { createRouter, createWebHistory } from "vue-router"
-import { createPinia } from "pinia"
-import routes from "virtual:generated-pages"
 import App from "./App.vue"
-import PrimeVue from "primevue/config"
 
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"

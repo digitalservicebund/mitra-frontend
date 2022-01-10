@@ -1,6 +1,6 @@
 import Entity from "./Entity"
-import Playbook from "./Playbook"
 import Module from "./Module"
+import Playbook from "./Playbook"
 import { Answer, Step } from "./Step"
 
 function findStepIndex(
