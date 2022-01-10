@@ -16,7 +16,7 @@ module.exports = {
         "plugin:vuejs-accessibility/recommended",
         "@vue/typescript/recommended",
         "@vue/prettier",
-        "@vue/prettier/@typescript-eslint",
+        "@vue/eslint-config-prettier",
       ],
     },
     // ...and avoid linting Vue/TypeScript files with ES rules for JavaScript config files!
