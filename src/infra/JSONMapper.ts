@@ -10,42 +10,71 @@ import {
   TextAnswerStep,
 } from "../domain/Step"
 
-function createModule(jsonModule: Module): Module {
-  const steps: Step<Answer>[] = jsonModule.steps.map(createStep)
-  return new Module(jsonModule.text, steps, jsonModule.id)
+export type TextAnswerDTO = { value: string }
+
+export type ChoiceDTO = {
+  text: string
+  path: StepDTO[]
 }
 
-function createStep(jsonStep: Step<Answer>): Step<Answer> {
-  if (jsonStep.type === TextAnswerStep.TYPE) {
+export type SingleChoiceAnswerDTO = {
+  choices: ChoiceDTO[]
+  value: number
+}
+
+export type StepDTO = {
+  id: string
+  answer: TextAnswerDTO | SingleChoiceAnswerDTO
+  text: string
+  type: string
+  produce?: string
+}
+
+export type ModuleDTO = { id: string; text: string; steps: StepDTO[] }
+
+export type ContractDTO = { id: string; title: string; modules: ModuleDTO[] }
+
+export type PlaybookDTO = { id: string; modules: ModuleDTO[] }
+
+export function createStep(step: StepDTO): Step<Answer> {
+  if (step.type === TextAnswerStep.TYPE) {
+    const answer = step.answer as TextAnswerDTO
     return new TextAnswerStep(
-      jsonStep.text,
-      new TextAnswer((jsonStep.answer as TextAnswer).value),
-      (jsonStep as TextAnswerStep).produce,
-      jsonStep.id
+      step.text,
+      new TextAnswer(answer.value),
+      step.produce,
+      step.id
     )
   }
-  if (jsonStep.type === SingleChoiceAnswerStep.TYPE) {
+  if (step.type === SingleChoiceAnswerStep.TYPE) {
+    const answer = step.answer as SingleChoiceAnswerDTO
     return new SingleChoiceAnswerStep(
-      jsonStep.text,
+      step.text,
       new SingleChoiceAnswer(
-        (jsonStep.answer as SingleChoiceAnswer).choices.map((jsonChoice) => ({
-          text: jsonChoice.text,
-          path: jsonChoice.path.map(createStep),
+        answer.choices.map((choice) => ({
+          text: choice.text,
+          path: choice.path.map(createStep),
         })),
-        (jsonStep.answer as SingleChoiceAnswer).value
+        answer.value
       ),
-      jsonStep.id
+      step.id
     )
   }
   throw new Error("Step type unknown")
 }
 
-export function createPlaybook(jsonPlaybook: Playbook): Playbook {
-  const modules: Module[] = jsonPlaybook.modules.map(createModule)
-  return new Playbook(modules, jsonPlaybook.id)
+export function createModule(module: ModuleDTO): Module {
+  return new Module(module.text, module.steps.map(createStep), module.id)
 }
 
-export function createContract(jsonContract: Contract): Contract {
-  const modules: Module[] = jsonContract.modules.map(createModule)
-  return new Contract(jsonContract.title, modules, jsonContract.id)
+export function createContract(contract: ContractDTO): Contract {
+  return new Contract(
+    contract.title,
+    contract.modules.map(createModule),
+    contract.id
+  )
+}
+
+export function createPlaybook(playbook: PlaybookDTO): Playbook {
+  return new Playbook(playbook.modules.map(createModule), playbook.id)
 }
