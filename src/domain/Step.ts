@@ -68,8 +68,8 @@ export abstract class Step<T extends Answer> extends Entity {
     return []
   }
 
-  get path(): Step<Answer>[] {
-    return [this]
+  get path(): readonly Step<Answer>[] {
+    return Object.freeze([this])
   }
 
   print(): string {
@@ -128,11 +128,11 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return SingleChoiceAnswerStep.TYPE
   }
 
-  get path(): Step<Answer>[] {
+  get path(): readonly Step<Answer>[] {
     if (this.answer.value === -1) {
-      return [this]
+      return Object.freeze([this])
     }
-    return [this, ...this.answer.choices[this.answer.value].path]
+    return Object.freeze([this, ...this.answer.choices[this.answer.value].path])
   }
 
   get choices(): readonly Choice[] {

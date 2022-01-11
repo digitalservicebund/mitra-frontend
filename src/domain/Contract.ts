@@ -23,8 +23,8 @@ export default class Contract extends Entity {
     return new Contract("", modules)
   }
 
-  get path(): Step<Answer>[] {
-    return this.modules.flatMap((module) => module.path)
+  get path(): readonly Step<Answer>[] {
+    return Object.freeze(this.modules.flatMap((module) => module.path))
   }
 
   nextStepInPathAt(step: Step<Answer>): Step<Answer> | undefined {

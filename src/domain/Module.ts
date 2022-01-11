@@ -10,8 +10,8 @@ export default class Module extends Entity {
     super(id)
   }
 
-  get path(): Step<Answer>[] {
-    return this.steps.flatMap((step) => step.path)
+  get path(): readonly Step<Answer>[] {
+    return Object.freeze(this.steps.flatMap((step) => step.path))
   }
 
   clone(): Module {
