@@ -13,7 +13,7 @@ const computePathWithChoices = (
     value: number
   }
   if (choices && choices[value] !== undefined) {
-    for (const stepInPath of (step.answer as SingleChoiceAnswer).choices[value]
+    for (const stepInPath of (step as SingleChoiceAnswerStep).choices[value]
       .path) {
       path.push(...computePathWithChoices(stepInPath))
     }
