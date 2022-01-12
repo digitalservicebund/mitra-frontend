@@ -1,3 +1,4 @@
+import fs from "fs"
 import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
@@ -5,8 +6,28 @@ const { findByLabelText, findByText, findByTitle } = queries
 
 test.describe("Text answer step", async () => {
   test.use({
-    storageState: "./test/e2e/fixtures/contract-text-answer-step-state.json",
+    storageState: async ({}, use) => {
+      const contract = await fs.promises.readFile(
+        "./test/e2e/fixtures/contract-text-answer-step.json",
+        "utf-8"
+      )
+      await use({
+        cookies: [],
+        origins: [
+          {
+            origin: "http://localhost:5000",
+            localStorage: [
+              {
+                name: "3d324eca-06c2-4781-af52-705f49039d0d",
+                value: `${contract}`,
+              },
+            ],
+          },
+        ],
+      })
+    },
   })
+
   test("editing unanswered", async ({ page, baseURL }) => {
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
@@ -22,8 +43,28 @@ test.describe("Text answer step", async () => {
 
 test.describe("Single choice answer step", async () => {
   test.use({
-    storageState: "./test/e2e/fixtures/contract-single-choice-step-state.json",
+    storageState: async ({}, use) => {
+      const contract = await fs.promises.readFile(
+        "./test/e2e/fixtures/contract-single-choice-step.json",
+        "utf-8"
+      )
+      await use({
+        cookies: [],
+        origins: [
+          {
+            origin: "http://localhost:5000",
+            localStorage: [
+              {
+                name: "3d324eca-06c2-4781-af52-705f49039d0d",
+                value: `${contract}`,
+              },
+            ],
+          },
+        ],
+      })
+    },
   })
+
   test("editing unanswered", async ({ page, baseURL }) => {
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
