@@ -45,7 +45,7 @@ export class TextAnswer extends Answer<string> {
 }
 
 export class SingleChoiceAnswer extends Answer<number> {
-  constructor(public readonly choices: Choice[], value = -1) {
+  constructor(public readonly choices: readonly Choice[], value = -1) {
     super(value)
   }
 
