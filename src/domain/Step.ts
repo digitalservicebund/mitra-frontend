@@ -3,7 +3,9 @@ import Entity from "./Entity"
 type Answerable = string | number
 type Choice = { text: string; path: Step<Answer>[] }
 
-const computePath = (step: Step<Answer>): readonly Step<Answer>[] => {
+const computePathWithChoices = (
+  step: Step<Answer>
+): readonly Step<Answer>[] => {
   const path: Step<Answer>[] = [step]
 
   const { value, choices } = step.answer as {
@@ -13,7 +15,7 @@ const computePath = (step: Step<Answer>): readonly Step<Answer>[] => {
   if (choices && choices[value] !== undefined) {
     for (const stepInPath of (step.answer as SingleChoiceAnswer).choices[value]
       .path) {
-      path.push(...computePath(stepInPath))
+      path.push(...computePathWithChoices(stepInPath))
     }
   }
 
@@ -141,7 +143,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   }
 
   get path(): readonly Step<Answer>[] {
-    return computePath(this)
+    return computePathWithChoices(this)
   }
 
   get choices(): readonly Choice[] {
