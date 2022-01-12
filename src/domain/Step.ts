@@ -80,10 +80,6 @@ export abstract class Step<T extends Answer> extends Entity {
   abstract get type(): string
   abstract clone(): Step<T>
 
-  get steps(): Step<Answer>[] {
-    return []
-  }
-
   get path(): readonly Step<Answer>[] {
     return Object.freeze([this])
   }
