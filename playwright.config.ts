@@ -4,7 +4,7 @@ const config: PlaywrightTestConfig = {
   testDir: "./test/e2e",
   testIgnore: ["**/contract.spec.ts"],
   timeout: 10000,
-  retries: 1,
+  retries: process.env.CI === "true" ? 1 : 0,
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
