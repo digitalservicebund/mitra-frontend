@@ -3,6 +3,22 @@ import Entity from "./Entity"
 type Answerable = string | number
 type Choice = { text: string; path: Step<Answer>[] }
 
+const computePath = (step: Step<Answer>): readonly Step<Answer>[] => {
+  const path: Step<Answer>[] = [step]
+
+  const { value, choices } = step.answer as {
+    choices?: Step<Answer>[]
+    value: number
+  }
+  if (choices && choices[value] !== undefined) {
+    for (const stepInPath of (step.answer as SingleChoiceAnswer).choices[value]
+      .path) {
+      path.push(...computePath(stepInPath))
+    }
+  }
+
+  return Object.freeze(path)
+}
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
     super()
@@ -129,10 +145,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   }
 
   get path(): readonly Step<Answer>[] {
-    if (this.answer.value === -1) {
-      return Object.freeze([this])
-    }
-    return Object.freeze([this, ...this.answer.choices[this.answer.value].path])
+    return computePath(this)
   }
 
   get choices(): readonly Choice[] {
