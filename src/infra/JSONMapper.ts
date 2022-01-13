@@ -3,6 +3,7 @@ import Module from "../domain/Module"
 import Playbook from "../domain/Playbook"
 import {
   Answer,
+  Choice,
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   Step,
@@ -51,10 +52,9 @@ export function createStep(step: StepDTO): Step<Answer> {
     return new SingleChoiceAnswerStep(
       step.text,
       new SingleChoiceAnswer(
-        answer.choices.map((choice) => ({
-          text: choice.text,
-          path: choice.path.map(createStep),
-        })),
+        answer.choices.map(
+          (choice) => new Choice(choice.text, choice.path.map(createStep))
+        ),
         answer.value
       ),
       step.id

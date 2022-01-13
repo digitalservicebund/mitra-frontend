@@ -1,4 +1,5 @@
 import {
+  Choice,
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   TextAnswerStep,
@@ -12,6 +13,7 @@ describe("TextAnswerStep", () => {
   })
 
   it("should be cloned along with answer object", () => {
+    expect(step.clone()).not.toEqual(step)
     expect(step.clone().answer).not.toEqual(step.answer)
   })
 
@@ -24,19 +26,16 @@ describe("SingleChoiceAnswerStep", () => {
   const nestedStep = new SingleChoiceAnswerStep(
     "foo",
     new SingleChoiceAnswer([
-      { text: "foo", path: [new TextAnswerStep("foo")] },
-      { text: "bar", path: [new TextAnswerStep("bar")] },
+      new Choice("foo", [new TextAnswerStep("foo")]),
+      new Choice("bar", [new TextAnswerStep("bar")]),
     ])
   )
 
   const step = new SingleChoiceAnswerStep(
     "foo",
     new SingleChoiceAnswer([
-      { text: "foo", path: [new TextAnswerStep("foo")] },
-      {
-        text: "bar",
-        path: [nestedStep],
-      },
+      new Choice("foo", [new TextAnswerStep("foo")]),
+      new Choice("bar", [nestedStep]),
     ])
   )
 
@@ -57,5 +56,12 @@ describe("SingleChoiceAnswerStep", () => {
       nestedStep,
       ...nestedStep.answer.choices[0].path,
     ])
+  })
+
+  it("should be cloned along with answer object", () => {
+    expect(step.clone()).not.toEqual(step)
+    expect(step.clone().answer).not.toEqual(step.answer)
+    expect(step.clone().choices).not.toEqual(step.choices)
+    expect(step.clone().choices).toHaveLength(step.choices.length)
   })
 })

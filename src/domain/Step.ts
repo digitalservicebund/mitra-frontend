@@ -1,7 +1,6 @@
 import Entity from "./Entity"
 
 type Answerable = string | number
-type Choice = { text: string; path: Step<Answer>[] }
 
 const computePathWithChoices = (
   step: Step<Answer>
@@ -22,6 +21,20 @@ const computePathWithChoices = (
   return Object.freeze(path)
 }
 
+export class Choice {
+  constructor(
+    public readonly text: string,
+    public readonly path: Step<Answer>[]
+  ) {}
+
+  clone() {
+    return new Choice(
+      this.text,
+      this.path.map((step) => step.clone())
+    )
+  }
+}
+
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
     super()
@@ -32,12 +45,17 @@ export abstract class Answer<T = Answerable> extends Entity {
     this.value = answer
   }
 
+  abstract clone(): Answer<T>
   abstract toString(): string
 }
 
 export class TextAnswer extends Answer<string> {
   constructor(value = "") {
     super(value)
+  }
+
+  clone(): Answer<string> {
+    return new TextAnswer(this.value)
   }
 
   toString(): string {
@@ -48,6 +66,13 @@ export class TextAnswer extends Answer<string> {
 export class SingleChoiceAnswer extends Answer<number> {
   constructor(public readonly choices: readonly Choice[], value = -1) {
     super(value)
+  }
+
+  clone(): Answer<number> {
+    return new SingleChoiceAnswer(
+      this.choices.map((choice) => choice.clone()),
+      this.value
+    )
   }
 
   toString(): string {
@@ -154,7 +179,10 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   clone(): SingleChoiceAnswerStep {
     return new SingleChoiceAnswerStep(
       this.text,
-      new SingleChoiceAnswer(this.answer.choices, this.answer.value)
+      new SingleChoiceAnswer(
+        this.choices.map((choice) => choice.clone()),
+        this.answer.value
+      )
     )
   }
 }
