@@ -59,7 +59,7 @@ export class TextAnswer extends Answer<string> {
   }
 
   toString(): string {
-    return `${this.value}`
+    return this.value
   }
 }
 
