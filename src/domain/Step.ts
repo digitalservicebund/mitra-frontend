@@ -1,23 +1,23 @@
 import Entity from "./Entity"
 import ValueObject from "./ValueObject"
 
-type Answerable = string | number
+type Answerable = string | number | number[]
 
 const computePathWithChoices = (
   step: Step<Answer>
 ): readonly Step<Answer>[] => {
   const path: Step<Answer>[] = [step]
 
-  const { value, choices } = step.answer as {
-    choices?: Step<Answer>[]
-    value: number
-  }
-  if (choices && choices[value] !== undefined) {
-    for (const stepInPath of (step as SingleChoiceAnswerStep).choices[value]
-      .path) {
-      path.push(...computePathWithChoices(stepInPath))
-    }
-  }
+  const traversable =
+    step instanceof MultipleChoiceAnswerStep
+      ? step.selected
+      : step instanceof SingleChoiceAnswerStep && step.selected !== undefined
+      ? [step.selected]
+      : []
+
+  traversable
+    .flatMap((choice) => choice.path)
+    .forEach((stepInPath) => path.push(...computePathWithChoices(stepInPath)))
 
   return Object.freeze(path)
 }
@@ -76,8 +76,36 @@ export class SingleChoiceAnswer extends Answer<number> {
     )
   }
 
+  get selected(): Choice | undefined {
+    return this.choices[this.value]
+  }
+
   toString(): string {
-    return `${this.choices[this.value]?.text || ""}`
+    return `${this.selected?.text || ""}`
+  }
+}
+
+export class MultipleChoiceAnswer extends Answer<number[]> {
+  constructor(public readonly choices: readonly Choice[], readonly value = []) {
+    super(value)
+  }
+
+  clone(): Answer<number[]> {
+    return new MultipleChoiceAnswer(
+      this.choices.map((choice) => choice.clone()),
+      this.value
+    )
+  }
+
+  get selected(): readonly Choice[] {
+    return this.value.reduce(
+      (memo: Choice[], index: number) => [...memo, this.choices[index]],
+      []
+    )
+  }
+
+  toString(): string {
+    return `${this.selected.map((choice) => choice.text).join(",")}`
   }
 }
 
@@ -177,10 +205,54 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
     return this.answer.choices
   }
 
+  get selected(): Choice | undefined {
+    return this.answer.selected
+  }
+
   clone(): SingleChoiceAnswerStep {
     return new SingleChoiceAnswerStep(
       this.text,
       new SingleChoiceAnswer(
+        this.choices.map((choice) => choice.clone()),
+        this.answer.value
+      )
+    )
+  }
+}
+
+export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
+  // We need to capture the type manually, as at runtime it's not available,
+  // and because Vue uses proxies, thus we can't compare constructors...
+  static readonly TYPE = "MultipleChoiceAnswerStep"
+
+  constructor(
+    text: string,
+    answer: MultipleChoiceAnswer = new MultipleChoiceAnswer([]),
+    id?: string
+  ) {
+    super(text, answer, id)
+  }
+
+  get type(): string {
+    return MultipleChoiceAnswerStep.TYPE
+  }
+
+  get path(): readonly Step<Answer>[] {
+    return computePathWithChoices(this)
+  }
+
+  get choices(): readonly Choice[] {
+    return this.answer.choices
+  }
+
+  get selected(): readonly Choice[] {
+    return this.answer.selected
+  }
+
+  clone(): MultipleChoiceAnswerStep {
+    return new MultipleChoiceAnswerStep(
+      this.text,
+      new MultipleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
       )
