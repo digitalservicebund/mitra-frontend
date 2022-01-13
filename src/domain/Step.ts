@@ -1,4 +1,5 @@
 import Entity from "./Entity"
+import ValueObject from "./ValueObject"
 
 type Answerable = string | number
 
@@ -35,8 +36,9 @@ export class Choice {
   }
 }
 
-export abstract class Answer<T = Answerable> {
+export abstract class Answer<T = Answerable> extends ValueObject {
   constructor(public value: T) {
+    super()
     this.value = value
   }
 
