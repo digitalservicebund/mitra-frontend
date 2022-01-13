@@ -14,7 +14,6 @@ describe("TextAnswerStep", () => {
 
   it("should be cloned along with answer object", () => {
     expect(step.clone()).not.toEqual(step)
-    expect(step.clone().answer).not.toEqual(step.answer)
   })
 
   it("must allow `type` property to be serializable", () => {

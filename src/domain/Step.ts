@@ -35,9 +35,8 @@ export class Choice {
   }
 }
 
-export abstract class Answer<T = Answerable> extends Entity {
+export abstract class Answer<T = Answerable> {
   constructor(public value: T) {
-    super()
     this.value = value
   }
 
