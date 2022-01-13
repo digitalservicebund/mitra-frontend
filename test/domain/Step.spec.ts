@@ -64,4 +64,8 @@ describe("SingleChoiceAnswerStep", () => {
     expect(step.clone().choices).not.toEqual(step.choices)
     expect(step.clone().choices).toHaveLength(step.choices.length)
   })
+
+  it("must allow `type` property to be serializable", () => {
+    expect(JSON.stringify(step)).toMatch(/"type":"SingleChoiceAnswerStep"/)
+  })
 })
