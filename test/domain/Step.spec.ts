@@ -46,17 +46,13 @@ describe("SingleChoiceAnswerStep", () => {
 
   it("should produce a path given a choice has been made", () => {
     step.answer.setValue(0)
-    expect(step.path).toEqual([step, ...step.answer.choices[0].path])
+    expect(step.path).toEqual([step, ...step.choices[0].path])
   })
 
   it("should produce a path including nested choices", () => {
     step.answer.setValue(1)
     nestedStep.answer.setValue(0)
-    expect(step.path).toEqual([
-      step,
-      nestedStep,
-      ...nestedStep.answer.choices[0].path,
-    ])
+    expect(step.path).toEqual([step, nestedStep, ...nestedStep.choices[0].path])
   })
 
   it("should be clonable", () => {
@@ -94,23 +90,19 @@ describe("MultipleChoiceAnswerStep", () => {
 
   it("should produce a path given a choice has been made", () => {
     step.answer.setValue([0])
-    expect(step.path).toEqual([step, ...step.answer.choices[0].path])
+    expect(step.path).toEqual([step, ...step.choices[0].path])
     step.answer.setValue([0, 1])
     expect(step.path).toEqual([
       step,
-      ...step.answer.choices[0].path,
-      ...step.answer.choices[1].path,
+      ...step.choices[0].path,
+      ...step.choices[1].path,
     ])
   })
 
   it("should produce a path including nested choices", () => {
     step.answer.setValue([1])
     nestedStep.answer.setValue([0])
-    expect(step.path).toEqual([
-      step,
-      nestedStep,
-      ...nestedStep.answer.choices[0].path,
-    ])
+    expect(step.path).toEqual([step, nestedStep, ...nestedStep.choices[0].path])
   })
 
   it("should provide selected choices in original order", () => {
