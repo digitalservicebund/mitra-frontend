@@ -14,11 +14,11 @@ describe("TextAnswerStep", () => {
     expect(step.path).toEqual([step])
   })
 
-  it("should be cloned along with answer object", () => {
+  it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
   })
 
-  it("must allow `type` property to be serializable", () => {
+  it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"TextAnswerStep"/)
   })
 })
@@ -59,14 +59,14 @@ describe("SingleChoiceAnswerStep", () => {
     ])
   })
 
-  it("should be cloned along with answer object", () => {
+  it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
     expect(step.clone().answer).not.toEqual(step.answer)
     expect(step.clone().choices).not.toEqual(step.choices)
     expect(step.clone().choices).toHaveLength(step.choices.length)
   })
 
-  it("must allow `type` property to be serializable", () => {
+  it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"SingleChoiceAnswerStep"/)
   })
 })
@@ -113,14 +113,14 @@ describe("MultipleChoiceAnswerStep", () => {
     ])
   })
 
-  it("should be cloned along with answer object", () => {
+  it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
     expect(step.clone().answer).not.toEqual(step.answer)
     expect(step.clone().choices).not.toEqual(step.choices)
     expect(step.clone().choices).toHaveLength(step.choices.length)
   })
 
-  it("must allow `type` property to be serializable", () => {
+  it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"MultipleChoiceAnswerStep"/)
   })
 })
