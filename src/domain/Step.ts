@@ -101,10 +101,12 @@ export class MultipleChoiceAnswer extends Answer<number[]> {
   }
 
   get selected(): readonly Choice[] {
-    return this.value.reduce(
-      (memo: Choice[], index: number) => [...memo, this.choices[index]],
-      []
-    )
+    return this.value
+      .sort()
+      .reduce(
+        (memo: Choice[], index: number) => [...memo, this.choices[index]],
+        []
+      )
   }
 
   toString(): string {

@@ -113,6 +113,11 @@ describe("MultipleChoiceAnswerStep", () => {
     ])
   })
 
+  it("should provide selected choices in original order", () => {
+    step.answer.setValue([1, 0])
+    expect(step.selected).toEqual(step.choices)
+  })
+
   it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
     expect(step.clone().answer).not.toEqual(step.answer)
