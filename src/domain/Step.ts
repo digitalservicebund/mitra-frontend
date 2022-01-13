@@ -21,6 +21,7 @@ const computePathWithChoices = (
 
   return Object.freeze(path)
 }
+
 export abstract class Answer<T = Answerable> extends Entity {
   constructor(public value: T) {
     super()
