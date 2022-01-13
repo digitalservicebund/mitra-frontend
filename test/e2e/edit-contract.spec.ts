@@ -53,7 +53,7 @@ test.describe("Text answer step", async () => {
 
 test.describe("Single choice answer step", async () => {
   test.use({
-    contractFile: "./test/e2e/fixtures/contract-single-choice-step.json",
+    contractFile: "./test/e2e/fixtures/contract-single-choice-answer-step.json",
   })
 
   test("editing unanswered", async ({ page, baseURL }) => {
