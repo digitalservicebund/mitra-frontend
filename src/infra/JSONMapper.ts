@@ -4,6 +4,8 @@ import Playbook from "../domain/Playbook"
 import {
   Answer,
   Choice,
+  MultipleChoiceAnswer,
+  MultipleChoiceAnswerStep,
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   Step,
@@ -11,21 +13,26 @@ import {
   TextAnswerStep,
 } from "../domain/Step"
 
-export type TextAnswerDTO = { value: string }
-
 export type ChoiceDTO = {
   text: string
   path: StepDTO[]
 }
+
+export type TextAnswerDTO = { value: string }
 
 export type SingleChoiceAnswerDTO = {
   choices: ChoiceDTO[]
   value: number
 }
 
+export type MultipleChoiceAnswerDTO = {
+  choices: ChoiceDTO[]
+  value: number[]
+}
+
 export type StepDTO = {
   id: string
-  answer: TextAnswerDTO | SingleChoiceAnswerDTO
+  answer: TextAnswerDTO | SingleChoiceAnswerDTO | MultipleChoiceAnswerDTO
   text: string
   type: string
   produce?: string
@@ -52,6 +59,19 @@ export function createStep(step: StepDTO): Step<Answer> {
     return new SingleChoiceAnswerStep(
       step.text,
       new SingleChoiceAnswer(
+        answer.choices.map(
+          (choice) => new Choice(choice.text, choice.path.map(createStep))
+        ),
+        answer.value
+      ),
+      step.id
+    )
+  }
+  if (step.type === MultipleChoiceAnswerStep.TYPE) {
+    const answer = step.answer as MultipleChoiceAnswerDTO
+    return new MultipleChoiceAnswerStep(
+      step.text,
+      new MultipleChoiceAnswer(
         answer.choices.map(
           (choice) => new Choice(choice.text, choice.path.map(createStep))
         ),

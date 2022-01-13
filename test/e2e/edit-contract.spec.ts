@@ -60,7 +60,10 @@ test.describe("Single choice answer step", async () => {
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
     )
+
     const document = await getDocument(page)
+    const preview = await page.locator("section:right-of(main)").elementHandle()
+
     await findByLabelText(document, "Test choice 1A")
     await findByLabelText(document, "Test choice 1B")
     await page.click("text=Test choice 1B")
@@ -68,13 +71,44 @@ test.describe("Single choice answer step", async () => {
     await expect(
       page.locator("li:has(label:text('Test choice 1B')) >> [role=radio]")
     ).toBeChecked()
-    const preview = await page.locator("section:right-of(main)").elementHandle()
     await findByText(preview, "Test choice 1B")
     await page.click("text=Weiter")
-    await findByTitle(document, "Test step 1B").then((input) =>
-      input.type("Answer to show up in preview")
+    await findByTitle(document, "Test step 1B")
+    await page.click("text=Weiter")
+    await findByTitle(document, "Test step 2")
+  })
+})
+
+test.describe("Multiple choice answer step", async () => {
+  test.use({
+    contractFile:
+      "./test/e2e/fixtures/contract-multiple-choice-answer-step.json",
+  })
+
+  test("editing unanswered", async ({ page, baseURL }) => {
+    await page.goto(
+      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
     )
-    await findByText(preview, "Answer to show up in preview")
+
+    const document = await getDocument(page)
+    const preview = await page.locator("section:right-of(main)").elementHandle()
+
+    await findByLabelText(document, "Test choice 1A")
+    await findByLabelText(document, "Test choice 1B")
+    await page.click("text=Test choice 1A")
+    await expect(
+      page.locator("li:has(label:text('Test choice 1A')) >> [role=checkbox]")
+    ).toBeChecked()
+    await findByText(preview, "Test choice 1A")
+    await page.click("text=Test choice 1B")
+    await expect(
+      page.locator("li:has(label:text('Test choice 1B')) >> [role=checkbox]")
+    ).toBeChecked()
+    await findByText(preview, "Test choice 1A, Test choice 1B")
+    await page.click("text=Weiter")
+    await findByTitle(document, "Test step 1A")
+    await page.click("text=Weiter")
+    await findByTitle(document, "Test step 1B")
     await page.click("text=Weiter")
     await findByTitle(document, "Test step 2")
   })

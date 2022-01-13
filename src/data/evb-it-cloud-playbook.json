@@ -49,6 +49,37 @@
                 }
               ]
             }
+          },
+          {
+            "id": "f7e2bb12-ba14-4686-8513-afbdcab276a8",
+            "text": "Schritt 1.4",
+            "type": "MultipleChoiceAnswerStep",
+            "answer": {
+              "choices": [
+                {
+                  "text": "Auswahl 1",
+                  "path": [
+                    {
+                      "id": "57c97b0d-4eae-439e-b747-c297b76128e5",
+                      "text": "Schritt 1.4 1",
+                      "type": "TextAnswerStep",
+                      "answer": {}
+                    }
+                  ]
+                },
+                {
+                  "text": "Auswahl 2",
+                  "path": [
+                    {
+                      "id": "0b79fbb8-18f4-4824-af2a-3f4a95dc8cc6",
+                      "text": "Schritt 1.4 2",
+                      "type": "TextAnswerStep",
+                      "answer": {}
+                    }
+                  ]
+                }
+              ]
+            }
           }
         ]
       },

@@ -86,7 +86,10 @@ export class SingleChoiceAnswer extends Answer<number> {
 }
 
 export class MultipleChoiceAnswer extends Answer<number[]> {
-  constructor(public readonly choices: readonly Choice[], readonly value = []) {
+  constructor(
+    public readonly choices: readonly Choice[],
+    readonly value: number[] = []
+  ) {
     super(value)
   }
 
@@ -105,7 +108,7 @@ export class MultipleChoiceAnswer extends Answer<number[]> {
   }
 
   toString(): string {
-    return `${this.selected.map((choice) => choice.text).join(",")}`
+    return `${this.selected.map((choice) => choice.text).join(", ")}`
   }
 }
 

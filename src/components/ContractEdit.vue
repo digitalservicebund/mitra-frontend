@@ -4,11 +4,13 @@
   import Contract from "../domain/Contract"
   import {
     Answer,
+    MultipleChoiceAnswerStep,
     SingleChoiceAnswerStep,
     Step,
     TextAnswerStep,
   } from "../domain/Step"
   import { useSession } from "../session"
+  import MultipleChoiceAnswerStepComponent from "./MultipleChoiceAnswerStep.vue"
   import SingleChoiceAnswerStepComponent from "./SingleChoiceAnswerStep.vue"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
 
@@ -28,6 +30,9 @@
     }
     if (step.type === SingleChoiceAnswerStep.TYPE) {
       return SingleChoiceAnswerStepComponent
+    }
+    if (step.type === MultipleChoiceAnswerStep.TYPE) {
+      return MultipleChoiceAnswerStepComponent
     }
     return null // unknown type, don't render anything
   })
