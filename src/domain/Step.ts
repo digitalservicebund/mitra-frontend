@@ -8,14 +8,14 @@ const computePathWithChoices = (
 ): readonly Step<Answer>[] => {
   const path: Step<Answer>[] = [step]
 
-  const traversable =
-    step instanceof MultipleChoiceAnswerStep
-      ? step.selected
-      : step instanceof SingleChoiceAnswerStep && step.selected !== undefined
-      ? [step.selected]
-      : []
+  // Take the selected choice(s) from either SingleChoiceAnswerStep or
+  // MultipleChoiceAnswerStep. Other steps won't hold a `selected` property.
+  const { selected } = step as {
+    selected?: Choice | Choice[]
+  }
 
-  traversable
+  ;[selected ?? []]
+    .flat()
     .flatMap((choice) => choice.path)
     .forEach((stepInPath) => path.push(...computePathWithChoices(stepInPath)))
 
