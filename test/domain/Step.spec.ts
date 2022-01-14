@@ -2,6 +2,7 @@ import {
   Choice,
   MultipleChoiceAnswer,
   MultipleChoiceAnswerStep,
+  RichTextAnswerStep,
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   TextAnswerStep,
@@ -20,6 +21,22 @@ describe("TextAnswerStep", () => {
 
   it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"TextAnswerStep"/)
+  })
+})
+
+describe("RichTextAnswerStep", () => {
+  const step = new RichTextAnswerStep("<p><strong>foo</strong></p>")
+
+  it("should produce a path", () => {
+    expect(step.path).toEqual([step])
+  })
+
+  it("should be clonable", () => {
+    expect(step.clone()).not.toEqual(step)
+  })
+
+  it("has a serializable `type` property", () => {
+    expect(JSON.stringify(step)).toMatch(/"type":"RichTextAnswerStep"/)
   })
 })
 
