@@ -1,7 +1,7 @@
 import Entity from "./Entity"
 import ValueObject from "./ValueObject"
 
-type Answerable = string | number | number[]
+type Answerable = string | number | number[] | Row[]
 
 const computePathWithChoices = (
   step: Step<Answer>
@@ -125,6 +125,22 @@ export class MultipleChoiceAnswer extends Answer<number[]> {
 
   toString(): string {
     return `${this.selected.map((choice) => choice.text).join(", ")}`
+  }
+}
+
+export type Row = { [key: string]: string }
+
+export class SheetAnswer extends Answer<Row[]> {
+  constructor(value: Row[]) {
+    super(value)
+  }
+
+  clone(): Answer<Row[]> {
+    return new SheetAnswer(this.value)
+  }
+
+  toString(): string {
+    return JSON.stringify(this.value)
   }
 }
 
@@ -310,5 +326,28 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
         this.answer.value
       )
     )
+  }
+}
+
+export class SheetAnswerStep extends Step<SheetAnswer> {
+  // We need to capture the type manually, as at runtime it's not available,
+  // and because Vue uses proxies, thus we can't compare constructors...
+  static readonly TYPE = "SheetAnswerStep"
+
+  constructor(
+    text: string,
+    answer: SheetAnswer,
+    public readonly produce: string = "${answer}",
+    id?: string
+  ) {
+    super(text, answer, id)
+  }
+
+  get type(): string {
+    return SheetAnswerStep.TYPE
+  }
+
+  clone(): SheetAnswerStep {
+    return new SheetAnswerStep(this.text, new SheetAnswer(this.answer.value))
   }
 }

@@ -6,6 +6,8 @@ import {
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   TextAnswerStep,
+  SheetAnswer,
+  SheetAnswerStep,
 } from "../../src/domain/Step"
 
 describe("TextAnswerStep", () => {
@@ -136,5 +138,27 @@ describe("MultipleChoiceAnswerStep", () => {
 
   it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"MultipleChoiceAnswerStep"/)
+  })
+})
+
+describe("SheetAnswerStep", () => {
+  const row = { column1: "fuu", colum2: "bar", colum3: "baz" }
+  const emptyRow = { column1: "", colum2: "", colum3: "" }
+  const step = new SheetAnswerStep("foo", new SheetAnswer([row, emptyRow]))
+
+  it("should be iniated with answer", () => {
+    expect(step.answer.value).toEqual([row, emptyRow])
+  })
+
+  it("should produce a path", () => {
+    expect(step.path).toEqual([step])
+  })
+
+  it("should be clonable", () => {
+    expect(step.clone()).not.toEqual(step)
+  })
+
+  it("has a serializable `type` property", () => {
+    expect(JSON.stringify(step)).toMatch(/"type":"SheetAnswerStep"/)
   })
 })
