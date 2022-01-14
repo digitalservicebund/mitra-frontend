@@ -6,6 +6,8 @@ import {
   Choice,
   MultipleChoiceAnswer,
   MultipleChoiceAnswerStep,
+  RichTextAnswer,
+  RichTextAnswerStep,
   SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   Step,
@@ -19,6 +21,8 @@ export type ChoiceDTO = {
 }
 
 export type TextAnswerDTO = { value: string }
+
+export type RichTextAnswerDTO = { value: string }
 
 export type SingleChoiceAnswerDTO = {
   choices: ChoiceDTO[]
@@ -50,6 +54,15 @@ export function createStep(step: StepDTO): Step<Answer> {
     return new TextAnswerStep(
       step.text,
       new TextAnswer(answer.value),
+      step.produce,
+      step.id
+    )
+  }
+  if (step.type === RichTextAnswerStep.TYPE) {
+    const answer = step.answer as RichTextAnswerDTO
+    return new RichTextAnswerStep(
+      step.text,
+      new RichTextAnswer(answer.value),
       step.produce,
       step.id
     )

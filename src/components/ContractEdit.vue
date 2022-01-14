@@ -5,12 +5,14 @@
   import {
     Answer,
     MultipleChoiceAnswerStep,
+    RichTextAnswerStep,
     SingleChoiceAnswerStep,
     Step,
     TextAnswerStep,
   } from "../domain/Step"
   import { useSession } from "../session"
   import MultipleChoiceAnswerStepComponent from "./MultipleChoiceAnswerStep.vue"
+  import RichTextAnswerStepComponent from "./RichTextAnswerStep.vue"
   import SingleChoiceAnswerStepComponent from "./SingleChoiceAnswerStep.vue"
   import TextAnswerStepComponent from "./TextAnswerStep.vue"
 
@@ -27,6 +29,9 @@
     const step = currentStep.value as Step<Answer>
     if (step.type === TextAnswerStep.TYPE) {
       return TextAnswerStepComponent
+    }
+    if (step.type === RichTextAnswerStep.TYPE) {
+      return RichTextAnswerStepComponent
     }
     if (step.type === SingleChoiceAnswerStep.TYPE) {
       return SingleChoiceAnswerStepComponent

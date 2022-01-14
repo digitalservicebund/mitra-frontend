@@ -51,6 +51,19 @@ test.describe("Text answer step", async () => {
   })
 })
 
+test.describe("Rich text answer step", async () => {
+  test.use({
+    contractFile: "./test/e2e/fixtures/contract-rich-text-answer-step.json",
+  })
+
+  test("editing unanswered", async ({ page, baseURL }) => {
+    await page.goto(
+      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
+    )
+    await expect(page.locator(".ProseMirror")).toBeEditable()
+  })
+})
+
 test.describe("Single choice answer step", async () => {
   test.use({
     contractFile: "./test/e2e/fixtures/contract-single-choice-answer-step.json",

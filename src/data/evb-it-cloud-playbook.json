@@ -80,6 +80,12 @@
                 }
               ]
             }
+          },
+          {
+            "id": "5ee3e9de-5052-49ac-95ed-849df72a7167",
+            "text": "Schritt 1.5",
+            "type": "RichTextAnswerStep",
+            "answer": {}
           }
         ]
       },
