@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import Checkbox from "primevue/checkbox"
   import { ref } from "vue"
-  import { SingleChoiceAnswerStep } from "../domain/Step"
+  import { MultipleChoiceAnswerStep } from "../domain/Step"
 
-  const props = defineProps<{ step: SingleChoiceAnswerStep }>()
+  const props = defineProps<{ step: MultipleChoiceAnswerStep }>()
 
   const answer = ref(props.step.answer.value)
   const labels = props.step.choices.map((choice) => choice.text)
