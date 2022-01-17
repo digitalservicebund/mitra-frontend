@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import StarterKit from "@tiptap/starter-kit"
   import { useEditor, EditorContent } from "@tiptap/vue-3"
-  import { watch } from "vue"
+  import { onBeforeUnmount, watch } from "vue"
   import { RichTextAnswerStep } from "../domain/Step"
 
   const props = defineProps<{ step: RichTextAnswerStep }>()
@@ -17,6 +17,8 @@
     (current) => editor.value?.commands.setContent(current.print()),
     { deep: true }
   )
+
+  onBeforeUnmount(() => editor.value?.destroy())
 </script>
 
 <template>
