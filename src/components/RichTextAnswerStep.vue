@@ -11,7 +11,10 @@
   const editor = useEditor({
     extensions: [StarterKit],
     content: answer.value,
-    onUpdate: ({ editor }) => props.step.answer.setValue(editor.getHTML()),
+    onUpdate: ({ editor }) => {
+      answer.value = editor.getHTML()
+      props.step.answer.setValue(editor.getHTML())
+    },
     editorProps: {
       attributes: {
         class: "m-2 focus:outline-none",

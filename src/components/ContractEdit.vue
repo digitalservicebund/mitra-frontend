@@ -39,7 +39,7 @@
     if (step.type === MultipleChoiceAnswerStep.TYPE) {
       return MultipleChoiceAnswerStepComponent
     }
-    console.error("Step type unknown, cannot render component", step)
+    console.error("Step type unknown, cannot render edit component", step)
     throw new Error("Step type unknown")
   })
 

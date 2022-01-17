@@ -60,7 +60,10 @@ test.describe("Rich text answer step", async () => {
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
     )
-    await expect(page.locator(".ProseMirror")).toBeEditable()
+    await expect(page.locator("main .ProseMirror")).toBeEditable()
+    await page.fill("main .ProseMirror", "Answer to show up in preview")
+    const preview = await page.locator("section:right-of(main)").elementHandle()
+    await findByText(preview, "Answer to show up in preview")
   })
 })
 
