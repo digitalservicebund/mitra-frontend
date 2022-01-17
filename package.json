@@ -23,7 +23,14 @@
     "audit:licences": "license-checker --production --excludePrivatePackages --onlyAllow 'MIT;ISC;BSD-3-Clause;Apache-2.0'"
   },
   "dependencies": {
-    "@tiptap/starter-kit": "^2.0.0-beta.171",
+    "@tiptap/extension-bold": "^2.0.0-beta.25",
+    "@tiptap/extension-document": "^2.0.0-beta.15",
+    "@tiptap/extension-italic": "^2.0.0-beta.25",
+    "@tiptap/extension-list-item": "^2.0.0-beta.20",
+    "@tiptap/extension-ordered-list": "^2.0.0-beta.27",
+    "@tiptap/extension-paragraph": "^2.0.0-beta.23",
+    "@tiptap/extension-text": "^2.0.0-beta.15",
+    "@tiptap/extension-underline": "^2.0.0-beta.22",
     "@tiptap/vue-3": "^2.0.0-beta.88",
     "file-saver": "^2.0.5",
     "pinia": "^2.0.6",
