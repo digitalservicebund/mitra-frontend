@@ -39,7 +39,8 @@
     if (step.type === MultipleChoiceAnswerStep.TYPE) {
       return MultipleChoiceAnswerStepComponent
     }
-    return null // unknown type, don't render anything
+    console.error("Step type unknown, cannot render component", step)
+    throw new Error("Step type unknown")
   })
 
   const hasPreviousStep = computed(

@@ -93,6 +93,7 @@ export function createStep(step: StepDTO): Step<Answer> {
       step.id
     )
   }
+  console.error("Step type unknown, cannot deserialize JSON", step)
   throw new Error("Step type unknown")
 }
 
