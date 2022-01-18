@@ -27,7 +27,7 @@
   <div class="mb-4">
     {{ step.text }}
   </div>
-  <div class="mb-4">
+  <div class="rich-text-editor mb-4">
     <div v-if="editor">
       <button
         :class="{
@@ -115,9 +115,7 @@
     </div>
     <editor-content
       :editor="editor"
-      class="border rounded border-neutral-300"
+      class="border border-neutral-300 min-h-[250px]"
     />
   </div>
 </template>
-
-<style></style>
