@@ -9,12 +9,15 @@
   const editor = useEditor({
     ...RichTextEditorConfig,
     content: props.step.print(),
-    onUpdate: ({ editor }) => props.step.answer.setValue(editor.getHTML()),
     editorProps: {
       attributes: {
         class: "m-2 focus:outline-none",
+        title: props.step.text,
+        role: "textbox",
+        "aria-multiline": "true",
       },
     },
+    onUpdate: ({ editor }) => props.step.answer.setValue(editor.getHTML()),
   })
 
   onBeforeUnmount(() => editor.value?.destroy())
