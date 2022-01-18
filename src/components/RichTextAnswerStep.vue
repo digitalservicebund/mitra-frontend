@@ -28,49 +28,49 @@
     {{ step.text }}
   </div>
   <div class="rich-text-editor mb-4">
-    <div v-if="editor">
+    <div v-if="editor" class="border">
       <button
-        :class="{
-          'font-bold': editor.isActive('bold'),
-          border: true,
-          'p-2': true,
-        }"
+        class="p-2"
+        title="Fett"
+        aria-label="Fett"
         @click="editor?.chain().focus().toggleBold().run()"
       >
-        bold
+        <span class="material-icons-outlined text-base" aria-hidden="true">
+          format_bold
+        </span>
       </button>
       <button
-        :class="{
-          'font-bold': editor.isActive('italic'),
-          border: true,
-          'p-2': true,
-        }"
+        class="p-2"
+        title="Kursiv"
+        aria-label="Kursiv"
         @click="editor?.chain().focus().toggleItalic().run()"
       >
-        italic
+        <span class="material-icons-outlined text-base" aria-hidden="true">
+          format_italic
+        </span>
       </button>
       <button
-        :class="{
-          'font-bold': editor.isActive('underline'),
-          border: true,
-          'p-2': true,
-        }"
+        class="p-2"
+        title="Unterstrichen"
+        aria-label="Unterstrichen"
         @click="editor?.chain().focus().toggleUnderline().run()"
       >
-        underline
+        <span class="material-icons-outlined text-base" aria-hidden="true">
+          format_underlined
+        </span>
       </button>
       <button
-        :class="{
-          'font-bold': editor.isActive('orderedList'),
-          border: true,
-          'p-2': true,
-        }"
+        class="p-2"
+        title="Liste"
+        aria-label="Liste"
         @click="editor?.chain().focus().toggleOrderedList().run()"
       >
-        list
+        <span class="material-icons-outlined text-base" aria-hidden="true">
+          format_list_bulleted
+        </span>
       </button>
       <button
-        class="border p-2"
+        class="p-2"
         @click="
           editor
             ?.chain()
@@ -81,35 +81,23 @@
       >
         insert table
       </button>
-      <button
-        class="border p-2"
-        @click="editor?.chain().focus().deleteTable().run()"
-      >
+      <button class="p-2" @click="editor?.chain().focus().deleteTable().run()">
         delete table
       </button>
-      <button
-        class="border p-2"
-        @click="editor?.chain().focus().addRowAfter().run()"
-      >
+      <button class="p-2" @click="editor?.chain().focus().addRowAfter().run()">
         insert row
       </button>
-      <button
-        class="border p-2"
-        @click="editor?.chain().focus().deleteRow().run()"
-      >
+      <button class="p-2" @click="editor?.chain().focus().deleteRow().run()">
         delete row
       </button>
 
       <button
-        class="border p-2"
+        class="p-2"
         @click="editor?.chain().focus().addColumnAfter().run()"
       >
         insert column
       </button>
-      <button
-        class="border p-2"
-        @click="editor?.chain().focus().deleteColumn().run()"
-      >
+      <button class="p-2" @click="editor?.chain().focus().deleteColumn().run()">
         delete column
       </button>
     </div>

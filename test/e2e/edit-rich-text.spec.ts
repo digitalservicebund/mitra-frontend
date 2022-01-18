@@ -54,24 +54,24 @@ test.describe("Rich text editing", async () => {
   })
 
   test("bold text", async ({ page, editor }) => {
-    await page.locator("text=bold").click()
+    await page.locator("button[title=Fett]").click()
     expect(await editor.innerHTML()).toEqual(
       "<p><strong>formattable</strong></p>"
     )
   })
 
   test("italic text", async ({ page, editor }) => {
-    await page.locator("text=italic").click()
+    await page.locator("button[title=Kursiv]").click()
     expect(await editor.innerHTML()).toEqual("<p><em>formattable</em></p>")
   })
 
   test("underlined text", async ({ page, editor }) => {
-    await page.locator("text=underline").click()
+    await page.locator("button[title=Unterstrichen]").click()
     expect(await editor.innerHTML()).toEqual("<p><u>formattable</u></p>")
   })
 
   test("ordered list", async ({ page, editor }) => {
-    await page.locator("text=list").click()
+    await page.locator("button[title=Liste]").click()
     expect(await editor.innerHTML()).toEqual(
       "<ol><li><p>formattable</p></li></ol>"
     )
