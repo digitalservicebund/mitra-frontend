@@ -76,4 +76,29 @@ test.describe("Rich text editing", async () => {
       "<ol><li><p>formattable</p></li></ol>"
     )
   })
+
+  test("table", async ({ page, editor }) => {
+    await page.locator("text=insert table").click()
+    expect(await (await editor.elementHandle()).$$("table")).toHaveLength(1)
+    // Default table inits with 3 rows
+    expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(3)
+    // Default table inits with 3 columns
+    expect(
+      await (await editor.elementHandle()).$$("tr:first-child td")
+    ).toHaveLength(3)
+    await page.locator("text=insert row").click()
+    expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(4) // row added
+    await page.locator("text=insert colum").click()
+    expect(
+      await (await editor.elementHandle()).$$("tr:first-child td")
+    ).toHaveLength(4) // column added
+    await page.locator("text=delete colum").click()
+    expect(
+      await (await editor.elementHandle()).$$("tr:first-child td")
+    ).toHaveLength(3)
+    await page.locator("text=delete row").click()
+    expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(3)
+    await page.locator("text=delete table").click()
+    expect(await (await editor.elementHandle()).$$("table")).toHaveLength(0)
+  })
 })

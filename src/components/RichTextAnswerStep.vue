@@ -69,6 +69,49 @@
       >
         list
       </button>
+      <button
+        class="border p-2"
+        @click="
+          editor
+            ?.chain()
+            .focus()
+            .insertTable({ rows: 3, cols: 3, withHeaderRow: false })
+            .run()
+        "
+      >
+        insert table
+      </button>
+      <button
+        class="border p-2"
+        @click="editor?.chain().focus().deleteTable().run()"
+      >
+        delete table
+      </button>
+      <button
+        class="border p-2"
+        @click="editor?.chain().focus().addRowAfter().run()"
+      >
+        insert row
+      </button>
+      <button
+        class="border p-2"
+        @click="editor?.chain().focus().deleteRow().run()"
+      >
+        delete row
+      </button>
+
+      <button
+        class="border p-2"
+        @click="editor?.chain().focus().addColumnAfter().run()"
+      >
+        insert column
+      </button>
+      <button
+        class="border p-2"
+        @click="editor?.chain().focus().deleteColumn().run()"
+      >
+        delete column
+      </button>
     </div>
     <editor-content
       :editor="editor"
