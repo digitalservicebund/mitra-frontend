@@ -8,7 +8,6 @@ type TestFixtures = {
 }
 
 const contractId = "3d324eca-06c2-4781-af52-705f49039d0d"
-const editorSelector = "main .ProseMirror"
 
 const test = base.extend<TestFixtures>({
   contractFile: "", // needs to be filled in per test.use(...) atm, see below
@@ -34,12 +33,10 @@ const test = base.extend<TestFixtures>({
   },
   page: async ({ page, baseURL }, use) => {
     await page.goto(`${baseURL}/mitra-frontend/contract/${contractId}`)
-    const editor = page.locator(editorSelector)
-    await editor.fill("formattable")
     await use(page)
   },
   editor: async ({ page }, use) => {
-    const editor = page.locator(editorSelector)
+    const editor = page.locator("main .ProseMirror")
     await use(editor)
   },
 })
@@ -49,10 +46,11 @@ const test = base.extend<TestFixtures>({
 // => https://github.com/jsdom/jsdom#unimplemented-parts-of-the-web-platform
 test.describe("Rich text editing", async () => {
   test.use({
-    contractFile: "./test/e2e/fixtures/contract-rich-text-answer-step.json",
+    contractFile: "./test/e2e/fixtures/contract-edit-rich-text.json",
   })
 
   test("bold text", async ({ page, editor }) => {
+    await editor.fill("formattable")
     await editor.selectText()
     await page.locator("button[title=Fett]").click()
     expect(await editor.innerHTML()).toEqual(
@@ -61,18 +59,21 @@ test.describe("Rich text editing", async () => {
   })
 
   test("italic text", async ({ page, editor }) => {
+    await editor.fill("formattable")
     await editor.selectText()
     await page.locator("button[title=Kursiv]").click()
     expect(await editor.innerHTML()).toEqual("<p><em>formattable</em></p>")
   })
 
   test("underlined text", async ({ page, editor }) => {
+    await editor.fill("formattable")
     await editor.selectText()
     await page.locator("button[title=Unterstrichen]").click()
     expect(await editor.innerHTML()).toEqual("<p><u>formattable</u></p>")
   })
 
   test("ordered list", async ({ page, editor }) => {
+    await editor.fill("formattable")
     await editor.selectText()
     await page.locator("button[title=Liste]").click()
     expect(await editor.innerHTML()).toEqual(
@@ -127,5 +128,9 @@ test.describe("Rich text editing", async () => {
   }) => {
     await editor.click({ position: { x: 10, y: 100 } })
     expect(editor).toBeFocused()
+  })
+
+  test("former answer prefill", async ({ editor }) => {
+    expect(await editor.innerHTML()).toEqual("<p>Earlier answer</p>")
   })
 })

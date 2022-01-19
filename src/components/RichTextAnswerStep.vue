@@ -48,7 +48,7 @@
 
   const editor = useEditor({
     ...RichTextEditorConfig,
-    content: props.step.print(),
+    content: props.step.answer.value,
     editorProps: {
       attributes: {
         class: "border border-neutral-300 p-2 min-h-[250px] focus:outline-none",
