@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <div class="mb-4">
+  <div class="rich-text-editor-preview mb-4">
     <editor-content :editor="editor" />
   </div>
 </template>

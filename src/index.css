@@ -4,11 +4,13 @@
 
 /* purgecss start ignore */
 
-.rich-text-editor table {
+.rich-text-editor table,
+.rich-text-editor-preview table {
   @apply table-fixed border-collapse w-full;
 }
 
-.rich-text-editor td {
+.rich-text-editor td,
+.rich-text-editor-preview td {
   @apply border p-1 align-top;
 }
 
