@@ -36,7 +36,6 @@ const test = base.extend<TestFixtures>({
     await page.goto(`${baseURL}/mitra-frontend/contract/${contractId}`)
     const editor = page.locator(editorSelector)
     await editor.fill("formattable")
-    await editor.selectText()
     await use(page)
   },
   editor: async ({ page }, use) => {
@@ -54,6 +53,7 @@ test.describe("Rich text editing", async () => {
   })
 
   test("bold text", async ({ page, editor }) => {
+    await editor.selectText()
     await page.locator("button[title=Fett]").click()
     expect(await editor.innerHTML()).toEqual(
       "<p><strong>formattable</strong></p>"
@@ -61,16 +61,19 @@ test.describe("Rich text editing", async () => {
   })
 
   test("italic text", async ({ page, editor }) => {
+    await editor.selectText()
     await page.locator("button[title=Kursiv]").click()
     expect(await editor.innerHTML()).toEqual("<p><em>formattable</em></p>")
   })
 
   test("underlined text", async ({ page, editor }) => {
+    await editor.selectText()
     await page.locator("button[title=Unterstrichen]").click()
     expect(await editor.innerHTML()).toEqual("<p><u>formattable</u></p>")
   })
 
   test("ordered list", async ({ page, editor }) => {
+    await editor.selectText()
     await page.locator("button[title=Liste]").click()
     expect(await editor.innerHTML()).toEqual(
       "<ol><li><p>formattable</p></li></ol>"
@@ -78,7 +81,9 @@ test.describe("Rich text editing", async () => {
   })
 
   test("table", async ({ page, editor }) => {
-    await page.locator("text=insert table").click()
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Tabelle einfügen")).toBeVisible()
+    await page.locator("text=Tabelle einfügen").click()
     expect(await (await editor.elementHandle()).$$("table")).toHaveLength(1)
     // Default table inits with 3 rows
     expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(3)
@@ -86,19 +91,34 @@ test.describe("Rich text editing", async () => {
     expect(
       await (await editor.elementHandle()).$$("tr:first-child td")
     ).toHaveLength(3)
-    await page.locator("text=insert row").click()
+
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Zeile einfügen")).toBeVisible()
+    await page.locator("text=Zeile einfügen").click()
     expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(4) // row added
-    await page.locator("text=insert colum").click()
+
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Zeile löschen")).toBeVisible()
+    await page.locator("text=Zeile löschen").click()
+    expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(3)
+
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Spalte einfügen")).toBeVisible()
+    await page.locator("text=Spalte einfügen").click()
     expect(
       await (await editor.elementHandle()).$$("tr:first-child td")
     ).toHaveLength(4) // column added
-    await page.locator("text=delete colum").click()
+
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Spalte löschen")).toBeVisible()
+    await page.locator("text=Spalte löschen").click()
     expect(
       await (await editor.elementHandle()).$$("tr:first-child td")
     ).toHaveLength(3)
-    await page.locator("text=delete row").click()
-    expect(await (await editor.elementHandle()).$$("tr")).toHaveLength(3)
-    await page.locator("text=delete table").click()
+
+    await page.locator("button[title=Tabelle]").click()
+    await expect(page.locator("text=Tabelle löschen")).toBeVisible()
+    await page.locator("text=Tabelle löschen").click()
     expect(await (await editor.elementHandle()).$$("table")).toHaveLength(0)
   })
 

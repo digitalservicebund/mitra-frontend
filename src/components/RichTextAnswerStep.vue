@@ -1,10 +1,46 @@
 <script setup lang="ts">
   import { useEditor, EditorContent } from "@tiptap/vue-3"
-  import { onBeforeUnmount } from "vue"
+  import Menu from "primevue/menu"
+  import { onBeforeUnmount, ref } from "vue"
   import { RichTextAnswerStep } from "../domain/Step"
   import RichTextEditorConfig from "./RichTextEditorConfig"
 
   const props = defineProps<{ step: RichTextAnswerStep }>()
+
+  const menu = ref()
+
+  const tableActions = [
+    {
+      label: "Tabelle einfügen",
+      command: () =>
+        editor.value?.commands.insertTable({
+          rows: 3,
+          cols: 3,
+          withHeaderRow: false,
+        }),
+    },
+    {
+      label: "Tabelle löschen",
+      command: () => editor.value?.chain().focus().deleteTable().run(),
+    },
+    {
+      label: "Zeile einfügen",
+      command: () => editor.value?.chain().focus().addRowAfter().run(),
+    },
+    {
+      label: "Zeile löschen",
+      command: () => editor.value?.chain().focus().deleteRow().run(),
+    },
+    {
+      label: "Spalte einfügen",
+      command: () => editor.value?.chain().focus().addColumnAfter().run(),
+    },
+    {
+      label: "Spalte löschen",
+      command: () => editor.value?.chain().focus().deleteColumn().run(),
+    },
+  ]
+  const toggleTableActionsMenu = (event: Event) => menu.value.toggle(event)
 
   const editor = useEditor({
     ...RichTextEditorConfig,
@@ -71,34 +107,15 @@
       </button>
       <button
         class="p-2"
-        @click="
-          editor
-            ?.chain()
-            .focus()
-            .insertTable({ rows: 3, cols: 3, withHeaderRow: false })
-            .run()
-        "
+        title="Tabelle"
+        aria-label="Tabelle"
+        @click="toggleTableActionsMenu"
       >
-        insert table
+        <span class="material-icons-outlined text-base" aria-hidden="true">
+          view_module
+        </span>
       </button>
-      <button class="p-2" @click="editor?.chain().focus().deleteTable().run()">
-        delete table
-      </button>
-      <button class="p-2" @click="editor?.chain().focus().addRowAfter().run()">
-        insert row
-      </button>
-      <button class="p-2" @click="editor?.chain().focus().deleteRow().run()">
-        delete row
-      </button>
-      <button
-        class="p-2"
-        @click="editor?.chain().focus().addColumnAfter().run()"
-      >
-        insert column
-      </button>
-      <button class="p-2" @click="editor?.chain().focus().deleteColumn().run()">
-        delete column
-      </button>
+      <Menu ref="menu" :model="tableActions" :popup="true" />
     </div>
     <editor-content :editor="editor" />
   </div>
