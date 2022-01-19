@@ -1,5 +1,6 @@
 import BoldExtension from "@tiptap/extension-bold"
 import DocumentExtension from "@tiptap/extension-document"
+import GapCursorExtension from "@tiptap/extension-gapcursor"
 import ItalicExtension from "@tiptap/extension-italic"
 import ListItemExtension from "@tiptap/extension-list-item"
 import OrderedListExtension from "@tiptap/extension-ordered-list"
@@ -15,6 +16,7 @@ export default {
   extensions: [
     BoldExtension,
     DocumentExtension,
+    GapCursorExtension,
     ItalicExtension,
     ListItemExtension,
     OrderedListExtension,
