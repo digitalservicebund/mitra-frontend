@@ -101,4 +101,11 @@ test.describe("Rich text editing", async () => {
     await page.locator("text=delete table").click()
     expect(await (await editor.elementHandle()).$$("table")).toHaveLength(0)
   })
+
+  test("set focus when clicked outside of editable content", async ({
+    editor,
+  }) => {
+    await editor.click({ position: { x: 10, y: 100 } })
+    expect(editor).toBeFocused()
+  })
 })

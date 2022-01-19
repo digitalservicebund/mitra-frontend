@@ -11,7 +11,7 @@
     content: props.step.print(),
     editorProps: {
       attributes: {
-        class: "m-2 focus:outline-none",
+        class: "border border-neutral-300 p-2 min-h-[250px] focus:outline-none",
         title: props.step.text,
         role: "textbox",
         "aria-multiline": "true",
@@ -90,7 +90,6 @@
       <button class="p-2" @click="editor?.chain().focus().deleteRow().run()">
         delete row
       </button>
-
       <button
         class="p-2"
         @click="editor?.chain().focus().addColumnAfter().run()"
@@ -101,9 +100,6 @@
         delete column
       </button>
     </div>
-    <editor-content
-      :editor="editor"
-      class="border border-neutral-300 min-h-[250px]"
-    />
+    <editor-content :editor="editor" />
   </div>
 </template>
