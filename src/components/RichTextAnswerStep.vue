@@ -13,11 +13,15 @@
     {
       label: "Tabelle einfügen",
       command: () =>
-        editor.value?.commands.insertTable({
-          rows: 3,
-          cols: 3,
-          withHeaderRow: false,
-        }),
+        editor.value
+          ?.chain()
+          .insertTable({
+            rows: 3,
+            cols: 3,
+            withHeaderRow: false,
+          })
+          .focus()
+          .run(),
     },
     {
       label: "Tabelle löschen",
