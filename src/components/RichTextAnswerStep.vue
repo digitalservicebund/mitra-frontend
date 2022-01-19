@@ -67,7 +67,7 @@
   <div class="mb-4">
     {{ step.text }}
   </div>
-  <div class="rich-text-editor mb-4">
+  <div class="mb-4">
     <div v-if="editor" class="border">
       <button
         class="p-2"

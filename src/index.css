@@ -4,14 +4,18 @@
 
 /* purgecss start ignore */
 
-.rich-text-editor table,
-.rich-text-editor-preview table {
+.ProseMirror table {
   @apply table-fixed border-collapse w-full;
 }
 
-.rich-text-editor td,
-.rich-text-editor-preview td {
+.ProseMirror td {
   @apply border p-1 align-top;
+}
+
+.ProseMirror ol:not(:first-child),
+.ProseMirror p:not(:first-child),
+.ProseMirror table:not(:first-child) {
+  margin-top: 0.75em;
 }
 
 #app {
