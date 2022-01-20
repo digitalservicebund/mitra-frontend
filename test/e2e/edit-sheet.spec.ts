@@ -74,7 +74,6 @@ test.describe("Sheet answer step", async () => {
       await page.keyboard.press("Delete")
     }
 
-    const preview = await page.locator("section:right-of(main)").elementHandle()
     await expect(
       page.locator("section:right-of(main) >> table.p-datatable-table")
     ).toHaveCount(0)
