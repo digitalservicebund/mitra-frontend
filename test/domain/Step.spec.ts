@@ -24,6 +24,10 @@ describe("TextAnswerStep", () => {
   it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"TextAnswerStep"/)
   })
+
+  it("won't print anything without an answer", () => {
+    expect(step.print()).toEqual("")
+  })
 })
 
 describe("RichTextAnswerStep", () => {
@@ -39,6 +43,10 @@ describe("RichTextAnswerStep", () => {
 
   it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"RichTextAnswerStep"/)
+  })
+
+  it("won't print anything without an answer", () => {
+    expect(step.print()).toEqual("")
   })
 })
 
