@@ -18,5 +18,5 @@ export const editorContentAsAnswerValue: (
   editor.isEmpty
     ? ""
     : step.produce !== "${answer}"
-    ? editor.getText()
+    ? editor.getHTML().replace("<p>", "").replace("</p>", "") // Replace only the first occurrence!
     : editor.getHTML()

@@ -10,10 +10,15 @@ describe("RichTextHelper", () => {
     expect(editorContentAsAnswerValue(editor, step)).toEqual("<p>foo</p>")
   })
 
-  it("retrieves plain text content from editor given a step with template", () => {
-    const editor = new Editor({ ...RichTextEditorConfig, content: "foo" })
+  it("retrieves text content without first enclosing paragraph from editor given a step with template", () => {
+    const editor = new Editor({
+      ...RichTextEditorConfig,
+      content: "<p>foo<strong>bar</strong></p><p>baz</p>",
+    })
     const step = new RichTextAnswerStep("foo", undefined, "Prefix: ${answer}")
-    expect(editorContentAsAnswerValue(editor, step)).toEqual("foo")
+    expect(editorContentAsAnswerValue(editor, step)).toEqual(
+      "foo<strong>bar</strong><p>baz</p>"
+    )
   })
 
   it("fall back given no editor content", () => {
