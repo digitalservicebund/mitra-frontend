@@ -61,4 +61,22 @@ test.describe("Sheet answer step", async () => {
 
     expect(allRows).toHaveLength(2)
   })
+
+  test("hiding preview if empty sheet", async ({ page, baseURL }) => {
+    await page.goto(
+      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
+    )
+
+    await page.locator("main >> text=Foo Cloud").click()
+    await page.fill("table:has-text('Lfd Nr') >> input", "")
+    for (let i = 18; i > 0; i--) {
+      await page.keyboard.press("Tab")
+      await page.keyboard.press("Delete")
+    }
+
+    const preview = await page.locator("section:right-of(main)").elementHandle()
+    await expect(
+      page.locator("section:right-of(main) >> table.p-datatable-table")
+    ).toHaveCount(0)
+  })
 })

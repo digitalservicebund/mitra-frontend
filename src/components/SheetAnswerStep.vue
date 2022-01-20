@@ -25,7 +25,8 @@
   }
 
   const onCellEditComplete = (event: DataTableCellEditCompleteEvent) => {
-    props.step.answer.updateRow(event.index, event.newData)
+    const { index, field, newValue } = event
+    props.step.updateCell(index, field, newValue)
   }
 
   function selectAll(e: Event) {

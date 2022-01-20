@@ -161,4 +161,13 @@ describe("SheetAnswerStep", () => {
   it("has a serializable `type` property", () => {
     expect(JSON.stringify(step)).toMatch(/"type":"SheetAnswerStep"/)
   })
+
+  it("should update cell", () => {
+    step.updateCell(0, "column1", "newFuu")
+    expect(step.answer.value[0]).toEqual({
+      column1: "newFuu",
+      colum2: "bar",
+      colum3: "baz",
+    })
+  })
 })
