@@ -15,7 +15,7 @@
 .ProseMirror ol:not(:first-child),
 .ProseMirror p:not(:first-child),
 .ProseMirror table:not(:first-child) {
-  margin-top: 0.75em;
+  @apply mt-2;
 }
 
 #app {
