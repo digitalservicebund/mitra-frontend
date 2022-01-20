@@ -1,0 +1,1 @@
+import{i as r,m as a,n,o as s,j as c}from"./vendor.dbd82945.js";import{C as d,m as i,a as m}from"./provide.830d5ee3.js";import"./index.646992fd.js";const k=r({setup(p){const t=m(),o=d.fromPlaybook(i().findById("db2a1d38-01fb-4ea2-bc6f-b5213413c809"));return t.save(o),a(async()=>{await n().push(`/mitra-frontend/contract/${o.id}`)}),(e,f)=>(s(),c("div"))}});export{k as default};
