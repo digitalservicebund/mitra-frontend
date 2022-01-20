@@ -1,6 +1,6 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
-import SheetAnswerStepComponent from "../../src/components/Buyer/SheetAnswerStep.vue"
+import SheetAnswerStepComponent from "../../src/components/buyer/SheetAnswerStep.vue"
 import { SheetAnswer, SheetAnswerStep } from "../../src/domain/Step"
 
 describe("SheetAnswerStep", () => {
