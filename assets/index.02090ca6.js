@@ -1,0 +1,1 @@
+import{_ as e}from"./CreatorStartScreen.67a17668.js";import{f as r,o,c as a}from"./vendor.267de9a6.js";import"./card.esm.d9e60e88.js";const _=r({setup(t){return(s,c)=>(o(),a(e))}});export{_ as default};
