@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  import { useEditor, EditorContent } from "@tiptap/vue-3"
+  import { useEditor, EditorContent, Editor } from "@tiptap/vue-3"
   import Menu from "primevue/menu"
   import { onBeforeUnmount, ref } from "vue"
   import { RichTextAnswerStep } from "../../domain/Step"
   import RichTextEditorConfig from "./RichTextEditorConfig"
+  import { editorContentAsAnswerValue } from "./RichTextHelper"
 
   const props = defineProps<{ step: RichTextAnswerStep }>()
 
@@ -57,7 +58,10 @@
         "aria-multiline": "true",
       },
     },
-    onUpdate: ({ editor }) => props.step.answer.setValue(editor.getHTML()),
+    onUpdate: ({ editor }) =>
+      props.step.answer.setValue(
+        editorContentAsAnswerValue(editor as Editor, props.step)
+      ),
   })
 
   onBeforeUnmount(() => editor.value?.destroy())
