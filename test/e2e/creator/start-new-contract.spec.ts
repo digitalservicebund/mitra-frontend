@@ -11,5 +11,5 @@ test("Reachable from creator's start page", async ({ page, baseURL }) => {
 
   await page.goto(`${baseURL}/mitra-frontend/creator`)
   await page.click("text=Neuer Vertrag aus lokaler Datei")
-  await expect(page).toHaveURL(/.*open-playbook/)
+  await expect(page).toHaveURL(/.*contract\/open-playbook/)
 })

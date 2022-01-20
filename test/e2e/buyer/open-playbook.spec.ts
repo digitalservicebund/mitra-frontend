@@ -5,7 +5,7 @@ const { findByText } = queries
 
 test.describe("Open playbook from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
-    await page.goto(`${baseURL}/mitra-frontend/open-playbook`)
+    await page.goto(`${baseURL}/mitra-frontend/contract/open-playbook`)
     await page.setInputFiles(
       "input[type=file]",
       "./test/e2e/fixtures/playbook.json"
@@ -16,7 +16,7 @@ test.describe("Open playbook from filesystem", async () => {
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
-    await page.goto(`${baseURL}/mitra-frontend/open-playbook`)
+    await page.goto(`${baseURL}/mitra-frontend/contract/open-playbook`)
     const dataTransfer = await page.evaluateHandle(() => {
       const data = new DataTransfer()
       const file = new File(

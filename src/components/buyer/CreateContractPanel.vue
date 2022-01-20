@@ -32,7 +32,10 @@
       </Card>
       <Card>
         <template #content>
-          <router-link to="/mitra-frontend/open-playbook" class="block">
+          <router-link
+            to="/mitra-frontend/contract/open-playbook"
+            class="block"
+          >
             <span
               class="material-icons-outlined hover:bg-gray-50"
               aria-hidden="true"
