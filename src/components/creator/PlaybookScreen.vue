@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <main class="flex h-full">
+  <main id="playbook-screen" class="flex h-full">
     <ul>
       <li v-for="module in playbook.modules" :key="module.text">
         {{ module.text }}

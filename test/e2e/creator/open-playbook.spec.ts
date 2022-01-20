@@ -10,7 +10,7 @@ test.describe("Open playbook from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/playbook.json"
     )
-    const main = await page.locator("main").elementHandle()
+    const main = await page.locator("main#playbook-screen").elementHandle()
     await findByText(main, "foo module")
   })
 
@@ -31,7 +31,7 @@ test.describe("Open playbook from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
-    const document = await getDocument(page)
-    await findByText(document, "foo module")
+    const main = await page.locator("main#playbook-screen").elementHandle()
+    await findByText(main, "foo module")
   })
 })
