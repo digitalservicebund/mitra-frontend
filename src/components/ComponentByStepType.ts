@@ -2,6 +2,7 @@ import {
   Answer,
   MultipleChoiceAnswerStep,
   RichTextAnswerStep,
+  SheetAnswerStep,
   SingleChoiceAnswerStep,
   Step,
   TextAnswerStep,
@@ -10,6 +11,8 @@ import MultipleChoiceAnswerPreview from "./MultipleChoiceAnswerPreview.vue"
 import MultipleChoiceAnswerEdit from "./MultipleChoiceAnswerStep.vue"
 import RichTextAnswerPreview from "./RichTextAnswerPreview.vue"
 import RichTextAnswerEdit from "./RichTextAnswerStep.vue"
+import SheetAnswerPreview from "./SheetAnswerPreview.vue"
+import SheetAnswerEdit from "./SheetAnswerStep.vue"
 import SingleChoiceAnswerPreview from "./SingleChoiceAnswerPreview.vue"
 import SingleChoiceAnswerEdit from "./SingleChoiceAnswerStep.vue"
 import TextAnswerPreview from "./TextAnswerPreview.vue"
@@ -31,6 +34,10 @@ const componentRegistry: { [key: string]: { [key: string]: object } } = {
   [MultipleChoiceAnswerStep.TYPE]: {
     edit: MultipleChoiceAnswerEdit,
     preview: MultipleChoiceAnswerPreview,
+  },
+  [SheetAnswerStep.TYPE]: {
+    edit: SheetAnswerEdit,
+    preview: SheetAnswerPreview,
   },
 }
 

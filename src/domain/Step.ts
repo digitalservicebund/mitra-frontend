@@ -142,6 +142,10 @@ export class SheetAnswer extends Answer<Row[]> {
   toString(): string {
     return JSON.stringify(this.value)
   }
+
+  updateRow(rowIndex: number, value: Row) {
+    this.value[rowIndex] = value
+  }
 }
 
 export abstract class Step<T extends Answer> extends Entity {

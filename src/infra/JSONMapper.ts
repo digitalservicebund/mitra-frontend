@@ -13,6 +13,9 @@ import {
   Step,
   TextAnswer,
   TextAnswerStep,
+  Row,
+  SheetAnswer,
+  SheetAnswerStep,
 } from "../domain/Step"
 
 export type ChoiceDTO = {
@@ -34,9 +37,15 @@ export type MultipleChoiceAnswerDTO = {
   value: number[]
 }
 
+export type SheetAnswerDTO = { value: Row[] }
+
 export type StepDTO = {
   id: string
-  answer: TextAnswerDTO | SingleChoiceAnswerDTO | MultipleChoiceAnswerDTO
+  answer:
+    | TextAnswerDTO
+    | SingleChoiceAnswerDTO
+    | MultipleChoiceAnswerDTO
+    | SheetAnswerDTO
   text: string
   type: string
   produce?: string
@@ -90,6 +99,15 @@ export function createStep(step: StepDTO): Step<Answer> {
         ),
         answer.value
       ),
+      step.id
+    )
+  }
+  if (step.type === SheetAnswerStep.TYPE) {
+    const answer = step.answer as SheetAnswerDTO
+    return new SheetAnswerStep(
+      step.text,
+      new SheetAnswer(answer.value),
+      step.produce,
       step.id
     )
   }

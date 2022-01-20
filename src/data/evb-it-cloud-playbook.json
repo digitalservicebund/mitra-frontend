@@ -86,6 +86,23 @@
             "text": "Schritt 1.5",
             "type": "RichTextAnswerStep",
             "answer": {}
+          },
+          {
+            "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
+            "text": "Schritt 1.6",
+            "type": "SheetAnswerStep",
+            "answer": {
+              "value": [
+                {
+                  "Lfd Nr": "1",
+                  "Produkt/ Leistung": "Amazon Web Services",
+                  "Menge": "1",
+                  "MVD": "Juni '22",
+                  "Beginn": "01.01.22",
+                  "Monatlicher Preis": "3989,86€"
+                }
+              ]
+            }
           }
         ]
       },
