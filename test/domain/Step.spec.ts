@@ -27,7 +27,7 @@ describe("TextAnswerStep", () => {
 })
 
 describe("RichTextAnswerStep", () => {
-  const step = new RichTextAnswerStep("<p><strong>foo</strong></p>")
+  const step = new RichTextAnswerStep("foo")
 
   it("should produce a path", () => {
     expect(step.path).toEqual([step])
