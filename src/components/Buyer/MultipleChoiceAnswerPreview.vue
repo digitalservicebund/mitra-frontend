@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { MultipleChoiceAnswerStep } from "../domain/Step"
+  import { MultipleChoiceAnswerStep } from "../../domain/Step"
 
   defineProps<{ step: MultipleChoiceAnswerStep }>()
 </script>

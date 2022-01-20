@@ -6,7 +6,7 @@ import {
   SingleChoiceAnswerStep,
   Step,
   TextAnswerStep,
-} from "../domain/Step"
+} from "../../domain/Step"
 import MultipleChoiceAnswerPreview from "./MultipleChoiceAnswerPreview.vue"
 import MultipleChoiceAnswerEdit from "./MultipleChoiceAnswerStep.vue"
 import RichTextAnswerPreview from "./RichTextAnswerPreview.vue"

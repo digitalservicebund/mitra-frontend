@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from "vue"
-  import Contract from "../domain/Contract"
+  import Contract from "../../domain/Contract"
   import { stepAnswerPreviewComponent } from "./ComponentByStepType"
 
   const props = defineProps<{ contract: Contract }>()

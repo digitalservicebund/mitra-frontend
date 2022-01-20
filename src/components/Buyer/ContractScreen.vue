@@ -3,15 +3,15 @@
   import Dialog from "primevue/dialog"
   import InputText from "primevue/inputtext"
   import { onMounted, ref } from "vue"
-  import Contract from "../domain/Contract"
-  import ContractRepository from "../domain/ContractRepository"
-  import { Answer, Step } from "../domain/Step"
-  import Storage from "../domain/Storage"
+  import Contract from "../../domain/Contract"
+  import ContractRepository from "../../domain/ContractRepository"
+  import { Answer, Step } from "../../domain/Step"
+  import Storage from "../../domain/Storage"
   import {
     makeContractRepository,
     makeContractStorageService,
-  } from "../provide"
-  import { useSession } from "../session"
+  } from "../../provide"
+  import { useSession } from "../../session"
   import ContractEdit from "./ContractEdit.vue"
   import ContractPreview from "./ContractPreview.vue"
   import ContractSideMenu from "./ContractSideMenu.vue"

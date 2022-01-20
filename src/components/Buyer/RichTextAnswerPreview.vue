@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useEditor, EditorContent } from "@tiptap/vue-3"
   import { onBeforeUnmount, watch } from "vue"
-  import { RichTextAnswerStep } from "../domain/Step"
+  import { RichTextAnswerStep } from "../../domain/Step"
   import RichTextEditorConfig from "./RichTextEditorConfig"
 
   const props = defineProps<{ step: RichTextAnswerStep }>()

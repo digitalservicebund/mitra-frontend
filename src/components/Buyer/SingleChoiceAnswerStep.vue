@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import Checkbox from "primevue/checkbox"
+  import RadioButton from "primevue/radiobutton"
   import { ref } from "vue"
-  import { MultipleChoiceAnswerStep } from "../domain/Step"
+  import { SingleChoiceAnswerStep } from "../../domain/Step"
 
-  const props = defineProps<{ step: MultipleChoiceAnswerStep }>()
+  const props = defineProps<{ step: SingleChoiceAnswerStep }>()
 
   const answer = ref(props.step.answer.value)
   const labels = props.step.choices.map((choice) => choice.text)
@@ -19,9 +19,9 @@
     <li
       v-for="(label, index) in labels"
       :key="index"
-      class="p-field-checkbox flex flex-row items-center pt-1 pb-1"
+      class="p-field-radiobutton flex flex-row items-center pt-1 pb-1"
     >
-      <Checkbox
+      <RadioButton
         :id="`choice-${index}`"
         v-model="answer"
         name="choice"

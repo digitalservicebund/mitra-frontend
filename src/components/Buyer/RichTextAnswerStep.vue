@@ -2,7 +2,7 @@
   import { useEditor, EditorContent } from "@tiptap/vue-3"
   import Menu from "primevue/menu"
   import { onBeforeUnmount, ref } from "vue"
-  import { RichTextAnswerStep } from "../domain/Step"
+  import { RichTextAnswerStep } from "../../domain/Step"
   import RichTextEditorConfig from "./RichTextEditorConfig"
 
   const props = defineProps<{ step: RichTextAnswerStep }>()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import InputText from "primevue/inputtext"
   import { ref } from "vue"
-  import { TextAnswerStep } from "../domain/Step"
+  import { TextAnswerStep } from "../../domain/Step"
 
   const props = defineProps<{ step: TextAnswerStep }>()
 

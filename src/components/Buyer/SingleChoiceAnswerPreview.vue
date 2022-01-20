@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { TextAnswerStep } from "../domain/Step"
+  import { SingleChoiceAnswerStep } from "../../domain/Step"
 
-  defineProps<{ step: TextAnswerStep }>()
+  defineProps<{ step: SingleChoiceAnswerStep }>()
 </script>
 
 <template>

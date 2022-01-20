@@ -2,10 +2,10 @@
   import Menu from "primevue/menu"
   import type { MenuItem } from "primevue/menuitem"
   import { ref } from "vue"
-  import Contract from "../domain/Contract"
-  import Module from "../domain/Module"
-  import { Answer, Step } from "../domain/Step"
-  import { useSession } from "../session"
+  import Contract from "../../domain/Contract"
+  import Module from "../../domain/Module"
+  import { Answer, Step } from "../../domain/Step"
+  import { useSession } from "../../session"
 
   const props = defineProps<{ contract: Contract }>()
   const emit = defineEmits<{
