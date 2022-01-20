@@ -5,7 +5,7 @@
 <template>
   <main id="index" class="grid grid-rows-2 justify-center">
     <section>
-      <h2 class="font-black mt-8 mb-2">Verträge</h2>
+      <h2 class="font-black mt-8 mb-2">Vertrag erstellen</h2>
       <div class="flex flex-row">
         <Card>
           <template #content>
@@ -41,25 +41,6 @@
               >
               Neuer Vertrag aus lokaler Datei
             </router-link>
-          </template>
-        </Card>
-      </div>
-    </section>
-    <section>
-      <h2 class="font-black mt-8 mb-2">Playbooks</h2>
-      <div class="flex flex-row">
-        <Card class="p-disabled">
-          <template #content>
-            <span class="material-icons-outlined" aria-hidden="true"
-              >smart_display</span
-            >
-            Playbook bearbeiten
-          </template>
-        </Card>
-        <Card class="p-disabled">
-          <template #content>
-            <span class="material-icons-outlined" aria-hidden="true">add</span>
-            Neues Playbook
           </template>
         </Card>
       </div>
