@@ -3,11 +3,11 @@ import { fireEvent, render, screen } from "@testing-library/vue"
 import { mount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
 import { createRouter, createWebHistory } from "vue-router"
-import ContractSideMenu from "../../src/components/buyer/ContractSideMenu.vue"
-import Contract from "../../src/domain/Contract"
-import Module from "../../src/domain/Module"
-import { TextAnswerStep } from "../../src/domain/Step"
-import { useSession } from "../../src/session"
+import ContractSideMenu from "../../../src/components/buyer/ContractSideMenu.vue"
+import Contract from "../../../src/domain/Contract"
+import Module from "../../../src/domain/Module"
+import { TextAnswerStep } from "../../../src/domain/Step"
+import { useSession } from "../../../src/session"
 
 const module1: Module = new Module("Rubrum", [
   new TextAnswerStep("Schritt 1.1"),

@@ -1,14 +1,14 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount, shallowMount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
-import ContractScreen from "../../src/components/buyer/ContractScreen.vue"
-import ContractSideMenu from "../../src/components/buyer/ContractSideMenu.vue"
-import Contract from "../../src/domain/Contract"
-import ContractStorageService from "../../src/domain/ContractStorageService"
-import Module from "../../src/domain/Module"
-import { TextAnswerStep } from "../../src/domain/Step"
-import { makeContractStorageService } from "../../src/provide"
-import { useSession } from "../../src/session"
+import ContractScreen from "../../../src/components/buyer/ContractScreen.vue"
+import ContractSideMenu from "../../../src/components/buyer/ContractSideMenu.vue"
+import Contract from "../../../src/domain/Contract"
+import ContractStorageService from "../../../src/domain/ContractStorageService"
+import Module from "../../../src/domain/Module"
+import { TextAnswerStep } from "../../../src/domain/Step"
+import { makeContractStorageService } from "../../../src/provide"
+import { useSession } from "../../../src/session"
 
 describe("ContractScreen", () => {
   it("updates contract title when entered", () => {

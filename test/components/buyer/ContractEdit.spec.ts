@@ -1,10 +1,10 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
-import ContractEdit from "../../src/components/buyer/ContractEdit.vue"
-import Contract from "../../src/domain/Contract"
-import Module from "../../src/domain/Module"
-import { TextAnswerStep } from "../../src/domain/Step"
-import { useSession } from "../../src/session"
+import ContractEdit from "../../../src/components/buyer/ContractEdit.vue"
+import Contract from "../../../src/domain/Contract"
+import Module from "../../../src/domain/Module"
+import { TextAnswerStep } from "../../../src/domain/Step"
+import { useSession } from "../../../src/session"
 
 describe("ContractEdit", () => {
   it("updates session when navigating steps", async () => {
