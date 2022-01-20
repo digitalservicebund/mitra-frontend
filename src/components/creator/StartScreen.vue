@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Card from "primevue/card"
+  import CreateContractPanel from "../buyer/CreateContractPanel.vue"
 </script>
 
 <template>
@@ -23,47 +24,7 @@
         </Card>
       </div>
     </section>
-    <section>
-      <h2 class="font-black mt-8 mb-2">Vertrag erstellen</h2>
-      <div class="flex flex-row">
-        <Card>
-          <template #content>
-            <router-link to="/mitra-frontend/open-contract" class="block">
-              <span
-                class="material-icons-outlined hover:bg-gray-50"
-                aria-hidden="true"
-                >description</span
-              >
-              Vertrag bearbeiten
-            </router-link>
-          </template>
-        </Card>
-        <Card>
-          <template #content>
-            <router-link to="/mitra-frontend/new-contract" class="block">
-              <span
-                class="material-icons-outlined hover:bg-gray-50"
-                aria-hidden="true"
-                >cloud</span
-              >
-              Neuer EVB-IT Cloud Vertrag
-            </router-link>
-          </template>
-        </Card>
-        <Card>
-          <template #content>
-            <router-link to="/mitra-frontend/open-playbook" class="block">
-              <span
-                class="material-icons-outlined hover:bg-gray-50"
-                aria-hidden="true"
-                >add</span
-              >
-              Neuer Vertrag aus lokaler Datei
-            </router-link>
-          </template>
-        </Card>
-      </div>
-    </section>
+    <CreateContractPanel />
   </main>
 </template>
 
