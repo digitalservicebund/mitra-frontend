@@ -85,11 +85,18 @@
             "id": "5ee3e9de-5052-49ac-95ed-849df72a7167",
             "text": "Schritt 1.5",
             "type": "RichTextAnswerStep",
+            "answer": {},
+            "produce": "Textbaustein: ${answer}"
+          },
+          {
+            "id": "5ee3e9de-5052-49ac-95ed-849df72a7167",
+            "text": "Schritt 1.6",
+            "type": "RichTextAnswerStep",
             "answer": {}
           },
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "Schritt 1.6",
+            "text": "Schritt 1.7",
             "type": "SheetAnswerStep",
             "answer": {
               "value": [
