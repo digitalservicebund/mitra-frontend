@@ -14,12 +14,19 @@
             Neues Playbook erstellen
           </template>
         </Card>
-        <Card class="p-disabled">
+        <Card>
           <template #content>
-            <span class="material-icons-outlined" aria-hidden="true"
-              >smart_display</span
+            <router-link
+              to="/mitra-frontend/playbook/open-playbook"
+              class="block"
             >
-            Bestehendes Playbook weiter bearbeiten
+              <span
+                class="material-icons-outlined hover:bg-gray-50"
+                aria-hidden="true"
+                >description</span
+              >
+              Bestehendes Playbook weiter bearbeiten
+            </router-link>
           </template>
         </Card>
       </div>

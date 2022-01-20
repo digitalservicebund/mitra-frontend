@@ -1,8 +1,8 @@
 import ContractStorageService from "./domain/ContractStorageService"
 import PlaybookStorageService from "./domain/PlaybookStorageService"
 import contractFileStorage from "./infra/ContractFileStorage"
-import playbookRepository from "./infra/InMemoryPlaybookRepository"
 import contractRepository from "./infra/LocalStorageContractRepository"
+import playbookRepository from "./infra/LocalStoragePlaybookRepository"
 import playbookFileStorage from "./infra/PlaybookFileStorage"
 
 export const makeContractRepository = () => contractRepository
