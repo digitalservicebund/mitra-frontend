@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CreateContractPanel from "./CreateContractPanel.vue"
+  import CreateContractPanel from "../CreateContractPanel.vue"
 </script>
 
 <template>

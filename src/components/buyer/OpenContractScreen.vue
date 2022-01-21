@@ -10,7 +10,7 @@
     makeContractRepository,
     makeContractStorageService,
   } from "../../provide"
-  import NavigateToHome from "./NavigateToHome.vue"
+  import NavigateToHome from "../NavigateToHome.vue"
 
   const storage: LoadEntityFromStorage<Contract, File> =
     makeContractStorageService()

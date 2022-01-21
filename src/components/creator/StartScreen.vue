@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Card from "primevue/card"
-  import CreateContractPanel from "../buyer/CreateContractPanel.vue"
+  import CreateContractPanel from "../CreateContractPanel.vue"
 </script>
 
 <template>

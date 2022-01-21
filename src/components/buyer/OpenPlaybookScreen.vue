@@ -11,7 +11,7 @@
     makeContractRepository,
     makePlaybookStorageService,
   } from "../../provide"
-  import NavigateToHome from "./NavigateToHome.vue"
+  import NavigateToHome from "../NavigateToHome.vue"
 
   const storage: LoadEntityFromStorage<Playbook, File> =
     makePlaybookStorageService()
