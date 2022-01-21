@@ -2,7 +2,6 @@ import { devices, PlaywrightTestConfig } from "@playwright/test"
 
 const config: PlaywrightTestConfig = {
   testDir: "./test/e2e",
-  testIgnore: ["**/contract.spec.ts"],
   timeout: 10000,
   retries: process.env.CI === "true" ? 1 : 0,
   use: {
