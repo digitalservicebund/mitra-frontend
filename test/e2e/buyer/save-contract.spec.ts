@@ -7,7 +7,7 @@ test.skip(
 )
 
 test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
-  await page.goto(`${baseURL}/mitra-frontend/new-contract`)
+  await page.goto(`${baseURL}/mitra-frontend/contract/new`)
   await page.locator("text=Vertrag benennen").waitFor()
   await page.fill("#input-contract-title", "TEST")
   await page.click("text=OK")

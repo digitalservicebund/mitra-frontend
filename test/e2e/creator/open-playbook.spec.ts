@@ -1,4 +1,4 @@
-import { getDocument, queries } from "@playwright-testing-library/test"
+import { queries } from "@playwright-testing-library/test"
 import { test } from "@playwright/test"
 
 const { findByText } = queries

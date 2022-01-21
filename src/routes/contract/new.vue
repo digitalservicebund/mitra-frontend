@@ -2,9 +2,9 @@
 <script setup lang="ts">
   import { onBeforeMount } from "vue"
   import { useRouter } from "vue-router"
-  import Contract from "../domain/Contract"
-  import ContractRepository from "../domain/ContractRepository"
-  import { makeContractRepository, makePlaybookRepository } from "../provide"
+  import Contract from "../../domain/Contract"
+  import ContractRepository from "../../domain/ContractRepository"
+  import { makeContractRepository, makePlaybookRepository } from "../../provide"
 
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract = Contract.fromPlaybook(
