@@ -8,18 +8,19 @@
     <section>
       <h2 class="font-black mt-8 mb-2">Playbook erstellen</h2>
       <div class="flex flex-row">
-        <Card class="p-disabled">
+        <Card>
           <template #content>
-            <span class="material-icons-outlined" aria-hidden="true">add</span>
-            Neues Playbook erstellen
+            <router-link to="/mitra-frontend/playbook/new" class="block">
+              <span class="material-icons-outlined" aria-hidden="true"
+                >add</span
+              >
+              Neues Playbook erstellen
+            </router-link>
           </template>
         </Card>
         <Card>
           <template #content>
-            <router-link
-              to="/mitra-frontend/playbook/playbook/open"
-              class="block"
-            >
+            <router-link to="/mitra-frontend/playbook/open" class="block">
               <span
                 class="material-icons-outlined hover:bg-gray-50"
                 aria-hidden="true"
