@@ -24,7 +24,7 @@
               <span
                 class="material-icons-outlined hover:bg-gray-50"
                 aria-hidden="true"
-                >description</span
+                >edit</span
               >
               Bestehendes Playbook weiter bearbeiten
             </router-link>

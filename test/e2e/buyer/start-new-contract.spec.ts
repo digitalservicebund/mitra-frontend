@@ -2,7 +2,7 @@ import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
 test("Reachable from start page", async ({ page, baseURL }) => {
-  await page.goto(`${baseURL}/mitra-frontend/`)
+  await page.goto(`${baseURL}/mitra-frontend/einkauf`)
   await page.click("text=Neuer EVB-IT Cloud Vertrag")
   await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
 })

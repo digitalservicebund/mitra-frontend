@@ -8,18 +8,6 @@
     <div class="flex flex-row">
       <Card>
         <template #content>
-          <router-link to="/mitra-frontend/open-contract" class="block">
-            <span
-              class="material-icons-outlined hover:bg-gray-50"
-              aria-hidden="true"
-              >description</span
-            >
-            Vertrag weiter bearbeiten
-          </router-link>
-        </template>
-      </Card>
-      <Card>
-        <template #content>
           <router-link to="/mitra-frontend/contract/new" class="block">
             <span
               class="material-icons-outlined hover:bg-gray-50"
@@ -27,6 +15,18 @@
               >cloud</span
             >
             Neuer EVB-IT Cloud Vertrag
+          </router-link>
+        </template>
+      </Card>
+      <Card>
+        <template #content>
+          <router-link to="/mitra-frontend/contract/open" class="block">
+            <span
+              class="material-icons-outlined hover:bg-gray-50"
+              aria-hidden="true"
+              >edit</span
+            >
+            Vertrag weiter bearbeiten
           </router-link>
         </template>
       </Card>
@@ -41,7 +41,7 @@
               aria-hidden="true"
               >add</span
             >
-            Neuer Vertrag aus lokaler Datei
+            Neuer Vertrag aus lokalem Playbook
           </router-link>
         </template>
       </Card>
