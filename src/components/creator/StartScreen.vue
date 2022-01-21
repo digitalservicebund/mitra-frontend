@@ -17,7 +17,7 @@
         <Card>
           <template #content>
             <router-link
-              to="/mitra-frontend/playbook/open-playbook"
+              to="/mitra-frontend/playbook/playbook/open"
               class="block"
             >
               <span
