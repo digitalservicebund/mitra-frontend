@@ -21,8 +21,6 @@
     )
       ? { ...item, class: "font-bold" }
       : item
-    console.log(Module)
-    return item
   }
 
   const generateMenuItems = (modules: Module[]): MenuItem[] => {
