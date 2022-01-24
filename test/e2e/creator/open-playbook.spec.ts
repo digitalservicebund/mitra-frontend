@@ -1,5 +1,5 @@
 import { queries } from "@playwright-testing-library/test"
-import { test } from "@playwright/test"
+import { expect, test } from "@playwright/test"
 
 const { findByText } = queries
 
@@ -10,7 +10,10 @@ test.describe("Open playbook from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/playbook.json"
     )
-    const main = await page.locator("main#playbook-screen").elementHandle()
+    await expect(page).toHaveURL(
+      /playbook\/db2a1d38-01fb-4ea2-bc6f-b5213413c809/
+    )
+    const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
 
@@ -31,7 +34,10 @@ test.describe("Open playbook from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
-    const main = await page.locator("main#playbook-screen").elementHandle()
+    await expect(page).toHaveURL(
+      /playbook\/3d324eca-06c2-4781-af52-705f49039d0d/
+    )
+    const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
 })
