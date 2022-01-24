@@ -1,5 +1,5 @@
 import { queries } from "@playwright-testing-library/test"
-import { test } from "@playwright/test"
+import { expect, test } from "@playwright/test"
 
 const { findByText } = queries
 
@@ -10,6 +10,7 @@ test.describe("Open contract from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/contract.json"
     )
+    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
     const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
@@ -31,6 +32,7 @@ test.describe("Open contract from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
+    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
     const main = await page.locator("main").elementHandle()
     await findByText(main, "test contract")
   })

@@ -1,5 +1,5 @@
 import { getDocument, queries } from "@playwright-testing-library/test"
-import { test } from "@playwright/test"
+import { expect, test } from "@playwright/test"
 
 const { findByText } = queries
 
@@ -11,6 +11,7 @@ test.describe("Open playbook from filesystem", async () => {
       "./test/e2e/fixtures/playbook.json"
     )
     await page.click(".p-dialog-header-close-icon")
+    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
     const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
@@ -32,6 +33,7 @@ test.describe("Open playbook from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
+    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
     const document = await getDocument(page)
     await findByText(document, "Wie wollen Sie den Vertrag benennen?")
   })
