@@ -1,28 +1,30 @@
 {
-  "id": "3d324eca-06c2-4781-af52-705f49039d0d",
-  "title": "test contract",
-  "modules": [
-    {
-      "id": "930fe484-bd57-481d-8846-2d1a8b3e35db",
-      "text": "foo module",
-      "steps": [
-        {
-          "id": "67d574b0-2b77-42a5-bcd2-5ed600849adb",
-          "text": "bar",
-          "type": "TextAnswerStep",
-          "answer": {
-            "value": "hello world"
+  "contract": {
+    "id": "3d324eca-06c2-4781-af52-705f49039d0d",
+    "title": "test contract",
+    "modules": [
+      {
+        "id": "930fe484-bd57-481d-8846-2d1a8b3e35db",
+        "text": "foo module",
+        "steps": [
+          {
+            "id": "67d574b0-2b77-42a5-bcd2-5ed600849adb",
+            "text": "bar",
+            "type": "TextAnswerStep",
+            "answer": {
+              "value": "hello world"
+            }
+          },
+          {
+            "id": "f70f1d90-08c6-4b2e-9f4f-cd867efdf834",
+            "text": "baz",
+            "type": "TextAnswerStep",
+            "answer": {
+              "value": ""
+            }
           }
-        },
-        {
-          "id": "f70f1d90-08c6-4b2e-9f4f-cd867efdf834",
-          "text": "baz",
-          "type": "TextAnswerStep",
-          "answer": {
-            "value": ""
-          }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
+  }
 }

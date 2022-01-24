@@ -6,7 +6,7 @@ import { loadFile } from "./LoadFile"
 const storage: Storage<Playbook, File> = {
   async load(file: File) {
     const result = await loadFile(file)
-    return createPlaybook(JSON.parse(result as string).playbook)
+    return createPlaybook(JSON.parse(result as string))
   },
 
   async save() {

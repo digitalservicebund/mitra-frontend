@@ -12,7 +12,7 @@ const repository: ContractRepository = {
   },
 
   save(contract: Contract) {
-    localStorage.setItem(contract.id, JSON.stringify(contract))
+    localStorage.setItem(contract.id, JSON.stringify({ contract }))
   },
 }
 

@@ -23,7 +23,7 @@ test.describe("Open contract from filesystem", async () => {
       const data = new DataTransfer()
       const file = new File(
         [
-          '{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"test contract","modules":[]}',
+          '{"contract":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"test contract","modules":[]}}',
         ],
         "contract.json",
         {

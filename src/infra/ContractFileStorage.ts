@@ -33,10 +33,10 @@ const storage: Storage<Contract, File> = {
           },
         ],
       })
-      await writeFile(fileHandle, JSON.stringify(contract))
+      await writeFile(fileHandle, JSON.stringify({ contract }))
     } else {
       await import("file-saver").then(({ default: FileSaver }) => {
-        const blob = new Blob([JSON.stringify(contract)], {
+        const blob = new Blob([JSON.stringify({ contract })], {
           type: "application/json;charset=utf-8",
         })
         FileSaver.saveAs(blob, `${makeFileBaseName(contract)}.json`)

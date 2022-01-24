@@ -1,11 +1,13 @@
-import { playbook } from "../data/evb-it-cloud-playbook.json"
+import playbook from "../data/evb-it-cloud-playbook.json"
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import { createPlaybook, PlaybookDTO } from "./JSONMapper"
 
 const data = new Map<string, Playbook>()
 
-const cloudContractPlaybook = createPlaybook(playbook as PlaybookDTO)
+const cloudContractPlaybook = createPlaybook(
+  playbook as { playbook: PlaybookDTO }
+)
 data.set(cloudContractPlaybook.id, cloudContractPlaybook)
 
 const repository: PlaybookRepository = {

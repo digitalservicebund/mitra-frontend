@@ -1,4 +1,4 @@
-import { playbook } from "../data/evb-it-cloud-playbook.json"
+import playbook from "../data/evb-it-cloud-playbook.json"
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import { createPlaybook, PlaybookDTO } from "./JSONMapper"
@@ -13,11 +13,13 @@ const repository: PlaybookRepository = {
   },
 
   save(playbook: Playbook) {
-    localStorage.setItem(playbook.id, JSON.stringify(playbook))
+    localStorage.setItem(playbook.id, JSON.stringify({ playbook }))
   },
 }
 
-const cloudContractPlaybook = createPlaybook(playbook as PlaybookDTO)
+const cloudContractPlaybook = createPlaybook(
+  playbook as { playbook: PlaybookDTO }
+)
 repository.save(cloudContractPlaybook)
 
 export default repository

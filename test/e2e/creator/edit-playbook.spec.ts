@@ -35,7 +35,7 @@ const test = base.extend<TestFixtures>({
 
 test.describe("Module overview", async () => {
   test.use({
-    playbookFile: "./test/e2e/fixtures/playbook-edit.json",
+    playbookFile: "./test/e2e/fixtures/playbook.json",
   })
 
   test("showing header with title", async ({ page, baseURL }) => {

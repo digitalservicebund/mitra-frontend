@@ -119,7 +119,11 @@ export function createModule(module: ModuleDTO): Module {
   return new Module(module.text, module.steps.map(createStep), module.id)
 }
 
-export function createContract(contract: ContractDTO): Contract {
+export function createContract({
+  contract,
+}: {
+  contract: ContractDTO
+}): Contract {
   return new Contract(
     contract.title,
     contract.modules.map(createModule),
@@ -127,7 +131,11 @@ export function createContract(contract: ContractDTO): Contract {
   )
 }
 
-export function createPlaybook(playbook: PlaybookDTO): Playbook {
+export function createPlaybook({
+  playbook,
+}: {
+  playbook: PlaybookDTO
+}): Playbook {
   return new Playbook(
     playbook.title,
     playbook.modules.map(createModule),

@@ -25,5 +25,5 @@ test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
   ])
   const downloaded = fs.readFileSync("./test/e2e/saved-contract.json", "utf-8")
   expect(() => JSON.parse(downloaded)).not.toThrow()
-  expect(JSON.parse(downloaded)).toMatchObject({ title: "TEST" })
+  expect(JSON.parse(downloaded)).toMatchObject({ contract: { title: "TEST" } })
 })
