@@ -17,9 +17,7 @@ const repository: PlaybookRepository = {
   },
 }
 
-const cloudContractPlaybook = createPlaybook(
-  playbook as { playbook: PlaybookDTO }
-)
+const cloudContractPlaybook = createPlaybook(playbook as PlaybookDTO)
 repository.save(cloudContractPlaybook)
 
 export default repository
