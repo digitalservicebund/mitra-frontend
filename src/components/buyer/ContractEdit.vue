@@ -10,9 +10,9 @@
 
   const session = useSession()
 
-  const currentStep = ref(session.cache.get(props.contract))
+  const currentStep = ref(session.cache.get(props.contract.id))
   session.$subscribe((mutation, session) => {
-    currentStep.value = session.cache.get(props.contract)
+    currentStep.value = session.cache.get(props.contract.id)
   })
 
   const hasPreviousStep = computed(

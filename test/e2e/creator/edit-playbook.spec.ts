@@ -1,8 +1,5 @@
 import fs from "fs"
-import { getDocument, queries } from "@playwright-testing-library/test"
-import { test as base } from "@playwright/test"
-
-const { findByText } = queries
+import { expect, test as base } from "@playwright/test"
 
 type TestFixtures = {
   playbookFile: string
@@ -42,7 +39,8 @@ test.describe("Module overview", async () => {
     await page.goto(
       `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
     )
-    const document = await getDocument(page)
-    findByText(document, "test playbook")
+
+    // NOTE: the testing library's findByText didn't work with <header> in webkit..
+    await expect(page.locator("header")).toHaveText("test playbook")
   })
 })

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  import Menu from "primevue/menu"
   import type { MenuItem } from "primevue/menuitem"
+  import PanelMenu from "primevue/panelmenu"
   import { ref } from "vue"
-  import Contract from "../../domain/Contract"
   import Module from "../../domain/Module"
+  import Playbook from "../../domain/Playbook"
   import { Answer, Step } from "../../domain/Step"
   import { useSession } from "../../session"
 
-  const props = defineProps<{ contract: Contract }>()
+  const props = defineProps<{ playbook: Playbook }>()
   const emit = defineEmits<{
     (e: "save"): void
     (e: "navigate", step: Step<Answer>): void
@@ -17,10 +17,12 @@
 
   const withHighlight = (item: MenuItem, module: Module) => {
     return module.path.find((step) =>
-      step.equals(session.cache.get(props.contract.id))
+      step.equals(session.cache.get(props.playbook.id))
     )
       ? { ...item, class: "font-bold" }
       : item
+    console.log(Module)
+    return item
   }
 
   const generateMenuItems = (modules: Module[]): MenuItem[] => {
@@ -31,7 +33,8 @@
         to: "/mitra-frontend/",
       },
       {
-        label: "Module",
+        key: "1",
+        label: props.playbook.title || "Unbenanntes Playbook",
         items: modules.map((module, index) => {
           return withHighlight(
             {
@@ -51,14 +54,14 @@
   }
 
   session.$subscribe(() => {
-    menuItems.value = generateMenuItems(props.contract.modules)
+    menuItems.value = generateMenuItems(props.playbook.modules)
   })
 
-  const menuItems = ref(generateMenuItems(props.contract.modules))
+  const menuItems = ref(generateMenuItems(props.playbook.modules))
 </script>
 
 <template>
-  <Menu :model="menuItems" class="w-70" />
+  <PanelMenu :model="menuItems" :expanded-keys="{ '1': true }" class="w-70" />
 </template>
 
 <style>

@@ -25,10 +25,10 @@ describe("ContractEdit", () => {
       },
     })
 
-    expect(session.cache.get(contract)).toEqual(contract.modules[0].steps[0])
+    expect(session.cache.get(contract.id)).toEqual(contract.modules[0].steps[0])
     await wrapper.find("button").trigger("click") // next
-    expect(session.cache.get(contract)).toEqual(contract.modules[1].steps[0])
+    expect(session.cache.get(contract.id)).toEqual(contract.modules[1].steps[0])
     await wrapper.find("button").trigger("click") // back
-    expect(session.cache.get(contract)).toEqual(contract.modules[0].steps[0])
+    expect(session.cache.get(contract.id)).toEqual(contract.modules[0].steps[0])
   })
 })
