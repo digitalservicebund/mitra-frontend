@@ -11,7 +11,7 @@
 
 <template>
   <header>
-    <h1>{{ playbook.title }}</h1>
+    <h1>{{ playbook.title || "Unbenanntes Playbook" }}</h1>
   </header>
   <main>
     <section>
