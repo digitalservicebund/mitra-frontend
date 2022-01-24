@@ -11,7 +11,7 @@ test.describe("Open playbook from filesystem", async () => {
       "./test/e2e/fixtures/playbook.json"
     )
     await expect(page).toHaveURL(
-      /playbook\/db2a1d38-01fb-4ea2-bc6f-b5213413c809/
+      /playbook\/3d324eca-06c2-4781-af52-705f49039d0d/
     )
     const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
@@ -23,7 +23,7 @@ test.describe("Open playbook from filesystem", async () => {
       const data = new DataTransfer()
       const file = new File(
         [
-          '{"playbook":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","modules":[{"id": "0b141639-8718-4ad9-9839-ec89aa8a1ec4","text": "foo module","steps": []}]}}',
+          '{"playbook":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"","modules":[{"id": "0b141639-8718-4ad9-9839-ec89aa8a1ec4","text": "foo module","steps": []}]}}',
         ],
         "playbook.json",
         {

@@ -22,7 +22,7 @@ test.describe("Open playbook from filesystem", async () => {
       const data = new DataTransfer()
       const file = new File(
         [
-          '{"playbook":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","modules":[]}}',
+          '{"playbook":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"","modules":[]}}',
         ],
         "playbook.json",
         {

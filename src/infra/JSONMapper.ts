@@ -55,7 +55,7 @@ export type ModuleDTO = { id: string; text: string; steps: StepDTO[] }
 
 export type ContractDTO = { id: string; title: string; modules: ModuleDTO[] }
 
-export type PlaybookDTO = { id: string; modules: ModuleDTO[] }
+export type PlaybookDTO = { id: string; title: string; modules: ModuleDTO[] }
 
 export function createStep(step: StepDTO): Step<Answer> {
   if (step.type === TextAnswerStep.TYPE) {
@@ -128,5 +128,9 @@ export function createContract(contract: ContractDTO): Contract {
 }
 
 export function createPlaybook(playbook: PlaybookDTO): Playbook {
-  return new Playbook(playbook.modules.map(createModule), playbook.id)
+  return new Playbook(
+    playbook.title,
+    playbook.modules.map(createModule),
+    playbook.id
+  )
 }

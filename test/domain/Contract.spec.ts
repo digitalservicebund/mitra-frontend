@@ -5,7 +5,7 @@ import { TextAnswerStep } from "../../src/domain/Step"
 
 describe("Contract", () => {
   it("can be created from Playbook as blueprint", () => {
-    const playbook = new Playbook([
+    const playbook = new Playbook("foo", [
       new Module("foo", [new TextAnswerStep("foo")]),
     ])
     const contract = Contract.fromPlaybook(playbook)

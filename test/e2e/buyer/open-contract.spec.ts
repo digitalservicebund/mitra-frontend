@@ -10,7 +10,9 @@ test.describe("Open contract from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/contract.json"
     )
-    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
+    await expect(page).toHaveURL(
+      /contract\/3d324eca-06c2-4781-af52-705f49039d0d/
+    )
     const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
@@ -32,7 +34,9 @@ test.describe("Open contract from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
-    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
+    await expect(page).toHaveURL(
+      /contract\/3d324eca-06c2-4781-af52-705f49039d0d/
+    )
     const main = await page.locator("main").elementHandle()
     await findByText(main, "test contract")
   })

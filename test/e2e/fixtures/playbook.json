@@ -1,6 +1,7 @@
 {
   "playbook": {
-    "id": "db2a1d38-01fb-4ea2-bc6f-b5213413c809",
+    "id": "3d324eca-06c2-4781-af52-705f49039d0d",
+    "title": "test playbook",
     "modules": [
       {
         "id": "0b141639-8718-4ad9-9839-ec89aa8a1ec4",

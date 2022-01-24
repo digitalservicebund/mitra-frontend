@@ -16,7 +16,7 @@ config.global.directives = {
 }
 
 // Set up tests environment to use test repositories
-let savedPlaybook: Playbook = new Playbook([
+let savedPlaybook: Playbook = new Playbook("test-playbook", [
   new Module("test-module", [new TextAnswerStep("test-step")]),
 ])
 const playbookTestRepository: PlaybookRepository = {
