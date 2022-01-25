@@ -39,15 +39,27 @@
         @navigate="handleNavigate"
       />
     </nav>
-
     <main class="flex-1 p-8">
       <section>
+        <h2>Module</h2>
         <ol>
           <li v-for="module in playbook.modules" :key="module.id">
-            {{ module.text }}
+            <details open>
+              <summary>{{ module.text }}</summary>
+              <p>{{ module.steps.length }} Fragen</p>
+            </details>
           </li>
         </ol>
       </section>
     </main>
   </div>
 </template>
+
+<style>
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

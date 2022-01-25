@@ -39,8 +39,16 @@ test.describe("Module overview", async () => {
     await page.goto(
       `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
     )
-
     // NOTE: the testing library's findByText didn't work with <header> in webkit..
-    await expect(page.locator("header")).toHaveText("test playbook")
+    await expect(page.locator("header >> text='test playbook'")).toBeVisible()
+  })
+
+  test("showing modules", async ({ page, baseURL }) => {
+    await page.goto(
+      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
+    )
+    await expect(page.locator("main >> text='Module'")).toBeVisible()
+    await expect(page.locator("main >> text='foo module'")).toBeVisible()
+    await expect(page.locator("main >> text='2 Fragen'")).toBeVisible()
   })
 })
