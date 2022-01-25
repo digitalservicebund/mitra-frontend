@@ -2,6 +2,9 @@ import vue from "@vitejs/plugin-vue"
 import { defineConfig } from "vite"
 import handlebars from "vite-plugin-handlebars"
 import pages from "vite-plugin-pages"
+import virtualHtml from "vite-plugin-virtual-html"
+
+const base = "mitra-frontend"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,10 +12,17 @@ export default defineConfig({
     vue(),
     handlebars(),
     pages({
-      pagesDir: [{ dir: "src/routes", baseRoute: "mitra-frontend" }],
+      pagesDir: [{ dir: "src/routes", baseRoute: base }],
+    }),
+    virtualHtml({
+      pages: {
+        index: `./${base}/index.html`,
+        einkauf: `./${base}/index.html`,
+        creator: `./${base}/index.html`,
+      },
     }),
   ],
-  base: "/mitra-frontend/",
+  base: `/${base}/`,
   server: {
     watch: {
       ignored: ["**/coverage/**", "**/.lighthouseci/**"],

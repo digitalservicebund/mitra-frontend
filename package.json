@@ -89,6 +89,7 @@
     "vite": "^2.7.1",
     "vite-plugin-handlebars": "^1.6.0",
     "vite-plugin-pages": "^0.20.0",
+    "vite-plugin-virtual-html": "^0.2.2",
     "vue-tsc": "^0.31.1"
   }
 }

@@ -121,7 +121,9 @@ The hooks are supposed to help you to:
 
 Currently the app is deployed to GitHub Pages from trunk continuously.
 
-:point_right: https://digitalservice4germany.github.io/mitra-frontend/
+creator :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
+
+einkauf :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
 
 ## License scanning
 

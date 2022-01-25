@@ -4,7 +4,7 @@ fileignoreconfig:
   - filename: .github/workflows/pipeline.yml
     checksum: 407e17f2b75cba05d92171db6bcdd60090d8315fc408505934016e42651562b9
   - filename: README.md
-    checksum: cf5e80a21b0e4f54287596e233099aa85e0ff17d86b3d59d819226c630f3caa0
+    checksum: e2c0fa360d7d698d0ad80e2d994211766200ed23bbe0a194ef1df71b5fad4ffe
   - filename: src/env.d.ts
     checksum: 1549c4dfbe3e2cba34fbb7452a21cbd93916d68d1c8235366ac8eece785c1d0a
   - filename: src/theme.css
