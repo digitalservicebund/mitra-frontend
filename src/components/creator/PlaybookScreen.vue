@@ -29,7 +29,7 @@
 
 <template>
   <header>
-    <h1>{{ playbook.title || "Unbenanntes Playbook" }}</h1>
+    <h1>{{ playbook.title }}</h1>
   </header>
   <div class="flex h-full">
     <nav class="flex-none">

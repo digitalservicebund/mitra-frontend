@@ -3,7 +3,7 @@ import Module from "./Module"
 
 export default class Playbook extends Entity {
   constructor(
-    public title: string,
+    public title: string = "Unbenanntes Playbook",
     public readonly modules: Module[] = [],
     id?: string
   ) {

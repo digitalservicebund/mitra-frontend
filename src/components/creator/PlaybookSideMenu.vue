@@ -32,7 +32,7 @@
       },
       {
         key: "1",
-        label: props.playbook.title || "Unbenanntes Playbook",
+        label: props.playbook.title,
         items: modules.map((module, index) => {
           return withHighlight(
             {
