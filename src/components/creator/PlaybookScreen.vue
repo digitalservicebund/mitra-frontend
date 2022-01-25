@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Breadcrumb from "primevue/breadcrumb"
+  import Button from "primevue/button"
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
   import type { MenuItem } from "primevue/menuitem"
@@ -24,7 +25,7 @@
   const playbook: Playbook = playbookRepository.findById(props.id)
 
   const editableTitle = ref(playbook.title)
-  const edittitle = ref()
+  const editTitle = ref()
 
   const breadcrumbTopLevel: MenuItem = {
     to: "/mitra-frontend/",
@@ -37,9 +38,13 @@
     },
   ])
 
+  const startTitleEditing = () => {
+    editTitle.value.open()
+  }
+
   const updateTitle = () => {
     playbook.title = editableTitle.value
-    edittitle.value.close()
+    editTitle.value.close()
   }
 
   const handleSave = () => {
@@ -54,14 +59,25 @@
 <template>
   <header>
     <Breadcrumb :home="breadcrumbTopLevel" :model="breadcrumbItems" />
-    <Inplace ref="edittitle" :closable="true">
+    <Inplace ref="editTitle" :closable="false">
       <template #display>
         <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
       </template>
       <template #content>
-        <InputText v-model="editableTitle" @keyup.enter="updateTitle" />
+        <InputText
+          v-model="editableTitle"
+          v-focus
+          @keyup.enter="updateTitle"
+          @blur="updateTitle"
+        />
       </template>
     </Inplace>
+    <Button type="button" @click="startTitleEditing">
+      <span class="material-icons-outlined text-base" aria-hidden="true">
+        edit
+      </span>
+      Ändern
+    </Button>
   </header>
   <div class="flex h-full">
     <nav class="flex-none">
@@ -96,6 +112,6 @@
     display: inherit;
   }
   header {
-    height: 100px;
+    height: 150px;
   }
 </style>

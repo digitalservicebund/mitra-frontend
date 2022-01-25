@@ -42,12 +42,19 @@ test.describe("Playbook metadata", async () => {
   })
 
   test("editing title", async ({ page }) => {
+    await expect(page.locator("header >> input")).not.toBeVisible()
     await page.locator("header h1 >> text='Unbenanntes Playbook'").click()
+    await expect(page.locator("header >> input")).toBeVisible()
     await page.fill("header >> input", "Test Playbook")
     await page.press("header >> input", "Enter")
     await expect(page.locator("header >> input")).not.toBeVisible()
     await expect(
       page.locator("header h1 >> text='Test Playbook'")
     ).toBeVisible()
+    await page.click("text='Ändern'")
+    await expect(page.locator("header >> input")).toBeVisible()
+    await expect(page.locator("header >> input")).toBeFocused()
+    await page.dispatchEvent("header >> input", "blur")
+    await expect(page.locator("header >> input")).not.toBeVisible()
   })
 })
