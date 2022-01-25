@@ -33,6 +33,7 @@
       {
         key: "1",
         label: props.playbook.title,
+        to: `/mitra-frontend/playbook/${props.playbook.id}`,
         items: modules.map((module, index) => {
           return withHighlight(
             {
