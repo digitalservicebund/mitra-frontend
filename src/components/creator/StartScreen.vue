@@ -11,7 +11,9 @@
         <Card>
           <template #content>
             <router-link to="/mitra-frontend/playbook/new" class="block">
-              <span class="material-icons-outlined" aria-hidden="true"
+              <span
+                class="material-icons-outlined hover:bg-gray-50"
+                aria-hidden="true"
                 >add</span
               >
               Neues Playbook erstellen
