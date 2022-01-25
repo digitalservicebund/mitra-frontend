@@ -51,12 +51,7 @@ describe("ContractScreen", () => {
       },
       global: {
         plugins: [pinia, PrimeVue],
-        stubs: {
-          Button: true,
-          Dialog: true,
-          RouterLink: true,
-          ContractEdit: true,
-        },
+        stubs: ["Button", "Dialog", "RouterLink", "ContractEdit"],
       },
     })
     const vm: unknown = wrapper.vm

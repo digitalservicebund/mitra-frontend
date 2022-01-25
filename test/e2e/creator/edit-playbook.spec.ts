@@ -43,7 +43,9 @@ test.describe("Playbook modules overview", async () => {
 
   test("showing header with title", async ({ page }) => {
     // NOTE: the testing library's findByText didn't work with <header> in webkit..
-    await expect(page.locator("header >> text='test playbook'")).toBeVisible()
+    await expect(
+      page.locator("header h1 >> text='test playbook'")
+    ).toBeVisible()
   })
 
   test("showing modules", async ({ page }) => {
@@ -59,10 +61,12 @@ test.describe("Playbook metadata", async () => {
   })
 
   test("editing title", async ({ page }) => {
-    await page.locator("header >> text='Unbenanntes Playbook'").click()
+    await page.locator("header h1 >> text='Unbenanntes Playbook'").click()
     await page.fill("header >> input", "Test Playbook")
     await page.press("header >> input", "Enter")
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await expect(page.locator("header >> text='Test Playbook'")).toBeVisible()
+    await expect(
+      page.locator("header h1 >> text='Test Playbook'")
+    ).toBeVisible()
   })
 })

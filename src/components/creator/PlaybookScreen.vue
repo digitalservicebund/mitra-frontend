@@ -1,7 +1,9 @@
 <script setup lang="ts">
+  import Breadcrumb from "primevue/breadcrumb"
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
-  import { ref } from "vue"
+  import type { MenuItem } from "primevue/menuitem"
+  import { Ref, ref } from "vue"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -24,6 +26,17 @@
   const editableTitle = ref(playbook.title)
   const edittitle = ref()
 
+  const breadcrumbTopLevel: MenuItem = {
+    to: "/mitra-frontend/",
+    label: "Startseite",
+  }
+  const breadcrumbItems: Ref<MenuItem[]> = ref([
+    {
+      label: editableTitle.value,
+      disabled: true,
+    },
+  ])
+
   const updateTitle = () => {
     playbook.title = editableTitle.value
     edittitle.value.close()
@@ -40,6 +53,7 @@
 
 <template>
   <header>
+    <Breadcrumb :home="breadcrumbTopLevel" :model="breadcrumbItems" />
     <Inplace ref="edittitle" :closable="true">
       <template #display>
         <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
