@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { Answer, Step } from "./domain/Step"
 
-export type EntryPoint = "creator" | "einkauf"
+type EntryPoint = "creator" | "einkauf"
 
 export const useSession = defineStore("session", {
   state: () => ({
