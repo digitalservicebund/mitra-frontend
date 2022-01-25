@@ -77,11 +77,11 @@
   </div>
 </template>
 
-<style>
-  details > summary {
-    list-style: none;
+<style scoped>
+  .p-inplace-display h1 {
+    display: inherit;
   }
-  details > summary::-webkit-details-marker {
-    display: none;
+  header {
+    height: 100px;
   }
 </style>
