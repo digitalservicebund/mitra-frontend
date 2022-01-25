@@ -65,3 +65,13 @@ test("Reset formerly entered values", async ({ page, baseURL }) => {
   )
   expect(inputValue).toBe("")
 })
+
+test("Navigate back to buyers start screen", async ({ page, baseURL }) => {
+  await page.goto(`${baseURL}/mitra-frontend/einkauf`)
+  await page.click("text=Neuer EVB-IT Cloud Vertrag")
+  await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
+  await page.fill("#input-contract-title", "foo")
+  await page.press("#input-contract-title", "Enter")
+  await page.click("nav >> text=Startseite")
+  await expect(page).toHaveURL(/\/mitra-frontend\/einkauf/)
+})

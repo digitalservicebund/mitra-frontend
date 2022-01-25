@@ -1,5 +1,9 @@
 <script setup lang="ts">
+  import { useSession } from "../../session"
   import CreateContractPanel from "../CreateContractPanel.vue"
+
+  const session = useSession()
+  session.rememberEntryPoint("einkauf")
 </script>
 
 <template>

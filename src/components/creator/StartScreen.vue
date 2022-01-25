@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import Card from "primevue/card"
+  import { useSession } from "../../session"
   import CreateContractPanel from "../CreateContractPanel.vue"
+
+  const session = useSession()
+  session.rememberEntryPoint("creator")
 </script>
 
 <template>
