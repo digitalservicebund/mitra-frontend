@@ -7,7 +7,7 @@
   import { makePlaybookRepository } from "../../provide"
 
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
-  const playbook: Playbook = new Playbook("")
+  const playbook: Playbook = new Playbook()
 
   playbookRepository.save(playbook)
 
