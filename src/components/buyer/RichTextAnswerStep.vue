@@ -117,6 +117,7 @@
         class="p-2"
         title="Tabelle"
         aria-label="Tabelle"
+        aria-haspopup="true"
         @click="toggleTableActionsMenu"
       >
         <span class="material-icons-outlined text-base" aria-hidden="true">
