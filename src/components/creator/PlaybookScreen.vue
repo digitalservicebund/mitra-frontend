@@ -29,7 +29,7 @@
 
 <template>
   <header>
-    <h1>{{ playbook.title }}</h1>
+    <h1 class="font-bold text-xl">{{ playbook.title }}</h1>
   </header>
   <div class="flex h-full">
     <nav class="flex-none">
@@ -41,11 +41,15 @@
     </nav>
     <main class="flex-1 p-8">
       <section>
-        <h2>Module</h2>
+        <h2 class="font-bold text-lg">Module</h2>
         <ol>
-          <li v-for="module in playbook.modules" :key="module.id">
+          <li
+            v-for="module in playbook.modules"
+            :key="module.id"
+            class="mt-4 border p-4 shadow-md"
+          >
             <details open>
-              <summary>{{ module.text }}</summary>
+              <summary class="text-lg">{{ module.text }}</summary>
               <p>{{ module.steps.length }} Fragen</p>
             </details>
           </li>
