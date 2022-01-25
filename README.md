@@ -123,7 +123,7 @@ Currently the app is deployed to GitHub Pages from trunk continuously.
 
 creator :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
 
-einkauf :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
+einkauf :point_right: https://digitalservice4germany.github.io/mitra-frontend/einkauf
 
 ## License scanning
 
