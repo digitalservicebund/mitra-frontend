@@ -15,6 +15,10 @@ const test = base.extend<TestFixtures>({
     const contract = await fs.promises.readFile(contractFile, "utf-8")
     await use(contract)
   },
+  editor: async ({ page }, use) => {
+    const editor = page.locator("main .ProseMirror")
+    await use(editor)
+  },
   storageState: async ({ contract }, use) => {
     await use({
       cookies: [],
@@ -31,13 +35,9 @@ const test = base.extend<TestFixtures>({
       ],
     })
   },
-  page: async ({ page, baseURL }, use) => {
+  page: async ({ baseURL, page }, use) => {
     await page.goto(`${baseURL}/mitra-frontend/contract/${contractId}`)
     await use(page)
-  },
-  editor: async ({ page }, use) => {
-    const editor = page.locator("main .ProseMirror")
-    await use(editor)
   },
 })
 

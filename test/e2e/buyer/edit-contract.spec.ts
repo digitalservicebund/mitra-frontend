@@ -9,6 +9,8 @@ type TestFixtures = {
   contract: string
 }
 
+const contractId = "3d324eca-06c2-4781-af52-705f49039d0d"
+
 const test = base.extend<TestFixtures>({
   contractFile: "", // needs to be filled in per test.use(...) atm, see below
   contract: async ({ contractFile }, use) => {
@@ -23,13 +25,17 @@ const test = base.extend<TestFixtures>({
           origin: "http://localhost:5000",
           localStorage: [
             {
-              name: "3d324eca-06c2-4781-af52-705f49039d0d",
+              name: contractId,
               value: `${contract}`,
             },
           ],
         },
       ],
     })
+  },
+  page: async ({ baseURL, page }, use) => {
+    await page.goto(`${baseURL}/mitra-frontend/contract/${contractId}`)
+    await use(page)
   },
 })
 
@@ -38,10 +44,7 @@ test.describe("Text answer step", async () => {
     contractFile: "./test/e2e/fixtures/contract-text-answer-step.json",
   })
 
-  test("editing unanswered", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
+  test("editing unanswered", async ({ page }) => {
     const document = await getDocument(page)
     await findByTitle(document, "Test step").then((input) =>
       input.type("Answer to show up in preview")
@@ -56,10 +59,7 @@ test.describe("Rich text answer step", async () => {
     contractFile: "./test/e2e/fixtures/contract-rich-text-answer-step.json",
   })
 
-  test("editing unanswered", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
+  test("editing unanswered", async ({ page }) => {
     await expect(page.locator("main .ProseMirror")).toBeEditable()
     await page.fill("main .ProseMirror", "Answer to show up in preview")
     const preview = await page.locator("section:right-of(main)").elementHandle()
@@ -72,11 +72,7 @@ test.describe("Single choice answer step", async () => {
     contractFile: "./test/e2e/fixtures/contract-single-choice-answer-step.json",
   })
 
-  test("editing unanswered", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
-
+  test("editing unanswered", async ({ page }) => {
     const document = await getDocument(page)
     const preview = await page.locator("section:right-of(main)").elementHandle()
 
@@ -101,11 +97,7 @@ test.describe("Multiple choice answer step", async () => {
       "./test/e2e/fixtures/contract-multiple-choice-answer-step.json",
   })
 
-  test("editing unanswered", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
-
+  test("editing unanswered", async ({ page }) => {
     const document = await getDocument(page)
     const preview = await page.locator("section:right-of(main)").elementHandle()
 

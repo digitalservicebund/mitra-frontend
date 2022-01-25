@@ -1,11 +1,12 @@
 import fs from "fs"
-import { expect, Page, test as base } from "@playwright/test"
+import { expect, test as base } from "@playwright/test"
 
 type TestFixtures = {
   playbookFile: string
   playbook: string
-  page: Page
 }
+
+const contractId = "3d324eca-06c2-4781-af52-705f49039d0d"
 
 const test = base.extend<TestFixtures>({
   playbookFile: "", // needs to be filled in per test.use(...) atm, see below
@@ -21,7 +22,7 @@ const test = base.extend<TestFixtures>({
           origin: "http://localhost:5000",
           localStorage: [
             {
-              name: "3d324eca-06c2-4781-af52-705f49039d0d",
+              name: contractId,
               value: `${playbook}`,
             },
           ],
@@ -30,9 +31,7 @@ const test = base.extend<TestFixtures>({
     })
   },
   page: async ({ baseURL, page }, use) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
+    await page.goto(`${baseURL}/mitra-frontend/playbook/${contractId}`)
     await use(page)
   },
 })
