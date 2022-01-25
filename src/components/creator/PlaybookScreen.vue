@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import Inplace from "primevue/inplace"
+  import InputText from "primevue/inputtext"
+  import { ref } from "vue"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -18,6 +21,14 @@
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
   const playbook: Playbook = playbookRepository.findById(props.id)
 
+  const editableTitle = ref(playbook.title)
+  const edittitle = ref()
+
+  const updateTitle = () => {
+    playbook.title = editableTitle.value
+    edittitle.value.close()
+  }
+
   const handleSave = () => {
     storage.save(playbook)
   }
@@ -29,7 +40,14 @@
 
 <template>
   <header>
-    <h1 class="font-bold text-xl">{{ playbook.title }}</h1>
+    <Inplace ref="edittitle" :closable="true">
+      <template #display>
+        <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
+      </template>
+      <template #content>
+        <InputText v-model="editableTitle" @keyup.enter="updateTitle" />
+      </template>
+    </Inplace>
   </header>
   <div class="flex h-full">
     <nav class="flex-none">

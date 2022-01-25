@@ -1,9 +1,10 @@
 import fs from "fs"
-import { expect, test as base } from "@playwright/test"
+import { expect, Page, test as base } from "@playwright/test"
 
 type TestFixtures = {
   playbookFile: string
   playbook: string
+  page: Page
 }
 
 const test = base.extend<TestFixtures>({
@@ -28,27 +29,41 @@ const test = base.extend<TestFixtures>({
       ],
     })
   },
+  page: async ({ baseURL, page }, use) => {
+    await page.goto(
+      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
+    )
+    await use(page)
+  },
 })
 
-test.describe("Module overview", async () => {
+test.describe("Playbook modules overview", async () => {
   test.use({
     playbookFile: "./test/e2e/fixtures/playbook.json",
   })
 
-  test("showing header with title", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
+  test("showing header with title", async ({ page }) => {
     // NOTE: the testing library's findByText didn't work with <header> in webkit..
     await expect(page.locator("header >> text='test playbook'")).toBeVisible()
   })
 
-  test("showing modules", async ({ page, baseURL }) => {
-    await page.goto(
-      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d`
-    )
+  test("showing modules", async ({ page }) => {
     await expect(page.locator("main >> text='Module'")).toBeVisible()
     await expect(page.locator("main >> text='foo module'")).toBeVisible()
     await expect(page.locator("main >> text='2 Fragen'")).toBeVisible()
+  })
+})
+
+test.describe("Playbook metadata", async () => {
+  test.use({
+    playbookFile: "./test/e2e/fixtures/empty-playbook.json",
+  })
+
+  test("editing title", async ({ page }) => {
+    await page.locator("header >> text='Unbenanntes Playbook'").click()
+    await page.fill("header >> input", "Test Playbook")
+    await page.press("header >> input", "Enter")
+    await expect(page.locator("header >> input")).not.toBeVisible()
+    await expect(page.locator("header >> text='Test Playbook'")).toBeVisible()
   })
 })
