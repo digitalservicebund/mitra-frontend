@@ -1,0 +1,1 @@
+import{_ as o}from"./CreateContractPanel.771bd937.js";import{f as e,o as t,g as a,i as n,c as _}from"./vendor.1dfe8916.js";const i={id:"index",class:"grid grid-rows-2 justify-center"},d=e({setup(r){return(s,c)=>(t(),a("main",i,[n(o)]))}}),m=e({setup(r){return(s,c)=>(t(),_(d))}});export{m as default};
