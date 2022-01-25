@@ -40,4 +40,12 @@ test.describe("Open contract from filesystem", async () => {
     const main = await page.locator("main").elementHandle()
     await findByText(main, "test contract")
   })
+
+  test("Navigate to buyer start screen", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/mitra-frontend/einkauf`)
+    await page.click("text=Vertrag weiter bearbeiten")
+    await expect(page).toHaveURL(/\/contract\/open/)
+    await page.click("text=Startseite")
+    await expect(page).toHaveURL(/\/mitra-frontend\/einkauf/)
+  })
 })

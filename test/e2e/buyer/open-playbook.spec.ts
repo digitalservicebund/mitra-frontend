@@ -37,4 +37,12 @@ test.describe("Open playbook from filesystem", async () => {
     const document = await getDocument(page)
     await findByText(document, "Wie wollen Sie den Vertrag benennen?")
   })
+
+  test("Navigate to buyer start screen", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/mitra-frontend/einkauf`)
+    await page.click("text=Neuer Vertrag aus lokalem Playbook")
+    await expect(page).toHaveURL(/\/contract\/open-playbook/)
+    await page.click("text=Startseite")
+    await expect(page).toHaveURL(/\/mitra-frontend\/einkauf/)
+  })
 })

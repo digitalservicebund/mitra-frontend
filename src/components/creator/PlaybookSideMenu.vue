@@ -28,7 +28,7 @@
       {
         label: "Startseite",
         icon: "pi pi-angle-left",
-        to: "/mitra-frontend/",
+        to: `/mitra-frontend/${session.entryPoint}`,
       },
       {
         key: "1",

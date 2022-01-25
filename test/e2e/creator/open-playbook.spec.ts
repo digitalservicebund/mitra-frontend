@@ -40,4 +40,12 @@ test.describe("Open playbook from filesystem", async () => {
     const main = await page.locator("main").elementHandle()
     await findByText(main, "foo module")
   })
+
+  test("Navigate to creator start screen", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/mitra-frontend/creator`)
+    await page.click("text=Neuer Vertrag aus lokalem Playbook")
+    await expect(page).toHaveURL(/\/contract\/open-playbook/)
+    await page.click("text=Startseite")
+    await expect(page).toHaveURL(/\/mitra-frontend\/creator/)
+  })
 })

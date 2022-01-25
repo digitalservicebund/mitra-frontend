@@ -28,7 +28,7 @@
   const editTitle = ref()
 
   const breadcrumbTopLevel: MenuItem = {
-    to: "/mitra-frontend/",
+    to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
   }
   const breadcrumbItems: Ref<MenuItem[]> = ref([
