@@ -9,16 +9,19 @@ import Module from "../../src/domain/Module"
 import { TextAnswerStep } from "../../src/domain/Step"
 import { useSession } from "../../src/session"
 
-const module1: Module = new Module("Rubrum", [
+const module1: Module = new Module("1. Rubrum", [
   new TextAnswerStep("Schritt 1.1"),
   new TextAnswerStep("Schritt 1.2"),
   new TextAnswerStep("Schritt 1.3"),
 ])
-const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags", [
-  new TextAnswerStep("Schritt 2.1"),
-  new TextAnswerStep("Schritt 2.2"),
-  new TextAnswerStep("Schritt 2.3"),
-])
+const module2: Module = new Module(
+  "2. Gegenstand und Bestandteile des Vertrags",
+  [
+    new TextAnswerStep("Schritt 2.1"),
+    new TextAnswerStep("Schritt 2.2"),
+    new TextAnswerStep("Schritt 2.3"),
+  ]
+)
 const testModules: Module[] = [module1, module2]
 
 describe("SideMenu", () => {

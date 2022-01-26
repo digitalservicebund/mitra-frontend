@@ -42,10 +42,10 @@
         to: `/mitra-frontend/${navigatablePathSegment()}/${
           props.navigatable.id
         }`,
-        items: modules.map((module, index) => {
+        items: modules.map((module) => {
           return withHighlight(
             {
-              label: `${index + 1}. ${module.text}`,
+              label: module.text,
               command: () => emit("navigate", module.path[0]),
             },
             module
