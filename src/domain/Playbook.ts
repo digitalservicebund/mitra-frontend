@@ -13,4 +13,12 @@ export default class Playbook extends Entity {
   addModules(...modules: Module[]) {
     this.modules.push(...modules)
   }
+
+  findModuleById(id: string): Module {
+    const module = this.modules.find((module) => module.id === id)
+    if (module === undefined) {
+      throw new Error("Module not found")
+    }
+    return module
+  }
 }

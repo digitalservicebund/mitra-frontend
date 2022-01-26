@@ -23,4 +23,13 @@ describe("Playbook", () => {
 
     expect(playbook.modules).toEqual(modules)
   })
+
+  it("should return module by id", () => {
+    const playbook = new Playbook()
+    const module1 = new Module("foo")
+    const module2 = new Module("bar")
+    playbook.addModules(module1, module2)
+
+    expect(playbook.findModuleById(module2.id).text).toEqual("bar")
+  })
 })

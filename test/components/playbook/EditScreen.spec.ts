@@ -1,8 +1,32 @@
 import { createTestingPinia } from "@pinia/testing"
 import { render, screen } from "@testing-library/vue"
+import { createRouter, createWebHistory } from "vue-router"
 import EditScreen from "../../../src/components/playbook/EditScreen.vue"
 
 describe("EditScreen", () => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      {
+        path: "/mitra-frontend/",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
+        path: "/mitra-frontend/playbook/:playbook/module/:module",
+        component: {
+          template: "<div></div>",
+        },
+      },
+    ],
+  })
+
+  beforeAll(async () => {
+    router.push("/mitra-frontend/")
+    await router.isReady()
+  })
+
   it("has a header with the playbook title", async () => {
     render(EditScreen, {
       props: {
@@ -37,8 +61,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"],
+        plugins: [createTestingPinia(), router],
+        stubs: ["Breadcrumb", "Inplace", "SideMenu"],
       },
     })
 

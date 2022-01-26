@@ -96,16 +96,19 @@
       <section class="mt-16">
         <h2 class="font-bold text-lg">Module</h2>
         <ol>
-          <li
+          <router-link
             v-for="module in playbook.modules"
             :key="module.id"
-            class="mt-4 border p-4 shadow-md"
+            :to="`/mitra-frontend/playbook/${playbook.id}/module/${module.id}`"
+            class="block"
           >
-            <details open>
-              <summary class="text-lg">{{ module.text }}</summary>
-              <p>{{ module.steps.length }} Fragen</p>
-            </details>
-          </li>
+            <li class="mt-4 border p-4 shadow-md">
+              <details open>
+                <summary class="text-lg">{{ module.text }}</summary>
+                <p>{{ module.steps.length }} Fragen</p>
+              </details>
+            </li>
+          </router-link>
         </ol>
       </section>
     </main>
