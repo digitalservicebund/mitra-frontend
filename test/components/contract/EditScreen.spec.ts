@@ -1,7 +1,7 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount, shallowMount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
-import ContractScreen from "../../../src/components/contract/Screen.vue"
+import EditScreen from "../../../src/components/contract/EditScreen.vue"
 import ContractSideMenu from "../../../src/components/contract/SideMenu.vue"
 import Contract from "../../../src/domain/Contract"
 import ContractStorageService from "../../../src/domain/ContractStorageService"
@@ -10,9 +10,9 @@ import { TextAnswerStep } from "../../../src/domain/Step"
 import { makeContractStorageService } from "../../../src/provide"
 import { useSession } from "../../../src/session"
 
-describe("ContractScreen", () => {
+describe("EditScreen", () => {
   it("updates contract title when entered", () => {
-    const wrapper = shallowMount(ContractScreen, {
+    const wrapper = shallowMount(EditScreen, {
       props: {
         id: "contract-id",
       },
@@ -45,7 +45,7 @@ describe("ContractScreen", () => {
     const session = useSession()
     session.rememberCurrentStep(contract, contract.modules[0].steps[0])
 
-    const wrapper = mount(ContractScreen, {
+    const wrapper = mount(EditScreen, {
       props: {
         id: "contract-id",
       },

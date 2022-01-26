@@ -1,12 +1,12 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
-import ContractEdit from "../../../src/components/contract/Edit.vue"
+import EditStep from "../../../src/components/contract/EditStep.vue"
 import Contract from "../../../src/domain/Contract"
 import Module from "../../../src/domain/Module"
 import { TextAnswerStep } from "../../../src/domain/Step"
 import { useSession } from "../../../src/session"
 
-describe("ContractEdit", () => {
+describe("EditStep", () => {
   it("updates session when navigating steps", async () => {
     const contract = new Contract("", [
       new Module("foo", [new TextAnswerStep("foo")]),
@@ -16,7 +16,7 @@ describe("ContractEdit", () => {
     const session = useSession()
     session.rememberCurrentStep(contract, contract.modules[0].steps[0])
 
-    const wrapper = mount(ContractEdit, {
+    const wrapper = mount(EditStep, {
       props: {
         contract: contract,
       },

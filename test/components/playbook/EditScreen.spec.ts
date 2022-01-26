@@ -1,10 +1,10 @@
 import { createTestingPinia } from "@pinia/testing"
 import { render, screen } from "@testing-library/vue"
-import PlaybookScreen from "../../../src/components/playbook/Screen.vue"
+import EditScreen from "../../../src/components/playbook/EditScreen.vue"
 
 describe("PlaybookScreen", () => {
   it("has a header with the playbook title", async () => {
-    render(PlaybookScreen, {
+    render(EditScreen, {
       props: {
         id: "xyz",
       },
@@ -18,7 +18,7 @@ describe("PlaybookScreen", () => {
   })
 
   it("has a breadcrumb navigation", async () => {
-    render(PlaybookScreen, {
+    render(EditScreen, {
       props: {
         id: "xyz",
       },
@@ -32,7 +32,7 @@ describe("PlaybookScreen", () => {
   })
 
   it("lists the playbook's modules", async () => {
-    render(PlaybookScreen, {
+    render(EditScreen, {
       props: {
         id: "xyz",
       },

@@ -12,7 +12,7 @@
     makeContractStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
-  import ContractEdit from "./Edit.vue"
+  import EditStep from "./EditStep.vue"
   import ContractPreview from "./Preview.vue"
   import ContractSideMenu from "./SideMenu.vue"
 
@@ -102,7 +102,7 @@
       </header>
 
       <transition name="fade" mode="out-in">
-        <ContractEdit :contract="contract" />
+        <EditStep :contract="contract" />
       </transition>
     </main>
 
