@@ -71,9 +71,3 @@
 <template>
   <PanelMenu :model="menuItems" :expanded-keys="{ '1': true }" class="w-64" />
 </template>
-
-<style>
-  .p-menu .p-menuitem-link .p-menuitem-icon:not(.pi):empty {
-    display: none;
-  }
-</style>
