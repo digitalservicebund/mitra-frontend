@@ -33,6 +33,10 @@ header.edit {
 header.edit .p-inplace {
   display: inline-flex;
 }
+
+.p-panelmenu .pi-angle-left::before,
+.p-panelmenu .pi-angle-down::before,
+.p-panelmenu .pi-download::before,
 header.edit .p-breadcrumb-chevron::before {
   direction: ltr;
   display: inline-block;
@@ -46,9 +50,21 @@ header.edit .p-breadcrumb-chevron::before {
   white-space: nowrap;
   word-wrap: normal;
   font-feature-settings: "liga";
-  content: " chevron_right ";
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
+}
+
+.p-panelmenu .pi-angle-left::before {
+  content: "chevron_left";
+}
+.p-panelmenu .pi-angle-down::before {
+  content: "expand_more";
+}
+.p-panelmenu .pi-download::before {
+  content: "file_download";
+}
+header.edit .p-breadcrumb-chevron::before {
+  content: "chevron_right";
 }
 
 #app {

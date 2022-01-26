@@ -39,6 +39,7 @@
       {
         key: "1",
         label: props.navigatable.title,
+        icon: "pi pi-angle-down",
         to: `/mitra-frontend/${navigatablePathSegment()}/${
           props.navigatable.id
         }`,
@@ -54,7 +55,7 @@
       },
       {
         label: "Speichern",
-        icon: "pi pi-fw pi-download",
+        icon: "pi pi-download",
         command: () => emit("save"),
       },
     ]
