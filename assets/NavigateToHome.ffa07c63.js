@@ -200,4 +200,4 @@ import{R as F,s as _}from"./button.esm.beccdf6b.js";import{o as r,c as o,k as b,
 .p-fluid .p-fileupload .p-button {
     width: auto;
 }
-`;ae(re);X.render=ne;const oe=S("span",{class:"material-icons-outlined text-lg align-bottom mr-1","aria-hidden":"true"},"arrow_back",-1),de=S("span",{class:"text-lg"},"Startseite",-1),fe=M({setup(e){const t=N().entryPoint;return console.log(t),(s,a)=>{const n=m("router-link");return r(),o(n,{to:`/mitra-frontend/${U(t)}`,class:"block mb-4"},{default:h(()=>[oe,de]),_:1},8,["to"])}}});export{fe as _,X as s};
+`;ae(re);X.render=ne;const oe=S("span",{class:"material-icons-outlined text-lg align-bottom mr-1","aria-hidden":"true"},"arrow_back",-1),de=S("span",{class:"text-lg"},"Startseite",-1),fe=M({setup(e){const t=N().entryPoint;return(s,a)=>{const n=m("router-link");return r(),o(n,{to:`/mitra-frontend/${U(t)}`,class:"block mb-4"},{default:h(()=>[oe,de]),_:1},8,["to"])}}});export{fe as _,X as s};
