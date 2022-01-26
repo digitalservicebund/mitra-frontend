@@ -1,6 +1,6 @@
 import { createTestingPinia } from "@pinia/testing"
 import { render, screen } from "@testing-library/vue"
-import PlaybookScreen from "../../../src/components/creator/PlaybookScreen.vue"
+import PlaybookScreen from "../../../src/components/playbook/Screen.vue"
 
 describe("PlaybookScreen", () => {
   it("has a header with the playbook title", async () => {

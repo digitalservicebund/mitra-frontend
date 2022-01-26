@@ -14,7 +14,7 @@
     makePlaybookStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
-  import PlaybookSideMenu from "./PlaybookSideMenu.vue"
+  import PlaybookSideMenu from "./SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
 
