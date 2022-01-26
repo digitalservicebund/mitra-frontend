@@ -4,7 +4,7 @@
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
   import type { MenuItem } from "primevue/menuitem"
-  import { Ref, ref } from "vue"
+  import { computed, ref } from "vue"
   import Contract from "../../domain/Contract"
   import ContractRepository from "../../domain/ContractRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -26,15 +26,14 @@
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract = contractRepository.findById(props.id)
   session.rememberCurrentStep(contract, contract.path[0])
-
-  const editableTitle = ref(contract.title)
-  const editTitle = ref()
-
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
   }
-  const breadcrumbItems: Ref<MenuItem[]> = ref([
+
+  const editableTitle = ref(contract.title)
+  const editTitle = ref()
+  const breadcrumbItems = computed(() => [
     {
       label: editableTitle.value,
       disabled: true,

@@ -51,6 +51,9 @@ test.describe("Playbook metadata", async () => {
     await expect(
       page.locator("header h1 >> text='Test Playbook'")
     ).toBeVisible()
+    await expect(
+      page.locator("header nav >> text='Test Playbook'")
+    ).toBeVisible()
     await page.click("text='Ändern'")
     await expect(page.locator("header >> input")).toBeVisible()
     await expect(page.locator("header >> input")).toBeFocused()

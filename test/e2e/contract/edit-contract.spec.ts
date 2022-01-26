@@ -52,6 +52,9 @@ test.describe("Contract editing", async () => {
     await page.press("header >> input", "Enter")
     await expect(page.locator("header >> input")).not.toBeVisible()
     await expect(page.locator("header h1 >> text='Test Vertrag'")).toBeVisible()
+    await expect(
+      page.locator("header nav >> text='Test Vertrag'")
+    ).toBeVisible()
     await page.click("text='Ändern'")
     await expect(page.locator("header >> input")).toBeVisible()
     await expect(page.locator("header >> input")).toBeFocused()

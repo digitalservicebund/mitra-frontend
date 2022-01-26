@@ -4,7 +4,7 @@
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
   import type { MenuItem } from "primevue/menuitem"
-  import { Ref, ref } from "vue"
+  import { computed, ref } from "vue"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -23,15 +23,14 @@
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
   const playbook: Playbook = playbookRepository.findById(props.id)
-
-  const editableTitle = ref(playbook.title)
-  const editTitle = ref()
-
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
   }
-  const breadcrumbItems: Ref<MenuItem[]> = ref([
+
+  const editableTitle = ref(playbook.title)
+  const editTitle = ref()
+  const breadcrumbItems = computed(() => [
     {
       label: editableTitle.value,
       disabled: true,
