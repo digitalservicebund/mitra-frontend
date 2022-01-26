@@ -2,7 +2,6 @@
   import { useSession } from "../session"
 
   const entryPoint = useSession().entryPoint
-  console.log(entryPoint)
 </script>
 
 <template>
