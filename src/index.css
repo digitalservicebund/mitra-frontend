@@ -27,6 +27,30 @@
   @apply mt-2;
 }
 
+header.edit {
+  height: 150px;
+}
+header.edit .p-inplace {
+  display: inline-flex;
+}
+header.edit .p-breadcrumb-chevron::before {
+  direction: ltr;
+  display: inline-block;
+  font-family: "Material Icons Outlined";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  font-feature-settings: "liga";
+  content: " chevron_right ";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
 #app {
   font-family: BundesSansWeb, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,

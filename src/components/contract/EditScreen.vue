@@ -68,8 +68,8 @@
         @navigate="handleNavigate"
       />
     </nav>
-    <main id="contract-outline" class="flex-1 px-8">
-      <header>
+    <main class="flex-1 px-8">
+      <header class="edit">
         <Breadcrumb
           :home="breadcrumbTopLevel"
           :model="breadcrumbItems"
@@ -109,30 +109,6 @@
 </template>
 
 <style scoped>
-  #contract-outline header {
-    height: 150px;
-  }
-  #contract-outline .p-inplace {
-    display: inline-flex;
-  }
-  #contract-outline .p-breadcrumb-chevron::before {
-    direction: ltr;
-    display: inline-block;
-    font-family: "Material Icons Outlined";
-    font-size: 22px;
-    font-style: normal;
-    font-weight: normal;
-    letter-spacing: normal;
-    line-height: 1;
-    text-transform: none;
-    white-space: nowrap;
-    word-wrap: normal;
-    font-feature-settings: "liga";
-    content: " chevron_right ";
-    -webkit-font-feature-settings: "liga";
-    -webkit-font-smoothing: antialiased;
-  }
-
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.5s;
