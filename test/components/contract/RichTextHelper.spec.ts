@@ -1,6 +1,6 @@
 import { Editor } from "@tiptap/vue-3"
-import RichTextEditorConfig from "../../../src/components/buyer/RichTextEditorConfig"
-import { editorContentAsAnswerValue } from "../../../src/components/buyer/RichTextHelper"
+import RichTextEditorConfig from "../../../src/components/contract/RichTextEditorConfig"
+import { editorContentAsAnswerValue } from "../../../src/components/contract/RichTextHelper"
 import { RichTextAnswerStep } from "../../../src/domain/Step"
 
 describe("RichTextHelper", () => {

@@ -1,6 +1,6 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
-import ContractEdit from "../../../src/components/buyer/ContractEdit.vue"
+import ContractEdit from "../../../src/components/contract/Edit.vue"
 import Contract from "../../../src/domain/Contract"
 import Module from "../../../src/domain/Module"
 import { TextAnswerStep } from "../../../src/domain/Step"

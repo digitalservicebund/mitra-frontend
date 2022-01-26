@@ -12,9 +12,9 @@
     makeContractStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
-  import ContractEdit from "./ContractEdit.vue"
-  import ContractPreview from "./ContractPreview.vue"
-  import ContractSideMenu from "./ContractSideMenu.vue"
+  import ContractEdit from "./Edit.vue"
+  import ContractPreview from "./Preview.vue"
+  import ContractSideMenu from "./SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
 
