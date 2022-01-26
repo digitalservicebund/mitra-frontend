@@ -57,28 +57,6 @@
 </script>
 
 <template>
-  <header>
-    <Breadcrumb :home="breadcrumbTopLevel" :model="breadcrumbItems" />
-    <Inplace ref="editTitle" :closable="false">
-      <template #display>
-        <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
-      </template>
-      <template #content>
-        <InputText
-          v-model="editableTitle"
-          v-focus
-          @keyup.enter="updateTitle"
-          @blur="updateTitle"
-        />
-      </template>
-    </Inplace>
-    <Button type="button" @click="startTitleEditing">
-      <span class="material-icons-outlined text-base" aria-hidden="true">
-        edit
-      </span>
-      Ändern
-    </Button>
-  </header>
   <div class="flex h-full">
     <nav class="flex-none">
       <PlaybookSideMenu
@@ -87,8 +65,36 @@
         @navigate="handleNavigate"
       />
     </nav>
-    <main class="flex-1 p-8">
-      <section>
+    <main id="playbook-outline" class="flex-1 px-8">
+      <header>
+        <Breadcrumb
+          :home="breadcrumbTopLevel"
+          :model="breadcrumbItems"
+          class="mb-4"
+        />
+        <p><small>Playbook</small></p>
+        <Inplace ref="editTitle" :closable="false">
+          <template #display>
+            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
+          </template>
+          <template #content>
+            <InputText
+              v-model="editableTitle"
+              v-focus
+              class="mr-1"
+              @keyup.enter="updateTitle"
+              @blur="updateTitle"
+            />
+          </template>
+        </Inplace>
+        <Button type="button" @click="startTitleEditing">
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            edit
+          </span>
+          Ändern
+        </Button>
+      </header>
+      <section class="mt-16">
         <h2 class="font-bold text-lg">Module</h2>
         <ol>
           <li
@@ -107,11 +113,28 @@
   </div>
 </template>
 
-<style scoped>
-  .p-inplace-display h1 {
-    display: inherit;
-  }
-  header {
+<style>
+  #playbook-outline header {
     height: 150px;
+  }
+  #playbook-outline .p-inplace {
+    display: inline-flex;
+  }
+  #playbook-outline .p-breadcrumb-chevron::before {
+    direction: ltr;
+    display: inline-block;
+    font-family: "Material Icons Outlined";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    font-feature-settings: "liga";
+    content: " chevron_right ";
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
   }
 </style>
