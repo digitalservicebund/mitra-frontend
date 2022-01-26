@@ -14,7 +14,7 @@
     makePlaybookStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
-  import PlaybookSideMenu from "./SideMenu.vue"
+  import SideMenu from "../SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
 
@@ -59,8 +59,8 @@
 <template>
   <div class="flex h-full">
     <nav class="flex-none">
-      <PlaybookSideMenu
-        :playbook="playbook"
+      <SideMenu
+        :navigatable="playbook"
         @save="handleSave"
         @navigate="handleNavigate"
       />

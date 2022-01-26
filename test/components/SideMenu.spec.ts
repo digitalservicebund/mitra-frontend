@@ -3,11 +3,11 @@ import { fireEvent, render, screen } from "@testing-library/vue"
 import { mount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
 import { createRouter, createWebHistory } from "vue-router"
-import ContractSideMenu from "../../../src/components/contract/SideMenu.vue"
-import Contract from "../../../src/domain/Contract"
-import Module from "../../../src/domain/Module"
-import { TextAnswerStep } from "../../../src/domain/Step"
-import { useSession } from "../../../src/session"
+import SideMenu from "../../src/components/SideMenu.vue"
+import Contract from "../../src/domain/Contract"
+import Module from "../../src/domain/Module"
+import { TextAnswerStep } from "../../src/domain/Step"
+import { useSession } from "../../src/session"
 
 const module1: Module = new Module("Rubrum", [
   new TextAnswerStep("Schritt 1.1"),
@@ -21,12 +21,18 @@ const module2: Module = new Module("Gegenstand und Bestandteile des Vertrags", [
 ])
 const testModules: Module[] = [module1, module2]
 
-describe("ContractSideMenu", () => {
+describe("SideMenu", () => {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
       {
         path: "/mitra-frontend/",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
+        path: "/mitra-frontend/:navigatable/:id",
         component: {
           template: "<div></div>",
         },
@@ -40,16 +46,15 @@ describe("ContractSideMenu", () => {
   })
 
   it("should render all fixed menu items", () => {
-    render(ContractSideMenu, {
+    render(SideMenu, {
       props: {
-        contract: new Contract("", testModules),
+        navigatable: new Contract(undefined, testModules),
       },
       global: {
         plugins: [router, createTestingPinia(), PrimeVue],
       },
     })
     expect(screen.getByText("Startseite")).toBeVisible()
-    expect(screen.getByText("Module")).toBeVisible()
     expect(screen.getByText("1. Rubrum")).toBeVisible()
     expect(
       screen.getByText("2. Gegenstand und Bestandteile des Vertrags")
@@ -58,15 +63,14 @@ describe("ContractSideMenu", () => {
   })
 
   it("should issue command to navigate to module", async () => {
-    const { emitted } = render(ContractSideMenu, {
+    const { emitted } = render(SideMenu, {
       props: {
-        contract: new Contract("", testModules),
+        navigatable: new Contract(undefined, testModules),
       },
       global: {
         plugins: [router, createTestingPinia(), PrimeVue],
       },
     })
-    await fireEvent.click(screen.getByText("Module"))
     await fireEvent.click(
       screen.getByText("2. Gegenstand und Bestandteile des Vertrags")
     )
@@ -74,9 +78,9 @@ describe("ContractSideMenu", () => {
   })
 
   it("should issue command to save contract", async () => {
-    const { emitted } = render(ContractSideMenu, {
+    const { emitted } = render(SideMenu, {
       props: {
-        contract: new Contract("", testModules),
+        navigatable: new Contract(undefined, testModules),
       },
       global: {
         plugins: [router, createTestingPinia(), PrimeVue],
@@ -87,22 +91,22 @@ describe("ContractSideMenu", () => {
   })
 
   it("should highlight module of currently worked on step", () => {
-    const contract = new Contract("", testModules)
+    const contract = new Contract(undefined, testModules)
     const pinia = createTestingPinia()
     const session = useSession()
     session.rememberCurrentStep(contract, contract.modules[1].steps[0])
 
-    const wrapper = mount(ContractSideMenu, {
+    const wrapper = mount(SideMenu, {
       props: {
-        contract: contract,
+        navigatable: contract,
       },
       global: {
         plugins: [router, pinia, PrimeVue],
       },
     })
 
-    expect(wrapper.find(".font-bold").element).toHaveTextContent(
-      "2. Gegenstand und Bestandteile des Vertrags"
-    )
+    expect(
+      wrapper.find("[style='font-weight: bold;']").element
+    ).toHaveTextContent("2. Gegenstand und Bestandteile des Vertrags")
   })
 })

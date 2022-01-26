@@ -2,7 +2,7 @@ import { createTestingPinia } from "@pinia/testing"
 import { render, screen } from "@testing-library/vue"
 import EditScreen from "../../../src/components/playbook/EditScreen.vue"
 
-describe("PlaybookScreen", () => {
+describe("EditScreen", () => {
   it("has a header with the playbook title", async () => {
     render(EditScreen, {
       props: {
@@ -10,7 +10,7 @@ describe("PlaybookScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "PlaybookSideMenu", "RouterLink"],
+        stubs: ["Breadcrumb", "SideMenu", "RouterLink"],
       },
     })
 
@@ -24,7 +24,7 @@ describe("PlaybookScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["Inplace", "PlaybookSideMenu", "RouterLink"],
+        stubs: ["Inplace", "SideMenu", "RouterLink"],
       },
     })
 
@@ -38,7 +38,7 @@ describe("PlaybookScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "Inplace", "PlaybookSideMenu", "RouterLink"],
+        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"],
       },
     })
 

@@ -1,7 +1,7 @@
-import { queries } from "@playwright-testing-library/test"
+import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
-const { findByText } = queries
+const { findAllByText } = queries
 
 test.describe("Open playbook from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
@@ -13,8 +13,7 @@ test.describe("Open playbook from filesystem", async () => {
     await expect(page).toHaveURL(
       /playbook\/3d324eca-06c2-4781-af52-705f49039d0d/
     )
-    const main = await page.locator("main").elementHandle()
-    await findByText(main, "foo module")
+    await findAllByText(await getDocument(page), "foo module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
@@ -37,8 +36,7 @@ test.describe("Open playbook from filesystem", async () => {
     await expect(page).toHaveURL(
       /playbook\/3d324eca-06c2-4781-af52-705f49039d0d/
     )
-    const main = await page.locator("main").elementHandle()
-    await findByText(main, "foo module")
+    await findAllByText(await getDocument(page), "foo module")
   })
 
   test("Navigate to creator start screen", async ({ page, baseURL }) => {

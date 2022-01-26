@@ -8,9 +8,6 @@ test.skip(
 
 test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
   await page.goto(`${baseURL}/mitra-frontend/contract/new`)
-  await page.locator("text=Vertrag benennen").waitFor()
-  await page.fill("#input-contract-title", "TEST")
-  await page.click("text=OK")
 
   page.on("download", (download) => {
     download.createReadStream().then((stream) => {
@@ -25,5 +22,7 @@ test("Save currently worked on contract to disk", async ({ page, baseURL }) => {
   ])
   const downloaded = fs.readFileSync("./test/e2e/saved-contract.json", "utf-8")
   expect(() => JSON.parse(downloaded)).not.toThrow()
-  expect(JSON.parse(downloaded)).toMatchObject({ contract: { title: "TEST" } })
+  expect(JSON.parse(downloaded)).toMatchObject({
+    contract: { title: "Unbenannter Vertrag" },
+  })
 })

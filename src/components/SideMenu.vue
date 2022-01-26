@@ -1,13 +1,14 @@
 <script setup lang="ts">
-  import Menu from "primevue/menu"
   import type { MenuItem } from "primevue/menuitem"
+  import PanelMenu from "primevue/panelmenu"
   import { ref } from "vue"
-  import Contract from "../../domain/Contract"
-  import Module from "../../domain/Module"
-  import { Answer, Step } from "../../domain/Step"
-  import { useSession } from "../../session"
+  import Contract from "../domain/Contract"
+  import Module from "../domain/Module"
+  import Playbook from "../domain/Playbook"
+  import { Answer, Step } from "../domain/Step"
+  import { useSession } from "../session"
 
-  const props = defineProps<{ contract: Contract }>()
+  const props = defineProps<{ navigatable: Contract | Playbook }>()
   const emit = defineEmits<{
     (e: "save"): void
     (e: "navigate", step: Step<Answer>): void
@@ -15,11 +16,16 @@
 
   const session = useSession()
 
+  const navigatablePathSegment = () => {
+    const [, segment] = location.pathname.match(/\/(playbook|contract)\//) || []
+    return segment
+  }
+
   const withHighlight = (item: MenuItem, module: Module) => {
     return module.path.find((step) =>
-      step.equals(session.cache.get(props.contract.id))
+      step.equals(session.cache.get(props.navigatable.id))
     )
-      ? { ...item, class: "font-bold" }
+      ? { ...item, style: "font-weight:bold" }
       : item
   }
 
@@ -31,7 +37,11 @@
         to: `/mitra-frontend/${session.entryPoint}`,
       },
       {
-        label: "Module",
+        key: "1",
+        label: props.navigatable.title,
+        to: `/mitra-frontend/${navigatablePathSegment()}/${
+          props.navigatable.id
+        }`,
         items: modules.map((module, index) => {
           return withHighlight(
             {
@@ -51,14 +61,14 @@
   }
 
   session.$subscribe(() => {
-    menuItems.value = generateMenuItems(props.contract.modules)
+    menuItems.value = generateMenuItems(props.navigatable.modules)
   })
 
-  const menuItems = ref(generateMenuItems(props.contract.modules))
+  const menuItems = ref(generateMenuItems(props.navigatable.modules))
 </script>
 
 <template>
-  <Menu :model="menuItems" class="w-70" />
+  <PanelMenu :model="menuItems" :expanded-keys="{ '1': true }" class="w-64" />
 </template>
 
 <style>

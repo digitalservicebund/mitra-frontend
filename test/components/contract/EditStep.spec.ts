@@ -8,7 +8,7 @@ import { useSession } from "../../../src/session"
 
 describe("EditStep", () => {
   it("updates session when navigating steps", async () => {
-    const contract = new Contract("", [
+    const contract = new Contract(undefined, [
       new Module("foo", [new TextAnswerStep("foo")]),
       new Module("bar", [new TextAnswerStep("bar")]),
     ])

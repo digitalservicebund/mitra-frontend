@@ -11,7 +11,7 @@ function findStepIndex(
 }
 export default class Contract extends Entity {
   constructor(
-    public title: string,
+    public title: string = "Unbenannter Vertrag",
     public readonly modules: Module[],
     id?: string
   ) {
@@ -20,7 +20,7 @@ export default class Contract extends Entity {
 
   static fromPlaybook(playbook: Playbook): Contract {
     const modules: Module[] = playbook.modules.map((module) => module.clone())
-    return new Contract("", modules)
+    return new Contract(undefined, modules)
   }
 
   get path(): readonly Step<Answer>[] {

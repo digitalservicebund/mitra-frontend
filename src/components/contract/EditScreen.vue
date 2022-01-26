@@ -1,8 +1,10 @@
 <script setup lang="ts">
+  import Breadcrumb from "primevue/breadcrumb"
   import Button from "primevue/button"
-  import Dialog from "primevue/dialog"
+  import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
-  import { onMounted, ref } from "vue"
+  import type { MenuItem } from "primevue/menuitem"
+  import { Ref, ref } from "vue"
   import Contract from "../../domain/Contract"
   import ContractRepository from "../../domain/ContractRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -12,9 +14,9 @@
     makeContractStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
+  import SideMenu from "../SideMenu.vue"
   import EditStep from "./EditStep.vue"
   import ContractPreview from "./Preview.vue"
-  import ContractSideMenu from "./SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
 
@@ -25,27 +27,27 @@
   const contract: Contract = contractRepository.findById(props.id)
   session.rememberCurrentStep(contract, contract.path[0])
 
-  const placeholder = contract.title || "Unbenannter Vertrag"
-  const contractTitle = ref(placeholder)
-  const titleInput = ref(placeholder)
-  const displayTitleDialog = ref(false)
+  const editableTitle = ref(contract.title)
+  const editTitle = ref()
 
-  const editTitle = () => {
-    titleInput.value = contractTitle.value
-    displayTitleDialog.value = true
+  const breadcrumbTopLevel: MenuItem = {
+    to: `/mitra-frontend/${session.entryPoint}`,
+    label: "Startseite",
+  }
+  const breadcrumbItems: Ref<MenuItem[]> = ref([
+    {
+      label: editableTitle.value,
+      disabled: true,
+    },
+  ])
+
+  const startTitleEditing = () => {
+    editTitle.value.open()
   }
 
   const updateTitle = () => {
-    displayTitleDialog.value = false
-    if (titleInput.value !== placeholder) {
-      contractTitle.value = titleInput.value
-      contract.title = titleInput.value
-    }
-  }
-
-  const highlightText = (event: Event) => {
-    const target = event.target as HTMLInputElement
-    target?.select()
+    contract.title = editableTitle.value
+    editTitle.value.close()
   }
 
   const handleSave = () => {
@@ -55,55 +57,51 @@
   const handleNavigate = (step: Step<Answer>) => {
     session.rememberCurrentStep(contract, step)
   }
-
-  onMounted(() => {
-    if (!contract.title) {
-      editTitle()
-    }
-  })
 </script>
 
 <template>
   <div class="flex h-full">
     <nav class="flex-none">
-      <ContractSideMenu
-        :contract="contract"
+      <SideMenu
+        :navigatable="contract"
         @save="handleSave"
         @navigate="handleNavigate"
       />
     </nav>
-
-    <main class="flex-1 p-8">
-      <Dialog
-        id="dialog-contract-title"
-        v-model:visible="displayTitleDialog"
-        :modal="true"
-        :dismissable-mask="true"
-        header="Wie wollen Sie den Vertrag benennen?"
-      >
-        <InputText
-          id="input-contract-title"
-          v-model="titleInput"
-          v-focus
-          title="Titel des Vertrags"
-          type="text"
-          @focus="highlightText"
-          @keyup.enter="updateTitle"
-        />
-        <template #footer>
-          <Button label="OK" icon="pi pi-check" @click="updateTitle"></Button>
-        </template>
-      </Dialog>
-
+    <main id="contract-outline" class="flex-1 px-8">
       <header>
-        <Button class="p-button-link" @click="editTitle">
-          <span>{{ contractTitle }}</span>
+        <Breadcrumb
+          :home="breadcrumbTopLevel"
+          :model="breadcrumbItems"
+          class="mb-4"
+        />
+        <p><small>Vertrag</small></p>
+        <Inplace ref="editTitle" :closable="false">
+          <template #display>
+            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
+          </template>
+          <template #content>
+            <InputText
+              v-model="editableTitle"
+              v-focus
+              class="mr-1"
+              @keyup.enter="updateTitle"
+              @blur="updateTitle"
+            />
+          </template>
+        </Inplace>
+        <Button type="button" @click="startTitleEditing">
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            edit
+          </span>
+          Ändern
         </Button>
       </header>
-
-      <transition name="fade" mode="out-in">
-        <EditStep :contract="contract" />
-      </transition>
+      <section class="mt-16">
+        <transition name="fade" mode="out-in">
+          <EditStep :contract="contract" />
+        </transition>
+      </section>
     </main>
 
     <ContractPreview :contract="contract" class="flex-1 bg-slate-100" />
@@ -111,19 +109,34 @@
 </template>
 
 <style scoped>
-  #dialog-contract-title {
-    width: 40vw;
+  #contract-outline header {
+    height: 150px;
   }
-
-  #input-contract-title {
-    width: 100%;
+  #contract-outline .p-inplace {
+    display: inline-flex;
+  }
+  #contract-outline .p-breadcrumb-chevron::before {
+    direction: ltr;
+    display: inline-block;
+    font-family: "Material Icons Outlined";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    font-feature-settings: "liga";
+    content: " chevron_right ";
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
   }
 
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.5s;
   }
-
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;

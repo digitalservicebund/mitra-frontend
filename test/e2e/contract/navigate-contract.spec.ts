@@ -4,14 +4,11 @@ import { expect, test as base } from "@playwright/test"
 const test = base.extend({
   page: async ({ baseURL, page }, use) => {
     await page.goto(`${baseURL}/mitra-frontend/contract/new`)
-    await page.locator("text=Vertrag benennen").waitFor()
-    await page.mouse.click(0, 0) // Dismiss dialog..
     await use(page)
   },
 })
 
 test("List contract modules in navigation", async ({ page }) => {
-  await page.click("nav >> text=Module")
   await expect(page.locator("nav >> text=Rubrum")).toBeVisible()
   await expect(
     page.locator("nav >> text=Gegenstand der Leistungen")
@@ -19,7 +16,6 @@ test("List contract modules in navigation", async ({ page }) => {
 })
 
 test("Navigate through modules in navigation", async ({ page }) => {
-  await page.click("nav >> text=Module")
   await page.click("nav >> text=Gegenstand")
   await expect(page.locator("text=Schritt 2.1")).toBeVisible()
 })

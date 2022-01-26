@@ -39,6 +39,27 @@ const test = base.extend<TestFixtures>({
   },
 })
 
+test.describe("Contract editing", async () => {
+  test.use({
+    contractFile: "./test/e2e/fixtures/empty-contract.json",
+  })
+
+  test("editing title", async ({ page }) => {
+    await expect(page.locator("header >> input")).not.toBeVisible()
+    await page.locator("header h1 >> text='Unbenannter Vertrag'").click()
+    await expect(page.locator("header >> input")).toBeVisible()
+    await page.fill("header >> input", "Test Vertrag")
+    await page.press("header >> input", "Enter")
+    await expect(page.locator("header >> input")).not.toBeVisible()
+    await expect(page.locator("header h1 >> text='Test Vertrag'")).toBeVisible()
+    await page.click("text='Ändern'")
+    await expect(page.locator("header >> input")).toBeVisible()
+    await expect(page.locator("header >> input")).toBeFocused()
+    await page.dispatchEvent("header >> input", "blur")
+    await expect(page.locator("header >> input")).not.toBeVisible()
+  })
+})
+
 test.describe("Text answer step", async () => {
   test.use({
     contractFile: "./test/e2e/fixtures/contract-text-answer-step.json",

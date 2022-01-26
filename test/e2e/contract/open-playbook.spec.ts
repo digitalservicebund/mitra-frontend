@@ -1,7 +1,7 @@
 import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
-const { findByText } = queries
+const { findAllByText } = queries
 
 test.describe("Open playbook from filesystem", async () => {
   test("via file picker", async ({ page, baseURL }) => {
@@ -10,10 +10,8 @@ test.describe("Open playbook from filesystem", async () => {
       "input[type=file]",
       "./test/e2e/fixtures/playbook.json"
     )
-    await page.click(".p-dialog-header-close-icon")
-    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
-    const main = await page.locator("main").elementHandle()
-    await findByText(main, "foo module")
+    await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
+    await findAllByText(await getDocument(page), "foo module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
@@ -33,9 +31,8 @@ test.describe("Open playbook from filesystem", async () => {
       return data
     })
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
-    await expect(page).toHaveURL(/contract\/[a-z0-9-]/)
-    const document = await getDocument(page)
-    await findByText(document, "Wie wollen Sie den Vertrag benennen?")
+    await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
+    await findAllByText(await getDocument(page), "Unbenannter Vertrag")
   })
 
   test("Navigate to buyer start screen", async ({ page, baseURL }) => {

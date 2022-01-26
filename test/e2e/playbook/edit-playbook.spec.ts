@@ -6,7 +6,7 @@ type TestFixtures = {
   playbook: string
 }
 
-const contractId = "3d324eca-06c2-4781-af52-705f49039d0d"
+const playbookId = "3d324eca-06c2-4781-af52-705f49039d0d"
 
 const test = base.extend<TestFixtures>({
   playbookFile: "", // needs to be filled in per test.use(...) atm, see below
@@ -22,7 +22,7 @@ const test = base.extend<TestFixtures>({
           origin: "http://localhost:5000",
           localStorage: [
             {
-              name: contractId,
+              name: playbookId,
               value: `${playbook}`,
             },
           ],
@@ -31,7 +31,7 @@ const test = base.extend<TestFixtures>({
     })
   },
   page: async ({ baseURL, page }, use) => {
-    await page.goto(`${baseURL}/mitra-frontend/playbook/${contractId}`)
+    await page.goto(`${baseURL}/mitra-frontend/playbook/${playbookId}`)
     await use(page)
   },
 })
