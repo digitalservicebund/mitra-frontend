@@ -85,6 +85,7 @@
             <InputText
               v-model="editableTitle"
               v-focus
+              aria-label="Titel ändern"
               class="mr-1"
               @keyup.enter="updateTitle"
               @blur="updateTitle"

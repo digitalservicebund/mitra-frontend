@@ -1,15 +1,13 @@
 import { createTestingPinia } from "@pinia/testing"
+import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
-import { mount } from "@vue/test-utils"
 import PrimeVue from "primevue/config"
 import EditScreen from "../../../src/components/contract/EditScreen.vue"
-import SideMenu from "../../../src/components/SideMenu.vue"
-import Contract from "../../../src/domain/Contract"
 import ContractStorageService from "../../../src/domain/ContractStorageService"
-import Module from "../../../src/domain/Module"
-import { TextAnswerStep } from "../../../src/domain/Step"
-import { makeContractStorageService } from "../../../src/provide"
-import { useSession } from "../../../src/session"
+import {
+  makeContractRepository,
+  makeContractStorageService,
+} from "../../../src/provide"
 
 describe("EditScreen", () => {
   it("has a header with the contract title", async () => {
@@ -19,13 +17,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: [
-          "Breadcrumb",
-          "SideMenu",
-          "RouterLink",
-          "EditStep",
-          "ContractPreview",
-        ],
+        stubs: ["Breadcrumb", "EditStep", "RouterLink", "SideMenu"],
       },
     })
 
@@ -39,70 +31,37 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: [
-          "Inplace",
-          "SideMenu",
-          "RouterLink",
-          "EditStep",
-          "ContractPreview",
-        ],
+        stubs: ["EditStep", "Inplace", "RouterLink", "SideMenu"],
       },
     })
 
     await screen.findByText("Unbenannter Vertrag")
   })
 
-  it("updates contract title when entered", () => {
-    const wrapper = mount(EditScreen, {
-      props: {
-        id: "contract-id",
-      },
-      global: {
-        plugins: [createTestingPinia(), PrimeVue],
-        stubs: ["Breadcrumb", "RouterLink", "EditStep", "ContractPreview"],
-      },
-    })
-    const vm: unknown = wrapper.vm
-    const instance = vm as {
-      contract: Contract
-      editableTitle: string
-      updateTitle: () => void
-    }
-
-    expect(instance.contract.title).toBe("Unbenannter Vertrag")
-
-    // Simulate text input
-    instance.editableTitle = "Neuer Vertrag"
-    instance.updateTitle()
-
-    expect(instance.contract.title).toBe("Neuer Vertrag")
-  })
-
-  it("saves contract as work in progress when requested", () => {
-    const contract = new Contract(undefined, [
-      new Module("foo", [new TextAnswerStep("foo")]),
-      new Module("bar", [new TextAnswerStep("bar")]),
-    ])
+  // TODO: also avoid stubbing components as much as possible!
+  it("saves contract as work in progress when requested", async () => {
+    const user = userEvent.setup()
     const pinia = createTestingPinia()
-    const session = useSession()
-    session.rememberCurrentStep(contract, contract.modules[0].steps[0])
-
-    const wrapper = mount(EditScreen, {
+    render(EditScreen, {
       props: {
-        id: "contract-id",
+        id: "xyz",
       },
       global: {
         plugins: [pinia, PrimeVue],
-        stubs: ["Breadcrumb", "RouterLink", "EditStep", "ContractPreview"],
+        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
       },
     })
-    const vm: unknown = wrapper.vm
-    const instance = vm as {
-      contract: Contract
-    }
-    wrapper.findComponent(SideMenu).vm.$emit("save")
+
+    await user.click(screen.getByText("Ändern"))
+    await user.clear(screen.getByLabelText("Titel ändern"))
+    await user.type(screen.getByLabelText("Titel ändern"), "Neuer Titel")
+    await user.click(screen.getByText("Speichern"))
+
+    // eslint-disable-next-line testing-library/await-async-query
+    const contract = makeContractRepository().findById("xyz")
+    expect(contract.title).toBe("Neuer Titel")
 
     const storage: ContractStorageService = makeContractStorageService()
-    expect(storage.save).toHaveBeenNthCalledWith(1, instance.contract)
+    expect(storage.save).toHaveBeenNthCalledWith(1, contract)
   })
 })
