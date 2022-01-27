@@ -14,6 +14,7 @@
     makeContractStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
+  import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
   import EditStep from "./EditStep.vue"
   import ContractPreview from "./Preview.vue"
@@ -100,6 +101,7 @@
           </span>
           Ändern
         </Button>
+        <Metadata :created-at="new Date()" :saved-at="new Date()" />
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">

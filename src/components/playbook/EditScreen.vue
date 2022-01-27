@@ -15,6 +15,7 @@
     makePlaybookStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
+  import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
@@ -110,6 +111,7 @@
           </span>
           Ändern
         </Button>
+        <Metadata :created-at="new Date()" :saved-at="new Date()" />
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Module</h2>

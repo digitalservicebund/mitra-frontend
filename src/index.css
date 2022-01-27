@@ -27,9 +27,6 @@
   @apply mt-2;
 }
 
-header.edit {
-  height: 150px;
-}
 header.edit .p-inplace {
   display: inline-flex;
 }
