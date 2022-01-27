@@ -68,6 +68,7 @@
         @navigate="handleNavigate"
       />
     </nav>
+
     <main class="flex-1 px-8">
       <header class="edit">
         <Breadcrumb
