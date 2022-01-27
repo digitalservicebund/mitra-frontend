@@ -32,7 +32,7 @@
   }
 
   const editableTitle = ref(contract.title)
-  const editTitle = ref()
+  const editTitle = ref<InstanceType<typeof Inplace>>()
   const breadcrumbItems = computed(() => [
     {
       label: editableTitle.value,
@@ -41,12 +41,14 @@
   ])
 
   const startTitleEditing = () => {
-    editTitle.value.open()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(editTitle.value as any).open()
   }
 
   const updateTitle = () => {
     contract.title = editableTitle.value
-    editTitle.value.close()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(editTitle.value as any).close()
   }
 
   const handleSave = () => {

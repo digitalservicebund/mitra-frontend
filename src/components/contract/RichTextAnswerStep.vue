@@ -8,7 +8,7 @@
 
   const props = defineProps<{ step: RichTextAnswerStep }>()
 
-  const menu = ref()
+  const menu = ref<InstanceType<typeof Menu>>()
 
   const tableActions = [
     {
@@ -45,7 +45,7 @@
       command: () => editor.value?.chain().focus().deleteColumn().run(),
     },
   ]
-  const toggleTableActionsMenu = (event: Event) => menu.value.toggle(event)
+  const toggleTableActionsMenu = (event: Event) => menu.value?.toggle(event)
 
   const editor = useEditor({
     ...RichTextEditorConfig,
