@@ -33,8 +33,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "SideMenu", "RouterLink"],
+        plugins: [createTestingPinia(), router],
+        stubs: ["Breadcrumb", "SideMenu"],
       },
     })
 
@@ -47,8 +47,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [createTestingPinia()],
-        stubs: ["Inplace", "SideMenu", "RouterLink"],
+        plugins: [createTestingPinia(), router],
+        stubs: ["Inplace", "SideMenu"],
       },
     })
 
@@ -77,8 +77,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"],
+        plugins: [createTestingPinia(), router],
+        stubs: ["Breadcrumb", "Inplace", "SideMenu"],
       },
     })
 
