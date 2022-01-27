@@ -70,4 +70,18 @@ describe("EditScreen", () => {
     await screen.findByText("test-module")
     await screen.findByText("1 Fragen")
   })
+
+  it("has a add module button", async () => {
+    render(EditScreen, {
+      props: {
+        id: "xyz",
+      },
+      global: {
+        plugins: [createTestingPinia()],
+        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"]
+      },
+    })
+
+    await screen.findByText("Neues Modul")
+  })
 })

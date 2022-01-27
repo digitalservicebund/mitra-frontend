@@ -5,6 +5,8 @@
   import InputText from "primevue/inputtext"
   import type { MenuItem } from "primevue/menuitem"
   import { computed, ref } from "vue"
+  import { useRouter } from "vue-router"
+  import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
   import { Answer, Step } from "../../domain/Step"
@@ -19,6 +21,8 @@
   const props = defineProps<{ id: string }>()
 
   const session = useSession()
+
+  const router = useRouter()
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
@@ -52,6 +56,15 @@
 
   const handleNavigate = (step: Step<Answer>) => {
     session.rememberCurrentStep(playbook, step)
+  }
+
+  const addNewModule = async () => {
+    const module = new Module("Unbenanntes Modul")
+    playbook.addModules(module)
+    playbookRepository.save(playbook)
+    await router.push(
+      `/mitra-frontend/playbook/${playbook.id}/module/${module.id}`
+    )
   }
 </script>
 
@@ -112,6 +125,12 @@
             </li>
           </router-link>
         </ol>
+        <Button type="button" class="mt-8" @click="addNewModule">
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            add
+          </span>
+          Neues Modul
+        </Button>
       </section>
     </main>
   </div>
