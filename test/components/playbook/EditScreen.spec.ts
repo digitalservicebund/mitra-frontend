@@ -78,7 +78,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"]
+        stubs: ["Breadcrumb", "Inplace", "SideMenu", "RouterLink"],
       },
     })
 
