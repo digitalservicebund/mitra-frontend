@@ -17,7 +17,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["Breadcrumb", "EditStep", "RouterLink", "SideMenu"],
+        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
       },
     })
 
@@ -31,14 +31,13 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia()],
-        stubs: ["EditStep", "Inplace", "RouterLink", "SideMenu"],
+        stubs: ["EditStep", "Inplace", "RouterLink"],
       },
     })
 
     await screen.findByText("Unbenannter Vertrag")
   })
 
-  // TODO: also avoid stubbing components as much as possible!
   it("saves contract as work in progress when requested", async () => {
     const user = userEvent.setup()
     const pinia = createTestingPinia()
