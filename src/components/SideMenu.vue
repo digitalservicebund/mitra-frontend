@@ -5,14 +5,13 @@
   import Contract from "../domain/Contract"
   import Module from "../domain/Module"
   import Playbook from "../domain/Playbook"
-  import { Answer, Step } from "../domain/Step"
   import { useSession } from "../session"
 
   const props =
     defineProps<{ title: string; navigatable: Contract | Playbook }>()
   const emit = defineEmits<{
     (e: "save"): void
-    (e: "navigate", step: Step<Answer>): void
+    (e: "navigate", module: Module): void
   }>()
 
   const session = useSession()
@@ -46,7 +45,7 @@
         withHighlight(
           {
             label: module.text,
-            command: () => emit("navigate", module.path[0]),
+            command: () => emit("navigate", module),
           },
           module
         )

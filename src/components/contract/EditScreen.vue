@@ -7,7 +7,7 @@
   import { computed, ref } from "vue"
   import Contract from "../../domain/Contract"
   import ContractRepository from "../../domain/ContractRepository"
-  import { Answer, Step } from "../../domain/Step"
+  import Module from "../../domain/Module"
   import Storage from "../../domain/Storage"
   import {
     makeContractRepository,
@@ -53,8 +53,8 @@
     storage.save(contract)
   }
 
-  const handleNavigate = (step: Step<Answer>) => {
-    session.rememberCurrentStep(contract, step)
+  const handleNavigate = (module: Module) => {
+    session.rememberCurrentStep(contract, module.steps[0])
   }
 </script>
 

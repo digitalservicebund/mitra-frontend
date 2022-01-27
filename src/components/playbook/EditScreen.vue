@@ -9,7 +9,6 @@
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
-  import { Answer, Step } from "../../domain/Step"
   import Storage from "../../domain/Storage"
   import {
     makePlaybookRepository,
@@ -54,8 +53,10 @@
     storage.save(playbook)
   }
 
-  const handleNavigate = (step: Step<Answer>) => {
-    session.rememberCurrentStep(playbook, step)
+  const handleNavigate = async (module: Module) => {
+    await router.push(
+      `/mitra-frontend/playbook/${playbook.id}/module/${module.id}`
+    )
   }
 
   const addNewModule = async () => {
