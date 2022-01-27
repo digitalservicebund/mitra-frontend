@@ -51,6 +51,7 @@ describe("SideMenu", () => {
   it("should render all fixed menu items", () => {
     render(SideMenu, {
       props: {
+        title: "foo",
         navigatable: new Contract(undefined, testModules),
       },
       global: {
@@ -68,6 +69,7 @@ describe("SideMenu", () => {
   it("should issue command to navigate to module", async () => {
     const { emitted } = render(SideMenu, {
       props: {
+        title: "foo",
         navigatable: new Contract(undefined, testModules),
       },
       global: {
@@ -83,6 +85,7 @@ describe("SideMenu", () => {
   it("should issue command to save contract", async () => {
     const { emitted } = render(SideMenu, {
       props: {
+        title: "foo",
         navigatable: new Contract(undefined, testModules),
       },
       global: {
@@ -101,6 +104,7 @@ describe("SideMenu", () => {
 
     const wrapper = mount(SideMenu, {
       props: {
+        title: "foo",
         navigatable: contract,
       },
       global: {

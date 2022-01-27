@@ -53,7 +53,10 @@ test.describe("Contract editing", async () => {
     await expect(page.locator("header >> input")).not.toBeVisible()
     await expect(page.locator("header h1 >> text='Test Vertrag'")).toBeVisible()
     await expect(
-      page.locator("header nav >> text='Test Vertrag'")
+      page.locator("header nav >> text='Test Vertrag'") // breadcrumb
+    ).toBeVisible()
+    await expect(
+      page.locator("nav:left-of(main) >> text='Test Vertrag'") // sidemenu
     ).toBeVisible()
     await page.click("text='Ändern'")
     await expect(page.locator("header >> input")).toBeVisible()

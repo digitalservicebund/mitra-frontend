@@ -1,14 +1,15 @@
 <script setup lang="ts">
   import type { MenuItem } from "primevue/menuitem"
   import PanelMenu from "primevue/panelmenu"
-  import { ref } from "vue"
+  import { computed, shallowRef } from "vue"
   import Contract from "../domain/Contract"
   import Module from "../domain/Module"
   import Playbook from "../domain/Playbook"
   import { Answer, Step } from "../domain/Step"
   import { useSession } from "../session"
 
-  const props = defineProps<{ navigatable: Contract | Playbook }>()
+  const props =
+    defineProps<{ title: string; navigatable: Contract | Playbook }>()
   const emit = defineEmits<{
     (e: "save"): void
     (e: "navigate", step: Step<Answer>): void
@@ -29,43 +30,34 @@
       : item
   }
 
-  const generateMenuItems = (modules: Module[]): MenuItem[] => {
-    return [
-      {
-        label: "Startseite",
-        icon: "pi pi-angle-left",
-        to: `/mitra-frontend/${session.entryPoint}`,
-      },
-      {
-        key: "1",
-        label: props.navigatable.title,
-        icon: "pi pi-angle-down",
-        to: `/mitra-frontend/${navigatablePathSegment()}/${
-          props.navigatable.id
-        }`,
-        items: modules.map((module) => {
-          return withHighlight(
-            {
-              label: module.text,
-              command: () => emit("navigate", module.path[0]),
-            },
-            module
-          )
-        }),
-      },
-      {
-        label: "Speichern",
-        icon: "pi pi-download",
-        command: () => emit("save"),
-      },
-    ]
-  }
-
-  session.$subscribe(() => {
-    menuItems.value = generateMenuItems(props.navigatable.modules)
-  })
-
-  const menuItems = ref(generateMenuItems(props.navigatable.modules))
+  const modules = shallowRef(props.navigatable.modules)
+  const menuItems = computed(() => [
+    {
+      label: "Startseite",
+      icon: "pi pi-angle-left",
+      to: `/mitra-frontend/${session.entryPoint}`,
+    },
+    {
+      key: "1",
+      label: props.title,
+      icon: "pi pi-angle-down",
+      to: `/mitra-frontend/${navigatablePathSegment()}/${props.navigatable.id}`,
+      items: modules.value.map((module) =>
+        withHighlight(
+          {
+            label: module.text,
+            command: () => emit("navigate", module.path[0]),
+          },
+          module
+        )
+      ),
+    },
+    {
+      label: "Speichern",
+      icon: "pi pi-download",
+      command: () => emit("save"),
+    },
+  ])
 </script>
 
 <template>

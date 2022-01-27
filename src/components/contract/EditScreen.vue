@@ -62,6 +62,7 @@
   <div class="flex h-full">
     <nav class="flex-none">
       <SideMenu
+        :title="editableTitle"
         :navigatable="contract"
         @save="handleSave"
         @navigate="handleNavigate"

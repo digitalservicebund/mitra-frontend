@@ -52,7 +52,10 @@ test.describe("Playbook metadata", async () => {
       page.locator("header h1 >> text='Test Playbook'")
     ).toBeVisible()
     await expect(
-      page.locator("header nav >> text='Test Playbook'")
+      page.locator("header nav >> text='Test Playbook'") // breadcrumb
+    ).toBeVisible()
+    await expect(
+      page.locator("nav:left-of(main) >> text='Test Playbook'") // sidemenu
     ).toBeVisible()
     await page.click("text='Ändern'")
     await expect(page.locator("header >> input")).toBeVisible()
