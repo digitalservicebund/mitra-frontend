@@ -58,4 +58,18 @@ describe("Contract", () => {
     expect(contract.previousStepInPathAt(stepOne)).toBeUndefined()
     expect(contract.previousStepInPathAt(stepTwo)).toBe(stepOne)
   })
+
+  it("holds initial metadata", () => {
+    const contract = new Contract("foo", [])
+    const { createdAt, savedAt } = contract.metadata
+    expect(savedAt).toBeUndefined()
+    expect(createdAt.getSeconds()).toBeCloseTo(new Date().getSeconds())
+  })
+
+  it("allows to update metadata", () => {
+    const contract = new Contract("foo", [])
+    const savedAt = new Date()
+    contract.updateMetadata({ savedAt })
+    expect(contract.metadata.savedAt).toEqual(savedAt)
+  })
 })

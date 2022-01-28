@@ -111,7 +111,7 @@
           </span>
           Ändern
         </Button>
-        <Metadata :created-at="new Date()" :saved-at="new Date()" />
+        <Metadata v-bind="playbook.metadata" />
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Module</h2>

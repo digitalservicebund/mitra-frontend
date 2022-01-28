@@ -8,11 +8,18 @@ const repository: ContractRepository = {
     if (serializedContract === null) {
       throw new Error("Contract not found")
     }
-    return createContract(JSON.parse(serializedContract))
+    const object = JSON.parse(serializedContract, (key, value) =>
+      ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
+    )
+    const { createdAt, savedAt } = object
+    return createContract(object).updateMetadata({ createdAt, savedAt })
   },
 
   save(contract: Contract) {
-    localStorage.setItem(contract.id, JSON.stringify({ contract }))
+    localStorage.setItem(
+      contract.id,
+      JSON.stringify({ contract, ...contract.metadata })
+    )
   },
 }
 

@@ -101,7 +101,7 @@
           </span>
           Ändern
         </Button>
-        <Metadata :created-at="new Date()" :saved-at="new Date()" />
+        <Metadata v-bind="contract.metadata" />
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">

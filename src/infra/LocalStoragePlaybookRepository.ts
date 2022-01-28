@@ -9,11 +9,21 @@ const repository: PlaybookRepository = {
     if (serializedPlaybook === null) {
       throw new Error("Playbook not found")
     }
-    return createPlaybook(JSON.parse(serializedPlaybook))
+    const object = JSON.parse(serializedPlaybook, (key, value) =>
+      ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
+    )
+    const { createdAt, savedAt } = object
+    return createPlaybook(JSON.parse(serializedPlaybook)).updateMetadata({
+      createdAt,
+      savedAt,
+    })
   },
 
   save(playbook: Playbook) {
-    localStorage.setItem(playbook.id, JSON.stringify({ playbook }))
+    localStorage.setItem(
+      playbook.id,
+      JSON.stringify({ playbook, ...playbook.metadata })
+    )
   },
 }
 

@@ -17,7 +17,9 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
 const storage: Storage<Contract, File> = {
   async load(file: File) {
     const result = await loadFile(file)
-    return createContract(JSON.parse(result as string))
+    return createContract(JSON.parse(result as string)).updateMetadata({
+      savedAt: new Date(file.lastModified),
+    })
   },
 
   async save(contract: Contract) {

@@ -32,4 +32,18 @@ describe("Playbook", () => {
 
     expect(playbook.findModuleById(module2.id).text).toEqual("bar")
   })
+
+  it("holds initial metadata", () => {
+    const playbook = new Playbook()
+    const { createdAt, savedAt } = playbook.metadata
+    expect(savedAt).toBeUndefined()
+    expect(createdAt.getSeconds()).toBeCloseTo(new Date().getSeconds())
+  })
+
+  it("allows to update metadata", () => {
+    const playbook = new Playbook()
+    const savedAt = new Date()
+    playbook.updateMetadata({ savedAt })
+    expect(playbook.metadata.savedAt).toEqual(savedAt)
+  })
 })
