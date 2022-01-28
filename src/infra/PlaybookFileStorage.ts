@@ -5,8 +5,9 @@ import { loadFile } from "./LoadFile"
 
 const storage: Storage<Playbook, File> = {
   async load(file: File) {
-    const result = await loadFile(file)
-    return createPlaybook(JSON.parse(result as string)).updateMetadata({
+    const object = JSON.parse((await loadFile(file)) as string)
+    return createPlaybook(object).updateMetadata({
+      createdAt: new Date(object.createdAt),
       savedAt: new Date(file.lastModified),
     })
   },

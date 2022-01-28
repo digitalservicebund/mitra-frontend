@@ -16,13 +16,16 @@ async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
 
 const storage: Storage<Contract, File> = {
   async load(file: File) {
-    const result = await loadFile(file)
-    return createContract(JSON.parse(result as string)).updateMetadata({
+    const object = JSON.parse((await loadFile(file)) as string)
+    return createContract(object).updateMetadata({
+      createdAt: new Date(object.createdAt),
       savedAt: new Date(file.lastModified),
     })
   },
 
   async save(contract: Contract) {
+    const writable = JSON.stringify({ contract, ...contract.metadata })
+
     if (!!window.showSaveFilePicker) {
       const fileHandle: FileSystemFileHandle = await window.showSaveFilePicker({
         suggestedName: makeFileBaseName(contract),
@@ -35,10 +38,10 @@ const storage: Storage<Contract, File> = {
           },
         ],
       })
-      await writeFile(fileHandle, JSON.stringify({ contract }))
+      await writeFile(fileHandle, writable)
     } else {
       await import("file-saver").then(({ default: FileSaver }) => {
-        const blob = new Blob([JSON.stringify({ contract })], {
+        const blob = new Blob([writable], {
           type: "application/json;charset=utf-8",
         })
         FileSaver.saveAs(blob, `${makeFileBaseName(contract)}.json`)
