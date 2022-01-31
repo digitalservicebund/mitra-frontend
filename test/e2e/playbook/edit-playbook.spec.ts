@@ -65,10 +65,14 @@ test.describe("Edit Playbook", async () => {
   test("add module", async ({ page }) => {
     await page.locator("text=Neues Modul").click()
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
-    await expect(page.locator("main >> text='Unbenanntes Modul'")).toBeVisible()
+    await expect(
+      page.locator("main h1 >> text='Unbenanntes Modul'")
+    ).toBeVisible()
 
     await page.goto(`/mitra-frontend/playbook/${playbookId}`)
-    await expect(page.locator("main >> text='Unbenanntes Modul'")).toBeVisible()
+    await expect(
+      page.locator("main section:below(header) >> text='Unbenanntes Modul'")
+    ).toBeVisible()
   })
 
   test("navigate to Modules via side nav", async ({ page }) => {

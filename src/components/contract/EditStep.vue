@@ -55,7 +55,7 @@
 <template>
   <section :key="currentStep?.id">
     <h3 class="font-bold">
-      {{ currentModule?.text }}
+      {{ currentModule?.title }}
     </h3>
     <component
       :is="stepAnswerEditComponent(currentStep as Step<Answer>)"
