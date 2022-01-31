@@ -24,7 +24,7 @@
         }
       } else if (item instanceof Module) {
         return {
-          label: item.text,
+          label: item.title,
           disabled: i + 1 < props.items.length ? false : true,
           to: `/mitra-frontend/playbook/${props.items[i - 1].id}/module/${
             item.id

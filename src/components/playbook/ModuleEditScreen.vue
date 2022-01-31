@@ -44,7 +44,7 @@
     <main>
       <header class="edit">
         <Breadcrumb :items="[playbook, module]" />
-        <h1>{{ module.text }}</h1>
+        <h1>{{ module.title }}</h1>
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>

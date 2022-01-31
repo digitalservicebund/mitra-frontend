@@ -106,7 +106,7 @@
           >
             <li class="mt-4 border p-4 shadow-md">
               <details open>
-                <summary class="text-lg">{{ module.text }}</summary>
+                <summary class="text-lg">{{ module.title }}</summary>
                 <p>{{ module.steps.length }} Fragen</p>
               </details>
             </li>

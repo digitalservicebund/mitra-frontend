@@ -51,7 +51,7 @@ export type StepDTO = {
   produce?: string
 }
 
-export type ModuleDTO = { id: string; text: string; steps: StepDTO[] }
+export type ModuleDTO = { id: string; title: string; steps: StepDTO[] }
 
 export type ContractDTO = {
   contract: { id: string; title: string; modules: ModuleDTO[] }
@@ -120,7 +120,7 @@ export function createStep(step: StepDTO): Step<Answer> {
 }
 
 export function createModule(module: ModuleDTO): Module {
-  return new Module(module.text, module.steps.map(createStep), module.id)
+  return new Module(module.title, module.steps.map(createStep), module.id)
 }
 
 export function createContract({ contract }: ContractDTO): Contract {

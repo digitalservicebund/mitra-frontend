@@ -5,7 +5,7 @@
     "modules": [
       {
         "id": "930fe484-bd57-481d-8846-2d1a8b3e35db",
-        "text": "foo module",
+        "title": "foo module",
         "steps": [
           {
             "id": "67d574b0-2b77-42a5-bcd2-5ed600849adb",

@@ -44,7 +44,7 @@
       items: modules.value.map((module) =>
         withHighlight(
           {
-            label: module.text,
+            label: module.title,
             command: () => emit("navigate", module),
           },
           module

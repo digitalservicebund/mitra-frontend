@@ -3,7 +3,7 @@ import { Answer, Step } from "./Step"
 
 export default class Module extends Entity {
   constructor(
-    public readonly text: string,
+    public readonly title: string,
     public readonly steps: Step<Answer>[] = [],
     id?: string
   ) {
@@ -16,7 +16,7 @@ export default class Module extends Entity {
 
   clone(): Module {
     return new Module(
-      this.text,
+      this.title,
       this.steps.map((step) => step.clone())
     )
   }

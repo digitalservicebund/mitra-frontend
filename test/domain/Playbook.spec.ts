@@ -30,7 +30,7 @@ describe("Playbook", () => {
     const module2 = new Module("bar")
     playbook.addModules(module1, module2)
 
-    expect(playbook.findModuleById(module2.id).text).toEqual("bar")
+    expect(playbook.findModuleById(module2.id).title).toEqual("bar")
   })
 
   it("holds initial metadata", () => {

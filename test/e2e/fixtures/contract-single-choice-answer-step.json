@@ -5,7 +5,7 @@
     "modules": [
       {
         "id": "930fe484-bd57-481d-8846-2d1a8b3e35db",
-        "text": "Test module",
+        "title": "Test module",
         "steps": [
           {
             "id": "f7e2bb12-ba14-4686-8513-afbdcab276a8",
