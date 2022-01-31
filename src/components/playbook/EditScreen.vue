@@ -36,6 +36,7 @@
     playbook.title = editableTitle.value
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(editTitle.value as any).close()
+    playbookRepository.save(playbook)
   }
 
   const handleSave = () => {
