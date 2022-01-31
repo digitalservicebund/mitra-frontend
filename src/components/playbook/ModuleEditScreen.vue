@@ -8,6 +8,7 @@
     makePlaybookRepository,
     makePlaybookStorageService,
   } from "../../provide"
+  import Breadcrumb from "../Breadcrumb.vue"
   import SideMenu from "../SideMenu.vue"
 
   const props = defineProps<{ playbookId: string; moduleId: string }>()
@@ -41,7 +42,10 @@
       />
     </nav>
     <main>
-      <h1>{{ module.text }}</h1>
+      <header class="edit">
+        <Breadcrumb :items="[playbook, module]" />
+        <h1>{{ module.text }}</h1>
+      </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>
         <ol>

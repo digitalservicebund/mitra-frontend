@@ -1,10 +1,8 @@
 <script setup lang="ts">
-  import Breadcrumb from "primevue/breadcrumb"
   import Button from "primevue/button"
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
-  import type { MenuItem } from "primevue/menuitem"
-  import { computed, ref } from "vue"
+  import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
@@ -14,32 +12,20 @@
     makePlaybookRepository,
     makePlaybookStorageService,
   } from "../../provide"
-  import { useSession } from "../../session"
+  import Breadcrumb from "../Breadcrumb.vue"
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
 
   const props = defineProps<{ id: string }>()
-
-  const session = useSession()
 
   const router = useRouter()
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
   const playbook: Playbook = playbookRepository.findById(props.id)
-  const breadcrumbTopLevel: MenuItem = {
-    to: `/mitra-frontend/${session.entryPoint}`,
-    label: "Startseite",
-  }
 
   const editableTitle = ref(playbook.title)
   const editTitle = ref<InstanceType<typeof Inplace>>()
-  const breadcrumbItems = computed(() => [
-    {
-      label: editableTitle.value,
-      disabled: true,
-    },
-  ])
 
   const startTitleEditing = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,11 +71,7 @@
 
     <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb
-          :home="breadcrumbTopLevel"
-          :model="breadcrumbItems"
-          class="mb-4"
-        />
+        <Breadcrumb :items="[playbook]" />
         <p><small>Playbook</small></p>
         <Inplace ref="editTitle" :closable="false">
           <template #display>

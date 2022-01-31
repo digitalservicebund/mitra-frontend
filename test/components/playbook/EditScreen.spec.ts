@@ -14,6 +14,12 @@ describe("EditScreen", () => {
         },
       },
       {
+        path: "/mitra-frontend/playbook/:playbook",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
         path: "/mitra-frontend/playbook/:playbook/module/:module",
         component: {
           template: "<div></div>",
