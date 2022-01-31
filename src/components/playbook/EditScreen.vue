@@ -71,7 +71,7 @@
 
     <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb :items="[playbook]" />
+        <Breadcrumb :current-title="editableTitle" :parent-items="[]" />
         <p><small>Playbook</small></p>
         <Inplace ref="editTitle" :closable="false">
           <template #display>

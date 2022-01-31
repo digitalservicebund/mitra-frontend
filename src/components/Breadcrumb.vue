@@ -7,7 +7,10 @@
   import { useSession } from "../session"
 
   const session = useSession()
-  const props = defineProps<{ items: (Module | Playbook)[] }>()
+  const props = defineProps<{
+    currentTitle: string
+    parentItems: (Module | Playbook)[]
+  }>()
 
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
@@ -15,23 +18,36 @@
   }
 
   const breadcrumbItems = computed(() => {
-    return props.items.map((item, i) => {
+    const items: MenuItem[] = []
+    let tmpRoute = `/mitra-frontend`
+
+    const getRoute = (item: Playbook | Module, tmpRoute: string): string => {
+      let route: string = tmpRoute
       if (item instanceof Playbook) {
-        return {
-          label: item.title,
-          disabled: i + 1 < props.items.length ? false : true,
-          to: `/mitra-frontend/playbook/${item.id}`,
-        }
-      } else if (item instanceof Module) {
-        return {
-          label: item.title,
-          disabled: i + 1 < props.items.length ? false : true,
-          to: `/mitra-frontend/playbook/${props.items[i - 1].id}/module/${
-            item.id
-          }`,
-        }
+        route += `/playbook/${item.id}`
       }
+      if (item instanceof Module) {
+        route += `/module/${item.id}`
+      }
+      return route
+    }
+
+    props.parentItems.map((item) => {
+      tmpRoute = getRoute(item, tmpRoute)
+      items.push({
+        label: item.title,
+        disabled: false,
+        to: tmpRoute,
+      })
     })
+
+    items.push({
+      label: props.currentTitle,
+      disabled: true,
+      to: "",
+    })
+
+    return items
   })
 </script>
 
@@ -44,6 +60,7 @@
     <template #item="{ item }">
       <router-link v-slot="{ href, navigate, isActive }" :to="item.to" custom>
         <a
+          v-if="item.to"
           :href="href"
           :class="{
             'active-link': isActive,
@@ -52,6 +69,9 @@
         >
           {{ item.label }}
         </a>
+        <span v-else>
+          {{ item.label }}
+        </span>
       </router-link>
     </template>
   </PrimeBreadcrumb>

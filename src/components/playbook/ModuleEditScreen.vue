@@ -43,7 +43,7 @@
     </nav>
     <main>
       <header class="edit">
-        <Breadcrumb :items="[playbook, module]" />
+        <Breadcrumb :current-title="module.title" :parent-items="[playbook]" />
         <h1>{{ module.title }}</h1>
       </header>
       <section class="mt-16">

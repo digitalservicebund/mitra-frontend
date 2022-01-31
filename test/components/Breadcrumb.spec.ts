@@ -10,6 +10,12 @@ describe("Breadcrumb", () => {
     history: createWebHistory(),
     routes: [
       {
+        path: "",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
         path: "/",
         component: {
           template: "<div></div>",
@@ -39,7 +45,8 @@ describe("Breadcrumb", () => {
   it("shows Startpage", () => {
     render(Breadcrumb, {
       props: {
-        items: [new Playbook("foo Playbook")],
+        parentItems: [],
+        currentTitle: new Playbook("foo Playbook").title,
       },
       global: {
         plugins: [createTestingPinia(), router],
@@ -50,10 +57,11 @@ describe("Breadcrumb", () => {
     expect(startPage).toHaveAttribute("href", "/mitra-frontend/")
   })
 
-  it("shows Playbook", () => {
+  it("shows Playbook in Module view", () => {
     render(Breadcrumb, {
       props: {
-        items: [new Playbook("foo Playbook")],
+        parentItems: [new Playbook("foo Playbook")],
+        currentTitle: new Module("foo Module").title,
       },
       global: {
         plugins: [createTestingPinia(), router],
@@ -61,33 +69,24 @@ describe("Breadcrumb", () => {
     })
 
     const playbook = screen.getByText("foo Playbook")
+    expect(playbook).toBeVisible()
     expect(playbook).toHaveAttribute(
       "href",
       expect.stringMatching(/\/mitra-frontend\/playbook\/[a-z0-9-]+$/)
     )
   })
 
-  it("shows both Module and Playbook", () => {
+  it("shows module title in modue view", () => {
     render(Breadcrumb, {
       props: {
-        items: [new Playbook("foo Playbook"), new Module("foo Module")],
+        parentItems: [new Playbook("foo Playbook")],
+        currentTitle: new Module("foo Module").title,
       },
       global: {
         plugins: [createTestingPinia(), router],
       },
     })
 
-    const playbook = screen.getByText("foo Playbook")
-    const module = screen.getByText("foo Module")
-    expect(playbook).toHaveAttribute(
-      "href",
-      expect.stringMatching(/\/mitra-frontend\/playbook\/[a-z0-9-]+$/)
-    )
-    expect(module).toHaveAttribute(
-      "href",
-      expect.stringMatching(
-        /\/mitra-frontend\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/
-      )
-    )
+    expect(screen.getByText("foo Module")).toBeVisible()
   })
 })
