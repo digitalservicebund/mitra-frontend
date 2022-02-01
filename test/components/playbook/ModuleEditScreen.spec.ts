@@ -8,6 +8,12 @@ describe("ModuleEditScreen", () => {
     history: createWebHistory(),
     routes: [
       {
+        path: "",
+        component: {
+          template: "<div></div>",
+        },
+      },
+      {
         path: "/mitra-frontend/",
         component: {
           template: "<div></div>",
