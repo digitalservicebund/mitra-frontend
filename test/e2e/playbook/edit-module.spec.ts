@@ -73,4 +73,12 @@ test.describe("Edit Module", async () => {
       page.locator("header h1 >> text='test two module'")
     ).toBeVisible()
   })
+
+  test("delete module", async ({ page }) => {
+    await page.locator("text=Modul löschen").click()
+    await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/$/)
+    await expect(
+      page.locator("nav:left-of(main) >> text='test one module'")
+    ).not.toBeVisible()
+  })
 })

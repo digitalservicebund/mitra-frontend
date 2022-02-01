@@ -46,9 +46,15 @@
   }
 
   const handleNavigate = async (module: Module) => {
-    await router.push({
-      path: `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}/`,
-    })
+    await router.push(
+      `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}/`
+    )
+  }
+
+  const removeModule = async () => {
+    playbook.value.removeModule(module.value)
+    playbookRepository.save(playbook.value)
+    await router.push(`/mitra-frontend/playbook/${playbook.value.id}/`)
   }
 </script>
 
@@ -81,11 +87,17 @@
             />
           </template>
         </Inplace>
-        <Button type="button" @click="startTitleEditing">
+        <Button type="button" class="mx-2" @click="startTitleEditing">
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            delete
+          </span>
+          Ändern
+        </Button>
+        <Button type="button" @click="removeModule">
           <span class="material-icons-outlined text-base" aria-hidden="true">
             edit
           </span>
-          Ändern
+          Modul löschen
         </Button>
       </header>
       <section class="mt-16">

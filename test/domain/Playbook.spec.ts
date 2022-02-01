@@ -46,4 +46,13 @@ describe("Playbook", () => {
     playbook.updateMetadata({ savedAt })
     expect(playbook.metadata.savedAt).toEqual(savedAt)
   })
+
+  it("removes Module", () => {
+    const module1 = new Module("foo")
+    const module2 = new Module("bar")
+    const playbook = new Playbook("foo playbook", [module1, module2])
+    playbook.removeModule(module1)
+    expect(playbook.modules.length).toEqual(1)
+    expect(playbook.modules[0].title).toEqual("bar")
+  })
 })

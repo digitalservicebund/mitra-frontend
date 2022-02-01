@@ -7,7 +7,7 @@ export default class Playbook extends Entity {
 
   constructor(
     public title: string = "Unbenanntes Playbook",
-    public readonly modules: Module[] = [],
+    public modules: Module[] = [],
     id?: string
   ) {
     super(id)
@@ -25,6 +25,10 @@ export default class Playbook extends Entity {
 
   addModules(...modules: Module[]): void {
     this.modules.push(...modules)
+  }
+
+  removeModule(module: Module): void {
+    this.modules = this.modules.filter((item) => item !== module)
   }
 
   findModuleById(id: string): Module {

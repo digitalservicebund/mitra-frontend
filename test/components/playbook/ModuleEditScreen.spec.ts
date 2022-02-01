@@ -68,4 +68,19 @@ describe("ModuleEditScreen", () => {
 
     await screen.findByText("test-module")
   })
+
+  it("has a remove module button", async () => {
+    render(ModuleEditScreen, {
+      props: {
+        playbookId: "xyz",
+        moduleId: "xyz",
+      },
+      global: {
+        plugins: [createTestingPinia(), router],
+        stubs: ["Inplace", "SideMenu"],
+      },
+    })
+
+    await screen.findByText("Modul löschen")
+  })
 })
