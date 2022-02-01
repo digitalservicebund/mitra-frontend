@@ -3,7 +3,7 @@ import { Answer, Step } from "./Step"
 
 export default class Module extends Entity {
   constructor(
-    public readonly title: string,
+    public title: string = "Unbenanntes Modul",
     public readonly steps: Step<Answer>[] = [],
     id?: string
   ) {

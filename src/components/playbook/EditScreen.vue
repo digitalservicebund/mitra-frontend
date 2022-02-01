@@ -50,7 +50,7 @@
   }
 
   const addNewModule = async () => {
-    const module = new Module("Unbenanntes Modul")
+    const module = new Module()
     playbook.addModules(module)
     playbookRepository.save(playbook)
     await router.push(
