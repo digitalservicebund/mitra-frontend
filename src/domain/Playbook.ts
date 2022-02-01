@@ -3,7 +3,7 @@ import Metadata from "./Metadata"
 import Module from "./Module"
 
 export default class Playbook extends Entity {
-  #metadata: Metadata
+  _metadata: Metadata
 
   constructor(
     public title: string = "Unbenanntes Playbook",
@@ -11,15 +11,15 @@ export default class Playbook extends Entity {
     id?: string
   ) {
     super(id)
-    this.#metadata = { createdAt: new Date() }
+    this._metadata = { createdAt: new Date() }
   }
 
   get metadata(): Metadata {
-    return Object.freeze(this.#metadata)
+    return Object.freeze(this._metadata)
   }
 
   updateMetadata(data: Partial<Metadata>): Playbook {
-    this.#metadata = { ...this.#metadata, ...data }
+    this._metadata = { ...this._metadata, ...data }
     return this
   }
 
