@@ -83,6 +83,7 @@
               v-model="editableTitle"
               v-focus
               class="mr-1"
+              aria-label="Titel ändern"
               @keyup.enter="updateTitle"
               @blur="updateTitle"
             />

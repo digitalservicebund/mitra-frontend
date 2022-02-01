@@ -11,7 +11,7 @@ export default class PlaybookStorageService
     return this.storage.load(content)
   }
 
-  public async save() {
-    return Promise.reject("Not implemented")
+  public async save(playbook: Playbook) {
+    return this.storage.save(playbook)
   }
 }

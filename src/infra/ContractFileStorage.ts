@@ -1,18 +1,8 @@
 import Contract from "../domain/Contract"
 import Storage from "../domain/Storage"
+import { makeFileBaseName, writeFile } from "./FileStorageHelper"
 import { createContract } from "./JSONMapper"
 import { loadFile } from "./LoadFile"
-
-function makeFileBaseName(contract: Contract) {
-  return contract.title.toLowerCase().replace(/\s/g, "-")
-}
-
-async function writeFile(fileHandle: FileSystemFileHandle, data: string) {
-  const writable: FileSystemWritableFileStream =
-    await fileHandle.createWritable()
-  await writable.write(data)
-  await writable.close()
-}
 
 const storage: Storage<Contract, File> = {
   async load(file: File) {

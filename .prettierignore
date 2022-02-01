@@ -5,3 +5,4 @@ dist-ssr
 coverage
 .lighthouseci
 test/e2e/saved-contract.json
+test/e2e/saved-playbook.json

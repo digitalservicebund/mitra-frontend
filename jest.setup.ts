@@ -46,6 +46,7 @@ const contractTestRepository: ContractRepository = {
 const playbookTestStorageService: PlaybookStorageService =
   new PlaybookStorageService({ load: jest.fn(), save: jest.fn() })
 jest.spyOn(playbookTestStorageService, "load")
+jest.spyOn(playbookTestStorageService, "save")
 
 const contractTestStorageService: ContractStorageService =
   new ContractStorageService({ load: jest.fn(), save: jest.fn() })

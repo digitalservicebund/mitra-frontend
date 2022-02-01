@@ -1,7 +1,14 @@
 import { createTestingPinia } from "@pinia/testing"
+import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
+import PrimeVue from "primevue/config"
 import { createRouter, createWebHistory } from "vue-router"
 import EditScreen from "../../../src/components/playbook/EditScreen.vue"
+import PlaybookStorageService from "../../../src/domain/PlaybookStorageService"
+import {
+  makePlaybookRepository,
+  makePlaybookStorageService,
+} from "../../../src/provide"
 
 describe("EditScreen", () => {
   const router = createRouter({
@@ -95,5 +102,30 @@ describe("EditScreen", () => {
     })
 
     await screen.findByText("Neues Modul")
+  })
+
+  it("saves contract as work in progress when requested", async () => {
+    const user = userEvent.setup()
+    render(EditScreen, {
+      props: {
+        id: "xyz",
+      },
+      global: {
+        plugins: [createTestingPinia(), router, PrimeVue],
+        stubs: ["Breadcrumb", "RouterLink"],
+      },
+    })
+
+    await user.click(screen.getByText("Ändern"))
+    await user.clear(screen.getByLabelText("Titel ändern"))
+    await user.type(screen.getByLabelText("Titel ändern"), "Neuer Titel")
+    await user.click(screen.getByText("Speichern"))
+
+    // eslint-disable-next-line testing-library/await-async-query
+    const contract = makePlaybookRepository().findById("xyz")
+    expect(contract.title).toBe("Neuer Titel")
+
+    const storage: PlaybookStorageService = makePlaybookStorageService()
+    expect(storage.save).toHaveBeenNthCalledWith(1, contract)
   })
 })
