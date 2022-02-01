@@ -89,13 +89,13 @@
         </Inplace>
         <Button type="button" class="mx-2" @click="startTitleEditing">
           <span class="material-icons-outlined text-base" aria-hidden="true">
-            delete
+            edit
           </span>
           Ändern
         </Button>
         <Button type="button" @click="removeModule">
           <span class="material-icons-outlined text-base" aria-hidden="true">
-            edit
+            delete
           </span>
           Modul löschen
         </Button>
