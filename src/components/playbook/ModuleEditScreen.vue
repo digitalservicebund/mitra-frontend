@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  import Button from "primevue/button"
+  import Inplace from "primevue/inplace"
+  import InputText from "primevue/inputtext"
+  import { ref, Ref } from "vue"
   import { useRouter } from "vue-router"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
@@ -15,19 +19,36 @@
   const router = useRouter()
 
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
-  const playbook: Playbook = playbookRepository.findById(props.playbookId)
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
 
-  const module = playbook.findModuleById(props.moduleId)
+  let playbook: Ref<Playbook> = ref(
+    playbookRepository.findById(props.playbookId)
+  )
+  let module = ref(playbook.value.findModuleById(props.moduleId))
+
+  const editableTitle = ref(module.value.title)
+  const editTitle = ref<InstanceType<typeof Inplace>>()
+
+  const startTitleEditing = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(editTitle.value as any).open()
+  }
+
+  const updateTitle = () => {
+    module.value.title = editableTitle.value
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(editTitle.value as any).close()
+    playbookRepository.save(playbook.value)
+  }
 
   const handleSave = () => {
-    storage.save(playbook)
+    storage.save(playbook.value)
   }
 
   const handleNavigate = async (module: Module) => {
-    await router.push(
-      `/mitra-frontend/playbook/${playbook.id}/module/${module.id}`
-    )
+    await router.push({
+      path: `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}/`,
+    })
   }
 </script>
 
@@ -41,10 +62,31 @@
         @navigate="handleNavigate"
       />
     </nav>
-    <main>
+
+    <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb :current-title="module.title" :parent-items="[playbook]" />
-        <h1>{{ module.title }}</h1>
+        <Breadcrumb :current-title="editableTitle" :parent-items="[playbook]" />
+        <p><small>Modul</small></p>
+        <Inplace ref="editTitle" :closable="false">
+          <template #display>
+            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
+          </template>
+          <template #content>
+            <InputText
+              v-model="editableTitle"
+              v-focus
+              class="mr-1"
+              @keyup.enter="updateTitle"
+              @blur="updateTitle"
+            />
+          </template>
+        </Inplace>
+        <Button type="button" @click="startTitleEditing">
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            edit
+          </span>
+          Ändern
+        </Button>
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>

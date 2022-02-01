@@ -19,6 +19,9 @@ config.global.directives = {
 let savedPlaybook: Playbook = new Playbook("test-playbook", [
   new Module("test-module", [new TextAnswerStep("test-step")]),
 ])
+
+savedPlaybook.findModuleById = () => new Module("test-module")
+
 const playbookTestRepository: PlaybookRepository = {
   findById() {
     return savedPlaybook

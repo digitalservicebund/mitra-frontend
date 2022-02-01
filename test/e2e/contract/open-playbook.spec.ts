@@ -11,7 +11,7 @@ test.describe("Open playbook from filesystem", async () => {
       "./test/e2e/fixtures/playbook.json"
     )
     await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
-    await findAllByText(await getDocument(page), "foo module")
+    await findAllByText(await getDocument(page), "test one module")
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {

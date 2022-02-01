@@ -31,29 +31,31 @@ const test = base.extend<TestFixtures>({
     })
   },
   page: async ({ baseURL, page }, use) => {
-    await page.goto(`${baseURL}/mitra-frontend/playbook/${playbookId}`)
+    await page.goto(
+      `${baseURL}/mitra-frontend/playbook/${playbookId}/module/0b141639-8718-4ad9-9839-ec89aa8a1ec4`
+    )
     await use(page)
   },
 })
 
-test.describe("Edit Playbook", async () => {
+test.describe("Edit Module", async () => {
   test.use({
     playbookFile: "./test/e2e/fixtures/playbook.json",
   })
 
   test("editing title", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await page.locator("header h1 >> text='test playbook'").click()
+    await page.locator("header h1 >> text='test one module'").click()
     await expect(page.locator("header >> input")).toBeVisible()
-    await page.fill("header >> input", "Foo Playbook")
+    await page.fill("header >> input", "Foo Module")
     await page.press("header >> input", "Enter")
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await expect(page.locator("header h1 >> text='Foo Playbook'")).toBeVisible()
+    await expect(page.locator("header h1 >> text='Foo Module'")).toBeVisible()
     await expect(
-      page.locator("header nav >> text='Foo Playbook'") // breadcrumb
+      page.locator("header nav >> text='Foo Module'") // breadcrumb
     ).toBeVisible()
     await expect(
-      page.locator("nav:left-of(main) >> text='Foo Playbook'") // sidemenu
+      page.locator("nav:left-of(main) >> text='Foo Module'") // sidemenu
     ).toBeVisible()
     await page.click("text='Ändern'")
     await expect(page.locator("header >> input")).toBeVisible()
@@ -62,21 +64,13 @@ test.describe("Edit Playbook", async () => {
     await expect(page.locator("header >> input")).not.toBeVisible()
   })
 
-  test("add module", async ({ page }) => {
-    await page.locator("text=Neues Modul").click()
-    await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
+  test("navigate to second module", async ({ page }) => {
+    await page.locator("nav:left-of(main) >> text='test two module'").click()
+    await expect(page).toHaveURL(
+      /\/playbook\/[a-z0-9-]+\/module\/0b141639-8718-4ad9-9839-ec89aa8a1ec5\/$/
+    )
     await expect(
-      page.locator("main h1 >> text='Unbenanntes Modul'")
+      page.locator("header h1 >> text='test two module'")
     ).toBeVisible()
-
-    await page.goto(`/mitra-frontend/playbook/${playbookId}`)
-    await expect(
-      page.locator("main section:below(header) >> text='Unbenanntes Modul'")
-    ).toBeVisible()
-  })
-
-  test("navigate to Modules via side nav", async ({ page }) => {
-    await page.locator("nav:left-of(main) >> text='test one module'").click()
-    await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
   })
 })
