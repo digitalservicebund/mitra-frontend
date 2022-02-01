@@ -6,5 +6,5 @@
 </script>
 
 <template>
-  <Screen :playbook-id="playbookId" :module-id="moduleId" />
+  <Screen :key="moduleId" :playbook-id="playbookId" :module-id="moduleId" />
 </template>
