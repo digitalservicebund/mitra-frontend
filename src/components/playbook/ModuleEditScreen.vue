@@ -7,6 +7,7 @@
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
+  import { TextAnswerStep } from "../../domain/Step"
   import Storage from "../../domain/Storage"
   import {
     makePlaybookRepository,
@@ -56,6 +57,10 @@
     playbookRepository.save(playbook.value)
     await router.push(`/mitra-frontend/playbook/${playbook.value.id}/`)
   }
+
+  const addStep = () => {
+    module.value.addStep(new TextAnswerStep("Neue Frage"))
+  }
 </script>
 
 <template>
@@ -103,6 +108,17 @@
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>
+        <Button
+          v-if="module.steps.length === 0"
+          type="button"
+          class="mt-8"
+          @click="addStep"
+        >
+          <span class="material-icons-outlined text-base" aria-hidden="true">
+            add
+          </span>
+          Neue Frage
+        </Button>
         <span v-if="module.steps.length === 0">
           Für dieses Modul wurden noch keine Fragen erstellt.
         </span>

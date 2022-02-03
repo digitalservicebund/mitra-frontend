@@ -20,4 +20,9 @@ export default class Module extends Entity {
       this.steps.map((step) => step.clone())
     )
   }
+
+  addStep(step: Step<Answer>, index?: number): void {
+    if (!index) index = this.steps.length
+    this.steps.splice(index, 0, step)
+  }
 }

@@ -1,5 +1,5 @@
 import { createTestingPinia } from "@pinia/testing"
-import { render, screen } from "@testing-library/vue"
+import { render, screen, fireEvent } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
 import ModuleEditScreen from "../../../src/components/playbook/ModuleEditScreen.vue"
 
@@ -82,5 +82,21 @@ describe("ModuleEditScreen", () => {
     })
 
     await screen.findByText("Modul löschen")
+  })
+
+  it("can add steps", async () => {
+    render(ModuleEditScreen, {
+      props: {
+        playbookId: "xyz",
+        moduleId: "xyz",
+      },
+      global: {
+        plugins: [createTestingPinia(), router],
+        stubs: ["Inplace", "SideMenu"],
+      },
+    })
+
+    await fireEvent.click(screen.getByText("Neue Frage"))
+    await screen.findAllByText("Neue Frage")
   })
 })
