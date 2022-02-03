@@ -103,7 +103,10 @@
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>
-        <ol>
+        <span v-if="module.steps.length === 0">
+          Für dieses Modul wurden noch keine Fragen erstellt.
+        </span>
+        <ol v-else>
           <li
             v-for="step in module.steps"
             :key="step.id"
