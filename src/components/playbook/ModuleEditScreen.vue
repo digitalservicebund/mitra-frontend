@@ -15,6 +15,7 @@
   } from "../../provide"
   import Breadcrumb from "../Breadcrumb.vue"
   import SideMenu from "../SideMenu.vue"
+  import Step from "./Step.vue"
 
   const props = defineProps<{ playbookId: string; moduleId: string }>()
   const router = useRouter()
@@ -108,6 +109,9 @@
       </header>
       <section class="mt-16">
         <h2 class="font-bold text-lg">Fragen</h2>
+        <p v-if="module.steps.length === 0">
+          Für dieses Modul wurden noch keine Fragen erstellt.
+        </p>
         <Button
           v-if="module.steps.length === 0"
           type="button"
@@ -119,19 +123,13 @@
           </span>
           Neue Frage
         </Button>
-        <span v-if="module.steps.length === 0">
-          Für dieses Modul wurden noch keine Fragen erstellt.
-        </span>
         <ol v-else>
           <li
             v-for="step in module.steps"
             :key="step.id"
             class="mt-4 border p-4 shadow-md"
           >
-            <details open>
-              <summary class="text-lg">{{ step.text }}</summary>
-              <p>Typ: {{ step.type }}</p>
-            </details>
+            <Step :step="step" />
           </li>
         </ol>
       </section>
