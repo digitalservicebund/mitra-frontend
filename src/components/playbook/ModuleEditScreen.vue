@@ -61,6 +61,7 @@
 
   const addStep = () => {
     module.value.addStep(new TextAnswerStep("Neue Frage"))
+    playbookRepository.save(playbook.value)
   }
 </script>
 
