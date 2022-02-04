@@ -1,4 +1,5 @@
-import { SheetAnswerStep, SheetAnswer, Row } from "../../domain/Step"
+import { SheetAnswer, Row } from "../../domain/Answer"
+import { SheetAnswerStep } from "../../domain/Step"
 
 export const getColumns = (step: SheetAnswerStep): string[] => {
   return Object.keys(step.answer.value[0])

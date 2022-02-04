@@ -1,12 +1,14 @@
 import {
   Choice,
   MultipleChoiceAnswer,
+  SingleChoiceAnswer,
+  SheetAnswer,
+} from "../../src/domain/Answer"
+import {
   MultipleChoiceAnswerStep,
   RichTextAnswerStep,
-  SingleChoiceAnswer,
   SingleChoiceAnswerStep,
   TextAnswerStep,
-  SheetAnswer,
   SheetAnswerStep,
 } from "../../src/domain/Step"
 

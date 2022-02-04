@@ -2,7 +2,8 @@
   import Column from "primevue/column"
   import DataTable, { DataTableCellEditCompleteEvent } from "primevue/datatable"
   import InputText from "primevue/inputtext"
-  import { SheetAnswerStep, Row } from "../../domain/Step"
+  import { Row } from "../../domain/Answer"
+  import { SheetAnswerStep } from "../../domain/Step"
   import { getColumns, rowHasValues } from "./SheetHelper"
 
   const props = defineProps<{ step: SheetAnswerStep }>()

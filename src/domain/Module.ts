@@ -1,5 +1,6 @@
+import { Answer } from "./Answer"
 import Entity from "./Entity"
-import { Answer, Step } from "./Step"
+import { Step } from "./Step"
 
 export default class Module extends Entity {
   constructor(

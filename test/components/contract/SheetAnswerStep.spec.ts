@@ -1,7 +1,8 @@
 import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
 import SheetAnswerStepComponent from "../../../src/components/contract/SheetAnswerStep.vue"
-import { SheetAnswer, SheetAnswerStep } from "../../../src/domain/Step"
+import { SheetAnswer } from "../../../src/domain/Answer"
+import { SheetAnswerStep } from "../../../src/domain/Step"
 
 describe("SheetAnswerStep", () => {
   it("should render label within table head", async () => {

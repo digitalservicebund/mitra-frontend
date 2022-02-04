@@ -2,7 +2,8 @@
   import Column from "primevue/column"
   import DataTable from "primevue/datatable"
   import { computed } from "vue"
-  import { SheetAnswer, SheetAnswerStep } from "../../domain/Step"
+  import { SheetAnswer } from "../../domain/Answer"
+  import { SheetAnswerStep } from "../../domain/Step"
   import { getColumns, removeEmptyRows, rowHasValues } from "./SheetHelper"
 
   const props = defineProps<{ step: SheetAnswerStep }>()

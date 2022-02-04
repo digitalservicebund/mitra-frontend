@@ -1,8 +1,9 @@
+import { Answer } from "./Answer"
 import Entity from "./Entity"
 import Metadata from "./Metadata"
 import Module from "./Module"
 import Playbook from "./Playbook"
-import { Answer, Step } from "./Step"
+import { Step } from "./Step"
 
 function findStepIndex(
   steps: readonly Step<Answer>[],

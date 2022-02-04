@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
-import { Answer, Step } from "./domain/Step"
+import { Answer } from "./domain/Answer"
+import { Step } from "./domain/Step"
 
 type EntryPoint = "creator" | "einkauf"
 

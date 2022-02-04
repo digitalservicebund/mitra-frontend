@@ -1,5 +1,5 @@
+import { Answer } from "../../domain/Answer"
 import {
-  Answer,
   MultipleChoiceAnswerStep,
   RichTextAnswerStep,
   SheetAnswerStep,

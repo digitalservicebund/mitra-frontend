@@ -1,8 +1,9 @@
 <script setup lang="ts">
   import Button from "primevue/button"
   import { computed, ref } from "vue"
+  import { Answer } from "../../domain/Answer"
   import Contract from "../../domain/Contract"
-  import { Answer, Step } from "../../domain/Step"
+  import { Step } from "../../domain/Step"
   import { useSession } from "../../session"
   import { stepAnswerEditComponent } from "./ComponentByStepType"
 

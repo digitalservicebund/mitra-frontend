@@ -1,20 +1,22 @@
-import Contract from "../domain/Contract"
-import Module from "../domain/Module"
-import Playbook from "../domain/Playbook"
 import {
   Answer,
   Choice,
   MultipleChoiceAnswer,
-  MultipleChoiceAnswerStep,
   RichTextAnswer,
-  RichTextAnswerStep,
   SingleChoiceAnswer,
-  SingleChoiceAnswerStep,
-  Step,
   TextAnswer,
-  TextAnswerStep,
   Row,
   SheetAnswer,
+} from "../domain/Answer"
+import Contract from "../domain/Contract"
+import Module from "../domain/Module"
+import Playbook from "../domain/Playbook"
+import {
+  MultipleChoiceAnswerStep,
+  RichTextAnswerStep,
+  SingleChoiceAnswerStep,
+  Step,
+  TextAnswerStep,
   SheetAnswerStep,
 } from "../domain/Step"
 
