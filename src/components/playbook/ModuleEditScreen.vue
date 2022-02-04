@@ -4,10 +4,11 @@
   import InputText from "primevue/inputtext"
   import { ref, Ref } from "vue"
   import { useRouter } from "vue-router"
+  import { Answer } from "../../domain/Answer"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
   import PlaybookRepository from "../../domain/PlaybookRepository"
-  import { TextAnswerStep } from "../../domain/Step"
+  import { Step, TextAnswerStep } from "../../domain/Step"
   import Storage from "../../domain/Storage"
   import {
     makePlaybookRepository,
@@ -15,7 +16,7 @@
   } from "../../provide"
   import Breadcrumb from "../Breadcrumb.vue"
   import SideMenu from "../SideMenu.vue"
-  import Step from "./Step.vue"
+  import StepListView from "./StepListView.vue"
 
   const props = defineProps<{ playbookId: string; moduleId: string }>()
   const router = useRouter()
@@ -59,8 +60,15 @@
     await router.push(`/mitra-frontend/playbook/${playbook.value.id}/`)
   }
 
-  const addStep = () => {
-    module.value.addStep(new TextAnswerStep("Neue Frage"))
+  const addStep = (index?: number): void => {
+    index
+      ? module.value.addStep(new TextAnswerStep("Neue Frage"), index)
+      : module.value.addStep(new TextAnswerStep("Neue Frage"))
+    playbookRepository.save(playbook.value)
+  }
+
+  const deleteStep = (step: Step<Answer>): void => {
+    module.value.removeStep(step)
     playbookRepository.save(playbook.value)
   }
 </script>
@@ -117,7 +125,7 @@
           v-if="module.steps.length === 0"
           type="button"
           class="mt-8"
-          @click="addStep"
+          @click="addStep()"
         >
           <span class="material-icons-outlined text-base" aria-hidden="true">
             add
@@ -126,11 +134,15 @@
         </Button>
         <ol v-else>
           <li
-            v-for="step in module.steps"
+            v-for="(step, index) in module.steps"
             :key="step.id"
             class="mt-4 border p-4 shadow-md"
           >
-            <Step :step="step" />
+            <StepListView
+              :step="step"
+              @add-step="addStep(index + 1)"
+              @delete-step="deleteStep(step)"
+            />
           </li>
         </ol>
       </section>

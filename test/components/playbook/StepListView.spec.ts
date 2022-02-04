@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/vue"
-import Step from "../../../src/components/playbook/Step.vue"
+import Step from "../../../src/components/playbook/StepListView.vue"
 import { TextAnswerStep } from "../../../src/domain/Step"
 
 describe("Step", () => {

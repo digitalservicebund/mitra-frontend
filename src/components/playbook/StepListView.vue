@@ -6,17 +6,23 @@
   import { Step } from "../../domain/Step"
 
   defineProps<{ step: Step<Answer> }>()
+  const emit = defineEmits<{
+    (e: "addStep"): void
+    (e: "deleteStep"): void
+  }>()
 
   const menu = ref()
   const items = [
     {
       label: "Neue Frage",
+      command: () => emit("addStep"),
     },
     {
       label: "Frage duplizieren",
     },
     {
       label: "Frage löschen",
+      command: () => emit("deleteStep"),
     },
   ]
 
@@ -29,7 +35,8 @@
 <template>
   <details open>
     <summary class="text-lg relative">
-      {{ step.text }}
+      <h3>{{ step.text }}</h3>
+      <span class="text-slate-400">Erklärungstext (optional)</span>
       <Button
         type="button"
         class="absolute top-0 right-0"
@@ -45,6 +52,5 @@
       </Button>
       <ContextMenu ref="menu" :model="items" />
     </summary>
-    <p>Typ: {{ step.type }}</p>
   </details>
 </template>

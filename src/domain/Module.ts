@@ -5,7 +5,7 @@ import { Step } from "./Step"
 export default class Module extends Entity {
   constructor(
     public title: string = "Unbenanntes Modul",
-    public readonly steps: Step<Answer>[] = [],
+    public steps: Step<Answer>[] = [],
     id?: string
   ) {
     super(id)
@@ -25,5 +25,9 @@ export default class Module extends Entity {
   addStep(step: Step<Answer>, index?: number): void {
     if (!index) index = this.steps.length
     this.steps.splice(index, 0, step)
+  }
+
+  removeStep(step: Step<Answer>): void {
+    this.steps = this.steps.filter((item) => item !== step)
   }
 }
