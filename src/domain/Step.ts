@@ -29,11 +29,7 @@ const computePathWithChoices = (
 }
 
 export abstract class Step<T extends Answer> extends Entity {
-  constructor(
-    public readonly text: string,
-    public readonly answer: T,
-    id?: string
-  ) {
+  constructor(public text: string, public readonly answer: T, id?: string) {
     super(id)
 
     // Ensure our getters are enumerable so that JSON.stringify,
