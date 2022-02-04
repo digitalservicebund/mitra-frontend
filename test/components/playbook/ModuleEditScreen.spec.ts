@@ -92,7 +92,7 @@ describe("ModuleEditScreen", () => {
       },
       global: {
         plugins: [createTestingPinia(), router],
-        stubs: ["Inplace", "SideMenu"],
+        stubs: ["SideMenu"],
       },
     })
 
