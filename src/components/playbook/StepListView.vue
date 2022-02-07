@@ -12,7 +12,7 @@
     (e: "addStep"): void
     (e: "duplicateStep"): void
     (e: "deleteStep"): void
-    (e: "updateStep", step: Step<Answer>): void
+    (e: "updateStep", updatedStep: Step<Answer>): void
   }>()
 
   const editableTitle = ref(props.step.text)

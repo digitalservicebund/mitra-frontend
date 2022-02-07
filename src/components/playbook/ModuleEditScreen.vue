@@ -76,6 +76,12 @@
     module.value.removeStep(step)
     playbookRepository.save(playbook.value)
   }
+
+  const updateStep = (step: Step<Answer>, updatedStep: Step<Answer>): void => {
+    const index: number = module.value.steps.indexOf(step)
+    module.value.steps[index] = updatedStep
+    playbookRepository.save(playbook.value)
+  }
 </script>
 
 <template>
@@ -148,6 +154,7 @@
               @add-step="addStep(index + 1)"
               @delete-step="deleteStep(step)"
               @duplicate-step="duplicateStep(step)"
+              @update-step="updateStep(step, $event)"
             />
           </li>
         </ol>
