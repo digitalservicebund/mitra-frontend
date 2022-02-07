@@ -67,61 +67,55 @@ export type PlaybookDTO = {
 export function createStep(step: StepDTO): Step<Answer> {
   if (step.type === TextAnswerStep.TYPE) {
     const answer = step.answer as TextAnswerDTO
-    return new TextAnswerStep(
-      step.text,
-      new TextAnswer(answer.value),
-      step.produce,
-      step.description,
-      step.id
-    )
+    return new TextAnswerStep(step.text, {
+      answer: new TextAnswer(answer.value),
+      produce: step.produce,
+      description: step.description,
+      id: step.id,
+    })
   }
   if (step.type === RichTextAnswerStep.TYPE) {
     const answer = step.answer as RichTextAnswerDTO
-    return new RichTextAnswerStep(
-      step.text,
-      new RichTextAnswer(answer.value),
-      step.produce,
-      step.description,
-      step.id
-    )
+    return new RichTextAnswerStep(step.text, {
+      answer: new RichTextAnswer(answer.value),
+      produce: step.produce,
+      description: step.description,
+      id: step.id,
+    })
   }
   if (step.type === SingleChoiceAnswerStep.TYPE) {
     const answer = step.answer as SingleChoiceAnswerDTO
-    return new SingleChoiceAnswerStep(
-      step.text,
-      new SingleChoiceAnswer(
+    return new SingleChoiceAnswerStep(step.text, {
+      answer: new SingleChoiceAnswer(
         answer.choices.map(
           (choice) => new Choice(choice.text, choice.path.map(createStep))
         ),
         answer.value
       ),
-      step.description,
-      step.id
-    )
+      description: step.description,
+      id: step.id,
+    })
   }
   if (step.type === MultipleChoiceAnswerStep.TYPE) {
     const answer = step.answer as MultipleChoiceAnswerDTO
-    return new MultipleChoiceAnswerStep(
-      step.text,
-      new MultipleChoiceAnswer(
+    return new MultipleChoiceAnswerStep(step.text, {
+      answer: new MultipleChoiceAnswer(
         answer.choices.map(
           (choice) => new Choice(choice.text, choice.path.map(createStep))
         ),
         answer.value
       ),
-      step.description,
-      step.id
-    )
+      description: step.description,
+      id: step.id,
+    })
   }
   if (step.type === SheetAnswerStep.TYPE) {
     const answer = step.answer as SheetAnswerDTO
-    return new SheetAnswerStep(
-      step.text,
-      new SheetAnswer(answer.value),
-      step.produce,
-      step.description,
-      step.id
-    )
+    return new SheetAnswerStep(step.text, new SheetAnswer(answer.value), {
+      produce: step.produce,
+      description: step.description,
+      id: step.id,
+    })
   }
   console.error("Step type unknown, cannot deserialize JSON", step)
   throw new Error("Step type unknown")

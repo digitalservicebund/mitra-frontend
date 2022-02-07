@@ -13,12 +13,7 @@ import {
 } from "../../src/domain/Step"
 
 describe("TextAnswerStep", () => {
-  const step = new TextAnswerStep(
-    "foo",
-    undefined,
-    undefined,
-    "foo description"
-  )
+  const step = new TextAnswerStep("foo", { description: "foo description" })
 
   it("should be instantiated with a description", () => {
     expect(step.description).toEqual("foo description")
@@ -44,12 +39,7 @@ describe("TextAnswerStep", () => {
 })
 
 describe("RichTextAnswerStep", () => {
-  const step = new RichTextAnswerStep(
-    "foo",
-    undefined,
-    undefined,
-    "foo description"
-  )
+  const step = new RichTextAnswerStep("foo", { description: "foo description" })
 
   it("should be instantiated with a description", () => {
     expect(step.description).toEqual("foo description")
@@ -75,22 +65,21 @@ describe("RichTextAnswerStep", () => {
 })
 
 describe("SingleChoiceAnswerStep", () => {
-  const nestedStep = new SingleChoiceAnswerStep(
-    "foo",
-    new SingleChoiceAnswer([
+  const nestedStep = new SingleChoiceAnswerStep("foo", {
+    answer: new SingleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [new TextAnswerStep("bar")]),
-    ])
-  )
+    ]),
+    description: "foo description",
+  })
 
-  const step = new SingleChoiceAnswerStep(
-    "foo",
-    new SingleChoiceAnswer([
+  const step = new SingleChoiceAnswerStep("foo", {
+    answer: new SingleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
     ]),
-    "foo description"
-  )
+    description: "foo description",
+  })
 
   it("should be instantiated with a description", () => {
     expect(step.description).toEqual("foo description")
@@ -125,22 +114,20 @@ describe("SingleChoiceAnswerStep", () => {
 })
 
 describe("MultipleChoiceAnswerStep", () => {
-  const nestedStep = new MultipleChoiceAnswerStep(
-    "foo",
-    new MultipleChoiceAnswer([
+  const nestedStep = new MultipleChoiceAnswerStep("foo", {
+    answer: new MultipleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [new TextAnswerStep("bar")]),
-    ])
-  )
+    ]),
+  })
 
-  const step = new MultipleChoiceAnswerStep(
-    "foo",
-    new MultipleChoiceAnswer([
+  const step = new MultipleChoiceAnswerStep("foo", {
+    answer: new MultipleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
     ]),
-    "foo description"
-  )
+    description: "foo description",
+  })
 
   it("should be instantiated with a description", () => {
     expect(step.description).toEqual("foo description")
@@ -188,12 +175,9 @@ describe("MultipleChoiceAnswerStep", () => {
 describe("SheetAnswerStep", () => {
   const row = { column1: "fuu", colum2: "bar", colum3: "baz" }
   const emptyRow = { column1: "", colum2: "", colum3: "" }
-  const step = new SheetAnswerStep(
-    "foo",
-    new SheetAnswer([row, emptyRow]),
-    undefined,
-    "foo description"
-  )
+  const step = new SheetAnswerStep("foo", new SheetAnswer([row, emptyRow]), {
+    description: "foo description",
+  })
 
   it("should be iniated with answer", () => {
     expect(step.answer.value).toEqual([row, emptyRow])

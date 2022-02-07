@@ -70,15 +70,24 @@ export class TextAnswerStep extends Step<TextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "TextAnswerStep"
+  public readonly produce: string
 
   constructor(
     text: string,
-    answer: TextAnswer = new TextAnswer(),
-    public readonly produce: string = "${answer}",
-    description?: string,
-    id?: string
+    {
+      answer = new TextAnswer(),
+      produce = "${answer}",
+      description,
+      id,
+    }: {
+      answer?: TextAnswer
+      produce?: string
+      description?: string
+      id?: string
+    } = {}
   ) {
     super(text, answer, description, id)
+    this.produce = produce
   }
 
   get type(): string {
@@ -93,12 +102,11 @@ export class TextAnswerStep extends Step<TextAnswer> {
   }
 
   clone(): TextAnswerStep {
-    return new TextAnswerStep(
-      this.text,
-      new TextAnswer(this.answer.value),
-      this.produce,
-      this.description
-    )
+    return new TextAnswerStep(this.text, {
+      answer: new TextAnswer(this.answer.value),
+      produce: this.produce,
+      description: this.description,
+    })
   }
 }
 
@@ -106,15 +114,24 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "RichTextAnswerStep"
+  public readonly produce: string
 
   constructor(
     text: string,
-    answer: RichTextAnswer = new RichTextAnswer(),
-    public readonly produce: string = "${answer}",
-    description?: string,
-    id?: string
+    {
+      answer = new RichTextAnswer(),
+      produce = "${answer}",
+      description,
+      id,
+    }: {
+      answer?: RichTextAnswer
+      produce?: string
+      description?: string
+      id?: string
+    } = {}
   ) {
     super(text, answer, description, id)
+    this.produce = produce
   }
 
   get type(): string {
@@ -129,12 +146,11 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   }
 
   clone(): RichTextAnswerStep {
-    return new RichTextAnswerStep(
-      this.text,
-      new RichTextAnswer(this.answer.value),
-      this.produce,
-      this.description
-    )
+    return new RichTextAnswerStep(this.text, {
+      answer: new RichTextAnswer(this.answer.value),
+      produce: this.produce,
+      description: this.description,
+    })
   }
 }
 
@@ -145,9 +161,15 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
 
   constructor(
     text: string,
-    answer: SingleChoiceAnswer = new SingleChoiceAnswer([]),
-    description?: string,
-    id?: string
+    {
+      answer = new SingleChoiceAnswer([]),
+      description,
+      id,
+    }: {
+      answer?: SingleChoiceAnswer
+      description?: string
+      id?: string
+    } = {}
   ) {
     super(text, answer, description, id)
   }
@@ -169,14 +191,13 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   }
 
   clone(): SingleChoiceAnswerStep {
-    return new SingleChoiceAnswerStep(
-      this.text,
-      new SingleChoiceAnswer(
+    return new SingleChoiceAnswerStep(this.text, {
+      answer: new SingleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
       ),
-      this.description
-    )
+      description: this.description,
+    })
   }
 }
 
@@ -187,9 +208,15 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
 
   constructor(
     text: string,
-    answer: MultipleChoiceAnswer = new MultipleChoiceAnswer([]),
-    description?: string,
-    id?: string
+    {
+      answer = new MultipleChoiceAnswer([]),
+      description,
+      id,
+    }: {
+      answer?: MultipleChoiceAnswer
+      description?: string
+      id?: string
+    } = {}
   ) {
     super(text, answer, description, id)
   }
@@ -211,14 +238,13 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   }
 
   clone(): MultipleChoiceAnswerStep {
-    return new MultipleChoiceAnswerStep(
-      this.text,
-      new MultipleChoiceAnswer(
+    return new MultipleChoiceAnswerStep(this.text, {
+      answer: new MultipleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
       ),
-      this.description
-    )
+      description: this.description,
+    })
   }
 }
 
@@ -226,15 +252,23 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "SheetAnswerStep"
+  public readonly produce: string
 
   constructor(
     text: string,
     answer: SheetAnswer,
-    public readonly produce: string = "${answer}",
-    description?: string,
-    id?: string
+    {
+      produce = "${answer}",
+      description,
+      id,
+    }: {
+      produce?: string
+      description?: string
+      id?: string
+    } = {}
   ) {
     super(text, answer, description, id)
+    this.produce = produce
   }
 
   get type(): string {
@@ -242,12 +276,10 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   }
 
   clone(): SheetAnswerStep {
-    return new SheetAnswerStep(
-      this.text,
-      new SheetAnswer(this.answer.value),
-      this.produce,
-      this.description
-    )
+    return new SheetAnswerStep(this.text, new SheetAnswer(this.answer.value), {
+      produce: this.produce,
+      description: this.description,
+    })
   }
 
   updateCell(rowIndex: number, cell: string, value: string) {

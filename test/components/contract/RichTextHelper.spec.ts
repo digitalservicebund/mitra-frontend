@@ -15,7 +15,7 @@ describe("RichTextHelper", () => {
       ...RichTextEditorConfig,
       content: "<p>foo<strong>bar</strong></p><p>baz</p>",
     })
-    const step = new RichTextAnswerStep("foo", undefined, "Prefix: ${answer}")
+    const step = new RichTextAnswerStep("foo", { produce: "Prefix: ${answer}" })
     expect(editorContentAsAnswerValue(editor, step)).toEqual(
       "foo<strong>bar</strong><p>baz</p>"
     )
