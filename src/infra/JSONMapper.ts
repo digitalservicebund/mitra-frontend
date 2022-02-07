@@ -51,6 +51,7 @@ export type StepDTO = {
   text: string
   type: string
   produce?: string
+  description?: string
 }
 
 export type ModuleDTO = { id: string; title: string; steps: StepDTO[] }
@@ -70,6 +71,7 @@ export function createStep(step: StepDTO): Step<Answer> {
       step.text,
       new TextAnswer(answer.value),
       step.produce,
+      step.description,
       step.id
     )
   }
@@ -79,6 +81,7 @@ export function createStep(step: StepDTO): Step<Answer> {
       step.text,
       new RichTextAnswer(answer.value),
       step.produce,
+      step.description,
       step.id
     )
   }
@@ -92,6 +95,7 @@ export function createStep(step: StepDTO): Step<Answer> {
         ),
         answer.value
       ),
+      step.description,
       step.id
     )
   }
@@ -105,6 +109,7 @@ export function createStep(step: StepDTO): Step<Answer> {
         ),
         answer.value
       ),
+      step.description,
       step.id
     )
   }
@@ -114,6 +119,7 @@ export function createStep(step: StepDTO): Step<Answer> {
       step.text,
       new SheetAnswer(answer.value),
       step.produce,
+      step.description,
       step.id
     )
   }
