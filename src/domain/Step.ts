@@ -32,8 +32,8 @@ export abstract class Step<T extends Answer> extends Entity {
   constructor(
     public text: string,
     public readonly answer: T,
-    id?: string,
-    public description?: string
+    public description?: string,
+    id?: string
   ) {
     super(id)
 
@@ -75,10 +75,10 @@ export class TextAnswerStep extends Step<TextAnswer> {
     text: string,
     answer: TextAnswer = new TextAnswer(),
     public readonly produce: string = "${answer}",
-    id?: string,
-    description?: string
+    description?: string,
+    id?: string
   ) {
-    super(text, answer, id, description)
+    super(text, answer, description, id)
   }
 
   get type(): string {
@@ -111,10 +111,10 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
     text: string,
     answer: RichTextAnswer = new RichTextAnswer(),
     public readonly produce: string = "${answer}",
-    id?: string,
-    description?: string
+    description?: string,
+    id?: string
   ) {
-    super(text, answer, id, description)
+    super(text, answer, description, id)
   }
 
   get type(): string {
@@ -146,10 +146,10 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   constructor(
     text: string,
     answer: SingleChoiceAnswer = new SingleChoiceAnswer([]),
-    id?: string,
-    description?: string
+    description?: string,
+    id?: string
   ) {
-    super(text, answer, id, description)
+    super(text, answer, description, id)
   }
 
   get type(): string {
@@ -188,10 +188,10 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   constructor(
     text: string,
     answer: MultipleChoiceAnswer = new MultipleChoiceAnswer([]),
-    id?: string,
-    description?: string
+    description?: string,
+    id?: string
   ) {
-    super(text, answer, id, description)
+    super(text, answer, description, id)
   }
 
   get type(): string {
@@ -231,10 +231,10 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
     text: string,
     answer: SheetAnswer,
     public readonly produce: string = "${answer}",
-    id?: string,
-    description?: string
+    description?: string,
+    id?: string
   ) {
-    super(text, answer, id, description)
+    super(text, answer, description, id)
   }
 
   get type(): string {

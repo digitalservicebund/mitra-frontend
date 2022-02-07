@@ -17,7 +17,6 @@ describe("TextAnswerStep", () => {
     "foo",
     undefined,
     undefined,
-    undefined,
     "foo description"
   )
 
@@ -31,6 +30,8 @@ describe("TextAnswerStep", () => {
 
   it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
+
+    expect(step.clone().description).toEqual("foo description")
   })
 
   it("has a serializable `type` property", () => {
@@ -47,7 +48,6 @@ describe("RichTextAnswerStep", () => {
     "foo",
     undefined,
     undefined,
-    undefined,
     "foo description"
   )
 
@@ -61,6 +61,8 @@ describe("RichTextAnswerStep", () => {
 
   it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
+
+    expect(step.clone().description).toEqual("foo description")
   })
 
   it("has a serializable `type` property", () => {
@@ -87,7 +89,6 @@ describe("SingleChoiceAnswerStep", () => {
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
     ]),
-    undefined,
     "foo description"
   )
 
@@ -115,6 +116,7 @@ describe("SingleChoiceAnswerStep", () => {
     expect(step.clone().answer).not.toEqual(step.answer)
     expect(step.clone().choices).not.toEqual(step.choices)
     expect(step.clone().choices).toHaveLength(step.choices.length)
+    expect(step.clone().description).toEqual("foo description")
   })
 
   it("has a serializable `type` property", () => {
@@ -137,7 +139,6 @@ describe("MultipleChoiceAnswerStep", () => {
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
     ]),
-    undefined,
     "foo description"
   )
 
@@ -176,6 +177,7 @@ describe("MultipleChoiceAnswerStep", () => {
     expect(step.clone().answer).not.toEqual(step.answer)
     expect(step.clone().choices).not.toEqual(step.choices)
     expect(step.clone().choices).toHaveLength(step.choices.length)
+    expect(step.clone().description).toEqual("foo description")
   })
 
   it("has a serializable `type` property", () => {
@@ -189,7 +191,6 @@ describe("SheetAnswerStep", () => {
   const step = new SheetAnswerStep(
     "foo",
     new SheetAnswer([row, emptyRow]),
-    undefined,
     undefined,
     "foo description"
   )
@@ -208,6 +209,7 @@ describe("SheetAnswerStep", () => {
 
   it("should be clonable", () => {
     expect(step.clone()).not.toEqual(step)
+    expect(step.clone().description).toEqual("foo description")
   })
 
   it("has a serializable `type` property", () => {
