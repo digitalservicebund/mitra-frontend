@@ -81,4 +81,77 @@ test.describe("Edit Module", async () => {
       page.locator("nav:left-of(main) >> text='test one module'")
     ).not.toBeVisible()
   })
+
+  test("edit step title", async ({ page }) => {
+    await page.locator("section:below(header) >> text='bar step'").click()
+    await expect(page.locator("section:below(header) >> input")).toBeVisible()
+    await page.fill("section:below(header) >> input", "updated step title")
+    await page.press("section:below(header) >> input", "Enter")
+    await expect(
+      page.locator("section:below(header) >> input")
+    ).not.toBeVisible()
+    await expect(page.locator("text=updated step title")).toBeVisible()
+  })
+
+  test("edit step description", async ({ page }) => {
+    await page
+      .locator(
+        "section:below(header) >> :nth-match(:text('Erklärungstext (optional)'), 1)"
+      )
+      .click()
+    await expect(page.locator("section:below(header) >> input")).toBeVisible()
+    await page.fill(
+      "section:below(header) >> input",
+      "updated step description"
+    )
+    await page.press("section:below(header) >> input", "Enter")
+    await expect(
+      page.locator("section:below(header) >> input")
+    ).not.toBeVisible()
+    await expect(page.locator("text=updated step description")).toBeVisible()
+  })
+
+  test("clone step", async ({ page }) => {
+    await expect(page.locator("text=bar step")).toHaveCount(1)
+    await page
+      .locator("section:below(header) >> li:has-text('bar step') >> button")
+      .click()
+    await page.locator("text=Frage duplizieren").click()
+    await expect(page.locator("text=bar step")).toHaveCount(2)
+  })
+
+  test("delete step", async ({ page }) => {
+    await expect(page.locator("text=baz step")).toBeVisible()
+    await page
+      .locator("section:below(header) >> li:has-text('baz step') >> button")
+      .click()
+    await page.locator("text=Frage löschen").click()
+    await expect(page.locator("text=baz step")).not.toBeVisible()
+  })
+
+  test("add step via context menu", async ({ page }) => {
+    await expect(page.locator("ol:below(header) >> li")).toHaveCount(2)
+    await page
+      .locator("section:below(header) >> li:has-text('baz step') >> button")
+      .click()
+    await page.locator("text=Neue Frage").click()
+    await expect(page.locator("ol:below(header) >> li")).toHaveCount(3)
+  })
+})
+
+test.describe("Edit empty Module", async () => {
+  test.use({
+    playbookFile: "./test/e2e/fixtures/playbook-empty-module.json",
+  })
+
+  test("add question", async ({ page }) => {
+    await expect(
+      page.locator("text=Für dieses Modul wurden noch keine Fragen erstellt.")
+    ).toBeVisible()
+    await page.locator("text=Neue Frage").click()
+    await expect(
+      page.locator("main section >> text='Neue Frage'")
+    ).toBeVisible()
+    await expect(page.locator("text=Erklärungstext (optional)")).toBeVisible()
+  })
 })

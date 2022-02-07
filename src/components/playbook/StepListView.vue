@@ -26,6 +26,17 @@
     emit("updateStep", updatedStep)
   }
 
+  const editableDescription = ref(props.step.description)
+  const editDescription = ref<InstanceType<typeof Inplace>>()
+
+  const updateDescription = () => {
+    const updatedStep: Step<Answer> = props.step
+    updatedStep.description = editableDescription.value
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(editDescription.value as any).close()
+    emit("updateStep", updatedStep)
+  }
+
   const menu = ref()
   const items = [
     {
@@ -66,7 +77,26 @@
             />
           </template>
         </Inplace>
-        <div class="text-slate-400 ml-3">Erklärungstext (optional)</div>
+        <div></div>
+        <Inplace
+          ref="editDescription"
+          :closable="false"
+          :class="[editableDescription ? '' : 'text-slate-400']"
+        >
+          <template #display>
+            {{ editableDescription || "Erklärungstext (optional)" }}
+          </template>
+          <template #content>
+            <InputText
+              v-model="editableDescription"
+              v-focus
+              class="text-lg"
+              aria-label="Erklärung ändern"
+              @keyup.enter="updateDescription"
+              @blur="updateDescription"
+            />
+          </template>
+        </Inplace>
         <Button
           type="button"
           class="absolute top-0 right-0"

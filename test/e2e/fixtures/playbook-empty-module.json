@@ -1,0 +1,14 @@
+{
+  "playbook": {
+    "id": "3d324eca-06c2-4781-af52-705f49039d0d",
+    "title": "test playbook",
+    "modules": [
+      {
+        "id": "0b141639-8718-4ad9-9839-ec89aa8a1ec4",
+        "title": "test one module",
+        "steps": []
+      }
+    ]
+  },
+  "createdAt": "2022-01-23T15:40:09.448Z"
+}

@@ -9,13 +9,13 @@
         "steps": [
           {
             "id": "06817a49-dd7b-4d8a-9c5b-77702e913a30",
-            "text": "bar",
+            "text": "bar step",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "baz",
+            "text": "baz step",
             "type": "TextAnswerStep",
             "answer": {}
           }
