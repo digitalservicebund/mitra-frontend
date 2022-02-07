@@ -67,6 +67,11 @@
     playbookRepository.save(playbook.value)
   }
 
+  const duplicateStep = (step: Step<Answer>): void => {
+    module.value.duplicateStep(step)
+    playbookRepository.save(playbook.value)
+  }
+
   const deleteStep = (step: Step<Answer>): void => {
     module.value.removeStep(step)
     playbookRepository.save(playbook.value)
@@ -142,6 +147,7 @@
               :step="step"
               @add-step="addStep(index + 1)"
               @delete-step="deleteStep(step)"
+              @duplicate-step="duplicateStep(step)"
             />
           </li>
         </ol>

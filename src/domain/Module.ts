@@ -27,6 +27,14 @@ export default class Module extends Entity {
     this.steps.splice(index, 0, step)
   }
 
+  duplicateStep(step: Step<Answer>): void {
+    if (!this.steps.includes(step)) throw new Error("step not in module")
+
+    const duplicatedStep = step.clone()
+    duplicatedStep.text = `Kopie von ${step.text}`
+    this.addStep(duplicatedStep, this.steps.indexOf(step) + 1)
+  }
+
   removeStep(step: Step<Answer>): void {
     this.steps = this.steps.filter((item) => item !== step)
   }

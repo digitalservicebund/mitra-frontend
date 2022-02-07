@@ -10,6 +10,7 @@
   const props = defineProps<{ step: Step<Answer> }>()
   const emit = defineEmits<{
     (e: "addStep"): void
+    (e: "duplicateStep"): void
     (e: "deleteStep"): void
     (e: "updateStep", step: Step<Answer>): void
   }>()
@@ -33,6 +34,7 @@
     },
     {
       label: "Frage duplizieren",
+      command: () => emit("duplicateStep"),
     },
     {
       label: "Frage löschen",
@@ -41,7 +43,6 @@
   ]
 
   const openMenu = (event: Event) => {
-    console.log(menu.value)
     menu.value.show(event)
   }
 </script>
