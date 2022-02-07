@@ -13,7 +13,17 @@ import {
 } from "../../src/domain/Step"
 
 describe("TextAnswerStep", () => {
-  const step = new TextAnswerStep("foo")
+  const step = new TextAnswerStep(
+    "foo",
+    undefined,
+    undefined,
+    undefined,
+    "foo description"
+  )
+
+  it("should be instantiated with a description", () => {
+    expect(step.description).toEqual("foo description")
+  })
 
   it("should produce a path", () => {
     expect(step.path).toEqual([step])
@@ -33,7 +43,17 @@ describe("TextAnswerStep", () => {
 })
 
 describe("RichTextAnswerStep", () => {
-  const step = new RichTextAnswerStep("foo")
+  const step = new RichTextAnswerStep(
+    "foo",
+    undefined,
+    undefined,
+    undefined,
+    "foo description"
+  )
+
+  it("should be instantiated with a description", () => {
+    expect(step.description).toEqual("foo description")
+  })
 
   it("should produce a path", () => {
     expect(step.path).toEqual([step])
@@ -66,8 +86,14 @@ describe("SingleChoiceAnswerStep", () => {
     new SingleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
-    ])
+    ]),
+    undefined,
+    "foo description"
   )
+
+  it("should be instantiated with a description", () => {
+    expect(step.description).toEqual("foo description")
+  })
 
   it("should produce a path without a choice", () => {
     expect(step.path).toEqual([step])
@@ -110,8 +136,14 @@ describe("MultipleChoiceAnswerStep", () => {
     new MultipleChoiceAnswer([
       new Choice("foo", [new TextAnswerStep("foo")]),
       new Choice("bar", [nestedStep]),
-    ])
+    ]),
+    undefined,
+    "foo description"
   )
+
+  it("should be instantiated with a description", () => {
+    expect(step.description).toEqual("foo description")
+  })
 
   it("should produce a path without a choice", () => {
     expect(step.path).toEqual([step])
@@ -154,10 +186,20 @@ describe("MultipleChoiceAnswerStep", () => {
 describe("SheetAnswerStep", () => {
   const row = { column1: "fuu", colum2: "bar", colum3: "baz" }
   const emptyRow = { column1: "", colum2: "", colum3: "" }
-  const step = new SheetAnswerStep("foo", new SheetAnswer([row, emptyRow]))
+  const step = new SheetAnswerStep(
+    "foo",
+    new SheetAnswer([row, emptyRow]),
+    undefined,
+    undefined,
+    "foo description"
+  )
 
   it("should be iniated with answer", () => {
     expect(step.answer.value).toEqual([row, emptyRow])
+  })
+
+  it("should be instantiated with a description", () => {
+    expect(step.description).toEqual("foo description")
   })
 
   it("should produce a path", () => {

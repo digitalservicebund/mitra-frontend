@@ -29,7 +29,12 @@ const computePathWithChoices = (
 }
 
 export abstract class Step<T extends Answer> extends Entity {
-  constructor(public text: string, public readonly answer: T, id?: string) {
+  constructor(
+    public text: string,
+    public readonly answer: T,
+    id?: string,
+    public description?: string
+  ) {
     super(id)
 
     // Ensure our getters are enumerable so that JSON.stringify,
@@ -70,9 +75,10 @@ export class TextAnswerStep extends Step<TextAnswer> {
     text: string,
     answer: TextAnswer = new TextAnswer(),
     public readonly produce: string = "${answer}",
-    id?: string
+    id?: string,
+    description?: string
   ) {
-    super(text, answer, id)
+    super(text, answer, id, description)
   }
 
   get type(): string {
@@ -90,7 +96,8 @@ export class TextAnswerStep extends Step<TextAnswer> {
     return new TextAnswerStep(
       this.text,
       new TextAnswer(this.answer.value),
-      this.produce
+      this.produce,
+      this.description
     )
   }
 }
@@ -104,9 +111,10 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
     text: string,
     answer: RichTextAnswer = new RichTextAnswer(),
     public readonly produce: string = "${answer}",
-    id?: string
+    id?: string,
+    description?: string
   ) {
-    super(text, answer, id)
+    super(text, answer, id, description)
   }
 
   get type(): string {
@@ -124,7 +132,8 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
     return new RichTextAnswerStep(
       this.text,
       new RichTextAnswer(this.answer.value),
-      this.produce
+      this.produce,
+      this.description
     )
   }
 }
@@ -137,9 +146,10 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   constructor(
     text: string,
     answer: SingleChoiceAnswer = new SingleChoiceAnswer([]),
-    id?: string
+    id?: string,
+    description?: string
   ) {
-    super(text, answer, id)
+    super(text, answer, id, description)
   }
 
   get type(): string {
@@ -164,7 +174,8 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
       new SingleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
-      )
+      ),
+      this.description
     )
   }
 }
@@ -177,9 +188,10 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   constructor(
     text: string,
     answer: MultipleChoiceAnswer = new MultipleChoiceAnswer([]),
-    id?: string
+    id?: string,
+    description?: string
   ) {
-    super(text, answer, id)
+    super(text, answer, id, description)
   }
 
   get type(): string {
@@ -204,7 +216,8 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
       new MultipleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
-      )
+      ),
+      this.description
     )
   }
 }
@@ -218,9 +231,10 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
     text: string,
     answer: SheetAnswer,
     public readonly produce: string = "${answer}",
-    id?: string
+    id?: string,
+    description?: string
   ) {
-    super(text, answer, id)
+    super(text, answer, id, description)
   }
 
   get type(): string {
@@ -228,7 +242,12 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   }
 
   clone(): SheetAnswerStep {
-    return new SheetAnswerStep(this.text, new SheetAnswer(this.answer.value))
+    return new SheetAnswerStep(
+      this.text,
+      new SheetAnswer(this.answer.value),
+      this.produce,
+      this.description
+    )
   }
 
   updateCell(rowIndex: number, cell: string, value: string) {
