@@ -69,9 +69,6 @@
 
 <template>
   <div class="mb-4">
-    {{ step.text }}
-  </div>
-  <div class="mb-4">
     <div v-if="editor" class="border">
       <button
         class="p-2"

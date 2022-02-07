@@ -58,6 +58,12 @@
     <h3 class="font-bold">
       {{ currentModule?.title }}
     </h3>
+    <div class="mb-4">
+      {{ currentStep?.text }}
+    </div>
+    <div class="mb-4">
+      {{ currentStep?.description }}
+    </div>
     <component
       :is="stepAnswerEditComponent(currentStep as Step<Answer>)"
       :step="currentStep"

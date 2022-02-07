@@ -12,9 +12,6 @@
 
 <template>
   <div class="mb-4">
-    {{ step.text }}
-  </div>
-  <div class="mb-4">
     <InputText
       v-model="answer"
       :title="step.text"

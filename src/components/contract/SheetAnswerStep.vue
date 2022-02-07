@@ -37,9 +37,6 @@
 
 <template>
   <div class="mb-4">
-    {{ step.text }}
-  </div>
-  <div class="mb-4">
     <DataTable
       id="edit-sheet"
       :value="getPaddedSheet(step, 3)"

@@ -12,9 +12,6 @@
 </script>
 
 <template>
-  <div class="mb-4">
-    {{ step.text }}
-  </div>
   <ul class="mb-4">
     <li
       v-for="(label, index) in labels"
