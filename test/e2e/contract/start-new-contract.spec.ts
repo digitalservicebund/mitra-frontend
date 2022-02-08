@@ -22,16 +22,3 @@ test("Navigate back to buyers start screen", async ({ page, baseURL }) => {
   await page.click("nav >> text=Startseite")
   await expect(page).toHaveURL(/\/mitra-frontend\/einkauf/)
 })
-
-test.describe("Regression tests", () => {
-  test.skip(
-    ({ browserName }) => browserName !== "chromium",
-    "Regression test sufficient in Chromium only"
-  )
-
-  test("Navigate back using back button", async ({ page, baseURL }) => {
-    await page.goto(`${baseURL}/mitra-frontend/contract/new`)
-    await page.goBack()
-    await expect(page).not.toHaveURL(/\/contract\/[a-z0-9-]+$/)
-  })
-})
