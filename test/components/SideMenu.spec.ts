@@ -30,15 +30,11 @@ describe("SideMenu", () => {
     routes: [
       {
         path: "/mitra-frontend/",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
       {
         path: "/mitra-frontend/:navigatable/:id",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
     ],
   })

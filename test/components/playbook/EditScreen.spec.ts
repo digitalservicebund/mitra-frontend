@@ -16,27 +16,19 @@ describe("EditScreen", () => {
     routes: [
       {
         path: "",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
       {
         path: "/mitra-frontend/",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
       {
         path: "/mitra-frontend/playbook/:playbook",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
       {
         path: "/mitra-frontend/playbook/:playbook/module/:module",
-        component: {
-          template: "<div></div>",
-        },
+        component: {},
       },
     ],
   })
