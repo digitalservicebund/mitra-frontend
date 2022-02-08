@@ -20,3 +20,16 @@ test("Navigate to creator start screen", async ({ page, baseURL }) => {
   await page.click("nav:has-text('Speichern') >> text=Startseite")
   await expect(page).toHaveURL(/\/mitra-frontend\/creator/)
 })
+
+test.describe("Regression tests", () => {
+  test.skip(
+    ({ browserName }) => browserName !== "chromium",
+    "Regression test sufficient in Chromium only"
+  )
+
+  test("Navigate back using back button", async ({ page, baseURL }) => {
+    await page.goto(`${baseURL}/mitra-frontend/playbook/new`)
+    await page.goBack()
+    await expect(page).not.toHaveURL(/\/playbook\/[a-z0-9-]+$/)
+  })
+})

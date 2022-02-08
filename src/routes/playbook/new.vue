@@ -11,10 +11,10 @@
 
   playbookRepository.save(playbook)
 
-  onBeforeMount(async () => {
-    const router = useRouter()
-    await router.push(`/mitra-frontend/playbook/${playbook.id}`)
-  })
+  onBeforeMount(
+    async () =>
+      await useRouter().replace(`/mitra-frontend/playbook/${playbook.id}`)
+  )
 </script>
 
 <template>

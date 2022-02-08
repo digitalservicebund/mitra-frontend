@@ -12,10 +12,10 @@
   )
   contractRepository.save(contract)
 
-  onBeforeMount(async () => {
-    const router = useRouter()
-    await router.push(`/mitra-frontend/contract/${contract.id}`)
-  })
+  onBeforeMount(
+    async () =>
+      await useRouter().replace(`/mitra-frontend/contract/${contract.id}`)
+  )
 </script>
 
 <template>
