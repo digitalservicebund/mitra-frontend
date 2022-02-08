@@ -1,1 +1,0 @@
-import{f as t,a5 as r,a6 as s,o as n,g as p}from"./vendor.0c93a05d.js";import{P as c,c as i}from"./provide.90a1bbf7.js";import"./main.3b7cedd4.js";const b=t({setup(m){const e=i(),o=new c;return e.save(o),r(async()=>{await s().push(`/mitra-frontend/playbook/${o.id}`)}),(a,d)=>(n(),p("div"))}});export{b as default};
