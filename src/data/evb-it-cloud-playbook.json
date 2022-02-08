@@ -9,20 +9,20 @@
         "steps": [
           {
             "id": "06817a49-dd7b-4d8a-9c5b-77702e913a30",
-            "text": "Schritt 1.1",
+            "prompt": "Schritt 1.1",
             "type": "TextAnswerStep",
             "answer": {},
             "produce": "Textbaustein: ${answer}"
           },
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "Schritt 1.2",
+            "prompt": "Schritt 1.2",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "f7e2bb12-ba14-4686-8513-afbdcab276a8",
-            "text": "Schritt 1.3",
+            "prompt": "Schritt 1.3",
             "type": "SingleChoiceAnswerStep",
             "answer": {
               "choices": [
@@ -31,7 +31,7 @@
                   "path": [
                     {
                       "id": "57c97b0d-4eae-439e-b747-c297b76128e5",
-                      "text": "Schritt 1.3 A",
+                      "prompt": "Schritt 1.3 A",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -42,7 +42,7 @@
                   "path": [
                     {
                       "id": "0b79fbb8-18f4-4824-af2a-3f4a95dc8cc6",
-                      "text": "Schritt 1.3 B",
+                      "prompt": "Schritt 1.3 B",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -53,7 +53,7 @@
           },
           {
             "id": "f7e2bb12-ba14-4686-8513-afbdcab276a8",
-            "text": "Schritt 1.4",
+            "prompt": "Schritt 1.4",
             "type": "MultipleChoiceAnswerStep",
             "answer": {
               "choices": [
@@ -62,7 +62,7 @@
                   "path": [
                     {
                       "id": "57c97b0d-4eae-439e-b747-c297b76128e5",
-                      "text": "Schritt 1.4 1",
+                      "prompt": "Schritt 1.4 1",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -73,7 +73,7 @@
                   "path": [
                     {
                       "id": "0b79fbb8-18f4-4824-af2a-3f4a95dc8cc6",
-                      "text": "Schritt 1.4 2",
+                      "prompt": "Schritt 1.4 2",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -84,20 +84,20 @@
           },
           {
             "id": "5ee3e9de-5052-49ac-95ed-849df72a7167",
-            "text": "Schritt 1.5",
+            "prompt": "Schritt 1.5",
             "type": "RichTextAnswerStep",
             "answer": {},
             "produce": "Textbaustein: ${answer}"
           },
           {
             "id": "5ee3e9de-5052-49ac-95ed-849df72a7167",
-            "text": "Schritt 1.6",
+            "prompt": "Schritt 1.6",
             "type": "RichTextAnswerStep",
             "answer": {}
           },
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "Schritt 1.7",
+            "prompt": "Schritt 1.7",
             "type": "SheetAnswerStep",
             "answer": {
               "value": [
@@ -120,19 +120,19 @@
         "steps": [
           {
             "id": "203e3a8f-e8c7-45b7-86e7-e6390393a348",
-            "text": "Schritt 2.1",
+            "prompt": "Schritt 2.1",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "0b570aab-fa1b-4d93-aab3-35250b8590dc",
-            "text": "Schritt 2.2",
+            "prompt": "Schritt 2.2",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "c8a04406-bba5-4968-bf2a-54122f58fbc3",
-            "text": "Schritt 2.3",
+            "prompt": "Schritt 2.3",
             "type": "TextAnswerStep",
             "answer": {}
           }
@@ -144,25 +144,25 @@
         "steps": [
           {
             "id": "28acb64b-2c87-44c2-a112-10128a1ca546",
-            "text": "Schritt 3.1",
+            "prompt": "Schritt 3.1",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "3f460bf7-305f-4d53-a01b-074aa148c179",
-            "text": "Schritt 3.2",
+            "prompt": "Schritt 3.2",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "3cd87b83-60fa-4fd3-953b-fb0ad6d57a46",
-            "text": "Schritt 3.3",
+            "prompt": "Schritt 3.3",
             "type": "TextAnswerStep",
             "answer": {}
           },
           {
             "id": "253a3dcf-9731-4537-8be3-908ec0e0c887",
-            "text": "Schritt 3.4",
+            "prompt": "Schritt 3.4",
             "type": "TextAnswerStep",
             "answer": {}
           }

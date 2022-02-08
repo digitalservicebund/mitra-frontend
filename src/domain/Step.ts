@@ -30,7 +30,7 @@ const computePathWithChoices = (
 
 export abstract class Step<T extends Answer> extends Entity {
   constructor(
-    public text: string,
+    public prompt: string,
     public readonly answer: T,
     public description?: string,
     id?: string
@@ -73,7 +73,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
   public readonly produce: string
 
   constructor(
-    text: string,
+    prompt: string,
     {
       answer = new TextAnswer(),
       produce = "${answer}",
@@ -86,7 +86,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
       id?: string
     } = {}
   ) {
-    super(text, answer, description, id)
+    super(prompt, answer, description, id)
     this.produce = produce
   }
 
@@ -102,7 +102,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
   }
 
   clone(): TextAnswerStep {
-    return new TextAnswerStep(this.text, {
+    return new TextAnswerStep(this.prompt, {
       answer: new TextAnswer(this.answer.value),
       produce: this.produce,
       description: this.description,
@@ -117,7 +117,7 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   public readonly produce: string
 
   constructor(
-    text: string,
+    prompt: string,
     {
       answer = new RichTextAnswer(),
       produce = "${answer}",
@@ -130,7 +130,7 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
       id?: string
     } = {}
   ) {
-    super(text, answer, description, id)
+    super(prompt, answer, description, id)
     this.produce = produce
   }
 
@@ -146,7 +146,7 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   }
 
   clone(): RichTextAnswerStep {
-    return new RichTextAnswerStep(this.text, {
+    return new RichTextAnswerStep(this.prompt, {
       answer: new RichTextAnswer(this.answer.value),
       produce: this.produce,
       description: this.description,
@@ -160,7 +160,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   static readonly TYPE = "SingleChoiceAnswerStep"
 
   constructor(
-    text: string,
+    prompt: string,
     {
       answer = new SingleChoiceAnswer([]),
       description,
@@ -171,7 +171,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
       id?: string
     } = {}
   ) {
-    super(text, answer, description, id)
+    super(prompt, answer, description, id)
   }
 
   get type(): string {
@@ -191,7 +191,7 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   }
 
   clone(): SingleChoiceAnswerStep {
-    return new SingleChoiceAnswerStep(this.text, {
+    return new SingleChoiceAnswerStep(this.prompt, {
       answer: new SingleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
@@ -207,7 +207,7 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   static readonly TYPE = "MultipleChoiceAnswerStep"
 
   constructor(
-    text: string,
+    prompt: string,
     {
       answer = new MultipleChoiceAnswer([]),
       description,
@@ -218,7 +218,7 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
       id?: string
     } = {}
   ) {
-    super(text, answer, description, id)
+    super(prompt, answer, description, id)
   }
 
   get type(): string {
@@ -238,7 +238,7 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   }
 
   clone(): MultipleChoiceAnswerStep {
-    return new MultipleChoiceAnswerStep(this.text, {
+    return new MultipleChoiceAnswerStep(this.prompt, {
       answer: new MultipleChoiceAnswer(
         this.choices.map((choice) => choice.clone()),
         this.answer.value
@@ -255,7 +255,7 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   public readonly produce: string
 
   constructor(
-    text: string,
+    prompt: string,
     answer: SheetAnswer,
     {
       produce = "${answer}",
@@ -267,7 +267,7 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
       id?: string
     } = {}
   ) {
-    super(text, answer, description, id)
+    super(prompt, answer, description, id)
     this.produce = produce
   }
 
@@ -276,10 +276,14 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   }
 
   clone(): SheetAnswerStep {
-    return new SheetAnswerStep(this.text, new SheetAnswer(this.answer.value), {
-      produce: this.produce,
-      description: this.description,
-    })
+    return new SheetAnswerStep(
+      this.prompt,
+      new SheetAnswer(this.answer.value),
+      {
+        produce: this.produce,
+        description: this.description,
+      }
+    )
   }
 
   updateCell(rowIndex: number, cell: string, value: string) {

@@ -59,10 +59,10 @@
       {{ currentModule?.title }}
     </h3>
     <div class="mb-4">
-      {{ currentStep?.text }}
+      {{ currentStep?.prompt }}
     </div>
-    <div class="mb-4">
-      {{ currentStep?.description }}
+    <div v-if="currentStep?.description" class="mb-4">
+      {{ currentStep.description }}
     </div>
     <component
       :is="stepAnswerEditComponent(currentStep as Step<Answer>)"

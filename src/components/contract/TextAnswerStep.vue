@@ -14,7 +14,7 @@
   <div class="mb-4">
     <InputText
       v-model="answer"
-      :title="step.text"
+      :title="step.prompt"
       class="w-full"
       type="text"
       @input="handleInput"

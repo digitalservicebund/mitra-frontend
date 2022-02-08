@@ -15,12 +15,12 @@
     (e: "updateStep", updatedStep: Step<Answer>): void
   }>()
 
-  const editableTitle = ref(props.step.text)
+  const editableTitle = ref(props.step.prompt)
   const editTitle = ref<InstanceType<typeof Inplace>>()
 
   const updateTitle = () => {
     const updatedStep: Step<Answer> = props.step
-    updatedStep.text = editableTitle.value
+    updatedStep.prompt = editableTitle.value
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(editTitle.value as any).close()
     emit("updateStep", updatedStep)

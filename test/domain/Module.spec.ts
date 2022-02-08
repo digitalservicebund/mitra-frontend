@@ -13,7 +13,7 @@ describe("Module", () => {
     module.addStep(new TextAnswerStep("bar step"))
 
     expect(module.steps.length).toEqual(2)
-    expect(module.steps[1].text).toEqual("bar step")
+    expect(module.steps[1].prompt).toEqual("bar step")
   })
 
   it("should add step at specified index", () => {
@@ -25,7 +25,7 @@ describe("Module", () => {
     module.addStep(new TextAnswerStep("foo step"), 1)
 
     expect(module.steps.length).toEqual(4)
-    expect(module.steps[1].text).toEqual("foo step")
+    expect(module.steps[1].prompt).toEqual("foo step")
   })
 
   it("should duplicate step inplace", () => {
@@ -36,8 +36,8 @@ describe("Module", () => {
     module.duplicateStep(step1)
 
     expect(module.steps.length).toEqual(3)
-    expect(module.steps[0].text).toEqual("foo step")
-    expect(module.steps[1].text).toEqual("Kopie von foo step")
+    expect(module.steps[0].prompt).toEqual("foo step")
+    expect(module.steps[1].prompt).toEqual("Kopie von foo step")
   })
 
   it("should not duplicate step that does not exist in module", () => {

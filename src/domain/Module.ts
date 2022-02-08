@@ -31,7 +31,7 @@ export default class Module extends Entity {
     if (!this.steps.includes(step)) throw new Error("step not in module")
 
     const duplicatedStep = step.clone()
-    duplicatedStep.text = `Kopie von ${step.text}`
+    duplicatedStep.prompt = `Kopie von ${step.prompt}`
     this.addStep(duplicatedStep, this.steps.indexOf(step) + 1)
   }
 

@@ -48,7 +48,7 @@ export type StepDTO = {
     | SingleChoiceAnswerDTO
     | MultipleChoiceAnswerDTO
     | SheetAnswerDTO
-  text: string
+  prompt: string
   type: string
   produce?: string
   description?: string
@@ -67,7 +67,7 @@ export type PlaybookDTO = {
 export function createStep(step: StepDTO): Step<Answer> {
   if (step.type === TextAnswerStep.TYPE) {
     const answer = step.answer as TextAnswerDTO
-    return new TextAnswerStep(step.text, {
+    return new TextAnswerStep(step.prompt, {
       answer: new TextAnswer(answer.value),
       produce: step.produce,
       description: step.description,
@@ -76,7 +76,7 @@ export function createStep(step: StepDTO): Step<Answer> {
   }
   if (step.type === RichTextAnswerStep.TYPE) {
     const answer = step.answer as RichTextAnswerDTO
-    return new RichTextAnswerStep(step.text, {
+    return new RichTextAnswerStep(step.prompt, {
       answer: new RichTextAnswer(answer.value),
       produce: step.produce,
       description: step.description,
@@ -85,7 +85,7 @@ export function createStep(step: StepDTO): Step<Answer> {
   }
   if (step.type === SingleChoiceAnswerStep.TYPE) {
     const answer = step.answer as SingleChoiceAnswerDTO
-    return new SingleChoiceAnswerStep(step.text, {
+    return new SingleChoiceAnswerStep(step.prompt, {
       answer: new SingleChoiceAnswer(
         answer.choices.map(
           (choice) => new Choice(choice.text, choice.path.map(createStep))
@@ -98,7 +98,7 @@ export function createStep(step: StepDTO): Step<Answer> {
   }
   if (step.type === MultipleChoiceAnswerStep.TYPE) {
     const answer = step.answer as MultipleChoiceAnswerDTO
-    return new MultipleChoiceAnswerStep(step.text, {
+    return new MultipleChoiceAnswerStep(step.prompt, {
       answer: new MultipleChoiceAnswer(
         answer.choices.map(
           (choice) => new Choice(choice.text, choice.path.map(createStep))
@@ -111,7 +111,7 @@ export function createStep(step: StepDTO): Step<Answer> {
   }
   if (step.type === SheetAnswerStep.TYPE) {
     const answer = step.answer as SheetAnswerDTO
-    return new SheetAnswerStep(step.text, new SheetAnswer(answer.value), {
+    return new SheetAnswerStep(step.prompt, new SheetAnswer(answer.value), {
       produce: step.produce,
       description: step.description,
       id: step.id,

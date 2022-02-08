@@ -9,7 +9,7 @@
         "steps": [
           {
             "id": "67d574b0-2b77-42a5-bcd2-5ed600849adb",
-            "text": "bar",
+            "prompt": "bar",
             "type": "TextAnswerStep",
             "answer": {
               "value": "hello world"
@@ -17,7 +17,7 @@
           },
           {
             "id": "f70f1d90-08c6-4b2e-9f4f-cd867efdf834",
-            "text": "baz",
+            "prompt": "baz",
             "type": "TextAnswerStep",
             "answer": {
               "value": ""

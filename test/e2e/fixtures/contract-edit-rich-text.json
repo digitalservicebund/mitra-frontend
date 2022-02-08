@@ -9,7 +9,7 @@
         "steps": [
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "Test step",
+            "prompt": "Test step",
             "type": "RichTextAnswerStep",
             "answer": {
               "value": "Earlier answer"

@@ -9,7 +9,7 @@
         "steps": [
           {
             "id": "f7e2bb12-ba14-4686-8513-afbdcab276a8",
-            "text": "Test step 1",
+            "prompt": "Test step 1",
             "type": "SingleChoiceAnswerStep",
             "answer": {
               "choices": [
@@ -18,7 +18,7 @@
                   "path": [
                     {
                       "id": "57c97b0d-4eae-439e-b747-c297b76128e5",
-                      "text": "Test step 1A",
+                      "prompt": "Test step 1A",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -29,7 +29,7 @@
                   "path": [
                     {
                       "id": "0b79fbb8-18f4-4824-af2a-3f4a95dc8cc6",
-                      "text": "Test step 1B",
+                      "prompt": "Test step 1B",
                       "type": "TextAnswerStep",
                       "answer": {}
                     }
@@ -40,7 +40,7 @@
           },
           {
             "id": "c22cb3a2-2f89-47eb-b90c-a11f427ca6c8",
-            "text": "Test step 2",
+            "prompt": "Test step 2",
             "type": "TextAnswerStep",
             "answer": {}
           }

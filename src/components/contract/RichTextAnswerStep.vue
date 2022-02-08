@@ -53,7 +53,7 @@
     editorProps: {
       attributes: {
         class: "border border-neutral-300 p-2 min-h-[250px] focus:outline-none",
-        title: props.step.text,
+        title: props.step.prompt,
         role: "textbox",
         "aria-multiline": "true",
       },
