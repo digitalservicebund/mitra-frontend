@@ -2,8 +2,12 @@ import Entity from "./Entity"
 import Metadata from "./Metadata"
 import Module from "./Module"
 
-export default class Playbook extends Entity {
-  _metadata: Metadata
+interface Playbook {
+  metadata: Metadata
+}
+
+class Playbook extends Entity {
+  #metadata: Metadata
 
   constructor(
     public title: string = "Unbenanntes Playbook",
@@ -11,15 +15,16 @@ export default class Playbook extends Entity {
     id?: string
   ) {
     super(id)
-    this._metadata = { createdAt: new Date() }
-  }
+    this.#metadata = { createdAt: new Date() }
 
-  get metadata(): Metadata {
-    return Object.freeze(this._metadata)
+    // Workaround limitation of proxies and class names with private fields..
+    Object.defineProperty(this, "metadata", {
+      get: () => this.#metadata,
+    })
   }
 
   updateMetadata(data: Partial<Metadata>): Playbook {
-    this._metadata = { ...this._metadata, ...data }
+    this.#metadata = { ...this.#metadata, ...data }
     return this
   }
 
@@ -39,3 +44,5 @@ export default class Playbook extends Entity {
     return module
   }
 }
+
+export default Playbook

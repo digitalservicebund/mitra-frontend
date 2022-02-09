@@ -11,7 +11,12 @@ function findStepIndex(
 ): number {
   return steps.findIndex((x) => x.equals(step))
 }
-export default class Contract extends Entity {
+
+interface Contract {
+  metadata: Metadata
+}
+
+class Contract extends Entity {
   #metadata: Metadata
 
   constructor(
@@ -21,6 +26,11 @@ export default class Contract extends Entity {
   ) {
     super(id)
     this.#metadata = { createdAt: new Date() }
+
+    // Workaround limitation of proxies and class names with private fields..
+    Object.defineProperty(this, "metadata", {
+      get: () => this.#metadata,
+    })
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
@@ -30,10 +40,6 @@ export default class Contract extends Entity {
 
   get path(): readonly Step<Answer>[] {
     return Object.freeze(this.modules.flatMap((module) => module.path))
-  }
-
-  get metadata(): Metadata {
-    return Object.freeze(this.#metadata)
   }
 
   nextStepInPathAt(step: Step<Answer>): Step<Answer> | undefined {
@@ -55,3 +61,5 @@ export default class Contract extends Entity {
     return this
   }
 }
+
+export default Contract

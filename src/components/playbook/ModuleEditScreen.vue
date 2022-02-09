@@ -24,9 +24,9 @@
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
 
-  const playbook: Ref<Playbook> = ref(
+  const playbook = ref(
     playbookRepository.findById(props.playbookId)
-  )
+  ) as Ref<Playbook>
   const module = ref(playbook.value.findModuleById(props.moduleId))
   const editableTitle = ref(module.value.title)
   const editTitle = ref<InstanceType<typeof Inplace>>()
