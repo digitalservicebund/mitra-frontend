@@ -16,7 +16,7 @@
   } from "../../provide"
   import Breadcrumb from "../Breadcrumb.vue"
   import SideMenu from "../SideMenu.vue"
-  import StepListView from "./StepListView.vue"
+  import StepCard from "./StepCard.vue"
 
   const props = defineProps<{ playbookId: string; moduleId: string }>()
   const router = useRouter()
@@ -148,7 +148,7 @@
             :key="step.id"
             class="mt-4 border p-4 shadow-md"
           >
-            <StepListView
+            <StepCard
               :step="step"
               @add-step="addStep(index + 1)"
               @delete-step="deleteStep(step)"

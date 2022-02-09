@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
 import PrimeVue from "primevue/config"
-import Step from "../../../src/components/playbook/StepListView.vue"
+import Step from "../../../src/components/playbook/StepCard.vue"
 import { TextAnswerStep } from "../../../src/domain/Step"
 
 describe("Step", () => {
