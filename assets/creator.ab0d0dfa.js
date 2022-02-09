@@ -1,1 +1,1 @@
-import{_ as e}from"./StartScreenCreator.22c07fb5.js";import{f as r,o as t,c as o}from"./vendor.0be2fb2e.js";import"./CreateContractPanel.0067e2a2.js";import"./session.ab4c07a9.js";import"./Contract.6e826346.js";const _=r({setup(a){return(s,c)=>(t(),o(e))}});export{_ as default};
+import{_ as o}from"./StartScreenCreator.22c07fb5.js";import{f as r,o as t,c as e}from"./vendor.0be2fb2e.js";import"./CreateContractPanel.0067e2a2.js";import"./session.ab4c07a9.js";import"./Contract.6e826346.js";const f=r({setup(p){return(a,c)=>(t(),e(o))}});export{f as default};
