@@ -33,7 +33,7 @@ class Playbook extends Entity {
   }
 
   removeModule(module: Module): void {
-    this.modules = this.modules.filter((item) => item !== module)
+    this.modules = this.modules.filter((item) => !item.equals(module))
   }
 
   findModuleById(id: string): Module {
