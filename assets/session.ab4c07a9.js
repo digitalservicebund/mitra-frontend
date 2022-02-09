@@ -1,0 +1,1 @@
+import{n as r}from"./vendor.0be2fb2e.js";import{C as n}from"./Contract.6e826346.js";const a=r("session",{state:()=>({cache:[new n("",[])],entryPoint:""}),actions:{rememberContract(e,t){this.cache=[e,t||e.path[0]]},rememberEntryPoint(e){this.entryPoint=e}},getters:{contract(e){return e.cache[0]},lastEditedStep(e){return e.cache[1]}},persist:{enabled:!0}});export{a as u};
