@@ -16,7 +16,7 @@ describe("EditStep", () => {
   ])
   const pinia = createTestingPinia()
   const session = useSession()
-  session.rememberCurrentStep(contract, contract.modules[0].steps[0])
+  session.rememberContract(contract, contract.modules[0].steps[0])
 
   it("updates session when navigating steps", async () => {
     const wrapper = mount(EditStep, {
@@ -28,11 +28,11 @@ describe("EditStep", () => {
       },
     })
 
-    expect(session.cache.get(contract.id)).toEqual(contract.modules[0].steps[0])
+    expect(session.lastEditedStep).toEqual(contract.modules[0].steps[0])
     await wrapper.find("button").trigger("click") // next
-    expect(session.cache.get(contract.id)).toEqual(contract.modules[1].steps[0])
+    expect(session.lastEditedStep).toEqual(contract.modules[1].steps[0])
     await wrapper.find("button").trigger("click") // back
-    expect(session.cache.get(contract.id)).toEqual(contract.modules[0].steps[0])
+    expect(session.lastEditedStep).toEqual(contract.modules[0].steps[0])
   })
 
   it("displays description", async () => {

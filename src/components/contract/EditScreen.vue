@@ -26,7 +26,7 @@
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
   const contract: Contract = contractRepository.findById(props.id)
-  session.rememberCurrentStep(contract, contract.path[0])
+  session.rememberContract(contract)
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
@@ -57,7 +57,7 @@
   }
 
   const handleNavigate = (module: Module) => {
-    session.rememberCurrentStep(contract, module.steps[0])
+    session.rememberContract(contract, module.steps[0])
   }
 </script>
 

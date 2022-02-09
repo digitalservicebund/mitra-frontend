@@ -11,9 +11,9 @@
 
   const session = useSession()
 
-  const currentStep = ref(session.cache.get(props.contract.id))
-  session.$subscribe((mutation, session) => {
-    currentStep.value = session.cache.get(props.contract.id)
+  const currentStep = ref(session.lastEditedStep)
+  session.$subscribe((_mutation, state) => {
+    currentStep.value = state.cache[1] // Getters not available here!
   })
 
   const hasPreviousStep = computed(
@@ -38,7 +38,7 @@
     )
     if (step) {
       currentStep.value = step
-      session.rememberCurrentStep(props.contract, step)
+      session.rememberContract(props.contract, step)
     }
   }
 
@@ -48,7 +48,7 @@
     )
     if (step) {
       currentStep.value = step
-      session.rememberCurrentStep(props.contract, step)
+      session.rememberContract(props.contract, step)
     }
   }
 </script>

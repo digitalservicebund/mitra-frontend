@@ -95,8 +95,7 @@ describe("SideMenu", () => {
   it("should highlight module of currently worked on step", () => {
     const contract = new Contract(undefined, testModules)
     const pinia = createTestingPinia()
-    const session = useSession()
-    session.rememberCurrentStep(contract, contract.modules[1].steps[0])
+    useSession().rememberContract(contract, contract.modules[1].steps[0])
 
     const wrapper = mount(SideMenu, {
       props: {

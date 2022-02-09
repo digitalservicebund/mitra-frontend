@@ -22,9 +22,7 @@
   }
 
   const withHighlight = (item: MenuItem, module: Module) => {
-    return module.path.find((step) =>
-      step.equals(session.cache.get(props.navigatable.id))
-    )
+    return module.path.find((step) => step.equals(session.lastEditedStep))
       ? { ...item, style: "font-weight:bold" }
       : item
   }
