@@ -22,7 +22,7 @@ const test = base.extend<TestFixtures>({
       cookies: [],
       origins: [
         {
-          origin: "http://localhost:5000",
+          origin: "http://localhost:4173",
           localStorage: [
             {
               name: contractId,
