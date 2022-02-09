@@ -1,1 +1,0 @@
-import{u as n}from"./session.03f25a3d.js";import{_ as a}from"./CreateContractPanel.c67bbea6.js";import{f as e,o as s,g as c,i,c as _}from"./vendor.0c93a05d.js";const m={id:"index",class:"grid grid-rows-2 justify-center"},f=e({setup(o){return n().rememberEntryPoint("einkauf"),(t,p)=>(s(),c("main",m,[i(a)]))}}),j=e({setup(o){return(r,t)=>(s(),_(f))}});export{j as default};
