@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
   use: {
     viewport: { width: 1280, height: 720 },
     acceptDownloads: true,
-    baseURL: "http://localhost:5000",
+    baseURL: "http://localhost:4173",
     screenshot: "only-on-failure",
   },
   projects: [
@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig = {
   ],
   webServer: {
     command: "npm run serve",
-    port: 5000,
+    port: 4173,
     timeout: parseInt(process.env.WAIT_ON_TIMEOUT) || 20 * 1000,
   },
 }

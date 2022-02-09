@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "test": "jest test",
     "test:e2e": "playwright test",
-    "test:a11y": "start-server-and-test serve http-get://localhost:5000/mitra-frontend/ pa11y-ci",
+    "test:a11y": "start-server-and-test serve http-get://localhost:4173/mitra-frontend/ pa11y-ci",
     "coverage": "jest test --coverage",
     "lint:check": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:fix": "npm run lint:check -- --fix",
