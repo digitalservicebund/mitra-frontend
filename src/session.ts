@@ -27,4 +27,7 @@ export const useSession = defineStore("session", {
       return state.cache[1]
     },
   },
+  persist: {
+    enabled: true,
+  },
 })
