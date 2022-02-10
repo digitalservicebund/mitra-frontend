@@ -96,7 +96,7 @@ describe("EditScreen", () => {
     await screen.findByText("Neues Modul")
   })
 
-  it("saves contract as work in progress when requested", async () => {
+  it("saves playbook as work in progress when requested", async () => {
     const user = userEvent.setup()
     render(EditScreen, {
       props: {
