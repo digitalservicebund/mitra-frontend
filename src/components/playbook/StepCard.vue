@@ -3,7 +3,7 @@
   import ContextMenu from "primevue/contextmenu"
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
-  import { ref } from "vue"
+  import { ref, Ref } from "vue"
   import { Answer } from "../../domain/Answer"
   import { Step } from "../../domain/Step"
 
@@ -37,7 +37,8 @@
     emit("updateStep", updatedStep)
   }
 
-  const menu = ref()
+  const menu = ref<InstanceType<typeof ContextMenu>>()
+
   const items = [
     {
       label: "Neue Frage",
@@ -54,7 +55,7 @@
   ]
 
   const openMenu = (event: Event) => {
-    menu.value.show(event)
+    ;(menu as Ref<ContextMenu>).value.show(event)
   }
 </script>
 
