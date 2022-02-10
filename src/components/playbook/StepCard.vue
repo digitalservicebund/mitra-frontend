@@ -49,7 +49,11 @@
   <details open>
     <summary class="text-lg relative">
       <header class="edit">
-        <InplaceEditable :editable="step.prompt" @update="handleUpdateTitle" />
+        <InplaceEditable
+          :editable="step.prompt"
+          size="text-xl"
+          @update="handleUpdateTitle"
+        />
         <div></div>
         <InplaceEditable
           :editable="step.description"

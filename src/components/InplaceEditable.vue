@@ -1,9 +1,15 @@
 <script setup lang="ts">
+  import Button from "primevue/button"
   import Inplace from "primevue/inplace"
   import InputText from "primevue/inputtext"
   import { ref } from "vue"
 
-  const props = defineProps<{ editable?: string; placeholder?: string }>()
+  const props = defineProps<{
+    editable?: string
+    placeholder?: string
+    button?: boolean
+    h1?: boolean
+  }>()
   const emit = defineEmits<{
     (e: "update", newValue: string): void
   }>()
@@ -16,6 +22,11 @@
     ;(edit.value as any).close()
     emit("update", editable.value || "")
   }
+
+  const startEditing = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(edit.value as any).open()
+  }
 </script>
 
 <template>
@@ -25,7 +36,10 @@
     :class="[editable ? '' : 'text-slate-400']"
   >
     <template #display>
-      <h2 class="block text-lg">
+      <h1 v-if="h1" class="block mr-1 font-bold text-xl">
+        {{ editable || placeholder || "Klicken zum Bearbeiten" }}
+      </h1>
+      <h2 v-else class="block mr-1">
         {{ editable || placeholder || "Klicken zum Bearbeiten" }}
       </h2>
     </template>
@@ -33,11 +47,17 @@
       <InputText
         v-model="editable"
         v-focus
-        class="text-lg"
+        class="mr-1"
         aria-label="Eigenschaft ändern"
         @keyup.enter="update"
         @blur="update"
       />
     </template>
   </Inplace>
+  <Button v-if="button" type="button" class="mx-2" @click="startEditing">
+    <span class="material-icons-outlined text-base" aria-hidden="true">
+      edit
+    </span>
+    Ändern
+  </Button>
 </template>

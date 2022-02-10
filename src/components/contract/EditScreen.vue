@@ -1,8 +1,5 @@
 <script setup lang="ts">
   import Breadcrumb from "primevue/breadcrumb"
-  import Button from "primevue/button"
-  import Inplace from "primevue/inplace"
-  import InputText from "primevue/inputtext"
   import type { MenuItem } from "primevue/menuitem"
   import { computed, ref } from "vue"
   import Contract from "../../domain/Contract"
@@ -14,6 +11,7 @@
     makeContractStorageService,
   } from "../../provide"
   import { useSession } from "../../session"
+  import InplaceEditable from "../InplaceEditable.vue"
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
   import EditStep from "./EditStep.vue"
@@ -25,39 +23,30 @@
 
   const storage: Storage<Contract, File> = makeContractStorageService()
   const contractRepository: ContractRepository = makeContractRepository()
-  const contract: Contract = contractRepository.findById(props.id)
-  session.rememberContract(contract)
+  const contract = ref(contractRepository.findById(props.id))
+  session.rememberContract(contract.value as Contract)
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
   }
 
-  const editableTitle = ref(contract.title)
-  const editTitle = ref<InstanceType<typeof Inplace>>()
   const breadcrumbItems = computed(() => [
     {
-      label: editableTitle.value,
+      label: contract.value.title,
       disabled: true,
     },
   ])
 
-  const startTitleEditing = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).open()
-  }
-
-  const updateTitle = () => {
-    contract.title = editableTitle.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).close()
+  const handleUpdateTitle = (newTitle: string) => {
+    contract.value.title = newTitle
   }
 
   const handleSave = () => {
-    storage.save(contract)
+    storage.save(contract.value as Contract)
   }
 
   const handleNavigate = (module: Module) => {
-    session.rememberContract(contract, module.steps[0])
+    session.rememberContract(contract.value as Contract, module.steps[0])
   }
 </script>
 
@@ -65,8 +54,8 @@
   <div class="flex h-full">
     <nav class="flex-none">
       <SideMenu
-        :title="editableTitle"
-        :navigatable="contract"
+        :title="contract.title"
+        :navigatable="(contract as Contract)"
         @save="handleSave"
         @navigate="handleNavigate"
       />
@@ -80,37 +69,25 @@
           class="mb-4"
         />
         <p><small>Vertrag</small></p>
-        <Inplace ref="editTitle" :closable="false">
-          <template #display>
-            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
-          </template>
-          <template #content>
-            <InputText
-              v-model="editableTitle"
-              v-focus
-              aria-label="Titel ändern"
-              class="mr-1"
-              @keyup.enter="updateTitle"
-              @blur="updateTitle"
-            />
-          </template>
-        </Inplace>
-        <Button type="button" @click="startTitleEditing">
-          <span class="material-icons-outlined text-base" aria-hidden="true">
-            edit
-          </span>
-          Ändern
-        </Button>
+        <InplaceEditable
+          :editable="contract.title"
+          button
+          h1
+          @update="handleUpdateTitle"
+        />
         <Metadata v-bind="contract.metadata" />
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">
-          <EditStep :contract="contract" />
+          <EditStep :contract="(contract as Contract)" />
         </transition>
       </section>
     </main>
 
-    <ContractPreview :contract="contract" class="flex-1 bg-slate-100" />
+    <ContractPreview
+      :contract="(contract as Contract)"
+      class="flex-1 bg-slate-100"
+    />
   </div>
 </template>
 

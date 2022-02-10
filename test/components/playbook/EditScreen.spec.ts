@@ -109,8 +109,8 @@ describe("EditScreen", () => {
     })
 
     await user.click(screen.getByText("Ändern"))
-    await user.clear(screen.getByLabelText("Titel ändern"))
-    await user.type(screen.getByLabelText("Titel ändern"), "Neuer Titel")
+    await user.clear(screen.getByLabelText("Eigenschaft ändern"))
+    await user.type(screen.getByLabelText("Eigenschaft ändern"), "Neuer Titel")
     await user.click(screen.getByText("Speichern"))
 
     // eslint-disable-next-line testing-library/await-async-query

@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import Button from "primevue/button"
-  import Inplace from "primevue/inplace"
-  import InputText from "primevue/inputtext"
   import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Module from "../../domain/Module"
@@ -13,6 +11,7 @@
     makePlaybookStorageService,
   } from "../../provide"
   import Breadcrumb from "../Breadcrumb.vue"
+  import InplaceEditable from "../InplaceEditable.vue"
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
 
@@ -22,39 +21,29 @@
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
   const playbookRepository: PlaybookRepository = makePlaybookRepository()
-  const playbook: Playbook = playbookRepository.findById(props.id)
+  const playbook = ref(playbookRepository.findById(props.id))
 
-  const editableTitle = ref(playbook.title)
-  const editTitle = ref<InstanceType<typeof Inplace>>()
-
-  const startTitleEditing = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).open()
-  }
-
-  const updateTitle = () => {
-    playbook.title = editableTitle.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).close()
-    playbookRepository.save(playbook)
+  const handleUpdateTitle = (newTitle: string) => {
+    playbook.value.title = newTitle
+    playbookRepository.save(playbook.value as Playbook)
   }
 
   const handleSave = () => {
-    storage.save(playbook)
+    storage.save(playbook.value as Playbook)
   }
 
   const handleNavigate = async (module: Module) => {
     await router.push(
-      `/mitra-frontend/playbook/${playbook.id}/module/${module.id}`
+      `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}`
     )
   }
 
   const addNewModule = async () => {
     const module = new Module()
-    playbook.addModules(module)
-    playbookRepository.save(playbook)
+    playbook.value.addModules(module)
+    playbookRepository.save(playbook.value as Playbook)
     await router.push(
-      `/mitra-frontend/playbook/${playbook.id}/module/${module.id}`
+      `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}`
     )
   }
 </script>
@@ -63,8 +52,8 @@
   <div class="flex h-full">
     <nav class="flex-none">
       <SideMenu
-        :title="editableTitle"
-        :navigatable="playbook"
+        :title="playbook.title"
+        :navigatable="(playbook as Playbook)"
         @save="handleSave"
         @navigate="handleNavigate"
       />
@@ -72,29 +61,14 @@
 
     <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb :current-title="editableTitle" :parent-items="[]" />
+        <Breadcrumb :current-title="playbook.title" :parent-items="[]" />
         <p><small>Playbook</small></p>
-        <Inplace ref="editTitle" :closable="false">
-          <template #display>
-            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
-          </template>
-          <template #content>
-            <InputText
-              v-model="editableTitle"
-              v-focus
-              class="mr-1"
-              aria-label="Titel ändern"
-              @keyup.enter="updateTitle"
-              @blur="updateTitle"
-            />
-          </template>
-        </Inplace>
-        <Button type="button" @click="startTitleEditing">
-          <span class="material-icons-outlined text-base" aria-hidden="true">
-            edit
-          </span>
-          Ändern
-        </Button>
+        <InplaceEditable
+          :editable="playbook.title"
+          button
+          h1
+          @update="handleUpdateTitle"
+        />
         <Metadata v-bind="playbook.metadata" />
       </header>
       <section class="mt-16">

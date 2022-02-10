@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import Button from "primevue/button"
-  import Inplace from "primevue/inplace"
-  import InputText from "primevue/inputtext"
   import { ref, Ref } from "vue"
   import { useRouter } from "vue-router"
   import { Answer } from "../../domain/Answer"
@@ -15,6 +13,7 @@
     makePlaybookStorageService,
   } from "../../provide"
   import Breadcrumb from "../Breadcrumb.vue"
+  import InplaceEditable from "../InplaceEditable.vue"
   import SideMenu from "../SideMenu.vue"
   import StepCard from "./StepCard.vue"
 
@@ -28,18 +27,9 @@
     playbookRepository.findById(props.playbookId)
   ) as Ref<Playbook>
   const module = ref(playbook.value.findModuleById(props.moduleId))
-  const editableTitle = ref(module.value.title)
-  const editTitle = ref<InstanceType<typeof Inplace>>()
 
-  const startTitleEditing = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).open()
-  }
-
-  const updateTitle = () => {
-    module.value.title = editableTitle.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).close()
+  const handleUpdateTitle = (newTitle: string) => {
+    module.value.title = newTitle
     playbookRepository.save(playbook.value)
   }
 
@@ -96,29 +86,14 @@
 
     <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb :current-title="editableTitle" :parent-items="[playbook]" />
+        <Breadcrumb :current-title="module.title" :parent-items="[playbook]" />
         <p><small>Modul</small></p>
-        <Inplace ref="editTitle" :closable="false">
-          <template #display>
-            <h1 class="font-bold text-xl">{{ editableTitle }}</h1>
-          </template>
-          <template #content>
-            <InputText
-              v-model="editableTitle"
-              v-focus
-              class="mr-1"
-              aria-label="Titel ändern"
-              @keyup.enter="updateTitle"
-              @blur="updateTitle"
-            />
-          </template>
-        </Inplace>
-        <Button type="button" class="mx-2" @click="startTitleEditing">
-          <span class="material-icons-outlined text-base" aria-hidden="true">
-            edit
-          </span>
-          Ändern
-        </Button>
+        <InplaceEditable
+          :editable="module.title"
+          h1
+          button
+          @update="handleUpdateTitle"
+        />
         <Button type="button" @click="removeModule">
           <span class="material-icons-outlined text-base" aria-hidden="true">
             delete
