@@ -1,11 +1,10 @@
 <script setup lang="ts">
   import Button from "primevue/button"
   import ContextMenu from "primevue/contextmenu"
-  import Inplace from "primevue/inplace"
-  import InputText from "primevue/inputtext"
   import { ref, Ref } from "vue"
   import { Answer } from "../../domain/Answer"
   import { Step } from "../../domain/Step"
+  import InplaceEditable from "../InplaceEditable.vue"
 
   const props = defineProps<{ step: Step<Answer> }>()
   const emit = defineEmits<{
@@ -15,30 +14,7 @@
     (e: "updateStep", updatedStep: Step<Answer>): void
   }>()
 
-  const editableTitle = ref(props.step.prompt)
-  const editTitle = ref<InstanceType<typeof Inplace>>()
-
-  const updateTitle = () => {
-    const updatedStep: Step<Answer> = props.step
-    updatedStep.prompt = editableTitle.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editTitle.value as any).close()
-    emit("updateStep", updatedStep)
-  }
-
-  const editableDescription = ref(props.step.description)
-  const editDescription = ref<InstanceType<typeof Inplace>>()
-
-  const updateDescription = () => {
-    const updatedStep: Step<Answer> = props.step
-    updatedStep.description = editableDescription.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(editDescription.value as any).close()
-    emit("updateStep", updatedStep)
-  }
-
   const menu = ref<InstanceType<typeof ContextMenu>>()
-
   const items = [
     {
       label: "Neue Frage",
@@ -53,9 +29,19 @@
       command: () => emit("deleteStep"),
     },
   ]
-
   const openMenu = (event: Event) => {
     ;(menu as Ref<ContextMenu>).value.show(event)
+  }
+
+  const handleUpdateTitle = (newTitle: string) => {
+    const updatedStep: Step<Answer> = props.step
+    updatedStep.prompt = newTitle
+    emit("updateStep", updatedStep)
+  }
+  const handleUpdateDescription = (newDescription: string) => {
+    const updatedStep: Step<Answer> = props.step
+    updatedStep.description = newDescription
+    emit("updateStep", updatedStep)
   }
 </script>
 
@@ -63,41 +49,13 @@
   <details open>
     <summary class="text-lg relative">
       <header class="edit">
-        <Inplace ref="editTitle" :closable="false">
-          <template #display>
-            <h2 class="block text-lg">{{ editableTitle }}</h2>
-          </template>
-          <template #content>
-            <InputText
-              v-model="editableTitle"
-              v-focus
-              class="text-lg"
-              aria-label="Titel ändern"
-              @keyup.enter="updateTitle"
-              @blur="updateTitle"
-            />
-          </template>
-        </Inplace>
+        <InplaceEditable :editable="step.prompt" @update="handleUpdateTitle" />
         <div></div>
-        <Inplace
-          ref="editDescription"
-          :closable="false"
-          :class="[editableDescription ? '' : 'text-slate-400']"
-        >
-          <template #display>
-            {{ editableDescription || "Erklärungstext (optional)" }}
-          </template>
-          <template #content>
-            <InputText
-              v-model="editableDescription"
-              v-focus
-              class="text-lg"
-              aria-label="Erklärung ändern"
-              @keyup.enter="updateDescription"
-              @blur="updateDescription"
-            />
-          </template>
-        </Inplace>
+        <InplaceEditable
+          :editable="step.description"
+          placeholder="Erklärungstext (optional)"
+          @update="handleUpdateDescription"
+        />
         <Button
           type="button"
           class="absolute top-0 right-0"
