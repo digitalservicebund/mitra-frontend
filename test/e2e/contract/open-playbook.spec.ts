@@ -1,3 +1,4 @@
+import fs from "fs"
 import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
@@ -15,21 +16,20 @@ test.describe("Open playbook from filesystem", async () => {
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
+    const playbook = await fs.promises.readFile(
+      "./test/e2e/fixtures/playbook.json",
+      "utf-8"
+    )
+
     await page.goto(`${baseURL}/mitra-frontend/contract/open-playbook`)
-    const dataTransfer = await page.evaluateHandle(() => {
+    const dataTransfer = await page.evaluateHandle((playbook) => {
       const data = new DataTransfer()
-      const file = new File(
-        [
-          '{"playbook":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"","modules":[]}}',
-        ],
-        "playbook.json",
-        {
-          type: "application/json",
-        }
-      )
+      const file = new File([`${playbook}`], "playbook.json", {
+        type: "application/json",
+      })
       data.items.add(file)
       return data
-    })
+    }, playbook)
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
     await expect(page).toHaveURL(/\/contract\/[a-z0-9-]+$/)
     await findAllByText(await getDocument(page), "Unbenannter Vertrag")

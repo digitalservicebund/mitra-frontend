@@ -17,22 +17,22 @@ const test = base.extend<TestFixtures>({
   },
   page: async ({ baseURL, context, contract, page }, use) => {
     const {
-      contract: cached,
+      contract: rememberedContract,
       contract: {
         modules: [
           {
-            steps: [lastEditedStep],
+            steps: [{ id: rememberedStepId }],
           },
         ],
       },
-      createdAt: createdAt,
+      createdAt: rememberedCreatedAt,
     } = JSON.parse(contract)
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
-      `{"cache":[${JSON.stringify(cached)},${JSON.stringify(
-        lastEditedStep
-      )},{"createdAt":"${createdAt}"}]}`
+      `{"cache":[${JSON.stringify(
+        rememberedContract
+      )},"${rememberedStepId}",{"createdAt":"${rememberedCreatedAt}"}]}`
     )
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`

@@ -9,6 +9,7 @@ import {
   SheetAnswer,
 } from "../domain/Answer"
 import Contract from "../domain/Contract"
+import Metadata from "../domain/Metadata"
 import Module from "../domain/Module"
 import Playbook from "../domain/Playbook"
 import {
@@ -19,6 +20,8 @@ import {
   TextAnswerStep,
   SheetAnswerStep,
 } from "../domain/Step"
+
+export type MetadataDTO = Partial<Metadata>
 
 export type ChoiceDTO = {
   text: string
@@ -58,7 +61,7 @@ export type ModuleDTO = { id: string; title: string; steps: StepDTO[] }
 
 export type ContractDTO = {
   contract: { id: string; title: string; modules: ModuleDTO[] }
-}
+} & MetadataDTO
 
 export type PlaybookDTO = {
   playbook: { id: string; title: string; modules: ModuleDTO[] }
@@ -125,12 +128,15 @@ export function createModule(module: ModuleDTO): Module {
   return new Module(module.title, module.steps.map(createStep), module.id)
 }
 
-export function createContract({ contract }: ContractDTO): Contract {
+export function createContract({
+  contract,
+  ...metadata
+}: ContractDTO): Contract {
   return new Contract(
     contract.title,
     contract.modules.map(createModule),
     contract.id
-  )
+  ).updateMetadata(metadata)
 }
 
 export function createPlaybook({ playbook }: PlaybookDTO): Playbook {

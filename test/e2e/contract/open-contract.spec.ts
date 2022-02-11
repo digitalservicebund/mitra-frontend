@@ -1,3 +1,4 @@
+import fs from "fs"
 import { getDocument, queries } from "@playwright-testing-library/test"
 import { expect, test } from "@playwright/test"
 
@@ -17,21 +18,20 @@ test.describe("Open contract from filesystem", async () => {
   })
 
   test("via drag and drop", async ({ page, baseURL }) => {
+    const contract = await fs.promises.readFile(
+      "./test/e2e/fixtures/contract.json",
+      "utf-8"
+    )
+
     await page.goto(`${baseURL}/mitra-frontend/contract/open`)
-    const dataTransfer = await page.evaluateHandle(() => {
+    const dataTransfer = await page.evaluateHandle((contract) => {
       const data = new DataTransfer()
-      const file = new File(
-        [
-          '{"contract":{"id":"3d324eca-06c2-4781-af52-705f49039d0d","title":"test contract","modules":[]}}',
-        ],
-        "contract.json",
-        {
-          type: "application/json",
-        }
-      )
+      const file = new File([`${contract}`], "contract.json", {
+        type: "application/json",
+      })
       data.items.add(file)
       return data
-    })
+    }, contract)
     await page.dispatchEvent(".p-fileupload-content", "drop", { dataTransfer })
     await expect(page).toHaveURL(
       /\/contract\/3d324eca-06c2-4781-af52-705f49039d0d$/

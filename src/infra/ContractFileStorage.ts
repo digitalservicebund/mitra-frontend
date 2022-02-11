@@ -7,7 +7,8 @@ import { loadFile } from "./LoadFile"
 const storage: Storage<Contract, File> = {
   async load(file: File) {
     const object = JSON.parse((await loadFile(file)) as string)
-    return createContract(object).updateMetadata({
+    return createContract({
+      ...object,
       createdAt: new Date(object.createdAt),
       savedAt: new Date(file.lastModified),
     })
