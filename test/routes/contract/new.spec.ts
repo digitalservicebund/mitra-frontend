@@ -1,3 +1,4 @@
+import { createTestingPinia } from "@pinia/testing"
 import { mount } from "@vue/test-utils"
 import { createRouter, createWebHistory } from "vue-router"
 import CreateContract from "../../../src/routes/contract/new.vue"
@@ -27,7 +28,7 @@ describe("/contract/new", () => {
 
     mount(CreateContract, {
       global: {
-        plugins: [router],
+        plugins: [router, createTestingPinia()],
       },
     })
 

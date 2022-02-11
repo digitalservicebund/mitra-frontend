@@ -1,52 +1,53 @@
 import { createTestingPinia } from "@pinia/testing"
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
-import PrimeVue from "primevue/config"
 import EditScreen from "../../../src/components/contract/EditScreen.vue"
+import Contract from "../../../src/domain/Contract"
 import ContractStorageService from "../../../src/domain/ContractStorageService"
-import {
-  makeContractRepository,
-  makeContractStorageService,
-} from "../../../src/provide"
+import Module from "../../../src/domain/Module"
+import { TextAnswerStep } from "../../../src/domain/Step"
+import { makeContractStorageService } from "../../../src/provide"
+import { useSession } from "../../../src/session"
 
 describe("EditScreen", () => {
+  const pinia = createTestingPinia()
+  const session = useSession()
+
+  beforeAll(() => {
+    session.rememberContract(
+      new Contract("test-contract", [
+        new Module("test-module", [new TextAnswerStep("test-step")]),
+      ])
+    )
+  })
+
   it("has a header with the contract title", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia()],
+        plugins: [pinia],
         stubs: ["Breadcrumb", "EditStep", "RouterLink"],
       },
     })
 
-    await screen.findByText("Unbenannter Vertrag")
+    await screen.findByText("test-contract")
   })
 
   it("has a breadcrumb navigation", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia()],
+        plugins: [pinia],
         stubs: ["EditStep", "Inplace", "RouterLink"],
       },
     })
 
-    await screen.findByText("Unbenannter Vertrag")
+    await screen.findByText("test-contract")
   })
 
   it("saves contract as work in progress when requested", async () => {
     const user = userEvent.setup()
-    const pinia = createTestingPinia()
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [pinia, PrimeVue],
+        plugins: [pinia],
         stubs: ["Breadcrumb", "EditStep", "RouterLink"],
       },
     })
@@ -56,11 +57,9 @@ describe("EditScreen", () => {
     await user.type(screen.getByLabelText("Eigenschaft ändern"), "Neuer Titel")
     await user.click(screen.getByText("Speichern"))
 
-    // eslint-disable-next-line testing-library/await-async-query
-    const contract = makeContractRepository().findById("xyz")
-    expect(contract.title).toBe("Neuer Titel")
+    expect(session.contract.title).toBe("Neuer Titel")
 
     const storage: ContractStorageService = makeContractStorageService()
-    expect(storage.save).toHaveBeenNthCalledWith(1, contract)
+    expect(storage.save).toHaveBeenNthCalledWith(1, session.contract)
   })
 })

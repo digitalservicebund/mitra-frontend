@@ -12,9 +12,6 @@
   const session = useSession()
 
   const currentStep = ref(session.lastEditedStep)
-  session.$subscribe((_mutation, state) => {
-    currentStep.value = state.cache[1] // Getters not available here!
-  })
 
   const hasPreviousStep = computed(
     () =>

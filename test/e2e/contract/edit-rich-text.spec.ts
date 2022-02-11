@@ -7,8 +7,6 @@ type TestFixtures = {
   editor: Locator
 }
 
-const contractId = "3d324eca-06c2-4781-af52-705f49039d0d"
-
 const test = base.extend<TestFixtures>({
   contractFile: "", // needs to be filled in per test.use(...) atm, see below
   contract: async ({ contractFile }, use) => {
@@ -19,24 +17,28 @@ const test = base.extend<TestFixtures>({
     const editor = page.locator("main .ProseMirror")
     await use(editor)
   },
-  storageState: async ({ contract }, use) => {
-    await use({
-      cookies: [],
-      origins: [
-        {
-          origin: "http://localhost:4173",
-          localStorage: [
-            {
-              name: contractId,
-              value: `${contract}`,
-            },
-          ],
-        },
-      ],
-    })
-  },
-  page: async ({ baseURL, page }, use) => {
-    await page.goto(`${baseURL}/mitra-frontend/contract/${contractId}`)
+  page: async ({ baseURL, context, contract, page }, use) => {
+    const {
+      contract: cached,
+      contract: {
+        modules: [
+          {
+            steps: [lastEditedStep],
+          },
+        ],
+      },
+      createdAt: createdAt,
+    } = JSON.parse(contract)
+
+    await context.addInitScript(
+      (session) => window.sessionStorage.setItem("session", session),
+      `{"cache":[${JSON.stringify(cached)},${JSON.stringify(
+        lastEditedStep
+      )},{"createdAt":"${createdAt}"}]}`
+    )
+    await page.goto(
+      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
+    )
     await use(page)
   },
 })

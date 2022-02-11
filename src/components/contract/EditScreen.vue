@@ -3,13 +3,9 @@
   import type { MenuItem } from "primevue/menuitem"
   import { computed, ref } from "vue"
   import Contract from "../../domain/Contract"
-  import ContractRepository from "../../domain/ContractRepository"
   import Module from "../../domain/Module"
   import Storage from "../../domain/Storage"
-  import {
-    makeContractRepository,
-    makeContractStorageService,
-  } from "../../provide"
+  import { makeContractStorageService } from "../../provide"
   import { useSession } from "../../session"
   import InplaceEditable from "../InplaceEditable.vue"
   import Metadata from "../Metadata.vue"
@@ -17,19 +13,15 @@
   import EditStep from "./EditStep.vue"
   import ContractPreview from "./Preview.vue"
 
-  const props = defineProps<{ id: string }>()
-
   const session = useSession()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
-  const contractRepository: ContractRepository = makeContractRepository()
-  const contract = ref(contractRepository.findById(props.id))
-  session.rememberContract(contract.value as Contract)
   const breadcrumbTopLevel: MenuItem = {
     to: `/mitra-frontend/${session.entryPoint}`,
     label: "Startseite",
   }
 
+  const contract = ref(session.contract)
   const breadcrumbItems = computed(() => [
     {
       label: contract.value.title,
@@ -79,7 +71,10 @@
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">
-          <EditStep :contract="(contract as Contract)" />
+          <EditStep
+            :key="session.lastEditedStep.id"
+            :contract="(contract as Contract)"
+          />
         </transition>
       </section>
     </main>

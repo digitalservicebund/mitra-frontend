@@ -3,14 +3,15 @@
   import { onBeforeMount } from "vue"
   import { useRouter } from "vue-router"
   import Contract from "../../domain/Contract"
-  import ContractRepository from "../../domain/ContractRepository"
-  import { makeContractRepository, makePlaybookRepository } from "../../provide"
+  import { makePlaybookRepository } from "../../provide"
+  import { useSession } from "../../session"
 
-  const contractRepository: ContractRepository = makeContractRepository()
+  const session = useSession()
+
   const contract: Contract = Contract.fromPlaybook(
     makePlaybookRepository().findById("db2a1d38-01fb-4ea2-bc6f-b5213413c809")
   )
-  contractRepository.save(contract)
+  session.rememberContract(contract)
 
   onBeforeMount(
     async () =>
