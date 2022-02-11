@@ -43,7 +43,7 @@ describe("EditScreen", () => {
     await screen.findByText("test-contract")
   })
 
-  it("saves contract as work in progress when requested", async () => {
+  it("maintains edited title in session", async () => {
     const user = userEvent.setup()
     render(EditScreen, {
       global: {
@@ -58,6 +58,18 @@ describe("EditScreen", () => {
     await user.click(screen.getByText("Speichern"))
 
     expect(session.contract.title).toBe("Neuer Titel")
+  })
+
+  it("saves contract as work in progress when requested", async () => {
+    const user = userEvent.setup()
+    render(EditScreen, {
+      global: {
+        plugins: [pinia],
+        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
+      },
+    })
+
+    await user.click(screen.getByText("Speichern"))
 
     const storage: ContractStorageService = makeContractStorageService()
     expect(storage.save).toHaveBeenNthCalledWith(1, session.contract)
