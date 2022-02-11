@@ -43,7 +43,7 @@ test.describe("Edit Playbook", async () => {
 
   test("editing title", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await page.locator("header h1 >> text='test playbook'").click()
+    await page.click("header h1 >> text='test playbook'")
     await expect(page.locator("header >> input")).toBeVisible()
     await page.fill("header >> input", "Foo Playbook")
     await page.press("header >> input", "Enter")
@@ -63,7 +63,7 @@ test.describe("Edit Playbook", async () => {
   })
 
   test("add module", async ({ page }) => {
-    await page.locator("text=Neues Modul").click()
+    await page.click("text=Neues Modul")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
     await expect(
       page.locator("main h1 >> text='Unbenanntes Modul'")
@@ -76,7 +76,7 @@ test.describe("Edit Playbook", async () => {
   })
 
   test("navigate to Modules via side nav", async ({ page }) => {
-    await page.locator("nav:left-of(main) >> text='test one module'").click()
+    await page.click("nav:left-of(main) >> text='test one module'")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
   })
 })

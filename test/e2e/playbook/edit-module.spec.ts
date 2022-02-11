@@ -45,7 +45,7 @@ test.describe("Edit Module", async () => {
 
   test("editing title", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await page.locator("header h1 >> text='test one module'").click()
+    await page.click("header h1 >> text='test one module'")
     await expect(page.locator("header >> input")).toBeVisible()
     await page.fill("header >> input", "Foo Module")
     await page.press("header >> input", "Enter")
@@ -65,7 +65,7 @@ test.describe("Edit Module", async () => {
   })
 
   test("navigate to second module", async ({ page }) => {
-    await page.locator("nav:left-of(main) >> text='test two module'").click()
+    await page.click("nav:left-of(main) >> text='test two module'")
     await expect(page).toHaveURL(
       /\/playbook\/[a-z0-9-]+\/module\/0b141639-8718-4ad9-9839-ec89aa8a1ec5\/$/
     )
@@ -75,7 +75,7 @@ test.describe("Edit Module", async () => {
   })
 
   test("delete module", async ({ page }) => {
-    await page.locator("text=Modul löschen").click()
+    await page.click("text=Modul löschen")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/$/)
     await expect(
       page.locator("nav:left-of(main) >> text='test one module'")
@@ -83,7 +83,7 @@ test.describe("Edit Module", async () => {
   })
 
   test("edit step title", async ({ page }) => {
-    await page.locator("section:below(header) >> text='bar step'").click()
+    await page.click("section:below(header) >> text='bar step'")
     await expect(page.locator("section:below(header) >> input")).toBeVisible()
     await page.fill("section:below(header) >> input", "updated step title")
     await page.press("section:below(header) >> input", "Enter")
@@ -94,11 +94,9 @@ test.describe("Edit Module", async () => {
   })
 
   test("edit step description", async ({ page }) => {
-    await page
-      .locator(
-        "section:below(header) >> :nth-match(:text('Erklärungstext (optional)'), 1)"
-      )
-      .click()
+    await page.click(
+      "section:below(header) >> :nth-match(:text('Erklärungstext (optional)'), 1)"
+    )
     await expect(page.locator("section:below(header) >> input")).toBeVisible()
     await page.fill(
       "section:below(header) >> input",
@@ -113,28 +111,28 @@ test.describe("Edit Module", async () => {
 
   test("clone step", async ({ page }) => {
     await expect(page.locator("text=bar step")).toHaveCount(1)
-    await page
-      .locator("section:below(header) >> li:has-text('bar step') >> button")
-      .click()
-    await page.locator("text=Frage duplizieren").click()
+    await page.click(
+      "section:below(header) >> li:has-text('bar step') >> button"
+    )
+    await page.click("text=Frage duplizieren")
     await expect(page.locator("text=bar step")).toHaveCount(2)
   })
 
   test("delete step", async ({ page }) => {
     await expect(page.locator("text=baz step")).toBeVisible()
-    await page
-      .locator("section:below(header) >> li:has-text('baz step') >> button")
-      .click()
-    await page.locator("text=Frage löschen").click()
+    await page.click(
+      "section:below(header) >> li:has-text('baz step') >> button"
+    )
+    await page.click("text=Frage löschen")
     await expect(page.locator("text=baz step")).not.toBeVisible()
   })
 
   test("add step via context menu", async ({ page }) => {
     await expect(page.locator("ol:below(header) >> li")).toHaveCount(2)
-    await page
-      .locator("section:below(header) >> li:has-text('baz step') >> button")
-      .click()
-    await page.locator("text=Neue Frage").click()
+    await page.click(
+      "section:below(header) >> li:has-text('baz step') >> button"
+    )
+    await page.click("text=Neue Frage")
     await expect(page.locator("ol:below(header) >> li")).toHaveCount(3)
   })
 })
@@ -148,7 +146,7 @@ test.describe("Edit empty Module", async () => {
     await expect(
       page.locator("text=Für dieses Modul wurden noch keine Fragen erstellt.")
     ).toBeVisible()
-    await page.locator("text=Neue Frage").click()
+    await page.click("text=Neue Frage")
     await expect(
       page.locator("main section >> text='Neue Frage'")
     ).toBeVisible()

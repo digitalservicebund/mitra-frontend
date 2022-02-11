@@ -48,7 +48,7 @@ test.describe("Title", async () => {
 
   test("editing default", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
-    await page.locator("header h1 >> text='Unbenannter Vertrag'").click()
+    await page.click("header h1 >> text='Unbenannter Vertrag'")
     await expect(page.locator("header >> input")).toBeVisible()
     await page.fill("header >> input", "Test Vertrag")
     await page.press("header >> input", "Enter")
