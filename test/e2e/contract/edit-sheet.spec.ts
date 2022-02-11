@@ -48,7 +48,7 @@ test.describe("Sheet answer step", async () => {
 
   test("editing prefilled sheet", async ({ page }) => {
     const preview = await page.locator("section:right-of(main)").elementHandle()
-    await page.locator("main >> text=Foo Cloud").click()
+    await page.click("main >> text=Foo Cloud")
     await page.fill(
       "table:has-text('Lfd Nr') >> input",
       "This field is updated"
@@ -64,7 +64,7 @@ test.describe("Sheet answer step", async () => {
   })
 
   test("hiding preview if empty sheet", async ({ page }) => {
-    await page.locator("main >> text=Foo Cloud").click()
+    await page.click("main >> text=Foo Cloud")
     await page.fill("table:has-text('Lfd Nr') >> input", "")
     for (let i = 18; i > 0; i--) {
       await page.keyboard.press("Tab")
