@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import Breadcrumb from "primevue/breadcrumb"
   import type { MenuItem } from "primevue/menuitem"
-  import { computed, ref } from "vue"
+  import { computed, Ref, ref } from "vue"
   import Contract from "../../domain/Contract"
   import Module from "../../domain/Module"
   import Storage from "../../domain/Storage"
@@ -21,7 +21,7 @@
     label: "Startseite",
   }
 
-  const contract = ref(session.contract)
+  const contract = ref(session.contract) as Ref<Contract>
   const breadcrumbItems = computed(() => [
     {
       label: contract.value.title,
@@ -34,11 +34,11 @@
   }
 
   const handleSave = () => {
-    storage.save(contract.value as Contract)
+    storage.save(contract.value)
   }
 
   const handleNavigate = (module: Module) => {
-    session.rememberContract(contract.value as Contract, module.steps[0])
+    session.rememberContract(contract.value, module.steps[0])
   }
 </script>
 
@@ -47,7 +47,7 @@
     <nav class="flex-none">
       <SideMenu
         :title="contract.title"
-        :navigatable="(contract as Contract)"
+        :navigatable="contract"
         @save="handleSave"
         @navigate="handleNavigate"
       />
@@ -71,18 +71,12 @@
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">
-          <EditStep
-            :key="session.lastEditedStep.id"
-            :contract="(contract as Contract)"
-          />
+          <EditStep :key="session.lastEditedStep.id" :contract="contract" />
         </transition>
       </section>
     </main>
 
-    <ContractPreview
-      :contract="(contract as Contract)"
-      class="flex-1 bg-slate-100"
-    />
+    <ContractPreview :contract="contract" class="flex-1 bg-slate-100" />
   </div>
 </template>
 
