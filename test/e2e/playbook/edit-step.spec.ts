@@ -6,33 +6,24 @@ type TestFixtures = {
   playbook: string
 }
 
-const playbookId = "3d324eca-06c2-4781-af52-705f49039d0d"
-
 const test = base.extend<TestFixtures>({
   playbookFile: "", // needs to be filled in per test.use(...) atm, see below
   playbook: async ({ playbookFile }, use) => {
     const playbook = await fs.promises.readFile(playbookFile, "utf-8")
     await use(playbook)
   },
-  storageState: async ({ playbook }, use) => {
-    await use({
-      cookies: [],
-      origins: [
-        {
-          origin: "http://localhost:4173",
-          localStorage: [
-            {
-              name: playbookId,
-              value: `${playbook}`,
-            },
-          ],
-        },
-      ],
-    })
-  },
-  page: async ({ baseURL, page }, use) => {
+  page: async ({ baseURL, context, page, playbook }, use) => {
+    const { playbook: rememberedPlaybook, createdAt: rememberedCreatedAt } =
+      JSON.parse(playbook)
+
+    await context.addInitScript(
+      (session) => window.sessionStorage.setItem("session", session),
+      `{"workspace":{"playbook":[${JSON.stringify(
+        rememberedPlaybook
+      )},{"createdAt":"${rememberedCreatedAt}"}]}}`
+    )
     await page.goto(
-      `${baseURL}/mitra-frontend/playbook/${playbookId}/module/0b141639-8718-4ad9-9839-ec89aa8a1ec4`
+      `${baseURL}/mitra-frontend/playbook/3d324eca-06c2-4781-af52-705f49039d0d/module/0b141639-8718-4ad9-9839-ec89aa8a1ec4`
     )
     await use(page)
   },
@@ -63,7 +54,9 @@ test.describe("Edit Step", async () => {
       page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
     await expect(page.locator("text='foo step'")).toBeVisible()
-    await page.reload()
+
+    await page.click("nav:left-of(main) >> text='test playbook'")
+    await page.click("text='test one module'")
     await expect(page.locator("text='foo step'")).toBeVisible()
   })
 
@@ -88,7 +81,9 @@ test.describe("Edit Step", async () => {
       page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
     await expect(page.locator("text='foo description'")).toBeVisible()
-    await page.reload()
+
+    await page.click("nav:left-of(main) >> text='test playbook'")
+    await page.click("text='test one module'")
     await page.click("main >> section:has-text('bar step') >> details")
     await expect(page.locator("text='foo description'")).toBeVisible()
   })
@@ -106,7 +101,6 @@ test.describe("Edit Step", async () => {
     await expect(
       page.locator("main >> section:has-text('bar step') >> text='langer Text'")
     ).toBeVisible()
-    // duplicate
     await page.click(
       "section:below(header) >> li:has-text('bar step') >> button"
     )
