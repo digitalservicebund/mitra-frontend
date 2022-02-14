@@ -33,13 +33,13 @@
   <Inplace
     ref="edit"
     :closable="false"
-    :class="[editable ? '' : 'text-slate-400']"
+    :class="[editable ? '' : 'text-slate-400', 'flex']"
   >
     <template #display>
-      <h1 v-if="h1" class="block mr-1 font-bold text-xl">
+      <h1 v-if="h1" class="mr-1 font-bold text-xl">
         {{ editable || placeholder || "Klicken zum Bearbeiten" }}
       </h1>
-      <h2 v-else class="block mr-1">
+      <h2 v-else class="mr-1 inline-flex">
         {{ editable || placeholder || "Klicken zum Bearbeiten" }}
       </h2>
     </template>
@@ -47,14 +47,19 @@
       <InputText
         v-model="editable"
         v-focus
-        class="mr-1"
+        class="mr-1 mb-2"
         aria-label="Eigenschaft ändern"
         @keyup.enter="update"
         @blur="update"
       />
     </template>
   </Inplace>
-  <Button v-if="button" type="button" class="mx-2" @click="startEditing">
+  <Button
+    v-if="button"
+    type="button"
+    class="mx-2 inline-flex align-top"
+    @click="startEditing"
+  >
     <span class="material-icons-outlined text-base" aria-hidden="true">
       edit
     </span>

@@ -94,7 +94,11 @@
           button
           @update="handleUpdateTitle"
         />
-        <Button type="button" @click="removeModule">
+        <Button
+          type="button"
+          class="inline-flex align-top"
+          @click="removeModule"
+        >
           <span class="material-icons-outlined text-base" aria-hidden="true">
             delete
           </span>
