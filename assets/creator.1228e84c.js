@@ -1,1 +1,0 @@
-import{_ as o}from"./StartScreenCreator.6d685a83.js";import{f as r,o as t,c as e}from"./vendor.0137cc33.js";import"./CreateContractPanel.437ee785.js";import"./session.de0901a5.js";const f=r({setup(a){return(c,p)=>(t(),e(o))}});export{f as default};
