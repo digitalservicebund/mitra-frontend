@@ -56,7 +56,7 @@ test.describe("Edit Playbook", async () => {
     await expect(page.locator("header >> input")).not.toBeVisible()
   })
 
-  test("Add module", async ({ baseURL, page }) => {
+  test("Add module", async ({ page }) => {
     await page.click("text=Neues Modul")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
     await expect(
