@@ -20,15 +20,17 @@ export const useSession = defineStore("session", {
     entryPoint: "",
   }),
   actions: {
-    rememberContract(contract: Contract, lastEditedStep?: Step<Answer>) {
-      this.cache = [
-        contract,
-        (lastEditedStep || contract.path[0]).id,
-        contract.metadata,
-      ]
+    rememberContract(
+      contract: Contract,
+      lastEditedStep: Step<Answer> = contract.path[0]
+    ) {
+      this.cache = [contract, lastEditedStep.id, contract.metadata]
     },
     rememberEntryPoint(entryPoint: EntryPoint) {
       this.entryPoint = entryPoint
+    },
+    refresh(contract: Contract) {
+      this.cache[0] = contract
     },
   },
   getters: {
