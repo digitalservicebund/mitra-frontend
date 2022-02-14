@@ -11,7 +11,7 @@ class Playbook extends Entity {
 
   constructor(
     public title: string = "Unbenanntes Playbook",
-    public modules: Module[] = [],
+    public readonly modules: Module[] = [],
     id?: string
   ) {
     super(id)
@@ -33,7 +33,7 @@ class Playbook extends Entity {
   }
 
   removeModule(module: Module): void {
-    this.modules = this.modules.filter((item) => !item.equals(module))
+    this.modules.splice(this.modules.indexOf(module), 1)
   }
 
   findModuleById(id: string): Module {
