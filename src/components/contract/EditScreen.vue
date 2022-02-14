@@ -31,7 +31,7 @@
 
   const handleUpdateTitle = (newTitle: string) => {
     contract.value.title = newTitle
-    session.refresh(contract.value)
+    session.refresh({ contract: contract.value })
   }
 
   const handleSave = () => {

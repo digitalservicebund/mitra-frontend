@@ -4,13 +4,17 @@ import { render, screen } from "@testing-library/vue"
 import PrimeVue from "primevue/config"
 import { createRouter, createWebHistory } from "vue-router"
 import EditScreen from "../../../src/components/playbook/EditScreen.vue"
+import Module from "../../../src/domain/Module"
+import Playbook from "../../../src/domain/Playbook"
 import PlaybookStorageService from "../../../src/domain/PlaybookStorageService"
-import {
-  makePlaybookRepository,
-  makePlaybookStorageService,
-} from "../../../src/provide"
+import { TextAnswerStep } from "../../../src/domain/Step"
+import { makePlaybookStorageService } from "../../../src/provide"
+import { useSession } from "../../../src/session"
 
 describe("EditScreen", () => {
+  const pinia = createTestingPinia()
+  const session = useSession()
+
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -34,17 +38,20 @@ describe("EditScreen", () => {
   })
 
   beforeAll(async () => {
+    session.rememberPlaybook(
+      new Playbook("test-playbook", [
+        new Module("test-module", [new TextAnswerStep("test-step")]),
+      ])
+    )
+
     router.push("/mitra-frontend/")
     await router.isReady()
   })
 
   it("has a header with the playbook title", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Breadcrumb", "SideMenu"],
       },
     })
@@ -54,11 +61,8 @@ describe("EditScreen", () => {
 
   it("has a breadcrumb navigation", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Inplace", "SideMenu"],
       },
     })
@@ -68,11 +72,8 @@ describe("EditScreen", () => {
 
   it("lists the playbook's modules", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Breadcrumb", "Inplace", "SideMenu"],
       },
     })
@@ -84,11 +85,8 @@ describe("EditScreen", () => {
 
   it("has a add module button", async () => {
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Breadcrumb", "Inplace", "SideMenu"],
       },
     })
@@ -99,11 +97,8 @@ describe("EditScreen", () => {
   it("saves playbook as work in progress when requested", async () => {
     const user = userEvent.setup()
     render(EditScreen, {
-      props: {
-        id: "xyz",
-      },
       global: {
-        plugins: [createTestingPinia(), router, PrimeVue],
+        plugins: [pinia, router, PrimeVue],
         stubs: ["Breadcrumb", "RouterLink"],
       },
     })
@@ -113,11 +108,7 @@ describe("EditScreen", () => {
     await user.type(screen.getByLabelText("Eigenschaft ändern"), "Neuer Titel")
     await user.click(screen.getByText("Speichern"))
 
-    // eslint-disable-next-line testing-library/await-async-query
-    const contract = makePlaybookRepository().findById("xyz")
-    expect(contract.title).toBe("Neuer Titel")
-
     const storage: PlaybookStorageService = makePlaybookStorageService()
-    expect(storage.save).toHaveBeenNthCalledWith(1, contract)
+    expect(storage.save).toHaveBeenNthCalledWith(1, session.playbook)
   })
 })

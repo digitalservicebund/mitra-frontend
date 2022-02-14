@@ -14,23 +14,17 @@ const test = base.extend<TestFixtures>({
     const playbook = await fs.promises.readFile(playbookFile, "utf-8")
     await use(playbook)
   },
-  storageState: async ({ playbook }, use) => {
-    await use({
-      cookies: [],
-      origins: [
-        {
-          origin: "http://localhost:4173",
-          localStorage: [
-            {
-              name: playbookId,
-              value: `${playbook}`,
-            },
-          ],
-        },
-      ],
-    })
-  },
-  page: async ({ baseURL, page }, use) => {
+  page: async ({ baseURL, context, page, playbook }, use) => {
+    const { playbook: rememberedPlaybook, createdAt: rememberedCreatedAt } =
+      JSON.parse(playbook)
+
+    await context.addInitScript(
+      (session) => window.sessionStorage.setItem("session", session),
+      `{"workspace":{"playbook":[${JSON.stringify(
+        rememberedPlaybook
+      )},{"createdAt":"${rememberedCreatedAt}"}]}}`
+    )
+
     await page.goto(`${baseURL}/mitra-frontend/playbook/${playbookId}`)
     await use(page)
   },
@@ -41,7 +35,7 @@ test.describe("Edit Playbook", async () => {
     playbookFile: "./test/e2e/fixtures/playbook.json",
   })
 
-  test("editing title", async ({ page }) => {
+  test("Change title", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
     await page.click("header h1 >> text='test playbook'")
     await expect(page.locator("header >> input")).toBeVisible()
@@ -62,20 +56,19 @@ test.describe("Edit Playbook", async () => {
     await expect(page.locator("header >> input")).not.toBeVisible()
   })
 
-  test("add module", async ({ page }) => {
+  test("Add module", async ({ baseURL, page }) => {
     await page.click("text=Neues Modul")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
     await expect(
       page.locator("main h1 >> text='Unbenanntes Modul'")
     ).toBeVisible()
-
-    await page.goto(`/mitra-frontend/playbook/${playbookId}`)
+    await page.goBack()
     await expect(
       page.locator("main section:below(header) >> text='Unbenanntes Modul'")
     ).toBeVisible()
   })
 
-  test("navigate to Modules via side nav", async ({ page }) => {
+  test("Navigate to modules via side nav", async ({ page }) => {
     await page.click("nav:left-of(main) >> text='test one module'")
     await expect(page).toHaveURL(/\/playbook\/[a-z0-9-]+\/module\/[a-z0-9-]+$/)
   })

@@ -5,22 +5,19 @@
   import { useRouter } from "vue-router"
   import LoadEntityFromStorage from "../../domain/LoadEntityFromStorage"
   import Playbook from "../../domain/Playbook"
-  import PlaybookRepository from "../../domain/PlaybookRepository"
-  import {
-    makePlaybookStorageService,
-    makePlaybookRepository,
-  } from "../../provide"
+  import { makePlaybookStorageService } from "../../provide"
+  import { useSession } from "../../session"
   import NavigateToHome from "../NavigateToHome.vue"
+
+  const session = useSession()
 
   const storage: LoadEntityFromStorage<Playbook, File> =
     makePlaybookStorageService()
 
-  const repository: PlaybookRepository = makePlaybookRepository()
-
   const upload = async (event: FileUploadUploaderEvent) => {
     const file: File | File[] = event?.files
     const playbook = await storage.load(file instanceof Array ? file[0] : file)
-    repository.save(playbook)
+    session.rememberPlaybook(playbook)
     await router.push(`/mitra-frontend/playbook/${playbook.id}`)
   }
 

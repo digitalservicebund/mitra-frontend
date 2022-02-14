@@ -2,8 +2,14 @@ import { createTestingPinia } from "@pinia/testing"
 import { render, screen, fireEvent } from "@testing-library/vue"
 import { createRouter, createWebHistory } from "vue-router"
 import ModuleEditScreen from "../../../src/components/playbook/ModuleEditScreen.vue"
+import Module from "../../../src/domain/Module"
+import Playbook from "../../../src/domain/Playbook"
+import { useSession } from "../../../src/session"
 
 describe("ModuleEditScreen", () => {
+  const pinia = createTestingPinia()
+  const session = useSession()
+
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -27,6 +33,10 @@ describe("ModuleEditScreen", () => {
   })
 
   beforeAll(async () => {
+    session.rememberPlaybook(
+      new Playbook("test-playbook", [new Module("test-module", [], "xyz")])
+    )
+
     router.push("/mitra-frontend/")
     await router.isReady()
   })
@@ -38,7 +48,7 @@ describe("ModuleEditScreen", () => {
         moduleId: "xyz",
       },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Breadcrumb", "SideMenu"],
       },
     })
@@ -53,7 +63,7 @@ describe("ModuleEditScreen", () => {
         moduleId: "xyz",
       },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Inplace", "SideMenu"],
       },
     })
@@ -68,7 +78,7 @@ describe("ModuleEditScreen", () => {
         moduleId: "xyz",
       },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["Inplace", "SideMenu"],
       },
     })
@@ -83,7 +93,7 @@ describe("ModuleEditScreen", () => {
         moduleId: "xyz",
       },
       global: {
-        plugins: [createTestingPinia(), router],
+        plugins: [pinia, router],
         stubs: ["SideMenu"],
       },
     })

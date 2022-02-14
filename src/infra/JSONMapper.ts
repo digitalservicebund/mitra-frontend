@@ -65,7 +65,7 @@ export type ContractDTO = {
 
 export type PlaybookDTO = {
   playbook: { id: string; title: string; modules: ModuleDTO[] }
-}
+} & MetadataDTO
 
 export function createStep(step: StepDTO): Step<Answer> {
   if (step.type === TextAnswerStep.TYPE) {
@@ -139,10 +139,13 @@ export function createContract({
   ).updateMetadata(metadata)
 }
 
-export function createPlaybook({ playbook }: PlaybookDTO): Playbook {
+export function createPlaybook({
+  playbook,
+  ...metadata
+}: PlaybookDTO): Playbook {
   return new Playbook(
     playbook.title,
     playbook.modules.map(createModule),
     playbook.id
-  )
+  ).updateMetadata(metadata)
 }

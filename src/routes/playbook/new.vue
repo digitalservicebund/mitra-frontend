@@ -3,13 +3,12 @@
   import { onBeforeMount } from "vue"
   import { useRouter } from "vue-router"
   import Playbook from "../../domain/Playbook"
-  import PlaybookRepository from "../../domain/PlaybookRepository"
-  import { makePlaybookRepository } from "../../provide"
+  import { useSession } from "../../session"
 
-  const playbookRepository: PlaybookRepository = makePlaybookRepository()
+  const session = useSession()
+
   const playbook: Playbook = new Playbook()
-
-  playbookRepository.save(playbook)
+  session.rememberPlaybook(playbook)
 
   onBeforeMount(
     async () =>

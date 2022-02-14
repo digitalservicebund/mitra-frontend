@@ -5,32 +5,28 @@
   import { Answer } from "../../domain/Answer"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
-  import PlaybookRepository from "../../domain/PlaybookRepository"
   import { Step, TextAnswerStep } from "../../domain/Step"
   import Storage from "../../domain/Storage"
-  import {
-    makePlaybookRepository,
-    makePlaybookStorageService,
-  } from "../../provide"
+  import { makePlaybookStorageService } from "../../provide"
+  import { useSession } from "../../session"
   import Breadcrumb from "../Breadcrumb.vue"
   import InplaceEditable from "../InplaceEditable.vue"
   import SideMenu from "../SideMenu.vue"
   import StepCard from "./StepCard.vue"
 
   const props = defineProps<{ playbookId: string; moduleId: string }>()
+
+  const session = useSession()
   const router = useRouter()
 
-  const playbookRepository: PlaybookRepository = makePlaybookRepository()
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
 
-  const playbook = ref(
-    playbookRepository.findById(props.playbookId)
-  ) as Ref<Playbook>
+  const playbook = ref(session.playbook) as Ref<Playbook>
   const module = ref(playbook.value.findModuleById(props.moduleId))
 
   const handleUpdateTitle = (newTitle: string) => {
     module.value.title = newTitle
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
   }
 
   const handleSave = () => {
@@ -45,7 +41,7 @@
 
   const removeModule = async () => {
     playbook.value.removeModule(module.value)
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
     await router.push(`/mitra-frontend/playbook/${playbook.value.id}/`)
   }
 
@@ -53,23 +49,23 @@
     index
       ? module.value.addStep(new TextAnswerStep("Neue Frage"), index)
       : module.value.addStep(new TextAnswerStep("Neue Frage"))
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
   }
 
   const duplicateStep = (step: Step<Answer>): void => {
     module.value.duplicateStep(step)
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
   }
 
   const deleteStep = (step: Step<Answer>): void => {
     module.value.removeStep(step)
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
   }
 
   const updateStep = (step: Step<Answer>, updatedStep: Step<Answer>): void => {
     const index: number = module.value.steps.indexOf(step)
     module.value.steps[index] = updatedStep
-    playbookRepository.save(playbook.value)
+    session.refresh({ playbook: playbook.value })
   }
 </script>
 

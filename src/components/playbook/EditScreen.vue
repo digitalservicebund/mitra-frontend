@@ -1,31 +1,26 @@
 <script setup lang="ts">
   import Button from "primevue/button"
-  import { ref } from "vue"
+  import { ref, Ref } from "vue"
   import { useRouter } from "vue-router"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
-  import PlaybookRepository from "../../domain/PlaybookRepository"
   import Storage from "../../domain/Storage"
-  import {
-    makePlaybookRepository,
-    makePlaybookStorageService,
-  } from "../../provide"
+  import { makePlaybookStorageService } from "../../provide"
+  import { useSession } from "../../session"
   import Breadcrumb from "../Breadcrumb.vue"
   import InplaceEditable from "../InplaceEditable.vue"
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
 
-  const props = defineProps<{ id: string }>()
-
+  const session = useSession()
   const router = useRouter()
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
-  const playbookRepository: PlaybookRepository = makePlaybookRepository()
-  const playbook = ref(playbookRepository.findById(props.id))
+  const playbook = ref(session.playbook) as Ref<Playbook>
 
   const handleUpdateTitle = (newTitle: string) => {
     playbook.value.title = newTitle
-    playbookRepository.save(playbook.value as Playbook)
+    session.refresh({ playbook: playbook.value })
   }
 
   const handleSave = () => {
@@ -41,7 +36,7 @@
   const addNewModule = async () => {
     const module = new Module()
     playbook.value.addModules(module)
-    playbookRepository.save(playbook.value as Playbook)
+    session.refresh({ playbook: playbook.value })
     await router.push(
       `/mitra-frontend/playbook/${playbook.value.id}/module/${module.id}`
     )

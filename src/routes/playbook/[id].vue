@@ -6,5 +6,5 @@
 </script>
 
 <template>
-  <Screen :id="id" :key="id" />
+  <Screen :key="id" />
 </template>

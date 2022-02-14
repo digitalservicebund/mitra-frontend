@@ -30,9 +30,9 @@ const test = base.extend<TestFixtures>({
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
-      `{"cache":[${JSON.stringify(
+      `{"workspace":{"contract":[${JSON.stringify(
         rememberedContract
-      )},"${rememberedStepId}",{"createdAt":"${rememberedCreatedAt}"}]}`
+      )},"${rememberedStepId}",{"createdAt":"${rememberedCreatedAt}"}]}}`
     )
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
@@ -41,12 +41,12 @@ const test = base.extend<TestFixtures>({
   },
 })
 
-test.describe("Title", async () => {
+test.describe("Edit Contract", async () => {
   test.use({
     contractFile: "./test/e2e/fixtures/contract-untitled.json",
   })
 
-  test("editing default", async ({ page }) => {
+  test("Change title", async ({ page }) => {
     await expect(page.locator("header >> input")).not.toBeVisible()
     await page.click("header h1 >> text='Unbenannter Vertrag'")
     await expect(page.locator("header >> input")).toBeVisible()
