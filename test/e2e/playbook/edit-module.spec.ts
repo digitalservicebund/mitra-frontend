@@ -73,33 +73,6 @@ test.describe("Edit Module", async () => {
     ).not.toBeVisible()
   })
 
-  test("edit step title", async ({ page }) => {
-    await page.click("section:below(header) >> text='bar step'")
-    await expect(page.locator("section:below(header) >> input")).toBeVisible()
-    await page.fill("section:below(header) >> input", "updated step title")
-    await page.press("section:below(header) >> input", "Enter")
-    await expect(
-      page.locator("section:below(header) >> input")
-    ).not.toBeVisible()
-    await expect(page.locator("text=updated step title")).toBeVisible()
-  })
-
-  test("edit step description", async ({ page }) => {
-    await page.click(
-      "section:below(header) >> :nth-match(:text('Erklärungstext (optional)'), 1)"
-    )
-    await expect(page.locator("section:below(header) >> input")).toBeVisible()
-    await page.fill(
-      "section:below(header) >> input",
-      "updated step description"
-    )
-    await page.press("section:below(header) >> input", "Enter")
-    await expect(
-      page.locator("section:below(header) >> input")
-    ).not.toBeVisible()
-    await expect(page.locator("text=updated step description")).toBeVisible()
-  })
-
   test("clone step", async ({ page }) => {
     await expect(page.locator("text=bar step")).toHaveCount(1)
     await page.click(
@@ -141,6 +114,5 @@ test.describe("Edit empty Module", async () => {
     await expect(
       page.locator("main section >> text='Neue Frage'")
     ).toBeVisible()
-    await expect(page.locator("text=Erklärungstext (optional)")).toBeVisible()
   })
 })

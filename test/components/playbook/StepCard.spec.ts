@@ -62,4 +62,28 @@ describe("Step", () => {
     await fireEvent.click(screen.getByText("Frage löschen"))
     expect(emitted().deleteStep).toBeTruthy()
   })
+
+  it("displays the description", async () => {
+    render(Step, {
+      props: {
+        step: step,
+      },
+    })
+    expect(
+      await screen.findByText("Erklärungstext (optional)")
+    ).not.toBeVisible()
+    await fireEvent.click(screen.getByText("Fragetext eintragen"))
+    expect(await screen.findByText("Erklärungstext (optional)")).toBeVisible()
+  })
+
+  it("displays the type selection dropdown", async () => {
+    render(Step, {
+      props: {
+        step: step,
+      },
+    })
+    expect(await screen.findByText("kurzer Text")).not.toBeVisible()
+    await fireEvent.click(screen.getByText("Fragetext eintragen"))
+    expect(await screen.findByText("kurzer Text")).toBeVisible()
+  })
 })
