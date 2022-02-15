@@ -70,7 +70,6 @@ export class TextAnswerStep extends Step<TextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "TextAnswerStep"
-  static readonly LABEL = "kurzer Text"
   public readonly produce: string
 
   constructor(
@@ -115,7 +114,6 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "RichTextAnswerStep"
-  static readonly LABEL = "langer Text"
   public readonly produce: string
 
   constructor(

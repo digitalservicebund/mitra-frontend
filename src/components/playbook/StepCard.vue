@@ -44,14 +44,22 @@
     ;(menu as Ref<ContextMenu>).value.show(event)
   }
 
-  const dropdownTypes = [TextAnswerStep, RichTextAnswerStep].map((step) => {
+  const stepLabels = {
+    TextAnswerStep: "Kurzer Text",
+    RichTextAnswerStep: "Langer Text",
+  }
+
+  const typeOptions = (
+    Object.keys(stepLabels) as Array<keyof typeof stepLabels>
+  ).map((type) => {
     return {
-      modelValue: step.TYPE,
-      name: step.LABEL,
+      modelValue: type,
+      name: stepLabels[type],
     }
   })
+
   const selectedType = ref(
-    dropdownTypes.find((type) => type.modelValue === props.step.type)
+    typeOptions.find((type) => type.modelValue === props.step.type)
   )
   const handleUpdateType = (e: Event) => {
     emit(
@@ -102,7 +110,7 @@
         />
         <div class="antworttyp text-base my-2 ml-3">
           <header class="text-slate-400">Antworttyp</header>
-          {{ step.label }}
+          {{ stepLabels[(step.type as keyof typeof stepLabels)] }}
         </div>
         <Button
           type="button"
@@ -131,7 +139,7 @@
       <div>
         <Dropdown
           v-model="selectedType"
-          :options="dropdownTypes"
+          :options="typeOptions"
           option-label="name"
           class="ml-3"
           aria-label="Fragentyp"
