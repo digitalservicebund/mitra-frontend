@@ -76,14 +76,23 @@ describe("Step", () => {
     expect(await screen.findByText("Erklärungstext (optional)")).toBeVisible()
   })
 
+  it("displays the step type", async () => {
+    render(Step, {
+      props: {
+        step: step,
+      },
+    })
+    expect(await screen.findByText("Antworttyp")).toBeVisible()
+  })
+
   it("displays the type selection dropdown", async () => {
     render(Step, {
       props: {
         step: step,
       },
     })
-    expect(await screen.findByText("kurzer Text")).not.toBeVisible()
+    expect(await screen.findByLabelText("Fragentyp")).not.toBeVisible()
     await fireEvent.click(screen.getByText("Fragetext eintragen"))
-    expect(await screen.findByText("kurzer Text")).toBeVisible()
+    expect(await screen.findByLabelText("Fragentyp")).toBeVisible()
   })
 })

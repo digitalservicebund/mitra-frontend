@@ -15,6 +15,16 @@
     (e: "updateStep", updatedStep: Step<Answer>): void
   }>()
 
+  let detailsControler = ref({
+    visible: false,
+    open() {
+      this.visible = true
+    },
+    close() {
+      this.visible = false
+    },
+  })
+
   const menu = ref<InstanceType<typeof ContextMenu>>()
   const items = [
     {
@@ -78,10 +88,22 @@
 </script>
 
 <template>
-  <details closed @keyup.prevent>
+  <details
+    :open="detailsControler.visible"
+    @keyup.prevent
+    @click.prevent="detailsControler.open"
+  >
     <summary class="text-lg relative">
       <header class="edit">
-        <InplaceEditable :editable="step.prompt" @update="handleUpdateTitle" />
+        <InplaceEditable
+          :editable="step.prompt"
+          h1
+          @update="handleUpdateTitle"
+        />
+        <div class="antworttyp text-base my-2 ml-3">
+          <header class="text-slate-400">Antworttyp</header>
+          {{ step.label }}
+        </div>
         <Button
           type="button"
           class="absolute top-0 right-0"
@@ -111,6 +133,7 @@
           v-model="selectedType"
           :options="dropdownTypes"
           option-label="name"
+          class="ml-3"
           aria-label="Fragentyp"
           placeholder="Fragentyp auswählen"
           @change="handleUpdateType"
@@ -119,3 +142,9 @@
     </div>
   </details>
 </template>
+
+<style>
+  details[open] header .antworttyp {
+    display: none;
+  }
+</style>
