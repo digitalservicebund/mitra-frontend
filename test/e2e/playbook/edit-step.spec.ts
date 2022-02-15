@@ -36,22 +36,22 @@ test.describe("Edit Step", async () => {
 
   test("editing title", async ({ page }) => {
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
     await page.click("text='bar step'")
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).toBeVisible()
     await page.fill(
-      "main >> section >> input[aria-label='Eigenschaft ändern']",
+      "main section input[aria-label='Eigenschaft ändern']",
       "foo step"
     )
     await page.press(
-      "main >> section >> input[aria-label='Eigenschaft ändern']",
+      "main section input[aria-label='Eigenschaft ändern']",
       "Enter"
     )
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
     await expect(page.locator("text='foo step'")).toBeVisible()
 
@@ -62,29 +62,29 @@ test.describe("Edit Step", async () => {
 
   test("edit description step", async ({ page }) => {
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
-    await page.click("main >> section:has-text('bar step') >> details")
+    await page.click("main section li:has-text('bar step') .toggle-arrow")
     await page.click("text='Erklärungstext (optional)'")
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).toBeVisible()
     await page.fill(
-      "main >> section >> input[aria-label='Eigenschaft ändern']",
+      "main section input[aria-label='Eigenschaft ändern']",
       "foo description"
     )
     await page.press(
-      "main >> section >> input[aria-label='Eigenschaft ändern']",
+      "main section input[aria-label='Eigenschaft ändern']",
       "Enter"
     )
     await expect(
-      page.locator("main >> section >> input[aria-label='Eigenschaft ändern']")
+      page.locator("main section input[aria-label='Eigenschaft ändern']")
     ).not.toBeVisible()
     await expect(page.locator("text='foo description'")).toBeVisible()
 
     await page.click("nav:left-of(main) >> text='test playbook'")
     await page.click("text='test one module'")
-    await page.click("main >> section:has-text('bar step') >> details")
+    await page.click("main section li:has-text('bar step') .toggle-arrow")
     await expect(page.locator("text='foo description'")).toBeVisible()
   })
 
@@ -92,7 +92,7 @@ test.describe("Edit Step", async () => {
     await expect(
       page.locator(":nth-match(:text('Kurzer Text'), 2)")
     ).not.toBeVisible()
-    await page.click("main >> section li:has-text('bar step') >> details")
+    await page.click("main section li:has-text('bar step') .toggle-arrow")
     await page.click(":nth-match(:text('Kurzer Text'), 2)")
     await page.click("text='Langer Text'")
     await expect(
@@ -101,12 +101,10 @@ test.describe("Edit Step", async () => {
     await expect(
       page.locator(":nth-match(:text('Langer Text'), 2)")
     ).toBeVisible()
-    await page.click(
-      "section:below(header) >> li:has-text('bar step') >> button"
-    )
+    await page.click("section:below(header) li:has-text('bar step') button")
     await page.click("text=Frage duplizieren")
     await page.click(
-      "main >> section li:has-text('Kopie von bar step') >> details summary"
+      "main section li:has-text('Kopie von bar step') .toggle-arrow"
     )
     await expect(
       page.locator(":nth-match(:text('Langer Text'), 2)")

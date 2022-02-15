@@ -63,7 +63,7 @@ describe("Step", () => {
     expect(emitted().deleteStep).toBeTruthy()
   })
 
-  it("displays the description", async () => {
+  it("displays the description if card open", async () => {
     render(Step, {
       props: {
         step: step,
@@ -74,18 +74,24 @@ describe("Step", () => {
     ).not.toBeVisible()
     await fireEvent.click(screen.getByText("Fragetext eintragen"))
     expect(await screen.findByText("Erklärungstext (optional)")).toBeVisible()
+    await fireEvent.click(screen.getByLabelText("Fragendetails anzeigen")) // arrow-toggle
+    expect(
+      await screen.findByText("Erklärungstext (optional)")
+    ).not.toBeVisible()
   })
 
-  it("displays the step type", async () => {
+  it("displays the step type if card is closed", async () => {
     render(Step, {
       props: {
         step: step,
       },
     })
     expect(await screen.findByText("Antworttyp")).toBeVisible()
+    await fireEvent.click(screen.getByLabelText("Fragendetails anzeigen")) // arrow-toggle
+    expect(await screen.findByText("Antworttyp")).not.toBeVisible()
   })
 
-  it("displays the type selection dropdown", async () => {
+  it("displays the type selection dropdown if card is open", async () => {
     render(Step, {
       props: {
         step: step,
@@ -94,5 +100,7 @@ describe("Step", () => {
     expect(await screen.findByLabelText("Fragentyp")).not.toBeVisible()
     await fireEvent.click(screen.getByText("Fragetext eintragen"))
     expect(await screen.findByLabelText("Fragentyp")).toBeVisible()
+    await fireEvent.click(screen.getByLabelText("Fragendetails anzeigen")) // arrow-toggle
+    expect(await screen.findByLabelText("Fragentyp")).not.toBeVisible()
   })
 })

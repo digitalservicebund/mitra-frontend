@@ -15,15 +15,9 @@
     (e: "updateStep", updatedStep: Step<Answer>): void
   }>()
 
-  let detailsControler = ref({
-    visible: false,
-    open() {
-      this.visible = true
-    },
-    close() {
-      this.visible = false
-    },
-  })
+  const isCardOpen = ref(false)
+  const openCard = () => (isCardOpen.value = true)
+  const toggleCard = () => (isCardOpen.value = !isCardOpen.value)
 
   const menu = ref<InstanceType<typeof ContextMenu>>()
   const items = [
@@ -96,63 +90,61 @@
 </script>
 
 <template>
-  <details
-    :open="detailsControler.visible"
-    @keyup.prevent
-    @click.prevent="detailsControler.open"
-  >
-    <summary class="text-lg relative">
-      <header class="edit">
-        <InplaceEditable
-          :editable="step.prompt"
-          h1
-          @update="handleUpdateTitle"
-        />
-        <div class="antworttyp text-base my-2 ml-3">
-          <header class="text-slate-400">Antworttyp</header>
-          {{ stepLabels[(step.type as keyof typeof stepLabels)] }}
-        </div>
-        <Button
-          type="button"
-          class="absolute top-0 right-0"
-          aria-label="menu"
-          aria-haspopup="menu"
-          @contextmenu="openMenu"
-          @click="openMenu"
-          @keypress.m="openMenu"
-        >
-          <span class="material-icons-outlined text-base" aria-hidden="true">
-            more_vert
-          </span>
-        </Button>
-        <ContextMenu ref="menu" :model="items" />
-      </header>
-    </summary>
-    <div class="relative edit">
-      <div class="mb-2">
-        <InplaceEditable
-          :editable="step.description"
-          placeholder="Erklärungstext (optional)"
-          @update="handleUpdateDescription"
-        />
+  <div :class="{ open: isCardOpen }" class="relative pl-5 pb-5 transition">
+    <span
+      class="toggle-arrow absolute top-2 left-0 material-icons-outlined cursor-pointer text-2xl leading-9 transition"
+      :class="{ 'rotate-270': isCardOpen }"
+      aria-label="Fragendetails anzeigen"
+      @click="toggleCard"
+      @keypress.o="toggleCard"
+    >
+      expand_more
+    </span>
+    <Button
+      type="button"
+      class="absolute top-0 right-0 z-20"
+      aria-label="menu"
+      aria-haspopup="menu"
+      @contextmenu="openMenu"
+      @click="openMenu"
+      @keypress.m="openMenu"
+    >
+      <span class="material-icons-outlined text-base" aria-hidden="true">
+        more_vert
+      </span>
+    </Button>
+    <ContextMenu ref="menu" :model="items" />
+    <header class="edit relative" @click="openCard" @keypress.o="openCard">
+      <InplaceEditable :editable="step.prompt" h1 @update="handleUpdateTitle" />
+      <div
+        class="antworttyp text-base my-2 ml-3"
+        :style="[isCardOpen ? 'display: none' : '']"
+      >
+        <header class="text-slate-400">Antworttyp</header>
+        {{ stepLabels[(step.type as keyof typeof stepLabels)] }}
       </div>
-      <div>
-        <Dropdown
-          v-model="selectedType"
-          :options="typeOptions"
-          option-label="name"
-          class="ml-3"
-          aria-label="Fragentyp"
-          placeholder="Fragentyp auswählen"
-          @change="handleUpdateType"
-        />
+    </header>
+    <div class="details" :style="[isCardOpen ? '' : 'display: none']">
+      <div class="relative edit">
+        <div class="mb-2">
+          <InplaceEditable
+            :editable="step.description"
+            placeholder="Erklärungstext (optional)"
+            @update="handleUpdateDescription"
+          />
+        </div>
+        <div>
+          <Dropdown
+            v-model="selectedType"
+            :options="typeOptions"
+            option-label="name"
+            class="ml-3"
+            aria-label="Fragentyp"
+            placeholder="Fragentyp auswählen"
+            @change="handleUpdateType"
+          />
+        </div>
       </div>
     </div>
-  </details>
+  </div>
 </template>
-
-<style>
-  details[open] header .antworttyp {
-    display: none;
-  }
-</style>
