@@ -55,7 +55,6 @@ export abstract class Step<T extends Answer> extends Entity {
   }
 
   abstract get type(): string
-  abstract get label(): string
   abstract clone(): Step<T>
 
   get path(): readonly Step<Answer>[] {
@@ -71,7 +70,7 @@ export class TextAnswerStep extends Step<TextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "TextAnswerStep"
-  static readonly LABEL = "Kurzer Text"
+  static readonly LABEL = "kurzer Text"
   public readonly produce: string
 
   constructor(
@@ -96,10 +95,6 @@ export class TextAnswerStep extends Step<TextAnswer> {
     return TextAnswerStep.TYPE
   }
 
-  get label(): string {
-    return TextAnswerStep.LABEL
-  }
-
   print() {
     if (!this.answer.value) {
       return ""
@@ -120,7 +115,7 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "RichTextAnswerStep"
-  static readonly LABEL = "Langer Text"
+  static readonly LABEL = "langer Text"
   public readonly produce: string
 
   constructor(
@@ -145,10 +140,6 @@ export class RichTextAnswerStep extends Step<RichTextAnswer> {
     return RichTextAnswerStep.TYPE
   }
 
-  get label(): string {
-    return RichTextAnswerStep.LABEL
-  }
-
   print() {
     if (!this.answer.value) {
       return ""
@@ -169,7 +160,6 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "SingleChoiceAnswerStep"
-  static readonly LABEL = "Single-Choice-Frage"
 
   constructor(
     prompt: string,
@@ -188,10 +178,6 @@ export class SingleChoiceAnswerStep extends Step<SingleChoiceAnswer> {
 
   get type(): string {
     return SingleChoiceAnswerStep.TYPE
-  }
-
-  get label(): string {
-    return SingleChoiceAnswerStep.LABEL
   }
 
   get path(): readonly Step<Answer>[] {
@@ -221,7 +207,6 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "MultipleChoiceAnswerStep"
-  static readonly LABEL = "Multiple-Choice-Frage"
 
   constructor(
     prompt: string,
@@ -240,10 +225,6 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
 
   get type(): string {
     return MultipleChoiceAnswerStep.TYPE
-  }
-
-  get label(): string {
-    return MultipleChoiceAnswerStep.LABEL
   }
 
   get path(): readonly Step<Answer>[] {
@@ -273,7 +254,6 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
   // We need to capture the type manually, as at runtime it's not available,
   // and because Vue uses proxies, thus we can't compare constructors...
   static readonly TYPE = "SheetAnswerStep"
-  static readonly LABEL = "Tabelle"
   public readonly produce: string
 
   constructor(
@@ -295,10 +275,6 @@ export class SheetAnswerStep extends Step<SheetAnswer> {
 
   get type(): string {
     return SheetAnswerStep.TYPE
-  }
-
-  get label(): string {
-    return SheetAnswerStep.LABEL
   }
 
   clone(): SheetAnswerStep {

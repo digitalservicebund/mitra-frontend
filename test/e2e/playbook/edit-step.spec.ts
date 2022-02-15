@@ -90,16 +90,16 @@ test.describe("Edit Step", async () => {
 
   test("edit step type and clone", async ({ page }) => {
     await expect(
-      page.locator(":nth-match(:text('Kurzer Text'), 2)")
+      page.locator(":nth-match(:text('kurzer Text'), 1)")
     ).not.toBeVisible()
     await page.click("main >> section li:has-text('bar step') >> details")
-    await page.click(":nth-match(:text('Kurzer Text'), 2)")
-    await page.click("text='Langer Text'")
+    await page.click("text='kurzer Text'")
+    await page.click("text='langer Text'")
     await expect(
-      page.locator(":nth-match(:text('Kurzer Text'), 2)")
+      page.locator(":nth-match(:text('kurzer Text'), 1)")
     ).not.toBeVisible()
     await expect(
-      page.locator(":nth-match(:text('Langer Text'), 2)")
+      page.locator("main >> section:has-text('bar step') >> text='langer Text'")
     ).toBeVisible()
     await page.click(
       "section:below(header) >> li:has-text('bar step') >> button"
@@ -109,7 +109,7 @@ test.describe("Edit Step", async () => {
       "main >> section li:has-text('Kopie von bar step') >> details summary"
     )
     await expect(
-      page.locator(":nth-match(:text('Langer Text'), 2)")
+      page.locator(":nth-match(:text('langer Text'), 2)")
     ).toBeVisible()
   })
 })
