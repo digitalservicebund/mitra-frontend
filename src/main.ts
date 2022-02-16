@@ -1,11 +1,11 @@
 import { createPinia } from "pinia"
-import piniaPersist from "pinia-plugin-persist"
 import PrimeVue from "primevue/config"
 // eslint-disable-next-line import/no-unresolved
 import routes from "virtual:generated-pages"
 import { createApp } from "vue"
 import { createRouter, createWebHistory } from "vue-router"
 import App from "./App.vue"
+import { persistence } from "./session"
 
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
@@ -19,7 +19,7 @@ const app = createApp(App)
       routes,
     })
   )
-  .use(createPinia().use(piniaPersist))
+  .use(createPinia().use(persistence))
   .use(PrimeVue)
 
 // Register global directive "v-focus" for focusing elements
