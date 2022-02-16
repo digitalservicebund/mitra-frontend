@@ -93,7 +93,7 @@
   <div :class="{ open: isCardOpen }" class="relative pl-5 pb-5 transition">
     <span
       class="toggle-arrow absolute top-2 left-0 material-icons-outlined cursor-pointer text-2xl leading-9 transition"
-      :class="{ 'rotate-270': isCardOpen }"
+      :class="{ 'rotate-270': !isCardOpen }"
       aria-label="Fragendetails anzeigen"
       @click="toggleCard"
       @keypress.o="toggleCard"
