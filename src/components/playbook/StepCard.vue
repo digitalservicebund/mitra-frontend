@@ -90,9 +90,9 @@
 </script>
 
 <template>
-  <div :class="{ open: isCardOpen }" class="relative pl-5 pb-5 transition">
+  <div :class="{ open: isCardOpen }" class="relative transition">
     <span
-      class="toggle-arrow absolute top-2 left-0 material-icons-outlined cursor-pointer text-2xl leading-9 transition select-none"
+      class="toggle-arrow absolute top-4 left-3 material-icons-outlined cursor-pointer text-2xl leading-9 transition select-none z-20"
       :class="{ 'rotate-270': !isCardOpen }"
       aria-label="Fragendetails anzeigen"
       @click="toggleCard"
@@ -102,7 +102,7 @@
     </span>
     <Button
       type="button"
-      class="absolute top-0 right-0 z-20"
+      class="absolute top-5 right-5 z-20"
       aria-label="menu"
       aria-haspopup="menu"
       @contextmenu="openMenu"
@@ -114,17 +114,21 @@
       </span>
     </Button>
     <ContextMenu ref="menu" :model="items" />
-    <header class="edit relative" @click="openCard" @keypress.o="openCard">
+    <header
+      class="edit relative py-2 pl-8"
+      @click="openCard"
+      @keypress.o="openCard"
+    >
       <InplaceEditable :editable="step.prompt" h1 @update="handleUpdateTitle" />
       <div
-        class="antworttyp text-base my-2 ml-3"
+        class="antworttyp text-base py-2 ml-3"
         :style="[isCardOpen ? 'display: none' : '']"
       >
         <header class="text-slate-400">Antworttyp</header>
         {{ stepLabels[(step.type as keyof typeof stepLabels)] }}
       </div>
     </header>
-    <div class="details" :style="[isCardOpen ? '' : 'display: none']">
+    <div class="details pb-5 pl-8" :style="[isCardOpen ? '' : 'display: none']">
       <div class="relative edit">
         <div class="mb-2">
           <InplaceEditable

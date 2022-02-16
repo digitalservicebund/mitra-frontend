@@ -121,7 +121,7 @@
           <li
             v-for="(step, index) in module.steps"
             :key="step.id"
-            class="mt-4 border p-4 shadow-md"
+            class="mt-4 border shadow-md"
           >
             <StepCard
               :step="step"
