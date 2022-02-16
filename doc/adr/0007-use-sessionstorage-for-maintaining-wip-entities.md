@@ -13,8 +13,6 @@ their work unexpectedly.
 
 ## Decision
 
-TODO: The change that we're proposing or have agreed to implement.
-
 We're backing the already in use [Pinia](https://pinia.vuejs.org) store with `sessionStorage`, with data being automatically written/serialized to `sessionStorage`.
 This allows for recreating the app state from its serialized representation.
 
