@@ -24,23 +24,13 @@ class NullPlaybook extends Playbook {
   }
 }
 
-const reviveDates: (metadata: { [property: string]: string }) => {
-  [property: string]: Date
-} = (metadata = {}) =>
-  Object.entries(metadata).reduce(
-    (memo: { [property: string]: Date }, entry) => {
-      const [key, value] = entry
-      memo[key] = new Date(value)
-      return memo
-    },
-    {}
-  )
-
 export const persistence = ({ store }: PiniaPluginContext): void => {
   const key = store.$id
   const persisted: string | null = sessionStorage.getItem(key)
   if (persisted) {
-    const { workspace, entryPoint } = JSON.parse(persisted)
+    const { workspace, entryPoint } = JSON.parse(persisted, (key, value) =>
+      ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
+    )
 
     // Hydrating from serialized session after reload, we need to rectify the
     // instances we're getting out of sessionStorage (object -> Contract/Playbook)..
@@ -48,24 +38,22 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
       const [contract, contractMetadata] = workspace.contract
       workspace.contract.splice(
         0,
-        2,
+        1,
         createContract({
           contract,
-          ...reviveDates(contractMetadata),
-        }),
-        reviveDates(contractMetadata)
+          ...contractMetadata,
+        })
       )
     }
     if (workspace.playbook) {
       const [playbook, playbookMetadata] = workspace.playbook
       workspace.playbook.splice(
         0,
-        2,
+        1,
         createPlaybook({
           playbook,
-          ...reviveDates(playbookMetadata),
-        }),
-        reviveDates(playbookMetadata)
+          ...playbookMetadata,
+        })
       )
     }
 
@@ -110,10 +98,10 @@ export const useSession = defineStore("session", {
     },
     refresh({ contract, playbook }: Workspace) {
       if (contract !== undefined) {
-        this.workspace.contract[0] = contract
+        this.workspace.contract.splice(0, 2, contract, contract.metadata)
       }
       if (playbook !== undefined) {
-        this.workspace.playbook[0] = playbook
+        this.workspace.playbook.splice(0, 2, playbook, playbook.metadata)
       }
     },
   },
