@@ -9,14 +9,12 @@ const repository: PlaybookRepository = {
     if (serializedPlaybook === null) {
       throw new Error("Playbook not found")
     }
-    const object = JSON.parse(serializedPlaybook, (key, value) =>
-      ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
+    const { playbook, ...metadata } = JSON.parse(
+      serializedPlaybook,
+      (key, value) =>
+        ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
     )
-    const { createdAt, savedAt } = object
-    return createPlaybook(JSON.parse(serializedPlaybook)).updateMetadata({
-      createdAt,
-      savedAt,
-    })
+    return createPlaybook({ playbook, ...metadata })
   },
 
   save(playbook: Playbook) {
