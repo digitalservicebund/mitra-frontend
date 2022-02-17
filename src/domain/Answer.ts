@@ -6,7 +6,7 @@ type Answerable = string | number | number[] | Row[]
 export class Choice {
   constructor(
     public readonly text: string,
-    public readonly path: Step<Answer>[]
+    public readonly path: Step<Answer>[] = []
   ) {}
 
   clone() {
