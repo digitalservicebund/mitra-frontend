@@ -28,12 +28,14 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
   const key = store.$id
   const persisted: string | null = sessionStorage.getItem(key)
   if (persisted) {
+    // Hydrating from serialized session after reload, we need to rectify the
+    // instances we're getting out of sessionStorage:
+    // string -> Date
+    // object -> Contract/Playbook
     const { workspace, entryPoint } = JSON.parse(persisted, (key, value) =>
       ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
     )
 
-    // Hydrating from serialized session after reload, we need to rectify the
-    // instances we're getting out of sessionStorage (object -> Contract/Playbook)..
     if (workspace.contract) {
       const [contract, contractMetadata] = workspace.contract
       workspace.contract.splice(
