@@ -12,25 +12,14 @@ function findStepIndex(
   return steps.findIndex((x) => x.equals(step))
 }
 
-interface Contract {
-  metadata: Metadata
-}
-
-class Contract extends Entity {
-  #metadata: Metadata
-
+export default class Contract extends Entity {
   constructor(
     public title: string = "Unbenannter Vertrag",
     public readonly modules: Module[],
-    id?: string
+    id?: string,
+    public readonly metadata: Metadata = { createdAt: new Date() }
   ) {
     super(id)
-    this.#metadata = { createdAt: new Date() }
-
-    // Workaround limitation of proxies and class names with private fields..
-    Object.defineProperty(this, "metadata", {
-      get: () => this.#metadata,
-    })
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
@@ -57,9 +46,7 @@ class Contract extends Entity {
   }
 
   updateMetadata(data: Partial<Metadata>): Contract {
-    this.#metadata = { ...this.#metadata, ...data }
+    Object.assign(this.metadata, data)
     return this
   }
 }
-
-export default Contract

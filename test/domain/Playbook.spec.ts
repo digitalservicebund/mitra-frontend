@@ -55,9 +55,4 @@ describe("Playbook", () => {
     expect(playbook.modules.length).toEqual(1)
     expect(playbook.modules[0].title).toEqual("bar")
   })
-
-  it("won't serialize with metadata automatically", () => {
-    const playbook = new Playbook().updateMetadata({ savedAt: new Date() })
-    expect(JSON.stringify(playbook)).not.toMatch("metadata")
-  })
 })

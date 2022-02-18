@@ -2,15 +2,14 @@ import { defineStore, PiniaPluginContext } from "pinia"
 import { watch } from "vue"
 import { Answer } from "./domain/Answer"
 import Contract from "./domain/Contract"
-import Metadata from "./domain/Metadata"
 import Playbook from "./domain/Playbook"
 import { Step } from "./domain/Step"
 import { createContract, createPlaybook } from "./infra/JSONMapper"
 
 type StepId = string
 type Workspace = { contract?: Contract; playbook?: Playbook }
-type ContractWorkspace = [Contract, Metadata, StepId]
-type PlaybookWorkspace = [Playbook, Metadata]
+type ContractWorkspace = [Contract, StepId]
+type PlaybookWorkspace = [Playbook]
 type EntryPoint = "creator" | "einkauf"
 
 class NullContract extends Contract {
@@ -37,26 +36,12 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
     )
 
     if (workspace.contract) {
-      const [contract, contractMetadata] = workspace.contract
-      workspace.contract.splice(
-        0,
-        1,
-        createContract({
-          contract,
-          ...contractMetadata,
-        })
-      )
+      const [contractDTO] = workspace.contract
+      workspace.contract[0] = createContract(contractDTO)
     }
     if (workspace.playbook) {
-      const [playbook, playbookMetadata] = workspace.playbook
-      workspace.playbook.splice(
-        0,
-        1,
-        createPlaybook({
-          playbook,
-          ...playbookMetadata,
-        })
-      )
+      const [playbookDTO] = workspace.playbook
+      workspace.playbook[0] = createPlaybook(playbookDTO)
     }
 
     store.$patch({ workspace, entryPoint })
@@ -73,15 +58,8 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
 export const useSession = defineStore("session", {
   state: () => ({
     workspace: {
-      contract: [
-        new NullContract(),
-        { createdAt: new Date(0) },
-        "",
-      ] as ContractWorkspace,
-      playbook: [
-        new NullPlaybook(),
-        { createdAt: new Date(0) },
-      ] as PlaybookWorkspace,
+      contract: [new NullContract(), ""] as ContractWorkspace,
+      playbook: [new NullPlaybook()] as PlaybookWorkspace,
     },
     entryPoint: "",
   }),
@@ -90,33 +68,33 @@ export const useSession = defineStore("session", {
       contract: Contract,
       lastEditedStep: Step<Answer> = contract.path[0]
     ) {
-      this.workspace.contract = [contract, contract.metadata, lastEditedStep.id]
+      this.workspace.contract = [contract, lastEditedStep.id]
     },
     rememberPlaybook(playbook: Playbook) {
-      this.workspace.playbook = [playbook, playbook.metadata]
+      this.workspace.playbook = [playbook]
     },
     rememberEntryPoint(entryPoint: EntryPoint) {
       this.entryPoint = entryPoint
     },
     refresh({ contract, playbook }: Workspace) {
       if (contract !== undefined) {
-        this.workspace.contract.splice(0, 2, contract, contract.metadata)
+        this.workspace.contract[0] = contract
       }
       if (playbook !== undefined) {
-        this.workspace.playbook.splice(0, 2, playbook, playbook.metadata)
+        this.workspace.playbook[0] = playbook
       }
     },
   },
   getters: {
     contract(): Contract {
-      return this.workspace.contract[0] as Contract
+      return this.workspace.contract[0]
     },
     playbook(): Playbook {
-      return this.workspace.playbook[0] as Playbook
+      return this.workspace.playbook[0]
     },
     lastEditedStep(): Step<Answer> {
       return this.contract.path.find(
-        (step) => step.id === this.workspace.contract[2]
+        (step) => step.id === this.workspace.contract[1]
       ) as Step<Answer>
     },
   },

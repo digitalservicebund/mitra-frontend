@@ -15,14 +15,11 @@ const test = base.extend<TestFixtures>({
     await use(playbook)
   },
   page: async ({ baseURL, context, page, playbook }, use) => {
-    const { playbook: rememberedPlaybook, createdAt: rememberedCreatedAt } =
-      JSON.parse(playbook)
+    const { playbook: rememberedPlaybook } = JSON.parse(playbook)
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
-      `{"workspace":{"playbook":[${JSON.stringify(
-        rememberedPlaybook
-      )},{"createdAt":"${rememberedCreatedAt}"}]}}`
+      `{"workspace":{"playbook":[${JSON.stringify(rememberedPlaybook)}]}}`
     )
 
     await page.goto(`${baseURL}/mitra-frontend/playbook/${playbookId}`)

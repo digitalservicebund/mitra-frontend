@@ -1,4 +1,4 @@
-import playbook from "../data/evb-it-cloud-playbook.json"
+import { playbook } from "../data/evb-it-cloud-playbook.json"
 import Playbook from "../domain/Playbook"
 import PlaybookRepository from "../domain/PlaybookRepository"
 import { createPlaybook, PlaybookDTO } from "./JSONMapper"
@@ -9,23 +9,20 @@ const repository: PlaybookRepository = {
     if (serializedPlaybook === null) {
       throw new Error("Playbook not found")
     }
-    const { playbook, ...metadata } = JSON.parse(
-      serializedPlaybook,
-      (key, value) =>
-        ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
+    const { playbook } = JSON.parse(serializedPlaybook, (key, value) =>
+      ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
     )
-    return createPlaybook({ playbook, ...metadata })
+    return createPlaybook(playbook)
   },
 
   save(playbook: Playbook) {
-    localStorage.setItem(
-      playbook.id,
-      JSON.stringify({ playbook, ...playbook.metadata })
-    )
+    localStorage.setItem(playbook.id, JSON.stringify({ playbook }))
   },
 }
 
-const cloudContractPlaybook = createPlaybook(playbook as PlaybookDTO)
+const cloudContractPlaybook = createPlaybook(
+  playbook as PlaybookDTO
+).updateMetadata({ createdAt: new Date() })
 repository.save(cloudContractPlaybook)
 
 export default repository

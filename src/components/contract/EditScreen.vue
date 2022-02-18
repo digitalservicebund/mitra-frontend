@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import Breadcrumb from "primevue/breadcrumb"
   import type { MenuItem } from "primevue/menuitem"
-  import { computed, Ref, ref } from "vue"
+  import { computed, ref } from "vue"
   import Contract from "../../domain/Contract"
   import Module from "../../domain/Module"
   import Storage from "../../domain/Storage"
@@ -21,7 +21,7 @@
     label: "Startseite",
   }
 
-  const contract = ref(session.contract) as Ref<Contract>
+  const contract = ref(session.contract)
   const breadcrumbItems = computed(() => [
     {
       label: contract.value.title,

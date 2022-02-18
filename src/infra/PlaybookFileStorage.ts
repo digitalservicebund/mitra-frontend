@@ -6,15 +6,19 @@ import { loadFile } from "./LoadFile"
 
 const storage: Storage<Playbook, File> = {
   async load(file: File) {
-    const object = JSON.parse((await loadFile(file)) as string)
-    return createPlaybook(object).updateMetadata({
-      createdAt: new Date(object.createdAt),
+    const { playbook: playbookDTO } = JSON.parse(
+      (await loadFile(file)) as string,
+      (key, value) => (key === "createdAt" ? new Date(value) : value)
+    )
+    return createPlaybook(playbookDTO).updateMetadata({
       savedAt: new Date(file.lastModified),
     })
   },
 
   async save(playbook: Playbook) {
-    const writable = JSON.stringify({ playbook, ...playbook.metadata })
+    const writable = JSON.stringify({ playbook }, (key, value) =>
+      key === "savedAt" ? undefined : value
+    )
 
     if (!!window.showSaveFilePicker) {
       const fileHandle: FileSystemFileHandle = await window.showSaveFilePicker({

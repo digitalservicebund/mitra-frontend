@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Button from "primevue/button"
-  import { ref, Ref } from "vue"
+  import { ref } from "vue"
   import { useRouter } from "vue-router"
   import { Answer } from "../../domain/Answer"
   import Module from "../../domain/Module"
@@ -21,7 +21,7 @@
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
 
-  const playbook = ref(session.playbook) as Ref<Playbook>
+  const playbook = ref(session.playbook)
   const module = ref(playbook.value.findModuleById(props.moduleId))
 
   const handleUpdateTitle = (newTitle: string) => {

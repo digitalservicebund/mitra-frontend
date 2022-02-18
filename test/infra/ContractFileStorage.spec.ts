@@ -6,22 +6,10 @@ describe("ContractFileStorage", () => {
     it("maintains the contract's savedAt metadata", async () => {
       const contract = new Contract("foo", [])
       const lastModified = Date.now()
-      const file = new File(
-        [
-          JSON.stringify({
-            contract,
-            createdAt: new Date("2022-01-27T10:04:38.424Z"),
-          }),
-        ],
-        "contract.json",
-        {
-          lastModified,
-        }
-      )
+      const file = new File([JSON.stringify({ contract })], "contract.json", {
+        lastModified,
+      })
       const loaded = await storage.load(file)
-      expect(loaded.metadata.createdAt).toEqual(
-        new Date("2022-01-27T10:04:38.424Z")
-      )
       expect(loaded.metadata.savedAt).toEqual(new Date(lastModified))
     })
   })
@@ -51,18 +39,6 @@ describe("ContractFileStorage", () => {
       expect(window.showSaveFilePicker).toBeCalledTimes(1)
       expect(fileStream.write).toBeCalledTimes(1)
       expect(fileStream.close).toBeCalledTimes(1)
-    })
-
-    it("should save a given contract along with metadata", async () => {
-      const contract: Contract = new Contract(
-        "foo",
-        [],
-        "928d4af5-15c8-4948-b67a-6036224cc196"
-      ).updateMetadata({ createdAt: new Date(0) })
-      await storage.save(contract)
-      expect(fileStream.write).toBeCalledWith(
-        '{"contract":{"id":"928d4af5-15c8-4948-b67a-6036224cc196","title":"foo","modules":[]},"createdAt":"1970-01-01T00:00:00.000Z"}'
-      )
     })
   })
 })

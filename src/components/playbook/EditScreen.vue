@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Button from "primevue/button"
-  import { ref, Ref } from "vue"
+  import { ref } from "vue"
   import { useRouter } from "vue-router"
   import Module from "../../domain/Module"
   import Playbook from "../../domain/Playbook"
@@ -16,7 +16,7 @@
   const router = useRouter()
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
-  const playbook = ref(session.playbook) as Ref<Playbook>
+  const playbook = ref(session.playbook)
 
   const handleUpdateTitle = (newTitle: string) => {
     playbook.value.title = newTitle
@@ -24,7 +24,7 @@
   }
 
   const handleSave = () => {
-    storage.save(playbook.value as Playbook)
+    storage.save(playbook.value)
   }
 
   const handleNavigate = async (module: Module) => {
@@ -48,7 +48,7 @@
     <nav class="flex-none">
       <SideMenu
         :title="playbook.title"
-        :navigatable="(playbook as Playbook)"
+        :navigatable="playbook"
         @save="handleSave"
         @navigate="handleNavigate"
       />

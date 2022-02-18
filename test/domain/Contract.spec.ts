@@ -72,9 +72,4 @@ describe("Contract", () => {
     contract.updateMetadata({ savedAt })
     expect(contract.metadata.savedAt).toEqual(savedAt)
   })
-
-  it("won't serialize with metadata automatically", () => {
-    const contract = new Contract("foo", [])
-    expect(JSON.stringify(contract)).not.toMatch("metadata")
-  })
 })

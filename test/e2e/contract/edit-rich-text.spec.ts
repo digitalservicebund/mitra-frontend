@@ -27,14 +27,13 @@ const test = base.extend<TestFixtures>({
           },
         ],
       },
-      createdAt: rememberedCreatedAt,
     } = JSON.parse(contract)
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
       `{"workspace":{"contract":[${JSON.stringify(
         rememberedContract
-      )},{"createdAt":"${rememberedCreatedAt}"},"${rememberedStepId}"]}}`
+      )},"${rememberedStepId}"]}}`
     )
     await page.goto(
       `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`

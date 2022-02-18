@@ -6,16 +6,19 @@ import { loadFile } from "./LoadFile"
 
 const storage: Storage<Contract, File> = {
   async load(file: File) {
-    const object = JSON.parse((await loadFile(file)) as string)
-    return createContract({
-      ...object,
-      createdAt: new Date(object.createdAt),
+    const { contract: contractDTO } = JSON.parse(
+      (await loadFile(file)) as string,
+      (key, value) => (key === "createdAt" ? new Date(value) : value)
+    )
+    return createContract(contractDTO).updateMetadata({
       savedAt: new Date(file.lastModified),
     })
   },
 
   async save(contract: Contract) {
-    const writable = JSON.stringify({ contract, ...contract.metadata })
+    const writable = JSON.stringify({ contract }, (key, value) =>
+      key === "savedAt" ? undefined : value
+    )
 
     if (!!window.showSaveFilePicker) {
       const fileHandle: FileSystemFileHandle = await window.showSaveFilePicker({
