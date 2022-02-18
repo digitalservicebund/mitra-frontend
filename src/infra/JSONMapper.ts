@@ -135,19 +135,17 @@ export function createModule(module: ModuleDTO): Module {
 }
 
 export function createContract(contract: ContractDTO): Contract {
-  return new Contract(
-    contract.title,
-    contract.modules.map(createModule),
-    contract.id,
-    contract.metadata
-  )
+  const { metadata, id } = contract
+  return new Contract(contract.title, contract.modules.map(createModule), {
+    metadata,
+    id,
+  })
 }
 
 export function createPlaybook(playbook: PlaybookDTO): Playbook {
-  return new Playbook(
-    playbook.title,
-    playbook.modules.map(createModule),
-    playbook.id,
-    playbook.metadata
-  )
+  const { metadata, id } = playbook
+  return new Playbook(playbook.title, playbook.modules.map(createModule), {
+    metadata,
+    id,
+  })
 }

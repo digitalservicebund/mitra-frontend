@@ -3,13 +3,18 @@ import Metadata from "./Metadata"
 import Module from "./Module"
 
 export default class Playbook extends Entity {
+  public readonly metadata: Metadata
+
   constructor(
     public title: string = "Unbenanntes Playbook",
     public readonly modules: Module[] = [],
-    id?: string,
-    public readonly metadata: Metadata = { createdAt: new Date() }
+    {
+      metadata = { createdAt: new Date() },
+      id,
+    }: { id?: string; metadata?: Metadata } = {}
   ) {
     super(id)
+    this.metadata = metadata
   }
 
   updateMetadata(data: Partial<Metadata>): Playbook {

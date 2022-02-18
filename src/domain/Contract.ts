@@ -13,13 +13,18 @@ function findStepIndex(
 }
 
 export default class Contract extends Entity {
+  public readonly metadata: Metadata
+
   constructor(
     public title: string = "Unbenannter Vertrag",
     public readonly modules: Module[],
-    id?: string,
-    public readonly metadata: Metadata = { createdAt: new Date() }
+    {
+      metadata = { createdAt: new Date() },
+      id,
+    }: { id?: string; metadata?: Metadata } = {}
   ) {
     super(id)
+    this.metadata = metadata
   }
 
   static fromPlaybook(playbook: Playbook): Contract {
