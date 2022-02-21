@@ -20,7 +20,7 @@ const testModules: Module[] = [
     new TextAnswerStep("Schritt 2.3"),
   ]),
 ]
-const contract = new Contract("test-contract", testModules)
+const contract = new Contract("test-contract", testModules, { id: "xyz" })
 
 describe("SideMenu", () => {
   const pinia = createTestingPinia()
@@ -51,7 +51,7 @@ describe("SideMenu", () => {
     render(SideMenu, {
       props: {
         title: "foo",
-        navigatable: new Contract(undefined, testModules),
+        navigatable: contract,
       },
       global: {
         plugins: [router, pinia],
@@ -69,7 +69,7 @@ describe("SideMenu", () => {
     const { emitted } = render(SideMenu, {
       props: {
         title: "foo",
-        navigatable: new Contract(undefined, testModules),
+        navigatable: contract,
       },
       global: {
         plugins: [router, pinia],
@@ -85,7 +85,7 @@ describe("SideMenu", () => {
     const { emitted } = render(SideMenu, {
       props: {
         title: "foo",
-        navigatable: new Contract(undefined, testModules),
+        navigatable: contract,
       },
       global: {
         plugins: [router, pinia],

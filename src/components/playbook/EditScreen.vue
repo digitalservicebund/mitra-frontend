@@ -12,11 +12,13 @@
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
 
+  const props = defineProps<{ id: string }>()
+
   const session = useSession()
   const router = useRouter()
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
-  const playbook = ref(session.playbook)
+  const playbook = ref(session.playbooks[props.id])
 
   const handleUpdateTitle = (newTitle: string) => {
     playbook.value.title = newTitle

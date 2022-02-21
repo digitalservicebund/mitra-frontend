@@ -34,7 +34,9 @@ describe("ModuleEditScreen", () => {
 
   beforeAll(async () => {
     session.rememberPlaybook(
-      new Playbook("test-playbook", [new Module("test-module", [], "xyz")])
+      new Playbook("test-playbook", [new Module("test-module", [], "xyz")], {
+        id: "xyz",
+      })
     )
 
     router.push("/mitra-frontend/")

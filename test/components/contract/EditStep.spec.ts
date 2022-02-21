@@ -8,12 +8,16 @@ import { TextAnswerStep } from "../../../src/domain/Step"
 import { useSession } from "../../../src/session"
 
 describe("EditStep", () => {
-  const contract = new Contract(undefined, [
-    new Module("foo", [
-      new TextAnswerStep("foo", { description: "foo description" }),
-    ]),
-    new Module("bar", [new TextAnswerStep("bar")]),
-  ])
+  const contract = new Contract(
+    undefined,
+    [
+      new Module("foo", [
+        new TextAnswerStep("foo", { description: "foo description" }),
+      ]),
+      new Module("bar", [new TextAnswerStep("bar")]),
+    ],
+    { id: "xyz" }
+  )
   const pinia = createTestingPinia()
   const session = useSession()
   session.rememberContract(contract, contract.modules[0].steps[0])
@@ -28,11 +32,11 @@ describe("EditStep", () => {
       },
     })
 
-    expect(session.lastEditedStep).toEqual(contract.modules[0].steps[0])
+    expect(session.lastEditedStep("xyz")).toEqual(contract.modules[0].steps[0])
     await wrapper.find("button").trigger("click") // next
-    expect(session.lastEditedStep).toEqual(contract.modules[1].steps[0])
+    expect(session.lastEditedStep("xyz")).toEqual(contract.modules[1].steps[0])
     await wrapper.find("button").trigger("click") // back
-    expect(session.lastEditedStep).toEqual(contract.modules[0].steps[0])
+    expect(session.lastEditedStep("xyz")).toEqual(contract.modules[0].steps[0])
   })
 
   it("displays description", async () => {

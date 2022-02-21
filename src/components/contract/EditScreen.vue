@@ -13,6 +13,8 @@
   import EditStep from "./EditStep.vue"
   import ContractPreview from "./Preview.vue"
 
+  const props = defineProps<{ id: string }>()
+
   const session = useSession()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
@@ -21,7 +23,7 @@
     label: "Startseite",
   }
 
-  const contract = ref(session.contract)
+  const contract = ref(session.contracts[props.id][0])
   const breadcrumbItems = computed(() => [
     {
       label: contract.value.title,
@@ -72,7 +74,10 @@
       </header>
       <section class="mt-16">
         <transition name="fade" mode="out-in">
-          <EditStep :key="session.lastEditedStep.id" :contract="contract" />
+          <EditStep
+            :key="session.lastEditedStep(contract.id)?.id"
+            :contract="contract"
+          />
         </transition>
       </section>
     </main>

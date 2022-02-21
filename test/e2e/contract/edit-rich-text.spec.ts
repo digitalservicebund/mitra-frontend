@@ -21,6 +21,7 @@ const test = base.extend<TestFixtures>({
     const {
       contract: rememberedContract,
       contract: {
+        id: rememberedContractId,
         modules: [
           {
             steps: [{ id: rememberedStepId }],
@@ -31,12 +32,12 @@ const test = base.extend<TestFixtures>({
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
-      `{"workspace":{"contract":[${JSON.stringify(
+      `{"contracts":{"${rememberedContractId}":[${JSON.stringify(
         rememberedContract
       )},"${rememberedStepId}"]}}`
     )
     await page.goto(
-      `${baseURL}/mitra-frontend/contract/3d324eca-06c2-4781-af52-705f49039d0d`
+      `${baseURL}/mitra-frontend/contract/${rememberedContractId}`
     )
     await use(page)
   },

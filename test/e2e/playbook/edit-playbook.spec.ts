@@ -6,8 +6,6 @@ type TestFixtures = {
   playbook: string
 }
 
-const playbookId = "3d324eca-06c2-4781-af52-705f49039d0d"
-
 const test = base.extend<TestFixtures>({
   playbookFile: "", // needs to be filled in per test.use(...) atm, see below
   playbook: async ({ playbookFile }, use) => {
@@ -15,14 +13,20 @@ const test = base.extend<TestFixtures>({
     await use(playbook)
   },
   page: async ({ baseURL, context, page, playbook }, use) => {
-    const { playbook: rememberedPlaybook } = JSON.parse(playbook)
+    const {
+      playbook: rememberedPlaybook,
+      playbook: { id: rememberedPlaybookId },
+    } = JSON.parse(playbook)
 
     await context.addInitScript(
       (session) => window.sessionStorage.setItem("session", session),
-      `{"workspace":{"playbook":[${JSON.stringify(rememberedPlaybook)}]}}`
+      `{"playbooks":{"${rememberedPlaybookId}":${JSON.stringify(
+        rememberedPlaybook
+      )}}}`
     )
-
-    await page.goto(`${baseURL}/mitra-frontend/playbook/${playbookId}`)
+    await page.goto(
+      `${baseURL}/mitra-frontend/playbook/${rememberedPlaybookId}`
+    )
     await use(page)
   },
 })

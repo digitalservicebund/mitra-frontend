@@ -21,7 +21,7 @@
 
   const storage: Storage<Playbook, File> = makePlaybookStorageService()
 
-  const playbook = ref(session.playbook)
+  const playbook = ref(session.playbooks[props.playbookId])
   const module = ref(playbook.value.findModuleById(props.moduleId))
 
   const handleUpdateTitle = (newTitle: string) => {

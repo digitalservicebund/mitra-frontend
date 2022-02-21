@@ -4,24 +4,17 @@ import { Answer } from "./domain/Answer"
 import Contract from "./domain/Contract"
 import Playbook from "./domain/Playbook"
 import { Step } from "./domain/Step"
-import { createContract, createPlaybook } from "./infra/JSONMapper"
+import {
+  ContractDTO,
+  createContract,
+  createPlaybook,
+  PlaybookDTO,
+} from "./infra/JSONMapper"
 
+type ContractId = string
+type PlaybookId = string
 type StepId = string
-type Workspace = { contract?: Contract; playbook?: Playbook }
-type ContractWorkspace = [Contract, StepId]
-type PlaybookWorkspace = [Playbook]
 type EntryPoint = "creator" | "einkauf"
-
-class NullContract extends Contract {
-  constructor() {
-    super("", [])
-  }
-}
-class NullPlaybook extends Playbook {
-  constructor() {
-    super()
-  }
-}
 
 export const persistence = ({ store }: PiniaPluginContext): void => {
   const key = store.$id
@@ -31,20 +24,23 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
     // instances we're getting out of sessionStorage:
     // string -> Date
     // object -> Contract/Playbook
-    const { workspace, entryPoint } = JSON.parse(persisted, (key, value) =>
+    const {
+      contracts = {},
+      playbooks = {},
+      entryPoint = "",
+    } = JSON.parse(persisted, (key, value) =>
       ["createdAt", "savedAt"].includes(key) ? new Date(value) : value
     )
-
-    if (workspace.contract) {
-      const [contractDTO] = workspace.contract
-      workspace.contract[0] = createContract(contractDTO)
+    for (const [contractId, pair] of Object.entries(contracts)) {
+      contracts[contractId][0] = createContract(
+        (pair as [object, string])[0] as ContractDTO
+      )
     }
-    if (workspace.playbook) {
-      const [playbookDTO] = workspace.playbook
-      workspace.playbook[0] = createPlaybook(playbookDTO)
+    for (const [playbookId, object] of Object.entries(playbooks)) {
+      playbooks[playbookId] = createPlaybook(object as PlaybookDTO)
     }
 
-    store.$patch({ workspace, entryPoint })
+    store.$patch({ contracts, playbooks, entryPoint })
     sessionStorage.setItem(key, JSON.stringify(store.$state))
   }
 
@@ -57,10 +53,8 @@ export const persistence = ({ store }: PiniaPluginContext): void => {
 
 export const useSession = defineStore("session", {
   state: () => ({
-    workspace: {
-      contract: [new NullContract(), ""] as ContractWorkspace,
-      playbook: [new NullPlaybook()] as PlaybookWorkspace,
-    },
+    contracts: {} as { [id: ContractId]: [Contract, StepId] },
+    playbooks: {} as { [id: PlaybookId]: Playbook },
     entryPoint: "",
   }),
   actions: {
@@ -68,34 +62,38 @@ export const useSession = defineStore("session", {
       contract: Contract,
       lastEditedStep: Step<Answer> = contract.path[0]
     ) {
-      this.workspace.contract = [contract, lastEditedStep.id]
+      this.contracts[contract.id] = [contract, lastEditedStep.id]
     },
     rememberPlaybook(playbook: Playbook) {
-      this.workspace.playbook = [playbook]
+      this.playbooks[playbook.id] = playbook
     },
     rememberEntryPoint(entryPoint: EntryPoint) {
       this.entryPoint = entryPoint
     },
-    refresh({ contract, playbook }: Workspace) {
+    refresh({
+      contract,
+      playbook,
+    }: {
+      contract?: Contract
+      playbook?: Playbook
+    }) {
       if (contract !== undefined) {
-        this.workspace.contract[0] = contract
+        this.contracts[contract.id][0] = contract
       }
       if (playbook !== undefined) {
-        this.workspace.playbook[0] = playbook
+        this.playbooks[playbook.id] = playbook
       }
     },
   },
   getters: {
-    contract(): Contract {
-      return this.workspace.contract[0]
-    },
-    playbook(): Playbook {
-      return this.workspace.playbook[0]
-    },
-    lastEditedStep(): Step<Answer> {
-      return this.contract.path.find(
-        (step) => step.id === this.workspace.contract[1]
-      ) as Step<Answer>
+    lastEditedStep: (state) => {
+      return (contractId: ContractId) => {
+        if (!(contractId in state.contracts)) {
+          return
+        }
+        const [contract, lastEditedStepId] = state.contracts[contractId]
+        return contract.path.find((step) => step.id === lastEditedStepId)
+      }
     },
   },
 })

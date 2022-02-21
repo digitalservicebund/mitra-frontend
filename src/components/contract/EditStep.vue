@@ -11,7 +11,7 @@
 
   const session = useSession()
 
-  const currentStep = ref(session.lastEditedStep)
+  const currentStep = ref(session.lastEditedStep(props.contract.id))
 
   const hasPreviousStep = computed(
     () =>
