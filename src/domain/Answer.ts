@@ -91,7 +91,7 @@ export class MultipleChoiceAnswer extends Answer<number[]> {
   clone(): Answer<number[]> {
     return new MultipleChoiceAnswer(
       this.choices.map((choice) => choice.clone()),
-      this.value
+      [...this.value] // Ensure to copy array, to avoid subtle "by reference" bugs!
     )
   }
 

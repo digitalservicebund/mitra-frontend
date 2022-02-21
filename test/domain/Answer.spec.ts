@@ -11,5 +11,14 @@ describe("Answer", () => {
       answer.setValue([1, 0])
       expect(answer.selected).toEqual(answer.choices)
     })
+
+    it("should clone itself along with values", () => {
+      const answer = new MultipleChoiceAnswer([
+        new Choice("foo"),
+        new Choice("bar"),
+      ])
+
+      expect(answer.clone().value).not.toBe(answer.value)
+    })
   })
 })
