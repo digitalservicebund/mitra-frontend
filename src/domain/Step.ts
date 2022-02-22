@@ -6,6 +6,7 @@ import {
   MultipleChoiceAnswer,
   SheetAnswer,
   Choice,
+  MultipleChoice,
 } from "./Answer"
 import Entity from "./Entity"
 
@@ -235,6 +236,10 @@ export class MultipleChoiceAnswerStep extends Step<MultipleChoiceAnswer> {
 
   get selected(): readonly Choice[] {
     return this.answer.selected
+  }
+
+  completeWith(selected: number[], ...filled: string[]) {
+    this.answer.setValue({ selected })
   }
 
   clone(): MultipleChoiceAnswerStep {

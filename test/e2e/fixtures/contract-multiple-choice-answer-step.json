@@ -14,7 +14,7 @@
             "answer": {
               "choices": [
                 {
-                  "text": "Test choice 1A",
+                  "text": "Test choice 1A with placeholder ${one} and ${two}",
                   "path": [
                     {
                       "id": "57c97b0d-4eae-439e-b747-c297b76128e5",

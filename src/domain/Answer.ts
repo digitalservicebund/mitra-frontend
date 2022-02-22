@@ -1,8 +1,9 @@
 import { Step } from "./Step"
 import ValueObject from "./ValueObject"
 
-type Answerable = string | number | number[] | Row[]
+type Answerable = string | number | MultipleChoice | Row[]
 
+export type MultipleChoice = { selected: number[]; text?: [...string[]] }
 export class Choice {
   constructor(
     public readonly text: string,
@@ -64,6 +65,10 @@ export class SingleChoiceAnswer extends Answer<number> {
     super(value)
   }
 
+  get selected(): Choice | undefined {
+    return this.choices[this.value]
+  }
+
   clone(): Answer<number> {
     return new SingleChoiceAnswer(
       this.choices.map((choice) => choice.clone()),
@@ -71,32 +76,21 @@ export class SingleChoiceAnswer extends Answer<number> {
     )
   }
 
-  get selected(): Choice | undefined {
-    return this.choices[this.value]
-  }
-
   toString(): string {
     return `${this.selected?.text || ""}`
   }
 }
 
-export class MultipleChoiceAnswer extends Answer<number[]> {
+export class MultipleChoiceAnswer extends Answer<MultipleChoice> {
   constructor(
     public readonly choices: readonly Choice[],
-    readonly value: number[] = []
+    readonly value: MultipleChoice = { selected: [] }
   ) {
     super(value)
   }
 
-  clone(): Answer<number[]> {
-    return new MultipleChoiceAnswer(
-      this.choices.map((choice) => choice.clone()),
-      [...this.value] // Ensure to copy array, to avoid subtle "by reference" bugs!
-    )
-  }
-
   get selected(): readonly Choice[] {
-    return this.value
+    return this.value.selected
       .sort()
       .reduce(
         (memo: Choice[], index: number) => [...memo, this.choices[index]],
@@ -104,7 +98,16 @@ export class MultipleChoiceAnswer extends Answer<number[]> {
       )
   }
 
+  clone(): Answer<MultipleChoice> {
+    return new MultipleChoiceAnswer(
+      this.choices.map((choice) => choice.clone()),
+      { ...this.value } // TODO: clone array again!
+    )
+  }
+
   toString(): string {
+    // TODO: here we must replace placeholders in `choice.text` with their values!
+    // => choice.text.replace(/\$\{[^}]+}/, ...)
     return `${this.selected.map((choice) => choice.text).join(", ")}`
   }
 }

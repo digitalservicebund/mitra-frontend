@@ -5,10 +5,13 @@
 
   const props = defineProps<{ step: MultipleChoiceAnswerStep }>()
 
-  const answer = ref(props.step.answer.value)
+  const answer = ref(props.step.answer.value.selected)
+  // TODO: here in labels we need to turn placeholders into editable boxes
+  // => Where do we keep the values? A choice must somehow maintain them?
   const labels = props.step.choices.map((choice) => choice.text)
 
-  const handleChange = () => props.step.answer.setValue(answer.value)
+  // TODO: when handling change we must read and provide values from editable placeholder fields as well
+  const handleChange = () => props.step.completeWith(answer.value)
 </script>
 
 <template>

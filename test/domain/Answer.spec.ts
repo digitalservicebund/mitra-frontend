@@ -8,7 +8,7 @@ describe("Answer", () => {
         new Choice("bar"),
       ])
 
-      answer.setValue([1, 0])
+      answer.setValue({ selected: [1, 0] })
       expect(answer.selected).toEqual(answer.choices)
     })
 
