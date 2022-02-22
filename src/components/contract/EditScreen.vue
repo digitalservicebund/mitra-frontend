@@ -1,12 +1,11 @@
 <script setup lang="ts">
-  import Breadcrumb from "primevue/breadcrumb"
-  import type { MenuItem } from "primevue/menuitem"
-  import { computed, ref } from "vue"
+  import { ref } from "vue"
   import Contract from "../../domain/Contract"
   import Module from "../../domain/Module"
   import Storage from "../../domain/Storage"
   import { makeContractStorageService } from "../../provide"
   import { useSession } from "../../session"
+  import Breadcrumb from "../Breadcrumb.vue"
   import InplaceEditable from "../InplaceEditable.vue"
   import Metadata from "../Metadata.vue"
   import SideMenu from "../SideMenu.vue"
@@ -18,18 +17,7 @@
   const session = useSession()
 
   const storage: Storage<Contract, File> = makeContractStorageService()
-  const breadcrumbTopLevel: MenuItem = {
-    to: `/mitra-frontend/${session.entryPoint}`,
-    label: "Startseite",
-  }
-
   const contract = ref(session.contracts[props.id][0])
-  const breadcrumbItems = computed(() => [
-    {
-      label: contract.value.title,
-      disabled: true,
-    },
-  ])
 
   const handleUpdateTitle = (newTitle: string) => {
     contract.value.title = newTitle
@@ -58,11 +46,7 @@
 
     <main class="flex-1 px-8">
       <header class="edit">
-        <Breadcrumb
-          :home="breadcrumbTopLevel"
-          :model="breadcrumbItems"
-          class="mb-4"
-        />
+        <Breadcrumb :current-title="contract.title" :parent-items="[]" />
         <p><small>Vertrag</small></p>
         <InplaceEditable
           :editable="contract.title"

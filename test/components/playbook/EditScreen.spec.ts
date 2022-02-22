@@ -26,7 +26,7 @@ describe("EditScreen", () => {
         component: {},
       },
       {
-        path: "/mitra-frontend/playbook/:playbook",
+        path: "/mitra-frontend/:foo/:bar",
         component: {},
       },
       {
@@ -70,7 +70,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [pinia, router],
-        stubs: ["Inplace", "SideMenu"],
+        stubs: ["InplaceEditable", "SideMenu"],
       },
     })
 
@@ -84,7 +84,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [pinia, router],
-        stubs: ["Breadcrumb", "Inplace", "SideMenu"],
+        stubs: ["Breadcrumb", "InplaceEditable", "SideMenu"],
       },
     })
 
@@ -100,7 +100,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [pinia, router],
-        stubs: ["Breadcrumb", "Inplace", "SideMenu"],
+        stubs: ["Breadcrumb", "InplaceEditable", "SideMenu"],
       },
     })
 
@@ -115,14 +115,14 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [pinia, router],
-        stubs: ["Breadcrumb", "RouterLink"],
+        stubs: ["Breadcrumb", "SideMenu"],
       },
     })
 
     await user.click(screen.getByText("Ändern"))
     await user.clear(screen.getByLabelText("Eigenschaft ändern"))
     await user.type(screen.getByLabelText("Eigenschaft ändern"), "Neuer Titel")
-    await user.click(screen.getByText("Speichern"))
+    await user.keyboard("{Enter}")
 
     expect(session.playbooks["xyz"].title).toBe("Neuer Titel")
   })
@@ -135,7 +135,7 @@ describe("EditScreen", () => {
       },
       global: {
         plugins: [pinia, router],
-        stubs: ["Breadcrumb", "RouterLink"],
+        stubs: ["Breadcrumb", "InplaceEditable"],
       },
     })
 

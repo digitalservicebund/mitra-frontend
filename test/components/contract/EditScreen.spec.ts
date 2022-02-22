@@ -1,6 +1,7 @@
 import { createTestingPinia } from "@pinia/testing"
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
+import { createRouter, createWebHistory } from "vue-router"
 import EditScreen from "../../../src/components/contract/EditScreen.vue"
 import Contract from "../../../src/domain/Contract"
 import ContractStorageService from "../../../src/domain/ContractStorageService"
@@ -13,7 +14,25 @@ describe("EditScreen", () => {
   const pinia = createTestingPinia()
   const session = useSession()
 
-  beforeAll(() => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      {
+        path: "",
+        component: {},
+      },
+      {
+        path: "/mitra-frontend/",
+        component: {},
+      },
+      {
+        path: "/mitra-frontend/:foo/:bar",
+        component: {},
+      },
+    ],
+  })
+
+  beforeAll(async () => {
     session.rememberContract(
       new Contract(
         "test-contract",
@@ -21,6 +40,9 @@ describe("EditScreen", () => {
         { id: "xyz" }
       )
     )
+
+    router.push("/mitra-frontend/")
+    await router.isReady()
   })
 
   it("has a header with the contract title", async () => {
@@ -29,8 +51,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [pinia],
-        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
+        plugins: [pinia, router],
+        stubs: ["Breadcrumb", "EditStep", "SideMenu"],
       },
     })
 
@@ -43,8 +65,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [pinia],
-        stubs: ["EditStep", "Inplace", "RouterLink"],
+        plugins: [pinia, router],
+        stubs: ["EditStep", "InplaceEditable", "SideMenu"],
       },
     })
 
@@ -58,15 +80,15 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [pinia],
-        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
+        plugins: [pinia, router],
+        stubs: ["Breadcrumb", "EditStep", "SideMenu"],
       },
     })
 
     await user.click(screen.getByText("Ändern"))
     await user.clear(screen.getByLabelText("Eigenschaft ändern"))
     await user.type(screen.getByLabelText("Eigenschaft ändern"), "Neuer Titel")
-    await user.click(screen.getByText("Speichern"))
+    await user.keyboard("{Enter}")
 
     expect(session.contracts["xyz"][0].title).toBe("Neuer Titel")
   })
@@ -78,8 +100,8 @@ describe("EditScreen", () => {
         id: "xyz",
       },
       global: {
-        plugins: [pinia],
-        stubs: ["Breadcrumb", "EditStep", "RouterLink"],
+        plugins: [pinia, router],
+        stubs: ["Breadcrumb", "EditStep", "InplaceEditable"],
       },
     })
 
