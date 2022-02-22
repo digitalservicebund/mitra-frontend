@@ -11,8 +11,13 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "@types/jest", "@types/wicg-file-system-access"]
+    "types": [
+      "vite/client",
+      "@types/jest",
+      "@types/wicg-file-system-access",
+      "axe-playwright"
+    ]
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "jest.setup.ts"],
-  "exclude": ["test/e2e/**/*.ts"]
+  "exclude": ["test/e2e/**/*.ts", "test/a11y/**/*.ts"]
 }

@@ -7,7 +7,11 @@ const config: Config.InitialOptions = {
     "^.+\\.vue$": "@vue/vue3-jest",
   },
   testEnvironment: "jsdom",
-  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/test/e2e"],
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/test/e2e",
+    "<rootDir>/test/a11y",
+  ],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   collectCoverageFrom: [
     "src/**/*.{ts,vue}",

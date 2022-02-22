@@ -57,6 +57,15 @@
       command: () => emit("save"),
     },
   ])
+
+  // onMounted(() => {
+  //   document
+  //     .querySelectorAll("li")
+  //     .forEach((li) => li.setAttribute("role", "listitem"))
+  //   document
+  //     .querySelectorAll("ul")
+  //     .forEach((ul) => ul.setAttribute("role", "list"))
+  // })
 </script>
 
 <template>

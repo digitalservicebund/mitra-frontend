@@ -15,6 +15,7 @@
     <InputText
       v-model="answer"
       :title="step.prompt"
+      :aria-label="step.prompt"
       class="w-full"
       type="text"
       @input="handleInput"
