@@ -21,7 +21,9 @@ For the provided Git hooks you will need:
 brew install lefthook talisman
 ```
 
-## Getting started
+## Development
+
+### Getting started
 
 **Optional - install [Git hooks](#git-hooks):**
 
@@ -29,7 +31,7 @@ brew install lefthook talisman
 ./run.sh init
 ```
 
-## Development
+### Dev server
 
 The project uses [Vite](https://vitejs.dev/guide/) to provide a fast bundler-less [dev server](http://localhost:3000/mitra-frontend/).
 
@@ -39,9 +41,13 @@ The project uses [Vite](https://vitejs.dev/guide/) to provide a fast bundler-les
 npm run dev
 ```
 
-## Testing
+### Testing
 
-The application has unit tests (using [Jest](https://jestjs.io/docs/getting-started)) as well as end-to-end tests (using [Playwright](https://playwright.dev/docs/intro)).
+The application has
+
+- unit tests (using [Jest](https://jestjs.io/docs/getting-started))
+- end-to-end tests (using [Playwright](https://playwright.dev/docs/intro))
+- accessibility tests (using [pa11y](https://github.com/pa11y/pa11y-ci))
 
 **To run the unit tests:**
 
@@ -55,16 +61,16 @@ npm test
 npm test -- --watch
 ```
 
-**To run the E2E tests:**
-
-```bash
-npm run test:e2e
-```
-
 **Gather coverage**:
 
 ```bash
 npm run coverage
+```
+
+**To run the E2E tests:**
+
+```bash
+npm run test:e2e
 ```
 
 **To run a11y tests:**
@@ -73,9 +79,9 @@ npm run coverage
 npm run test:a11y
 ```
 
-Note that automated accessibility testing will help you root out about 30% of the errors in your code, but can't replace auditing by humans.
+Note that automated accessibility testing will help root out about 30% of the errors in code, but can't replace auditing by humans.
 
-## Style (Linting & Formatting)
+### Style (linting & formatting)
 
 Linting is done via [ESLint](https://eslint.org/docs/user-guide/getting-started); consistent formatting for a variety of source code files is being enforced using [Prettier](https://prettier.io/docs/en/index.html). ESLint and Prettier work in conjunction.
 
@@ -101,7 +107,7 @@ npm run check
 
 (Executing in that order, failing fast.)
 
-## Git hooks
+### Git hooks
 
 The repo contains a [Lefthook](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md) configuration, providing a Git hooks setup out of the box.
 
@@ -111,7 +117,7 @@ The repo contains a [Lefthook](https://github.com/evilmartians/lefthook/blob/mas
 ./run.sh init
 ```
 
-The hooks are supposed to help you to:
+The hooks are supposed to help to:
 
 - commit properly formatted and linted source code only (and not break the build otherwise)
 - write [conventional commit messages](https://chris.beams.io/posts/git-commit/)
@@ -119,21 +125,34 @@ The hooks are supposed to help you to:
 
 ## Deployment
 
-Currently the app is deployed to GitHub Pages from trunk continuously.
+Currently the app is deployed to GitHub Pages from trunk continuously, upon a successful build.
 
-creator :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
+Entry point creator :point_right: https://digitalservice4germany.github.io/mitra-frontend/creator
 
-einkauf :point_right: https://digitalservice4germany.github.io/mitra-frontend/einkauf
+Entry point buyer :point_right: https://digitalservice4germany.github.io/mitra-frontend/einkauf
 
-## License scanning
+## Audits
 
-We conduct an allowlist-based license scanning as part of the pipeline's audit job. Whenever there's a production dependency added with a yet unknown license, the build is going to fail and we will be notified.
+### Lighthouse
 
-## Architecture Decision Records
+A [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit is performed against the deployed application as part of the pipeline's audit job and fails when metric values drop below a score of 90 (`recommended` [preset](https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md#preset)).
 
-[Architecture decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-are kept in the `docs/adr` directory. For adding new records install the [adr-tools](https://github.com/npryce/adr-tools) package:
+**Execute locally**:
 
 ```bash
-brew install adr-tools
+npm run audit:lighthouse
 ```
+
+### License scanning
+
+Continuous license scanning is performed as part of the pipeline's audit job. Whenever a production dependency is being added with a yet unknown license the build is going to fail.
+
+**Execute locally**:
+
+```bash
+npm run audit:licences
+```
+
+## Architecture
+
+:point_right: [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)
