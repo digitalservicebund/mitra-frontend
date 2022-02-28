@@ -13,18 +13,12 @@ config.global.directives = {
   },
 }
 
-// Set up test environment to use test repositories
-let savedPlaybook: Playbook = new Playbook("test-playbook", [
-  new Module("test-module", [new TextAnswerStep("test-step")]),
-])
-
+// Set up test environment to use test repository and storage
 const playbookTestRepository: PlaybookRepository = {
   findById() {
-    return savedPlaybook
-  },
-  save(playbook) {
-    savedPlaybook = playbook
-    return
+    return new Playbook("test-playbook", [
+      new Module("test-module", [new TextAnswerStep("test-step")]),
+    ])
   },
 }
 

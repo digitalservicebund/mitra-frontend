@@ -16,9 +16,6 @@ const repository: PlaybookRepository = {
     }
     return playbook
   },
-  save(playbook: Playbook) {
-    data.set(playbook.id, playbook)
-  },
 }
 
 export default repository
